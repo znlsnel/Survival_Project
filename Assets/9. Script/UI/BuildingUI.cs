@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,9 @@ public class BuildingUI : MonoBehaviour
     [SerializeField] private GameObject buildingMenuUI;
     [SerializeField] private Transform listBG;      // 리스트
     [SerializeField] private GameObject buttonPrefab;   // 건설품 버튼
+    [SerializeField] private Transform resourceListBG;  // 요구 자원 리스트
+    [SerializeField] private GameObject resourceItemPrefab;
+
 
     private BuildingUIManager buildingUIManager;
 
@@ -59,8 +63,35 @@ public class BuildingUI : MonoBehaviour
         }
     }
 
+
+
     private void SelectBuilding(BuildingData building)
     {
         Debug.Log($"선택된 건축물: {building.buildingName}");
+
+        foreach (Transform child in resourceListBG)
+        {
+            Destroy(child.gameObject);
+        }
+
+        foreach (ResourceCost resource in building.cost)
+        {
+            GameObject newResourceItem = Instantiate(resourceItemPrefab, resourceListBG);
+
+            Image icon = newResourceItem.GetComponentInChildren<Image>();
+            if (icon != null && resource.resourceItem.ItemIcon != null)
+            {
+                icon.sprite = resource.resourceItem.ItemIcon;
+            }
+
+            TextMeshProUGUI amountText = newResourceItem.GetComponentInChildren<TextMeshProUGUI>();
+            if (amountText != null)
+            {
+                amountText.text = $"{resource.resourceItem.ItemName} - {resource.amount}";
+            }
+        }
+
     }
+
+
 }

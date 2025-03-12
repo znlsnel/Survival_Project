@@ -9,7 +9,7 @@ public enum ResourceType { Rock, Wood }
 [Serializable]
 public class ResourceCost
 {
-    public ResourceType resourceType;
+    public ItemDataSO resourceItem;
     public int amount;
 }
 
