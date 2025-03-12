@@ -18,6 +18,7 @@ public class EventManager : Singleton<EventManager>
 
     public void RequestToggleBuildMode()
     {
+        Debug.Log("이벤트 요청");
         OnToggleBuildModeRequested?.Invoke();
     }
 

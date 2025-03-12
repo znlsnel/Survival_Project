@@ -37,6 +37,7 @@ public class JHN_PlayerManager : MonoBehaviour
 
     public void ToggleBuildingMode()
     {
+
         bool isBuildingMode = currentState is NormalState;
 
         if (isBuildingMode)

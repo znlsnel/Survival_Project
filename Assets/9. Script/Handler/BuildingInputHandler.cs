@@ -29,8 +29,6 @@ public class BuildingInputHandler : MonoBehaviour
             placeAction = playerBuilding.FindAction("PlaceObject");
             cancelAction = playerBuilding.FindAction("CancelBuild");
             toggleAction = playerBuilding.FindAction("ToggleBuildMode");
-
-
         }
     }
     private void OnEnable()
@@ -83,8 +81,7 @@ public class BuildingInputHandler : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started)
         {
-            Debug.Log("모드변경");
+            EventManager.Instance.RequestToggleBuildMode();
         }
-        EventManager.Instance.RequestToggleBuildMode();
     }
 }
