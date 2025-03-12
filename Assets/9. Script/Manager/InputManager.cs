@@ -10,11 +10,17 @@ public class InputManager : Singleton<InputManager>
 	[SerializeField] private InputActionAsset inputSystem;
 	[SerializeField] private InputActionReference move;
 	[SerializeField] private InputActionReference jump;
+	[SerializeField] private InputActionReference interaction;
 
 
 	public InputActionReference Move => move; 
 	public InputActionReference Jump => jump; 
+	public InputActionReference Interaction => interaction;
 
+	private void OnDestroy()
+	{
+		inputSystem.Disable();
+	}
 
 	protected override void Awake()
 	{
