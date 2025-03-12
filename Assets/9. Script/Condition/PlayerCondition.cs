@@ -11,23 +11,29 @@ public class PlayerCondition : MonoBehaviour
     Conditions thirsty { get { return uiCondition.thirsty; } }
     Conditions stamina { get { return uiCondition.stamina; } }
 
-    public float noHungerHealthDecay;
-    public float noThirstyHungryDecay;
+    public float HealthDecay;
+    public float fullHungerHealthImprove;
+ 
     //public event Action onTakeDamage;
 
     private void Update()
     {
-        hunger.Subtract(hunger.passiveValue * Time.deltaTime);
-        thirsty.Subtract(thirsty.passiveValue * Time.deltaTime);
+        hunger.Subtract(hunger.passiveValue * Time.deltaTime/2);
+        thirsty.Subtract(thirsty.passiveValue * Time.deltaTime/2);
         stamina.Add(stamina.passiveValue * Time.deltaTime);
 
-        if (thirsty.curValue < 0f)
+        //if (thirsty.curValue < 0f)
+        //{
+        //    hunger.Subtract(noThirstyHungryDecay * Time.deltaTime);
+        //}
+
+        if(hunger.curValue<0f || thirsty.curValue < 0f)
         {
-            hunger.Subtract(noThirstyHungryDecay * Time.deltaTime);
+            health.Subtract(HealthDecay * Time.deltaTime);
         }
-        if(hunger.curValue<0f)
+        else if(hunger.curValue >= 100f)
         {
-            health.Subtract(noHungerHealthDecay * Time.deltaTime);
+            health.Add(fullHungerHealthImprove * Time.deltaTime);
         }
 
         if (health.curValue < 0f)

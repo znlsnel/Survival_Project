@@ -22,7 +22,7 @@ public class Conditions : MonoBehaviour
 
     public float GetPercentage()
     {
-        return curValue / maxValue;
+        return maxValue > 0 ? curValue / maxValue : 0f;
     }
 
     public void Add(float amount)
