@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eeeb4370de184141b2a30855170e48e, type: 3}
   m_Name: TestFurniture
   m_EditorClassIdentifier: 
-  buildingName: "\uD14C\uC2A4\uD2B8\uC6A9"
+  buildingName: "\uAE30\uAD6C"
   buildingType: 0
-  description: "\uD14C\uC2A4\uD2B8\uC6A9 \uAC00\uAD6C"
+  description: "\uAE30\uAD6C"
   prefab: {fileID: 7484279822532589455, guid: 92306570620743f478f859cceeb6ef60, type: 3}
   cost: []

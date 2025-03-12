@@ -12,7 +12,6 @@ public class InputManager : Singleton<InputManager>
 	[SerializeField] private InputActionReference jump;
     [SerializeField] private InputActionReference toggleBuilding;
 
-
     [SerializeField] private PlayerInput playerInput;	// 플레이어 인풋연결
     [SerializeField] private BuildingInputHandler buildingInputHandler;	// 건축에 쓰이는 핸들러
 
