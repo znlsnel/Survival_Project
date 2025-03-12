@@ -10,6 +10,14 @@ public class BuildingInputHandler : MonoBehaviour
     [SerializeField] private InputAction rotateAction;
     [SerializeField] private InputAction placeAction;
     [SerializeField] private InputAction cancelAction;
+    [SerializeField] private InputAction toggleAction;
+
+
+    public InputAction RotateAction => rotateAction;
+    public InputAction PlaceAction => placeAction;
+    public InputAction CancelAction => cancelAction;
+    public InputAction ToggleAction => toggleAction;
+
 
     private void OnValidate()   // 미리
     {
@@ -20,6 +28,9 @@ public class BuildingInputHandler : MonoBehaviour
             rotateAction = playerBuilding.FindAction("RotateObject");
             placeAction = playerBuilding.FindAction("PlaceObject");
             cancelAction = playerBuilding.FindAction("CancelBuild");
+            toggleAction = playerBuilding.FindAction("ToggleBuildMode");
+
+
         }
     }
     private void OnEnable()
@@ -27,10 +38,12 @@ public class BuildingInputHandler : MonoBehaviour
         rotateAction.performed += RotateBuilding;
         placeAction.performed += PlaceBuilding;
         cancelAction.performed += CancelBuilding;
+        toggleAction.performed += ToggleBuildMode;
 
         rotateAction.Enable();
         placeAction.Enable();
         cancelAction.Enable();
+        toggleAction.Enable();
     }
 
     private void OnDisable()
@@ -38,6 +51,7 @@ public class BuildingInputHandler : MonoBehaviour
         rotateAction.performed -= RotateBuilding;
         placeAction.performed -= PlaceBuilding;
         cancelAction.performed -= CancelBuilding;
+        toggleAction.performed -= ToggleBuildMode;
     }
 
 
@@ -64,5 +78,13 @@ public class BuildingInputHandler : MonoBehaviour
         {
             Debug.Log("취소");
         }
+    }
+    public void ToggleBuildMode(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            Debug.Log("모드변경");
+        }
+        EventManager.Instance.RequestToggleBuildMode();
     }
 }

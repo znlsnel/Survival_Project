@@ -1,15 +1,15 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class JHN_PlayerManager : MonoBehaviour
 {
-    public static JHN_PlayerManager Instance { get; private set; }
-
-    [SerializeField] private PlayerInput playerInput; // 에디터에서 자동 할당
+    [SerializeField] private PlayerInput playerInput;
 
     private JHN_PlayerState currentState;
     private JHN_PlayerState normalState;
     private JHN_PlayerState buildState;
+
 
     private void OnValidate()
     {
@@ -20,28 +20,26 @@ public class JHN_PlayerManager : MonoBehaviour
 
         if (playerInput != null)
         {
-            normalState = new NormalState(playerInput);
-            buildState = new BuildState(playerInput);
+            normalState = new NormalState(playerInput, this);
+            buildState = new BuildState(playerInput, this);
         }
     }
 
-    private void Awake()
+    private void OnEnable()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        EventManager.Instance.OnToggleBuildModeRequested += ToggleBuildingMode;
+    }
 
-        currentState = buildState ?? new NormalState(playerInput);
+    private void OnDisable()
+    {
+        EventManager.Instance.OnToggleBuildModeRequested -= ToggleBuildingMode;
     }
 
     public void ToggleBuildingMode()
     {
-        if (currentState is NormalState)
+        bool isBuildingMode = currentState is NormalState;
+
+        if (isBuildingMode)
         {
             SetState(buildState);
         }
@@ -49,6 +47,7 @@ public class JHN_PlayerManager : MonoBehaviour
         {
             SetState(normalState);
         }
+        EventManager.Instance.BuildingModeChanged(isBuildingMode);
     }
 
     private void SetState(JHN_PlayerState newState)
@@ -56,4 +55,6 @@ public class JHN_PlayerManager : MonoBehaviour
         currentState = newState;
         currentState.EnterState();
     }
+
+
 }

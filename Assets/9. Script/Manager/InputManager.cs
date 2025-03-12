@@ -16,18 +16,17 @@ public class InputManager : Singleton<InputManager>
 
 
     public InputActionReference Move => move; 
-	public InputActionReference Jump => jump; 
+	public InputActionReference Jump => jump;
+
+    public InputAction RotateBuilding => buildingInputHandler?.RotateAction;
+    public InputAction PlaceBuilding => buildingInputHandler?.PlaceAction;
+    public InputAction CancelBuild => buildingInputHandler?.CancelAction;
 
 
-	protected override void Awake()
+    protected override void Awake()
 	{
 		base.Awake();
 		inputSystem.Enable();
-
-        if (buildingInputHandler != null)
-        {
-            buildingInputHandler.enabled = true;
-        }
     }
 
 	public static void SetActive(bool active)
