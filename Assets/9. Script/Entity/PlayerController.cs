@@ -11,10 +11,9 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         InputManager.Instance.Move.action.performed += MoveInput;
-
 	}
 
-    // Update is called once per frame
+
     void Update()
     {
         transform.position += moveDir * Time.deltaTime * 3.0f;

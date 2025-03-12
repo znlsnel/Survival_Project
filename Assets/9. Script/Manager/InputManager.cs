@@ -12,7 +12,7 @@ public class InputManager : Singleton<InputManager>
 	[SerializeField] private InputActionReference jump;
 
 
-	public InputActionReference Move => move;
+	public InputActionReference Move => move; 
 	public InputActionReference Jump => jump; 
 
 
@@ -22,4 +22,11 @@ public class InputManager : Singleton<InputManager>
 		inputSystem.Enable();  
 	}
 
+	public static void SetActive(bool active)
+	{
+		if (active)
+			Instance.inputSystem.Enable(); 
+		else
+			Instance.inputSystem.Disable();
+	}
 }
