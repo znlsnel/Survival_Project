@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,10 +11,13 @@ public class InventoryUI : MonoBehaviour
 {
 	[SerializeField] private Image itemIcon;
 	[SerializeField] private TextMeshProUGUI itemDescription;
+	[SerializeField] private GameObject popup;
 
 
     private readonly string itemSlotParentName = "ItemSlotParent";
     private readonly string movingSlotName = "movingSlot";
+    private readonly string dropButtonName = "DropButton";
+    private readonly string cancelButtonName = "CancelButton";
 
 	private List<InventorySlotUI> itemSlots = new List<InventorySlotUI>();
 	private List<ItemDataSO> myItems;
@@ -21,6 +25,7 @@ public class InventoryUI : MonoBehaviour
 
 	private InventoryHandler inventory;
 
+	private int selectItemIdx = -1;
 	private int clikedButtonIdx = -1;
 	private int hoveredButtonIdx = -1;
 	private Coroutine moveSlotCrt;
@@ -29,12 +34,19 @@ public class InventoryUI : MonoBehaviour
 	{
 		InitInventory();
 		InputManager.Instance.Inventory.action.started += InputInventoryKey;
+		CloseUI();
 	}
 
 	void InitInventory()
 	{
 		movingSlot = Util.FindChildByName(transform, movingSlotName)?.gameObject;
+		var throwButton = Util.FindChildByName(popup.transform, dropButtonName);
+		var cancelButton = Util.FindChildByName(popup.transform, cancelButtonName);
 		Transform itemSlotParent = Util.FindChildByName(transform, itemSlotParentName);
+
+
+		throwButton.GetComponent<Button>().onClick.AddListener(DropItem);
+		cancelButton.GetComponent<Button>().onClick.AddListener(ClosePopup);
 
 		itemIcon.gameObject.SetActive(false);
 		itemDescription.text = ""; 
@@ -67,6 +79,7 @@ public class InventoryUI : MonoBehaviour
 
 		gameObject.SetActive(true);
 		movingSlot.SetActive(false);
+		popup.SetActive(false);	
 	}
 	void CloseUI()
 	{
@@ -98,11 +111,15 @@ public class InventoryUI : MonoBehaviour
 	{
 		Debug.Log($"클릭 취소 {idx}");
 
-		if (moveSlotCrt != null && movingSlot.activeSelf)
+		if (moveSlotCrt != null)
 		{
 			StopCoroutine(moveSlotCrt);
 			moveSlotCrt = null;
-
+		} 
+		 
+		// if 아이템을 이동중이라면
+		if (movingSlot.activeSelf)
+		{
 			if (hoveredButtonIdx != -1 && clikedButtonIdx != -1)
 			{
 				ItemDataSO temp = myItems[clikedButtonIdx];
@@ -114,7 +131,8 @@ public class InventoryUI : MonoBehaviour
 		}
 		else
 		{
-			// 버리기 기능
+			selectItemIdx = clikedButtonIdx;
+			popup.SetActive(true);
 		}
 
 
@@ -154,6 +172,25 @@ public class InventoryUI : MonoBehaviour
 			movingSlot.transform.localPosition = movingSlot.transform.parent.InverseTransformPoint(Input.mousePosition);
 			yield return null;
 		}
+	}
+
+	void DropItem()
+	{
+		// 플레이어 앞으로 옮기는걸로 수정
+		Vector3 dropPos = inventory.transform.position + inventory.transform.forward * 1.0f;
+		var go = Instantiate(myItems[selectItemIdx].DropItemPrefab);
+		go.transform.position = dropPos;
+
+		myItems[selectItemIdx] = null;
+		itemSlots[selectItemIdx].SetIcon(null);
+		ClosePopup();
+		selectItemIdx = -1;
+	}
+
+	void ClosePopup()
+	{
+		popup.gameObject.SetActive(false);
+		selectItemIdx = -1;
 	}
 }
 

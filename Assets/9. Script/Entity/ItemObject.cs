@@ -14,6 +14,7 @@ public class ItemObject : MonoBehaviour, IInteractableObject
 	public void Interaction()
 	{
 		inventoryHandler.AddItem(itemData);
+		Destroy(gameObject);
 	}
 
 	 
