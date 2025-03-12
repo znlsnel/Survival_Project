@@ -15,9 +15,18 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "ToggleBuildMode",
+                    "name": "Interaction",
                     "type": "Button",
-                    "id": "8ce1270b-28f7-475d-9a95-bd18e1470bd8",
+                    "id": "7725e402-a505-41fc-aa5d-a95b86862a9a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Inventory",
+                    "type": "Button",
+                    "id": "29df2af9-183e-4a50-ad04-f26fca72208a",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -93,111 +102,23 @@
                 },
                 {
                     "name": "",
-                    "id": "77dda652-7a79-49ea-8d7b-2b580612d4e6",
-                    "path": "<Keyboard>/b",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ToggleBuildMode",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "PlayerBuilding",
-            "id": "5bb5e3e8-5477-477c-bb2f-463033973299",
-            "actions": [
-                {
-                    "name": "RotateObject",
-                    "type": "Button",
-                    "id": "c0f9be4f-2582-4e59-9c6b-f9914c7de8fc",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "PlaceObject",
-                    "type": "Button",
-                    "id": "4a5a19af-482e-4ab9-a1ca-f9944844c1b7",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "CancelBuild",
-                    "type": "Button",
-                    "id": "4fbb7f22-fb0c-4a81-94df-512890ab984e",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "ToggleBuildMode",
-                    "type": "Button",
-                    "id": "b99ca67c-a444-496e-989b-7a5c026ed266",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "11c3979a-efa2-4672-820b-cb7e85959c11",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RotateObject",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "337c100c-c5e2-4c85-8653-8ef07b1738be",
+                    "id": "dbae7b98-1b3a-4fc7-80f5-dd2e754d0a33",
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "RotateObject",
+                    "action": "Interaction",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "70ad437f-8d3a-4e9e-b630-abb4025c1ac4",
-                    "path": "<Mouse>/leftButton",
+                    "id": "c922652a-f322-4927-8f24-d74e67d697ec",
+                    "path": "<Keyboard>/i",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PlaceObject",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d34343d6-9122-4d01-bbcb-f03bc51336ba",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CancelBuild",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "26523df0-f673-487a-8b16-e9e088256830",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ToggleBuildMode",
+                    "action": "Inventory",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Singleton<T> : MonoBehaviour where T : Component
@@ -14,8 +15,8 @@ public class Singleton<T> : MonoBehaviour where T : Component
 			{
 				_instance = FindFirstObjectByType<T>();
 				if (_instance == null)
-					_instance = new GameObject("Input System").AddComponent<T>();
-			}
+					_instance = new GameObject().AddComponent<T>();
+			} 
 			return _instance;
 		}
 	}

@@ -16,6 +16,15 @@ public class InputManager : Singleton<InputManager>
     [SerializeField] private PlayerInput playerInput;	// 플레이어 인풋연결
     [SerializeField] private BuildingInputHandler buildingInputHandler;	// 건축에 쓰이는 핸들러
 
+	[SerializeField] private InputActionReference interaction;
+	[SerializeField] private InputActionReference inventory;
+	public InputActionReference Interaction => interaction;
+	public InputActionReference Inventory => inventory; 
+
+	private void OnDestroy()
+	{
+		inputSystem.Disable();
+	}
 
     public InputActionReference Move => move; 
 	public InputActionReference Jump => jump;
