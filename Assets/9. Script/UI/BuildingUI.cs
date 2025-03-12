@@ -40,10 +40,17 @@ public class BuildingUI : MonoBehaviour
             if (building.buildingType == category)
             {
                 GameObject newButton = Instantiate(buttonPrefab, listBG);
-                Text buttonText = newButton.GetComponentInChildren<Text>();
 
-                if (buttonText != null)
-                    buttonText.text = building.buildingName;
+                Image buttonImage = newButton.GetComponent<Image>();
+
+                if (buttonImage != null && building.buildingIcon != null)
+                {
+                    buttonImage.sprite = building.buildingIcon;
+                }
+                else
+                {
+                    Debug.LogWarning($"이미지 변경 실패: {building.buildingName}");
+                }
 
                 Button btn = newButton.GetComponent<Button>();
                 if (btn != null)

@@ -20,6 +20,7 @@ public class BuildingData : ScriptableObject
     public BuildingType buildingType;
     public string description;
     public GameObject prefab;
+    public Sprite buildingIcon;
 
     public List<ResourceCost> cost = new List<ResourceCost>();
 

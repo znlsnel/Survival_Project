@@ -16,4 +16,5 @@ MonoBehaviour:
   buildingType: 1
   description: "\uB370\uCF542"
   prefab: {fileID: 7484279822532589455, guid: 92306570620743f478f859cceeb6ef60, type: 3}
+  buildingIcon: {fileID: 21300000, guid: bd24f49365315ce4ab078b0114790639, type: 3}
   cost: []
