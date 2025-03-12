@@ -4,9 +4,12 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - inputSystem: {fileID: -944628639613478452, guid: 167b6126200c2564d81467a33d97502d, type: 3}
+  - inputSystem: {fileID: -944628639613478452, guid: 167b6126200c2564d81467a33d97502d,
+      type: 3}
   - move: {fileID: 8345802397018709986, guid: 167b6126200c2564d81467a33d97502d, type: 3}
   - jump: {instanceID: 0}
+  - interaction: {fileID: 6149264348853985044, guid: 167b6126200c2564d81467a33d97502d,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
