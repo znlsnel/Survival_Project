@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerCondition : MonoBehaviour
 {
     public UICondition uiCondition;
+    public DayNightCycle dayNightCycle;
 
     Conditions health { get { return uiCondition.health; } }
     Conditions hunger { get { return uiCondition.hunger; } }
@@ -15,7 +16,7 @@ public class PlayerCondition : MonoBehaviour
     public float healthDecay;
     public float thirstyDecay;
     public float fullHungerHealthImprove;
- 
+    public float temperatureDecayRate;
     //public event Action onTakeDamage;
 
     private void Update()
@@ -43,9 +44,19 @@ public class PlayerCondition : MonoBehaviour
             thirsty.Subtract(thirstyDecay * Time.deltaTime);
         }
 
+        UpdateTemperature();
+
         if (health.curValue < 0f)
         {
             Die();
+        }
+    }
+
+    void UpdateTemperature()
+    {
+        if (dayNightCycle.Night())
+        {
+            temperature.Subtract(temperatureDecayRate * Time.deltaTime);
         }
     }
 
@@ -62,6 +73,7 @@ public class PlayerCondition : MonoBehaviour
     {
         thirsty.Add(amount);
     }
+    
 
     public void Die()
     {
