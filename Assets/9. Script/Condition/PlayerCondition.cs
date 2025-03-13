@@ -111,6 +111,10 @@ public class PlayerCondition : MonoBehaviour
     {
         temperature.Add(amount * Time.deltaTime);
     }
+    public void Dash(float amounut)
+    {
+        stamina.Subtract(amounut * Time.deltaTime);
+    }
 
     public void Die()
     {
