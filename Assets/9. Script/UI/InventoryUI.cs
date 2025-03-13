@@ -7,65 +7,120 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
+public enum ESlotType
+{
+	None,
+	InventorySlot,
+	QuickSlot
+}
+
 public class InventoryUI : MonoBehaviour
 {
-	[SerializeField] private Image itemIcon;
-	[SerializeField] private TextMeshProUGUI itemDescription;
-	[SerializeField] private GameObject popup;
-
-	 
-    private readonly string itemSlotParentName = "ItemSlotParent";
-    private readonly string movingSlotName = "movingSlot";
-    private readonly string dropButtonName = "DropButton";
-    private readonly string cancelButtonName = "CancelButton";
-
-	private List<InventorySlotUI> itemSlots = new List<InventorySlotUI>();
-	private List<ItemDataSO> myItems;
-	private GameObject movingSlot;
-
-	private InventoryHandler inventory;
-
-	private int selectItemIdx = -1;
-	private int clikedButtonIdx = -1;
-	private int hoveredButtonIdx = -1;
-	private Coroutine moveSlotCrt;
-
-	private void Awake() 
+	private struct SlotInfo
 	{
-		InitInventory();
-		InputManager.Instance.Inventory.action.started += InputInventoryKey;
-		CloseUI();
-	}
-
-	private void InitInventory()
-	{
-		movingSlot = Util.FindChild(gameObject, movingSlotName, true)?.gameObject;
-		var throwButton = Util.FindChild(popup.gameObject, dropButtonName);
-		var cancelButton = Util.FindChild(popup.gameObject, cancelButtonName);
-		Transform itemSlotParent = Util.FindChild<Transform>(gameObject, itemSlotParentName);
-		 
-
-		throwButton.GetComponent<Button>().onClick.AddListener(DropItem);
-		cancelButton.GetComponent<Button>().onClick.AddListener(ClosePopup);
-
-		itemIcon.gameObject.SetActive(false);
-		itemDescription.text = "";
-
-		inventory = FindFirstObjectByType<InventoryHandler>();
-		myItems = inventory.MyItems;
-		myItems.Clear();
-
-		foreach (Transform child in itemSlotParent)
+		public int idx;
+		public ESlotType type;
+		public SlotInfo(int idx, ESlotType type)
 		{
-			InventorySlotUI slot = child.GetComponent<InventorySlotUI>();
-			SlotInit(slot, itemSlots.Count);
-
-			itemSlots.Add(slot);
-			myItems.Add(null);
+			this.idx = idx;
+			this.type = type;
 		}
 	}
 
-	private void InputInventoryKey(InputAction.CallbackContext context)
+	[Header("Inventory Core")]
+	private static readonly string MovingSlotName = "movingSlot";
+	private static readonly string ItemSlotParentName = "itemSlotParent";
+	private static readonly string QuickSlotParentName = "quickSlotParent";
+	private static readonly string InventoryScrollRectName = "InventoryScrollRect";
+
+	// === Item List ===
+	private Dictionary<ESlotType, List<InventorySlotUI>> itemSlots = new Dictionary<ESlotType, List<InventorySlotUI>>();
+	private Dictionary<ESlotType, List<ItemDataSO>> myItems = new Dictionary<ESlotType, List<ItemDataSO>>();
+	  
+	// === Handler ===
+	private InventoryHandler inventory;
+	private QuickSlotHandler quickSlot;
+
+	// === Objects ===
+	private GameObject movingSlot;
+	private ScrollRect scrollRect;
+
+	// === Values ===
+	private Coroutine moveSlotCrt;
+	private SlotInfo hoveredSlot;
+	private SlotInfo clikedSlot; 
+	private SlotInfo selectSlot;
+
+	private void Awake() 
+	{
+		InputManager.Instance.Inventory.action.started += InputInventoryToggle;
+
+		InitInventory();
+		CloseUI();
+	}
+
+	#region Inventory Function
+	private void InitInventory()
+	{
+		// Find Objects
+		Transform itemSlotParent = Util.FindChild<Transform>(gameObject, ItemSlotParentName, true);
+		Transform quickSlotParent = Util.FindChild<Transform>(gameObject, QuickSlotParentName, true);
+		movingSlot = Util.FindChild(gameObject, MovingSlotName, true);
+		scrollRect = Util.FindChild<ScrollRect>(gameObject, InventoryScrollRectName, true);
+
+	   // Find Components
+	   inventory = FindFirstObjectByType<InventoryHandler>();
+		quickSlot = FindFirstObjectByType<QuickSlotHandler>();
+
+		// Bind List & List Clear
+		itemSlots.Add(ESlotType.InventorySlot, new List<InventorySlotUI>());
+		itemSlots.Add(ESlotType.QuickSlot, new List<InventorySlotUI>());
+		myItems.Add(ESlotType.InventorySlot, inventory.MyItems);
+		myItems.Add(ESlotType.QuickSlot, quickSlot.MyItems);
+
+		// Item Slot Setting
+		foreach (Transform child in itemSlotParent)
+		{
+			InventorySlotUI slot = child.GetComponent<InventorySlotUI>();
+			SlotInit(slot, itemSlots[ESlotType.InventorySlot].Count, ESlotType.InventorySlot);
+
+			itemSlots[ESlotType.InventorySlot].Add(slot);
+			myItems[ESlotType.InventorySlot].Add(null);
+		}
+
+		// Quick Slot Setting
+		foreach (Transform child in quickSlotParent)
+		{
+			InventorySlotUI slot = child.GetComponent<InventorySlotUI>();
+			SlotInit(slot, itemSlots[ESlotType.QuickSlot].Count, ESlotType.QuickSlot);
+
+			itemSlots[ESlotType.QuickSlot].Add(slot);
+			myItems[ESlotType.QuickSlot].Add(null);
+		}
+	}
+	private void SlotInit(InventorySlotUI slot, int idx, ESlotType type)
+	{
+		slot.SetIcon(null); 
+		slot.SlotType = type; 
+
+		slot.onClick += ()=>ClickSlot(idx, type);
+		slot.onRelease += ()=> ReleaseSlot(idx, type);
+		slot.onHoverEnter += ()=> HoverEnterSlot(idx, type);
+		slot.onHoverExit += ()=> HoverExitSlot(idx, type);
+	}
+	public void UpdateItemInfo()
+	{
+		foreach (var slots in itemSlots)
+		{
+			for (int i = 0; i < slots.Value.Count; i++)
+				slots.Value[i].SetIcon(myItems[slots.Key][i] == null ? null : myItems[slots.Key][i].ItemIcon);
+		}
+		
+	}
+	#endregion
+
+	#region Inventory UI On Off
+	private void InputInventoryToggle(InputAction.CallbackContext context)
 	{
 		if (gameObject.activeSelf)
 			CloseUI(); 
@@ -74,121 +129,113 @@ public class InventoryUI : MonoBehaviour
 	}
 	private void OpenUI()
 	{
-		for (int i = 0; i < itemSlots.Count; i++)
-			itemSlots[i].SetIcon(myItems[i] == null ? null : myItems[i].ItemIcon);
-
+		UpdateItemInfo(); 
 		gameObject.SetActive(true);
-		movingSlot.SetActive(false);
-		popup.SetActive(false);	
 	}
 	private void CloseUI()
 	{
 		gameObject.SetActive(false);
-
 	}
-
-	private void SlotInit(InventorySlotUI slot, int idx)
+	#endregion
+	 
+	#region Item Slot Control
+	// Item Slot  
+	private void ClickSlot(int idx, ESlotType type)
 	{
-		slot.SetIcon(null);
-		slot.onClick += ()=>ClickSlot(idx);
-		slot.onRelease += ()=> ReleaseSlot(idx);
-		slot.onHoverEnter += ()=> HoverEnterSlot(idx);
-		slot.onHoverExit += ()=> HoverExitSlot(idx);
-	}
+		Debug.Log($"클릭 {idx} : 타입 : {type}");
+		clikedSlot = new SlotInfo(idx, type);
+		scrollRect.enabled = false;
 
-	private void ClickSlot(int idx)
-	{
-		Debug.Log($"클릭 {idx}");
-		clikedButtonIdx = idx;
-		
-		if (myItems[idx] != null)
+		if (GetItemDataList(type)[idx] != null)
 			moveSlotCrt = StartCoroutine(MoveItem(0.5f));
-	}
-
-	private void ReleaseSlot(int idx)
+	} 
+	private void ReleaseSlot(int idx, ESlotType type)
 	{
-		Debug.Log($"클릭 취소 {idx}");
+		Debug.Log($"클릭 취소 {idx} : 타입 : {type}");
+		scrollRect.enabled = true;
 
 		if (moveSlotCrt != null)
 		{
 			StopCoroutine(moveSlotCrt);
 			moveSlotCrt = null;
-		} 
+		}  
 		 
-		// if 아이템을 이동중이라면
-		if (movingSlot.activeSelf)
+		// 아이템이 이동중이라면 슬롯의 아이템 데이터 교환
+		if (movingSlot.activeSelf) 
 		{
-			if (hoveredButtonIdx != -1 && clikedButtonIdx != -1)
-			{
-				ItemDataSO temp = myItems[clikedButtonIdx];
-				myItems[clikedButtonIdx] = myItems[hoveredButtonIdx];
-				myItems[hoveredButtonIdx] = temp;
-			}
+			if (hoveredSlot.type != ESlotType.None && clikedSlot.type != ESlotType.None)
+				SwitchSlot(clikedSlot, hoveredSlot);
 
-			OpenUI();
-		}
+
+			movingSlot.SetActive(false);
+			UpdateItemInfo(); 
+		} 
 		else
-		{
-			selectItemIdx = clikedButtonIdx;
-			popup.SetActive(true);
-		}
+			selectSlot = clikedSlot;
 
-
-		clikedButtonIdx = -1;
+		clikedSlot.type = ESlotType.None;
 	}
-
-	private void HoverEnterSlot(int idx)
+	private void HoverEnterSlot(int idx, ESlotType type)
 	{
-		Debug.Log($"호버 {idx}");
-		hoveredButtonIdx = idx;
-
-		if (myItems[idx] == null)
-			return;
-
-		itemIcon.sprite = myItems[idx].ItemIcon;
-		itemDescription.text = myItems[idx].ItemName + "\n" + myItems[idx].ItemDescription;
-		itemIcon.gameObject.SetActive(true);
+		Debug.Log($"호버 {idx} : 타입 : {type}");
+		hoveredSlot = new SlotInfo(idx, type); 
 	}
-
-	private void HoverExitSlot(int idx)
+	private void HoverExitSlot(int idx, ESlotType type)
 	{
-		hoveredButtonIdx = -1;
-
-		itemIcon.gameObject.SetActive(false);	
-		itemDescription.text = "";
+		hoveredSlot.type = ESlotType.None;
 	}
-
 	private IEnumerator MoveItem(float time)
 	{
 		yield return new WaitForSeconds(time);
-		itemSlots[clikedButtonIdx].SetIcon(null); 
+
+		GetInventorySlot(clikedSlot).SetIcon(null);
+
 		movingSlot.transform.localPosition = movingSlot.transform.parent.InverseTransformPoint(Input.mousePosition);
+		movingSlot.GetComponent<InventorySlotUI>().SetIcon(GetItemData(clikedSlot).ItemIcon);
 		movingSlot.SetActive(true);
-		movingSlot.GetComponent<InventorySlotUI>().SetIcon(myItems[clikedButtonIdx].ItemIcon);
+
 		while (true)
 		{
 			movingSlot.transform.localPosition = movingSlot.transform.parent.InverseTransformPoint(Input.mousePosition);
 			yield return null;
 		}
 	}
+	#endregion
+
+	#region Popup
 
 	private void DropItem()
 	{
 		// 플레이어 앞으로 옮기는걸로 수정
 		Vector3 dropPos = inventory.transform.position + inventory.transform.forward * 1.0f;
-		var go = Instantiate(myItems[selectItemIdx].DropItemPrefab);
+		var go = Instantiate(GetItemData(selectSlot).DropItemPrefab);
 		go.transform.position = dropPos;
 
-		myItems[selectItemIdx] = null;
-		itemSlots[selectItemIdx].SetIcon(null);
+		SetItemData(selectSlot, null);
+		GetInventorySlot(selectSlot).SetIcon(null); 
+
+		
 		ClosePopup();
-		selectItemIdx = -1;
+		selectSlot.type = ESlotType.None;
 	}
 
 	private void ClosePopup()
 	{
-		popup.gameObject.SetActive(false);
-		selectItemIdx = -1;
+		selectSlot.type = ESlotType.None;
 	}
+	#endregion
+
+	#region Utility Function
+	private void SetItemData(SlotInfo slot, ItemDataSO data) => GetItemDataList(slot.type)[slot.idx] = data;
+	private ItemDataSO GetItemData(SlotInfo slot) => GetItemDataList(slot.type)[slot.idx];
+	private InventorySlotUI GetInventorySlot(SlotInfo slot) => itemSlots[slot.type][slot.idx];
+	private List<ItemDataSO> GetItemDataList(ESlotType type) => myItems[type];
+	private void SwitchSlot(SlotInfo slotA, SlotInfo slotB)
+	{
+		ItemDataSO temp = myItems[slotA.type][slotA.idx];
+		myItems[slotA.type][slotA.idx] = myItems[slotB.type][slotB.idx];
+		myItems[slotB.type][slotB.idx] = temp;
+	}
+	#endregion
 }
 

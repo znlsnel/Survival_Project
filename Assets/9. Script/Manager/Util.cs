@@ -22,14 +22,14 @@ public class Util : Singleton<Util>
 				var transform = go.transform.GetChild(i);
 				if (string.IsNullOrEmpty(name) || transform.name == name)
 				{
-					if (transform.TryGetComponent(out T component))
+					if (transform.TryGetComponent(out T component)) 
 						return component;
 				}
 			}
 		}
 		else
 		{
-			foreach (T component in go.GetComponentsInChildren<T>())
+			foreach (T component in go.GetComponentsInChildren<T>(true))
 			{
 				if (string.IsNullOrEmpty(name) || component.name == name)
 					return component;

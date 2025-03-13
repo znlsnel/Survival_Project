@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class QuickSlotHandler : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	private List<ItemDataSO> myItems = new List<ItemDataSO>();
+	public List<ItemDataSO> MyItems => myItems;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }
