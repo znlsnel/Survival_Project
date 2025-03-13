@@ -37,7 +37,7 @@ public class BuildingPreview : MonoBehaviour
     private void Update()
     {
         FollowMouse();
-        AdjustToGround();
+
         UpdatePreviewColor();
     }
     private void FollowMouse()
@@ -46,6 +46,7 @@ public class BuildingPreview : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, placementLayer))
         {
             targetPosition = new Vector3(hit.point.x, transform.position.y, hit.point.z);
+            AdjustToGround();
         }
     }
 
@@ -53,7 +54,7 @@ public class BuildingPreview : MonoBehaviour
     {
         Vector3 centerPosition = previewCollider.bounds.center; // 피봇이 중앙에 있지않는 경우가 이씅ㅁ
         Ray groundRay = new Ray(centerPosition, Vector3.down);
-        if (Physics.Raycast(groundRay, out RaycastHit groundHit, 3f, placementLayer))
+        if (Physics.Raycast(groundRay, out RaycastHit groundHit, 5f, placementLayer))   // 레이 길이가 너무 작으면 바닥을 못찾음..
         {
             targetPosition.y = groundHit.point.y;
             canPlace = true;

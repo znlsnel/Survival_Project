@@ -72,7 +72,7 @@ public class BuildingUI : MonoBehaviour
         Debug.Log($"선택된 건축물: {building.buildingName}");
 
         selectedBuilding = building;
-        EventManager.Instance.SetSelectedBuilding(selectedBuilding);
+        BuildingManager.Instance.SetSelectedBuilding(building);
 
         foreach (Transform child in resourceListBG)
         {
