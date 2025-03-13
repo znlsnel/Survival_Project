@@ -158,7 +158,8 @@ PlayerSettings:
   resetResolutionOnWindowResize: 0
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
-  applicationIdentifier: {}
+  applicationIdentifier:
+    Standalone: com.DefaultCompany.Survival-Project
   buildNumber:
     Standalone: 0
     VisionOS: 0
@@ -835,7 +836,7 @@ PlayerSettings:
   hmiLogStartupTiming: 0
   hmiCpuConfiguration: 
   apiCompatibilityLevel: 6
-  activeInputHandler: 0
+  activeInputHandler: 2
   windowsGamepadBackendHint: 0
   cloudProjectId: b954673b-15a3-4004-b1d6-0deca4dc69c3
   framebufferDepthMemorylessMode: 0
