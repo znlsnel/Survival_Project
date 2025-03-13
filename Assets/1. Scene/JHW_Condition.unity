@@ -2122,6 +2122,7 @@ MonoBehaviour:
   thirsty: {fileID: 554739732}
   stamina: {fileID: 1115914574}
   temperature: {fileID: 1804391188}
+  temperatureBar: {fileID: 1966861343}
 --- !u!1 &1718304277
 GameObject:
   m_ObjectHideFlags: 0
@@ -2748,6 +2749,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiCondition: {fileID: 1706647169}
   dayNightCycle: {fileID: 367064520}
+  weather: {fileID: 367064521}
   healthDecay: 10
   thirstyDecay: 5
   fullHungerHealthImprove: 5
