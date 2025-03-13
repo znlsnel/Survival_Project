@@ -39,11 +39,11 @@ public class InventoryUI : MonoBehaviour
 
 	private void InitInventory()
 	{
-		movingSlot = Util.FindChildByName(transform, movingSlotName)?.gameObject;
-		var throwButton = Util.FindChildByName(popup.transform, dropButtonName);
-		var cancelButton = Util.FindChildByName(popup.transform, cancelButtonName);
-		Transform itemSlotParent = Util.FindChildByName(transform, itemSlotParentName);
-
+		movingSlot = Util.FindChild(gameObject, movingSlotName, true)?.gameObject;
+		var throwButton = Util.FindChild(popup.gameObject, dropButtonName);
+		var cancelButton = Util.FindChild(popup.gameObject, cancelButtonName);
+		Transform itemSlotParent = Util.FindChild<Transform>(gameObject, itemSlotParentName);
+		 
 
 		throwButton.GetComponent<Button>().onClick.AddListener(DropItem);
 		cancelButton.GetComponent<Button>().onClick.AddListener(ClosePopup);
