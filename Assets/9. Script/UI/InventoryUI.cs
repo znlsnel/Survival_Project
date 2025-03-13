@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -14,7 +15,7 @@ public enum ESlotType
 	QuickSlot
 }
 
-public class InventoryUI : MonoBehaviour
+public class InventoryUI : BaseUI
 {
 	private struct SlotInfo
 	{
@@ -27,11 +28,17 @@ public class InventoryUI : MonoBehaviour
 		}
 	}
 
-	[Header("Inventory Core")]
-	private static readonly string MovingSlotName = "movingSlot";
-	private static readonly string ItemSlotParentName = "itemSlotParent";
-	private static readonly string QuickSlotParentName = "quickSlotParent";
-	private static readonly string InventoryScrollRectName = "InventoryScrollRect";
+	enum Transforms
+	{
+		itemSlotParent,
+		quickSlotParent,
+	}
+	
+	enum GameObjects
+	{
+		movingSlot,
+		InventoryScrollRect
+	}
 
 	// === Item List ===
 	private Dictionary<ESlotType, List<InventorySlotUI>> itemSlots = new Dictionary<ESlotType, List<InventorySlotUI>>();
@@ -62,11 +69,14 @@ public class InventoryUI : MonoBehaviour
 	#region Inventory Function
 	private void InitInventory()
 	{
+		Bind<Transform>(typeof(Transforms));
+		Bind<GameObject>(typeof(GameObjects));
 		// Find Objects
-		Transform itemSlotParent = Util.FindChild<Transform>(gameObject, ItemSlotParentName, true);
-		Transform quickSlotParent = Util.FindChild<Transform>(gameObject, QuickSlotParentName, true);
-		movingSlot = Util.FindChild(gameObject, MovingSlotName, true);
-		scrollRect = Util.FindChild<ScrollRect>(gameObject, InventoryScrollRectName, true);
+		Transform itemSlotParent = Get<Transform>((int)Transforms.itemSlotParent);
+		Transform quickSlotParent = Get<Transform>((int)Transforms.quickSlotParent);
+
+		movingSlot = Get<GameObject>((int)GameObjects.movingSlot);
+		scrollRect = Get<GameObject>((int)GameObjects.InventoryScrollRect).GetComponent<ScrollRect>();
 
 	   // Find Components
 	   inventory = FindFirstObjectByType<InventoryHandler>();
@@ -103,11 +113,11 @@ public class InventoryUI : MonoBehaviour
 		slot.SetIcon(null); 
 		slot.SlotType = type; 
 
-		slot.onClick += ()=>ClickSlot(idx, type);
-		slot.onRelease += ()=> ReleaseSlot(idx, type);
-		slot.onHoverEnter += ()=> HoverEnterSlot(idx, type);
-		slot.onHoverExit += ()=> HoverExitSlot(idx, type);
-	}
+		slot.onClick += (PointerEventData data) =>ClickSlot(idx, type);
+		slot.onRelease += (PointerEventData data) => ReleaseSlot(idx, type);
+		slot.onHoverEnter += (PointerEventData data) => HoverEnterSlot(idx, type);
+		slot.onHoverExit += (PointerEventData data)=> HoverExitSlot(idx, type);
+	} 
 	public void UpdateItemInfo()
 	{
 		foreach (var slots in itemSlots)
@@ -116,7 +126,7 @@ public class InventoryUI : MonoBehaviour
 				slots.Value[i].SetIcon(myItems[slots.Key][i] == null ? null : myItems[slots.Key][i].ItemIcon);
 		}
 		
-	}
+	} 
 	#endregion
 
 	#region Inventory UI On Off
@@ -239,3 +249,4 @@ public class InventoryUI : MonoBehaviour
 	#endregion
 }
 
+ 
