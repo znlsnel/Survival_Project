@@ -847,11 +847,11 @@ RectTransform:
   m_Children:
   - {fileID: 1672817313}
   - {fileID: 1546955000}
-  m_Father: {fileID: 1718304278}
+  m_Father: {fileID: 1706647168}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 328.01, y: -58.300003}
+  m_AnchoredPosition: {x: 327.16003, y: -58.300003}
   m_SizeDelta: {x: 40, y: 116}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &554739730
@@ -1857,6 +1857,7 @@ RectTransform:
   - {fileID: 1278868747}
   - {fileID: 1115914571}
   - {fileID: 1804391185}
+  - {fileID: 554739729}
   m_Father: {fileID: 38846675}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -1914,7 +1915,6 @@ RectTransform:
   m_Children:
   - {fileID: 1271476617}
   - {fileID: 309246999}
-  - {fileID: 554739729}
   m_Father: {fileID: 1706647168}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -2331,8 +2331,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiCondition: {fileID: 1706647169}
   dayNightCycle: {fileID: 367064520}
-  healthDecay: 0
-  thirstyDecay: 0
+  healthDecay: 10
+  thirstyDecay: 5
   fullHungerHealthImprove: 5
   temperatureDecayRate: 2
 --- !u!114 &1841271309

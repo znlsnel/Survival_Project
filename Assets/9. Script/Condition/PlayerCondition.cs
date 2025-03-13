@@ -25,19 +25,14 @@ public class PlayerCondition : MonoBehaviour
         thirsty.Subtract(thirsty.passiveValue * Time.deltaTime/2);
         stamina.Add(stamina.passiveValue * Time.deltaTime);
 
-        //if (thirsty.curValue < 0f)
-        //{
-        //    hunger.Subtract(noThirstyHungryDecay * Time.deltaTime);
-        //}
+        int decayCount = 0;
 
-        if(hunger.curValue<0f || thirsty.curValue < 0f || temperature.curValue<= 20f )
-        {
-            health.Subtract(healthDecay * Time.deltaTime);
-        }
-        else if(hunger.curValue >= 100f)
-        {
-            health.Add(fullHungerHealthImprove * Time.deltaTime);
-        }
+        if (hunger.curValue <= 0f) decayCount++;
+        if (thirsty.curValue <= 0f) decayCount++;
+        if (temperature.curValue <= 20f) decayCount++;
+
+        health.Subtract(decayCount * healthDecay * Time.deltaTime);
+
 
         if(temperature.curValue >= 70f)
         {
