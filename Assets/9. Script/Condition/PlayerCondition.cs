@@ -6,7 +6,7 @@ public class PlayerCondition : MonoBehaviour
 {
     public UICondition uiCondition;
     public DayNightCycle dayNightCycle;
-
+    public Weather weather;
     Conditions health { get { return uiCondition.health; } }
     Conditions hunger { get { return uiCondition.hunger; } }
     Conditions thirsty { get { return uiCondition.thirsty; } }
@@ -30,14 +30,9 @@ public class PlayerCondition : MonoBehaviour
         if (hunger.curValue <= 0f) decayCount++;
         if (thirsty.curValue <= 0f) decayCount++;
         if (temperature.curValue <= 20f) decayCount++;
+        if(temperature.curValue>=80f) decayCount++;
 
         health.Subtract(decayCount * healthDecay * Time.deltaTime);
-
-
-        if(temperature.curValue >= 70f)
-        {
-            thirsty.Subtract(thirstyDecay * Time.deltaTime);
-        }
 
         UpdateTemperature();
 
@@ -49,11 +44,54 @@ public class PlayerCondition : MonoBehaviour
 
     void UpdateTemperature()
     {
+        float temperatureMultiplier = 1f;
+
+        switch (weather.currentWeather)
+        {
+            case Weather.WeatherType.Rainy:
+                temperatureMultiplier = 1.5f; 
+                break;
+            case Weather.WeatherType.Snow:
+                temperatureMultiplier = 2f; 
+                break;
+            case Weather.WeatherType.Hot:
+                temperatureMultiplier = 2f; 
+                break;
+            case Weather.WeatherType.Sunny:
+                temperatureMultiplier = 1f; 
+                break;
+        }
+
+
         if (dayNightCycle.Night())
         {
-            temperature.Subtract(temperatureDecayRate * Time.deltaTime);
+            if(weather.currentWeather == Weather.WeatherType.Hot)
+            {
+                temperature.Subtract(temperatureDecayRate * Time.deltaTime/temperatureMultiplier);
+            }
+            else
+            {
+                temperature.Subtract(temperatureDecayRate * temperatureMultiplier * Time.deltaTime);
+            }
+        }
+        else
+        {
+
+            if (weather.currentWeather == Weather.WeatherType.Hot)
+            {
+                temperature.Add(temperatureDecayRate * temperatureMultiplier * Time.deltaTime);
+            }
+            else if (weather.currentWeather == Weather.WeatherType.Sunny)
+            {
+                temperature.Add(temperatureDecayRate * Time.deltaTime);
+            }
+            else if (weather.currentWeather == Weather.WeatherType.Rainy || weather.currentWeather == Weather.WeatherType.Snow)
+            {
+                temperature.Subtract(temperatureDecayRate * temperatureMultiplier * Time.deltaTime);
+            }
         }
     }
+
 
     public void Heal(float amount)
     {
