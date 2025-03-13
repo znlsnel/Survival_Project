@@ -30,8 +30,16 @@ public class InventorySlotUI : BaseUI
 	private TextMeshProUGUI amountText;
 	private GameObject amountIndicator;
 	private GameObject itemTypeBg;
-
-	public ESlotType SlotType { get => slotType; set => slotType = value; }
+	private int stackAmount = 1;
+	public int StackAmount
+	{
+		get => stackAmount; 
+		set
+		{
+			stackAmount = value;
+			UpdateStackAmount();
+		}
+	}
 	private void Awake()
 	{
 		Bind<Image>(typeof(Images));
@@ -43,8 +51,9 @@ public class InventorySlotUI : BaseUI
 		amountText = Get<TextMeshProUGUI>((int)TextMeshPros.amountText);
 		amountIndicator = Get<GameObject>((int)GameObjects.IndicatorAmount);
 		itemTypeBg = Get<GameObject>((int)GameObjects.IndicatorType);
+		UpdateStackAmount();
 	}  
-	  
+	public ESlotType SlotType { get => slotType; set => slotType = value; }
 	public void SetIcon(ItemDataSO data)
 	{
 		itemImage.gameObject.SetActive(data != null);
@@ -54,9 +63,12 @@ public class InventorySlotUI : BaseUI
 		if (data == null)
 			return;
 
-		
 		itemImage.sprite = data.ItemIcon;
 		itemTypeImage.sprite = data.ItemTypeIcon;
-		amountText.text = data.MaxStackCount.ToString(); 
 	}  
-}
+	private void UpdateStackAmount()
+	{
+		amountText.text = stackAmount.ToString();
+	}
+
+} 

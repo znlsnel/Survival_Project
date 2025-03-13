@@ -22,7 +22,7 @@ public class BaseUI : UIEventHandler
 				objects[i] = Util.FindChild(gameObject, names[i], true);
 			else
 				objects[i] = Util.FindChild<T>(gameObject, names[i], true);
-		}
+		} 
 	}
 
 	public T Get<T>(int idx) where T : UnityEngine.Object

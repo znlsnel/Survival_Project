@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Cryptography;
 using TMPro;
 using Unity.VisualScripting;
@@ -50,7 +51,6 @@ public class InventoryUI : BaseUI
 	}
 	#endregion
 
-	
 	// === Item List ===
 	private Dictionary<ESlotType, List<InventorySlotUI>> itemSlots = new Dictionary<ESlotType, List<InventorySlotUI>>();
 	private Dictionary<ESlotType, List<ItemDataSO>> myItems = new Dictionary<ESlotType, List<ItemDataSO>>();
@@ -73,18 +73,15 @@ public class InventoryUI : BaseUI
 	private void Awake() 
 	{
 		InputManager.Instance.Inventory.action.started += InputInventoryToggle;
-
 		InitInventory();
-		
-
 	}
 	private void Start()
 	{
 		InitItemSlots();
 		CloseUI(); 
-
 	}
-	#region Inventory Function
+
+	#region Inventory Function 
 	private void InitInventory()
 	{
 		Bind<Transform>(typeof(Transforms));
@@ -101,7 +98,7 @@ public class InventoryUI : BaseUI
 		itemSlots.Add(ESlotType.InventorySlot, new List<InventorySlotUI>());
 		itemSlots.Add(ESlotType.QuickSlot, new List<InventorySlotUI>());
 		myItems.Add(ESlotType.InventorySlot, inventory.MyItems);
-		myItems.Add(ESlotType.QuickSlot, quickSlot.MyItems);
+		myItems.Add(ESlotType.QuickSlot, inventory.QuickSlotItems); 
 	}
 
 	private void InitItemSlots()
@@ -154,6 +151,22 @@ public class InventoryUI : BaseUI
 		slot.onHoverEnter += (PointerEventData data) => HoverEnterSlot(idx, type);
 		slot.onHoverExit += (PointerEventData data)=> HoverExitSlot(idx, type);
 	} 
+	private void InputInventoryToggle(InputAction.CallbackContext context)
+	{
+		if (gameObject.activeSelf)
+			CloseUI(); 
+		else
+			OpenUI();
+	}
+	private void OpenUI()
+	{
+		UpdateItemInfo(); 
+		gameObject.SetActive(true);
+	}
+	private void CloseUI()
+	{
+		gameObject.SetActive(false);
+	}
 	public void UpdateItemInfo()
 	{
 		foreach (var slots in itemSlots)
@@ -185,25 +198,11 @@ public class InventoryUI : BaseUI
 			slot.SetIcon(item);
 		}  
 	} 
-	#endregion
-
-	#region Inventory UI On Off
-	private void InputInventoryToggle(InputAction.CallbackContext context)
+	public void AddItem(ESlotType type, int idx)
 	{
-		if (gameObject.activeSelf)
-			CloseUI(); 
-		else
-			OpenUI();
+		itemSlots[type][idx].StackAmount++;
 	}
-	private void OpenUI()
-	{
-		UpdateItemInfo(); 
-		gameObject.SetActive(true);
-	}
-	private void CloseUI()
-	{
-		gameObject.SetActive(false);
-	}
+	public int GetSlotStackAmount(ESlotType type, int idx) => itemSlots[type][idx].StackAmount;
 	#endregion
 	 
 	#region Item Slot Control
@@ -303,6 +302,10 @@ public class InventoryUI : BaseUI
 		ItemDataSO temp = myItems[slotA.type][slotA.idx];
 		myItems[slotA.type][slotA.idx] = myItems[slotB.type][slotB.idx];
 		myItems[slotB.type][slotB.idx] = temp;
+		 
+		int cnt = itemSlots[slotA.type][slotA.idx].StackAmount;
+		itemSlots[slotA.type][slotA.idx].StackAmount = itemSlots[slotB.type][slotB.idx].StackAmount;
+		itemSlots[slotB.type][slotB.idx].StackAmount = cnt;
 	}
 	#endregion
 }
