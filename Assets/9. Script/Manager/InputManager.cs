@@ -10,12 +10,13 @@ public class InputManager : Singleton<InputManager>
 	[SerializeField] private InputActionAsset inputSystem;
 	[SerializeField] private InputActionReference move;
 	[SerializeField] private InputActionReference jump;
+    [SerializeField] private InputActionReference toggleBuilding;
+
+    [SerializeField] private PlayerInput playerInput;	// 플레이어 인풋연결
+    [SerializeField] private BuildingInputHandler buildingInputHandler;	// 건축에 쓰이는 핸들러
+
 	[SerializeField] private InputActionReference interaction;
 	[SerializeField] private InputActionReference inventory;
-
-
-	public InputActionReference Move => move; 
-	public InputActionReference Jump => jump; 
 	public InputActionReference Interaction => interaction;
 	public InputActionReference Inventory => inventory; 
 
@@ -24,11 +25,21 @@ public class InputManager : Singleton<InputManager>
 		inputSystem.Disable();
 	}
 
-	protected override void Awake()
+    public InputActionReference Move => move; 
+	public InputActionReference Jump => jump;
+    public InputActionReference ToggleBuilding => toggleBuilding;
+
+
+    public InputAction RotateBuilding => buildingInputHandler?.RotateAction;
+    public InputAction PlaceBuilding => buildingInputHandler?.PlaceAction;
+    public InputAction CancelBuild => buildingInputHandler?.CancelAction;
+
+
+    protected override void Awake()
 	{
 		base.Awake();
-		inputSystem.Enable();  
-	}
+		inputSystem.Enable();
+    }
 
 	public static void SetActive(bool active)
 	{
@@ -37,4 +48,32 @@ public class InputManager : Singleton<InputManager>
 		else
 			Instance.inputSystem.Disable();
 	}
+
+
+
+    // 나중에 일반 핸들러 생기면 옮길게요
+    private void OnEnable()
+    {
+        if (toggleBuilding != null)
+        {
+            toggleBuilding.action.performed += ToggleBuildMode;
+            toggleBuilding.action.Enable();
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (toggleBuilding != null)
+        {
+            toggleBuilding.action.performed -= ToggleBuildMode;
+            toggleBuilding.action.Disable();
+        }
+    }
+    public void ToggleBuildMode(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            EventManager.Instance.RequestToggleBuildMode();
+        }
+    }
 }
