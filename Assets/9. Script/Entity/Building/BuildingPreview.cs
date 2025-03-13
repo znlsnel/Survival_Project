@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BuildingPreview : MonoBehaviour
@@ -10,6 +12,7 @@ public class BuildingPreview : MonoBehaviour
     private Collider previewCollider;
     private bool canPlace = false;
 
+    
     private MeshRenderer previewRenderer;
 
     private Vector3 targetPosition;
@@ -29,7 +32,6 @@ public class BuildingPreview : MonoBehaviour
         }
 
     }
-
 
     private void Awake()
     {
@@ -56,14 +58,13 @@ public class BuildingPreview : MonoBehaviour
         {
             originalMaterials = new Material[] { meshRenderer.sharedMaterial };
         }
+        previewCollider.enabled = false;     
     }
-
 
 
     private void Update()
     {
         FollowMouse();
-
         UpdatePreviewColor();
     }
     private void FollowMouse()
@@ -71,26 +72,15 @@ public class BuildingPreview : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, placementLayer))
         {
-            targetPosition = new Vector3(hit.point.x, transform.position.y, hit.point.z);
-            AdjustToGround();
-        }
-    }
-
-    private void AdjustToGround()
-    {
-        Vector3 centerPosition = previewCollider.bounds.center; // 피봇이 중앙에 있지않는 경우가 이씅ㅁ
-        Ray groundRay = new Ray(centerPosition, Vector3.down);
-        if (Physics.Raycast(groundRay, out RaycastHit groundHit, 5f, placementLayer))   // 레이 길이가 너무 작으면 바닥을 못찾음..
-        {
-            targetPosition.y = groundHit.point.y;
+            targetPosition = new Vector3(hit.point.x, hit.point.y, hit.point.z);
+            targetPosition.y = targetPosition.y+ previewCollider.bounds.size.y/2;
+            transform.position = targetPosition;
+            // AdjustToGround();
             canPlace = true;
-            Debug.Log("제발 바닥을 감지해줘");
-
         }
         else canPlace = false;
-
-        transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 15f);
     }
+
 
     private void UpdatePreviewColor()
     {
@@ -104,18 +94,6 @@ public class BuildingPreview : MonoBehaviour
         {
             mat.color = new Color(targetColor.r, targetColor.g, targetColor.b, 0.5f); // 반투명
         }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        canPlace = false;
-        UpdatePreviewColor();
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        canPlace = true;
-        UpdatePreviewColor();
     }
 
     public bool CanPlace()
