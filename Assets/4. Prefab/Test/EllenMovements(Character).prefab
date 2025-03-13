@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7374496084914271547}
+  - {fileID: 8065903470000648075}
   m_Father: {fileID: 4526243025766151024}
   m_LocalEulerAnglesHint: {x: -100.28, y: 0, z: 0}
 --- !u!1 &7376156389758394589
@@ -43,7 +43,6 @@ GameObject:
   - component: {fileID: 7374496084914271547}
   - component: {fileID: 7363379391583413321}
   - component: {fileID: 7353654648449429747}
-  - component: {fileID: 1333776628571425961}
   m_Layer: 0
   m_Name: Staff
   m_TagString: Untagged
@@ -59,12 +58,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7376156389758394589}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1661817943211116968}
+  m_Father: {fileID: 8065903470000648075}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7363379391583413321
 MeshFilter:
@@ -116,19 +115,38 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1333776628571425961
-MonoBehaviour:
+--- !u!1 &7922033448342482576
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7376156389758394589}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0b02ea62ead40e289065fef6249156d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hand: {fileID: 4526243025766151374}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8065903470000648075}
+  m_Layer: 9
+  m_Name: Pivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8065903470000648075
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7922033448342482576}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.48069173, y: 0.6172654, z: 0.48392013, w: 0.3920973}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7374496084914271547}
+  m_Father: {fileID: 1661817943211116968}
+  m_LocalEulerAnglesHint: {x: -103, y: -4.8, z: 108}
 --- !u!1 &8491889327271438198
 GameObject:
   m_ObjectHideFlags: 0
@@ -3038,12 +3056,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4526243025766541398}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &4526243025766151374 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400536, guid: a5674d01884853d4e8f2386a171e14d9,
-    type: 3}
-  m_PrefabInstance: {fileID: 4526243025766541398}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4526243025766510352 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100166, guid: a5674d01884853d4e8f2386a171e14d9,
@@ -3300,6 +3312,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpCount: 2
+  comboCount: 0
+  knockBackForce: 10
+  MeleeWeapon: {fileID: 0}
 --- !u!114 &3484249876762440738
 MonoBehaviour:
   m_ObjectHideFlags: 0

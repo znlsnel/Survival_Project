@@ -1,27 +1,31 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 public class ChomperNavigationHandler: MonoBehaviour
 {
-    private NavMeshAgent _agent;
+    [HideInInspector] public NavMeshAgent agent;
     public Transform target; // fix: 타겟은 싱글톤 플레이어로 될 예정
     
     // ReSharper disable once InconsistentNaming
-    [SerializeField] private float _speed = 3.5f; // 몬스터의 이동속도
+    [SerializeField] private float speed = 3.5f; // 몬스터의 이동속도
     [SerializeField] private float stoppingDistance = 1.5f; // 멈추는 위치
-    [SerializeField] private float chaseRange = 10f;// 추적 거리
+    [SerializeField] private float chaseRange = 5f;// 추적 거리
     
     void Awake()
     {
-        _agent = GetComponent<NavMeshAgent>();
-        _agent.speed = _speed;
-        _agent.acceleration = _speed * 2;
-        _agent.stoppingDistance = stoppingDistance;
-        _agent.autoBraking = true;
+        agent = GetComponent<NavMeshAgent>();
+        agent.speed = speed;
+        agent.acceleration = speed * 2;
+        agent.stoppingDistance = stoppingDistance;
+        agent.autoBraking = true;
     }
-    
-    public bool IsDetected { get; private set; }
-    public bool IsAttacking { get; private set; }
+
+    public enum Status { Idle, Detected, Attackable }
+
+    [FormerlySerializedAs("status")] public Status currStatus;
+    public Status PrevStatus;
+
     
     public void UpdateNavigation()
     {
@@ -29,20 +33,32 @@ public class ChomperNavigationHandler: MonoBehaviour
 
         var distanceToTarget = Vector3.Distance(transform.position, target.position);
 
-        IsDetected = distanceToTarget <= chaseRange;
-        IsAttacking = distanceToTarget <= stoppingDistance;
+        currStatus = Status.Idle;
+        if(distanceToTarget <= chaseRange) currStatus = Status.Detected;
+        if(distanceToTarget <= stoppingDistance) currStatus = Status.Attackable;
     }
     
-    public void Tracing()
+    public void SetTracing(bool isTracing)
     {
-        if (IsDetected && !IsAttacking)
+        if (isTracing)
         {
-            _agent.isStopped = false;
-            _agent.SetDestination(target.position);
+            var distanceToTarget = Vector3.Distance(transform.position, target.position);
+            if (distanceToTarget > stoppingDistance) // 멈출 거리보다 멀 때만 이동
+            {
+                agent.isStopped = false;
+                agent.SetDestination(target.position);
+            }
+            else
+            {
+                agent.isStopped = true; // 멈출 거리 도달 시 이동 멈춤
+                agent.ResetPath();
+            }
         }
         else
         {
-            _agent.isStopped = true;
+            agent.isStopped = true;
+            agent.ResetPath();
+            agent.velocity = Vector3.zero;
         }
     }
 }

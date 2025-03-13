@@ -1,13 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAudioHandler: MonoBehaviour
+// refactor : 공통 데이터 추상화 하기
+[RequireComponent(typeof(AudioSource))]
+public class MeleeWeaponAudioHandler: MonoBehaviour
 {
+    private AudioSource _audioSource;
+
     public enum SoundType { Attack, Damaged }
     [System.Serializable] public class SoundData { public SoundType type; public List<AudioClip> clips; }
     public List<SoundData> sounds = new List<SoundData>();
-    
-    private AudioSource _audioSource;
+
 
     void Awake()
     {

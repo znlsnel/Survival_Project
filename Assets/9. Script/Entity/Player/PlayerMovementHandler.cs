@@ -73,6 +73,12 @@ public class PlayerMovementHandler: MonoBehaviour
         bool value = Physics.CheckSphere(transform.position, 0.2f, groundLayerMask);
         return value;
     }
+
+    public void Knockback(Vector2 knockbackForce)
+    {
+        
+        _rigidbody.AddForce(knockbackForce, ForceMode.Impulse);
+    }
     
     // public float maxDistance = 0.3f;
     // bool IsGrounded()

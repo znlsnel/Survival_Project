@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PlayerCondition : MonoBehaviour
+public class PlayerTempCondition : MonoBehaviour
 {
 
     public Condition health;

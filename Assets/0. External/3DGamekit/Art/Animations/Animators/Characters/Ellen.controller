@@ -1,5 +1,41 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1107 &-4212198902797970366
+AnimatorStateMachine:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RangeCombatSM
+  m_ChildStates: []
+  m_ChildStateMachines: []
+  m_AnyStateTransitions: []
+  m_EntryTransitions: []
+  m_StateMachineTransitions: {}
+  m_StateMachineBehaviours: []
+  m_AnyStatePosition: {x: 50, y: 20, z: 0}
+  m_EntryPosition: {x: 50, y: 120, z: 0}
+  m_ExitPosition: {x: 800, y: 120, z: 0}
+  m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
+  m_DefaultState: {fileID: 0}
+--- !u!1109 &-3694655606257522751
+AnimatorTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: IsRangeAttackable
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: -4212198902797970366}
+  m_DstState: {fileID: 0}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 1
 --- !u!1102 &-2255808991545236021
 AnimatorState:
   serializedVersion: 6
@@ -133,6 +169,12 @@ AnimatorController:
     m_Controller: {fileID: 0}
   - m_Name: StateTime
     m_Type: 1
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: IsRangeAttackable
+    m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -2505,7 +2547,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 1102367316240351284}
-    m_Position: {x: 384, y: -72, z: 0}
+    m_Position: {x: 380, y: -70, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102008862376584700}
     m_Position: {x: 380, y: 0, z: 0}
@@ -2523,7 +2565,7 @@ AnimatorStateMachine:
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_EntryPosition: {x: 396, y: -168, z: 0}
   m_ExitPosition: {x: 696, y: 24, z: 0}
-  m_ParentStateMachinePosition: {x: 96, y: -168, z: 0}
+  m_ParentStateMachinePosition: {x: 100, y: -170, z: 0}
   m_DefaultState: {fileID: 1102367316240351284}
 --- !u!1107 &1107267585127195014
 AnimatorStateMachine:
@@ -2580,40 +2622,45 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: -2255808991545236021}
     m_Position: {x: 215, y: -175, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 5350595162640265884}
-    m_Position: {x: 230, y: -330, z: 0}
   m_ChildStateMachines:
   - serializedVersion: 1
     m_StateMachine: {fileID: 1107267585127195014}
     m_Position: {x: -120, y: 0, z: 0}
   - serializedVersion: 1
     m_StateMachine: {fileID: 1107901932556721024}
-    m_Position: {x: 480, y: 240, z: 0}
+    m_Position: {x: 480, y: 350, z: 0}
   - serializedVersion: 1
     m_StateMachine: {fileID: 1107516587743271850}
     m_Position: {x: 480, y: 0, z: 0}
   - serializedVersion: 1
     m_StateMachine: {fileID: 1107228720668996938}
-    m_Position: {x: -120, y: 240, z: 0}
+    m_Position: {x: -230, y: 240, z: 0}
   - serializedVersion: 1
     m_StateMachine: {fileID: 1107144586752185528}
     m_Position: {x: 360, y: 120, z: 0}
+  - serializedVersion: 1
+    m_StateMachine: {fileID: -4212198902797970366}
+    m_Position: {x: -130, y: 400, z: 0}
   m_AnyStateTransitions:
   - {fileID: 1101734552565717206}
   - {fileID: 1101532510285334376}
   m_EntryTransitions: []
   m_StateMachineTransitions:
+  - first: {fileID: -4212198902797970366}
+    second:
+    - {fileID: 2531980410504379917}
   - first: {fileID: 1107267585127195014}
     second:
     - {fileID: 1109724402327276408}
     - {fileID: 1109978867244363948}
     - {fileID: 1109429563890313610}
+    - {fileID: -3694655606257522751}
   - first: {fileID: 1107901932556721024}
     second:
     - {fileID: 1109756267749884836}
     - {fileID: 1109844324291011288}
     - {fileID: 1109355376993633130}
+    - {fileID: 8576562220665754510}
   - first: {fileID: 1107516587743271850}
     second:
     - {fileID: 1109004608291311438}
@@ -2702,7 +2749,7 @@ AnimatorStateMachine:
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 120, y: -348, z: 0}
   m_EntryPosition: {x: 396, y: -300, z: 0}
-  m_ExitPosition: {x: 396, y: 168, z: 0}
+  m_ExitPosition: {x: 400, y: 170, z: 0}
   m_ParentStateMachinePosition: {x: 360, y: -410, z: 0}
   m_DefaultState: {fileID: 1102663525648325754}
 --- !u!1109 &1109004608291311438
@@ -3129,29 +3176,31 @@ AnimatorTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 1
---- !u!1102 &5350595162640265884
-AnimatorState:
-  serializedVersion: 6
+--- !u!1109 &2531980410504379917
+AnimatorTransition:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Ellen_GunShoot
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 60b35be23e16e5746972444b244460e0, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 1107901932556721024}
+  m_DstState: {fileID: 0}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 1
+--- !u!1109 &8576562220665754510
+AnimatorTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: -4212198902797970366}
+  m_DstState: {fileID: 0}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 1
