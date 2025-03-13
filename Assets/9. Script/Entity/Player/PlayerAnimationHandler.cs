@@ -1,8 +1,10 @@
+using System;
 using UnityEngine;
 
 public class PlayerAnimationHandler: MonoBehaviour
 {
     [HideInInspector] public Animator animator;
+    [HideInInspector] public PlayerMeeleAnimationStateMachine meeleStateMachine;
     
     public static readonly int IsGrounded = Animator.StringToHash("Grounded");
     public static readonly int HashForwardSpeed = Animator.StringToHash("ForwardSpeed");
@@ -19,6 +21,7 @@ public class PlayerAnimationHandler: MonoBehaviour
 
     // 콤보 연계를 위한 시간 체크
     public static readonly int HashStateTime = Animator.StringToHash("StateTime");
+    public static readonly int HashIsAbleRegisterCombo = Animator.StringToHash("IsAbleRegisterCombo");
 
     public static readonly int HashEllenCombo1 = Animator.StringToHash("EllenCombo1");
     public static readonly int HashEllenCombo2 = Animator.StringToHash("EllenCombo2");
@@ -28,5 +31,16 @@ public class PlayerAnimationHandler: MonoBehaviour
     void Awake()
     {
         animator = GetComponent<Animator>();
+        meeleStateMachine = animator.GetBehaviour<PlayerMeeleAnimationStateMachine>();
+    }
+
+
+    public Action<bool> OnMeleeAttackAvailable;
+    
+    // notice: animation event에선 bool을 파라미터로 받지 못함
+    public void SetIsMeleeAttackAvailable(int isActive)
+    {
+        bool isAvailable = isActive != 0;
+        OnMeleeAttackAvailable?.Invoke(isAvailable);
     }
 }

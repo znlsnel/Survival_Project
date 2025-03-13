@@ -35,4 +35,10 @@ public class ItemDataSO : ScriptableObject
 
    
 }
+
+[CreateAssetMenu(fileName = "new ItemData", menuName = "My ScriptableObject/ItemData")]
+public class WeaponItemSO : ItemDataSO
+{
+	
+}
  
