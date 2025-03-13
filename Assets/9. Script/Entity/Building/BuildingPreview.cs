@@ -14,6 +14,7 @@ public class BuildingPreview : MonoBehaviour
 
     private Vector3 targetPosition;
 
+
     private void OnValidate()
     {
         placementLayer = LayerMask.GetMask("Ground", "Construction");
@@ -50,8 +51,9 @@ public class BuildingPreview : MonoBehaviour
 
     private void AdjustToGround()
     {
-        Ray groundRay = new Ray(targetPosition + Vector3.up, Vector3.down);
-        if (Physics.Raycast(groundRay, out RaycastHit groundHit, 2f, placementLayer))
+        Vector3 centerPosition = previewCollider.bounds.center; // 피봇이 중앙에 있지않는 경우가 이씅ㅁ
+        Ray groundRay = new Ray(centerPosition, Vector3.down);
+        if (Physics.Raycast(groundRay, out RaycastHit groundHit, 3f, placementLayer))
         {
             targetPosition.y = groundHit.point.y;
             canPlace = true;
@@ -94,20 +96,5 @@ public class BuildingPreview : MonoBehaviour
         {
             meshRenderer.material = invalidMaterial; // 기본적으로 배치 불가 색상
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        if (!Application.isPlaying) return; // 실행 중일 때만 표시
-
-        // 1. 카메라에서 마우스 위치로 쏘는 레이 (파란색)
-        Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine(mouseRay.origin, mouseRay.origin + mouseRay.direction * 10f);
-
-        // 2. 프리뷰 오브젝트에서 바닥으로 쏘는 레이 (빨간색)
-        Vector3 groundRayStart = targetPosition + Vector3.up * 1f;
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(groundRayStart, groundRayStart + Vector3.down * 2f);
     }
 }
