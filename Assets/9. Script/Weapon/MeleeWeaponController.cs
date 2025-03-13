@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(MeleeWeaponAudioHandler))]
 public class MeleeWeaponController: MonoBehaviour
 {
     // melee resource handler

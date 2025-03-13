@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         // notice: 애니메이션 진행 정도를 파악하여 콤보로 연결할 지 조건 분기
+        // question: 도끼로 채집 등인 경우, 콤보 기능 끄기 필요한 지?
         _animation.animator.SetFloat(PlayerAnimationHandler.HashStateTime, Mathf.Repeat(_animation.animator.GetCurrentAnimatorStateInfo(0).normalizedTime, 1f));
 
         // move
@@ -56,20 +57,18 @@ public class PlayerController : MonoBehaviour
             _movement.Jump();
         }
 
-        // attack : 점프 중 공격?
+        // bug: 두번 동시에 클릭됨
         if (_input.isClicked)
         {
-            // _condition.UseStemina(10);
-            
+            _input.isClicked = false; // fix - learn : 내부 로직 도중 에러가 나면 false 처리가 안되면서 무한 재생되는 버그 발생
+
             _animation.animator.SetTrigger(PlayerAnimationHandler.MeleeAttackTrigger);
             _audio.PlayerOneShot(PlayerAudioHandler.SoundType.Attack); // notice: 클래스 내부 enum의 경우 plyWeight에 따라 자동으로 static 처리
-            meleeWeaponController.audioHandler.PlayerOneShot(MeleeWeaponAudioHandler.SoundType.Attack);
+            // meleeWeaponController.audioHandler.PlayerOneShot(MeleeWeaponAudioHandler.SoundType.Attack);
             
             // feat: 쿨타임 개념 필요
             comboCount += 1;
             if(comboCount >= 2) comboCount = 0;
-            
-            _input.isClicked = false;
         }
 
         // refactor : 캐싱 필요
