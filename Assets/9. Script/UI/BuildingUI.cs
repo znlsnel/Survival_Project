@@ -17,6 +17,8 @@ public class BuildingUI : MonoBehaviour
 
     private BuildingUIManager buildingUIManager;
 
+    private BuildingData selectedBuilding;      // 짐 선택된 건축물 데이터
+
     public void InitializeUI(BuildingUIManager manager)
     {
         buildingUIManager = manager;
@@ -68,6 +70,9 @@ public class BuildingUI : MonoBehaviour
     private void SelectBuilding(BuildingData building)
     {
         Debug.Log($"선택된 건축물: {building.buildingName}");
+
+        selectedBuilding = building;
+        EventManager.Instance.SetSelectedBuilding(selectedBuilding);
 
         foreach (Transform child in resourceListBG)
         {

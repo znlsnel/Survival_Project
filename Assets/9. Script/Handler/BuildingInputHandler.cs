@@ -11,12 +11,16 @@ public class BuildingInputHandler : MonoBehaviour
     [SerializeField] private InputAction placeAction;
     [SerializeField] private InputAction cancelAction;
     [SerializeField] private InputAction toggleAction;
+    [SerializeField] private InputAction buildingAction;
+
 
 
     public InputAction RotateAction => rotateAction;
     public InputAction PlaceAction => placeAction;
     public InputAction CancelAction => cancelAction;
     public InputAction ToggleAction => toggleAction;
+    public InputAction BuildingAction => buildingAction;
+
 
 
     private void OnValidate()   // 미리
@@ -29,6 +33,8 @@ public class BuildingInputHandler : MonoBehaviour
             placeAction = playerBuilding.FindAction("PlaceObject");
             cancelAction = playerBuilding.FindAction("CancelBuild");
             toggleAction = playerBuilding.FindAction("ToggleBuildMode");
+            buildingAction = playerBuilding.FindAction("StartBuilding");
+
         }
     }
     private void OnEnable()
@@ -37,11 +43,15 @@ public class BuildingInputHandler : MonoBehaviour
         placeAction.performed += PlaceBuilding;
         cancelAction.performed += CancelBuilding;
         toggleAction.performed += ToggleBuildMode;
+        buildingAction.performed += StartBuilding;
+
 
         rotateAction.Enable();
         placeAction.Enable();
         cancelAction.Enable();
         toggleAction.Enable();
+        buildingAction.Enable();
+
     }
 
     private void OnDisable()
@@ -82,6 +92,15 @@ public class BuildingInputHandler : MonoBehaviour
         if (context.phase == InputActionPhase.Started)
         {
             EventManager.Instance.RequestToggleBuildMode();
+        }
+    }
+
+    public void StartBuilding(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            Debug.Log("빌딩시작");
+            EventManager.Instance.RequestStartBuilding();
         }
     }
 }

@@ -11,6 +11,12 @@ public class EventManager : Singleton<EventManager>
 
     public event Action OnToggleBuildModeRequested;
 
+    public event Action<BuildingData> OnStartBuildingRequested;
+
+    private BuildingData selectedBuilding;
+
+
+
     public void BuildingModeChanged(bool isBuilding)
     {
         OnBuildingModeChanged?.Invoke(isBuilding);
@@ -22,4 +28,18 @@ public class EventManager : Singleton<EventManager>
         OnToggleBuildModeRequested?.Invoke();
     }
 
+    public void SetSelectedBuilding(BuildingData buildingData)
+    {
+        selectedBuilding = buildingData;
+    }
+
+    public void RequestStartBuilding()
+    {
+        if (selectedBuilding == null)
+        {
+            return;
+        }
+        Debug.Log($"이벤트 요청: {selectedBuilding.buildingName} 빌딩 시작");
+        OnStartBuildingRequested?.Invoke(selectedBuilding);
+    }
 }
