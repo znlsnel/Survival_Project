@@ -13,7 +13,7 @@ public class InventoryUI : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI itemDescription;
 	[SerializeField] private GameObject popup;
 
-
+	 
     private readonly string itemSlotParentName = "ItemSlotParent";
     private readonly string movingSlotName = "movingSlot";
     private readonly string dropButtonName = "DropButton";
@@ -30,14 +30,14 @@ public class InventoryUI : MonoBehaviour
 	private int hoveredButtonIdx = -1;
 	private Coroutine moveSlotCrt;
 
-	private void Awake()
+	private void Awake() 
 	{
 		InitInventory();
 		InputManager.Instance.Inventory.action.started += InputInventoryKey;
 		CloseUI();
 	}
 
-	void InitInventory()
+	private void InitInventory()
 	{
 		movingSlot = Util.FindChildByName(transform, movingSlotName)?.gameObject;
 		var throwButton = Util.FindChildByName(popup.transform, dropButtonName);
@@ -49,30 +49,30 @@ public class InventoryUI : MonoBehaviour
 		cancelButton.GetComponent<Button>().onClick.AddListener(ClosePopup);
 
 		itemIcon.gameObject.SetActive(false);
-		itemDescription.text = ""; 
+		itemDescription.text = "";
 
 		inventory = FindFirstObjectByType<InventoryHandler>();
 		myItems = inventory.MyItems;
 		myItems.Clear();
 
-		foreach (Transform child in itemSlotParent) 
+		foreach (Transform child in itemSlotParent)
 		{
 			InventorySlotUI slot = child.GetComponent<InventorySlotUI>();
 			SlotInit(slot, itemSlots.Count);
 
 			itemSlots.Add(slot);
-			myItems.Add(null);  
-		} 
+			myItems.Add(null);
+		}
 	}
 
-	void InputInventoryKey(InputAction.CallbackContext context)
+	private void InputInventoryKey(InputAction.CallbackContext context)
 	{
 		if (gameObject.activeSelf)
 			CloseUI(); 
 		else
 			OpenUI();
 	}
-	void OpenUI()
+	private void OpenUI()
 	{
 		for (int i = 0; i < itemSlots.Count; i++)
 			itemSlots[i].SetIcon(myItems[i] == null ? null : myItems[i].ItemIcon);
@@ -81,13 +81,13 @@ public class InventoryUI : MonoBehaviour
 		movingSlot.SetActive(false);
 		popup.SetActive(false);	
 	}
-	void CloseUI()
+	private void CloseUI()
 	{
 		gameObject.SetActive(false);
 
 	}
 
-	void SlotInit(InventorySlotUI slot, int idx)
+	private void SlotInit(InventorySlotUI slot, int idx)
 	{
 		slot.SetIcon(null);
 		slot.onClick += ()=>ClickSlot(idx);
@@ -96,18 +96,16 @@ public class InventoryUI : MonoBehaviour
 		slot.onHoverExit += ()=> HoverExitSlot(idx);
 	}
 
-
-
-	void ClickSlot(int idx)
+	private void ClickSlot(int idx)
 	{
 		Debug.Log($"클릭 {idx}");
 		clikedButtonIdx = idx;
 		
 		if (myItems[idx] != null)
 			moveSlotCrt = StartCoroutine(MoveItem(0.5f));
-	} 
+	}
 
-	void ReleaseSlot(int idx)
+	private void ReleaseSlot(int idx)
 	{
 		Debug.Log($"클릭 취소 {idx}");
 
@@ -139,7 +137,7 @@ public class InventoryUI : MonoBehaviour
 		clikedButtonIdx = -1;
 	}
 
-	void HoverEnterSlot(int idx)
+	private void HoverEnterSlot(int idx)
 	{
 		Debug.Log($"호버 {idx}");
 		hoveredButtonIdx = idx;
@@ -150,9 +148,9 @@ public class InventoryUI : MonoBehaviour
 		itemIcon.sprite = myItems[idx].ItemIcon;
 		itemDescription.text = myItems[idx].ItemName + "\n" + myItems[idx].ItemDescription;
 		itemIcon.gameObject.SetActive(true);
-	} 
+	}
 
-	void HoverExitSlot(int idx)
+	private void HoverExitSlot(int idx)
 	{
 		hoveredButtonIdx = -1;
 
@@ -160,7 +158,7 @@ public class InventoryUI : MonoBehaviour
 		itemDescription.text = "";
 	}
 
-	IEnumerator MoveItem(float time)
+	private IEnumerator MoveItem(float time)
 	{
 		yield return new WaitForSeconds(time);
 		itemSlots[clikedButtonIdx].SetIcon(null); 
@@ -174,7 +172,7 @@ public class InventoryUI : MonoBehaviour
 		}
 	}
 
-	void DropItem()
+	private void DropItem()
 	{
 		// 플레이어 앞으로 옮기는걸로 수정
 		Vector3 dropPos = inventory.transform.position + inventory.transform.forward * 1.0f;
@@ -187,7 +185,7 @@ public class InventoryUI : MonoBehaviour
 		selectItemIdx = -1;
 	}
 
-	void ClosePopup()
+	private void ClosePopup()
 	{
 		popup.gameObject.SetActive(false);
 		selectItemIdx = -1;
