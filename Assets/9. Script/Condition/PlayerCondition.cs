@@ -11,7 +11,7 @@ public class PlayerCondition : MonoBehaviour
     Conditions hunger { get { return uiCondition.hunger; } }
     Conditions thirsty { get { return uiCondition.thirsty; } }
     Conditions stamina { get { return uiCondition.stamina; } }
-    Conditions temperature { get { return uiCondition.temperautre; } }
+    Conditions temperature { get { return uiCondition.temperature; } }
 
     public float healthDecay;
     public float thirstyDecay;

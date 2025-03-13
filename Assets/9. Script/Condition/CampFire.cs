@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class CampFire : MonoBehaviour
 {
-    public float temperatureIncreaseRate = 10f; 
+    public float temperatureIncreaseRate = 10f;
+    private UICondition uiCondition;
     private List<PlayerCondition> playersInRange = new List<PlayerCondition>();
+
+    private void Awake()
+    {
+        uiCondition = GameObject.Find("Conditions").GetComponent<UICondition>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -27,9 +33,13 @@ public class CampFire : MonoBehaviour
 
     private void Update()
     {
-        foreach (PlayerCondition player in playersInRange)
+        if(uiCondition.temperature.curValue<50)
         {
-            player.Rest(temperatureIncreaseRate);
+            foreach (PlayerCondition player in playersInRange)
+            {
+                player.Rest(temperatureIncreaseRate);
+            }
         }
+        
     }
 }
