@@ -8,7 +8,9 @@ public class BuildingUI : MonoBehaviour
     [Header("UI References")]
     [SerializeField] private Button funiButton;
     [SerializeField] private Button decoButton;
-    [SerializeField] private GameObject buildingMenuUI;
+    [SerializeField] private GameObject buildingMenuUI; // 메뉴 ui
+    [SerializeField] private GameObject buildingDesUI;  // 설명 ui (소비량)
+
     [SerializeField] private Transform listBG;      // 리스트
     [SerializeField] private GameObject buttonPrefab;   // 건설품 버튼
     [SerializeField] private Transform resourceListBG;  // 요구 자원 리스트
@@ -32,6 +34,7 @@ public class BuildingUI : MonoBehaviour
     public void ToggleUI(bool isBuildingMode)
     {
         buildingMenuUI.SetActive(isBuildingMode);
+        buildingDesUI.SetActive(isBuildingMode);
     }
 
     public void UpdateBuildingList(List<BuildingData> allBuildings, BuildingType category)
