@@ -51,9 +51,15 @@ public class BuildingManager : MonoBehaviour
 
         selectedBuilding = buildingData;
 
-        // 선택된 건물의 프리팹으로 프리뷰 생성
+        if (currentPreview != null)
+        {
+            Destroy(currentPreview.gameObject);
+        }
+
+        // 선택된 건축물의 원본 프리팹 -> 프리뷰
         GameObject previewObject = Instantiate(buildingData.prefab);
         currentPreview = previewObject.AddComponent<BuildingPreview>();
+        currentPreview.SetPreviewMode();
 
     }
 
@@ -77,6 +83,7 @@ public class BuildingManager : MonoBehaviour
             Instantiate(selectedBuilding.prefab, currentPreview.transform.position, currentPreview.transform.rotation);
             Destroy(currentPreview.gameObject);
             currentPreview = null;
+            selectedBuilding = null;
         }
         else
         {
@@ -90,7 +97,9 @@ public class BuildingManager : MonoBehaviour
         {
             Destroy(currentPreview.gameObject);
             currentPreview = null;
+            selectedBuilding = null;
         }
     }
+
 
 }
