@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using TMPro;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -28,18 +30,27 @@ public class InventoryUI : BaseUI
 		}
 	}
 
+	#region Binding Enum
 	enum Transforms
 	{
 		itemSlotParent,
 		quickSlotParent,
-	}
-	
+	} 
 	enum GameObjects
 	{
 		movingSlot,
 		InventoryScrollRect
 	}
+	enum Toggles
+	{
+		toggle_everything,
+		toggle_weapon,
+		toggle_consumableItem,
+		toggle_resource,
+	}
+	#endregion
 
+	
 	// === Item List ===
 	private Dictionary<ESlotType, List<InventorySlotUI>> itemSlots = new Dictionary<ESlotType, List<InventorySlotUI>>();
 	private Dictionary<ESlotType, List<ItemDataSO>> myItems = new Dictionary<ESlotType, List<ItemDataSO>>();
@@ -53,6 +64,7 @@ public class InventoryUI : BaseUI
 	private ScrollRect scrollRect;
 
 	// === Values ===
+	private EItemType categoryType = EItemType.None;
 	private Coroutine moveSlotCrt;
 	private SlotInfo hoveredSlot;
 	private SlotInfo clikedSlot; 
@@ -63,17 +75,20 @@ public class InventoryUI : BaseUI
 		InputManager.Instance.Inventory.action.started += InputInventoryToggle;
 
 		InitInventory();
-		CloseUI();
-	}
+		
 
+	}
+	private void Start()
+	{
+		InitItemSlots();
+		CloseUI(); 
+
+	}
 	#region Inventory Function
 	private void InitInventory()
 	{
 		Bind<Transform>(typeof(Transforms));
 		Bind<GameObject>(typeof(GameObjects));
-		// Find Objects
-		Transform itemSlotParent = Get<Transform>((int)Transforms.itemSlotParent);
-		Transform quickSlotParent = Get<Transform>((int)Transforms.quickSlotParent);
 
 		movingSlot = Get<GameObject>((int)GameObjects.movingSlot);
 		scrollRect = Get<GameObject>((int)GameObjects.InventoryScrollRect).GetComponent<ScrollRect>();
@@ -87,6 +102,13 @@ public class InventoryUI : BaseUI
 		itemSlots.Add(ESlotType.QuickSlot, new List<InventorySlotUI>());
 		myItems.Add(ESlotType.InventorySlot, inventory.MyItems);
 		myItems.Add(ESlotType.QuickSlot, quickSlot.MyItems);
+	}
+
+	private void InitItemSlots()
+	{
+		// Find Objects
+		Transform itemSlotParent = Get<Transform>((int)Transforms.itemSlotParent);
+		Transform quickSlotParent = Get<Transform>((int)Transforms.quickSlotParent);
 
 		// Item Slot Setting
 		foreach (Transform child in itemSlotParent)
@@ -107,7 +129,21 @@ public class InventoryUI : BaseUI
 			itemSlots[ESlotType.QuickSlot].Add(slot);
 			myItems[ESlotType.QuickSlot].Add(null);
 		}
+
+		SetCategoryButton();
 	}
+
+	private void SetCategoryButton()
+	{
+		Bind<Toggle>(typeof(Toggles));
+		Action<EItemType, bool> action = (eItemType, active) => { if (active) { categoryType = eItemType; UpdateItemInfo(); } };
+
+		Get<Toggle>((int)Toggles.toggle_consumableItem).onValueChanged.AddListener((active) => action.Invoke(EItemType.Consumable, active));
+		Get<Toggle>((int)Toggles.toggle_everything).onValueChanged.AddListener((active) => action.Invoke(EItemType.None, active));
+		Get<Toggle>((int)Toggles.toggle_resource).onValueChanged.AddListener((active) => action.Invoke(EItemType.Resource, active));
+		Get<Toggle>((int)Toggles.toggle_weapon).onValueChanged.AddListener((active) => action.Invoke(EItemType.Weapon, active));
+	}
+
 	private void SlotInit(InventorySlotUI slot, int idx, ESlotType type)
 	{
 		slot.SetIcon(null); 
@@ -123,9 +159,31 @@ public class InventoryUI : BaseUI
 		foreach (var slots in itemSlots)
 		{
 			for (int i = 0; i < slots.Value.Count; i++)
-				slots.Value[i].SetIcon(myItems[slots.Key][i] == null ? null : myItems[slots.Key][i].ItemIcon);
+			{
+				slots.Value[i].SetIcon(myItems[slots.Key][i] == null ? null : myItems[slots.Key][i]);
+				slots.Value[i].gameObject.SetActive(true);
+			}
 		}
-		
+
+
+		if (categoryType == EItemType.None)
+			return;
+
+		int cnt = 0;
+		for (int i = 0; i < itemSlots[ESlotType.InventorySlot].Count; i++)
+		{
+
+			InventorySlotUI targetSlot = itemSlots[ESlotType.InventorySlot][cnt];
+			InventorySlotUI slot = itemSlots[ESlotType.InventorySlot][i];
+			ItemDataSO item = myItems[ESlotType.InventorySlot][i];
+
+			bool usable = item != null && item.ItemType == categoryType;
+			slot.gameObject.SetActive(usable);
+			if (!usable)
+				continue;
+
+			slot.SetIcon(item);
+		}  
 	} 
 	#endregion
 
@@ -201,7 +259,7 @@ public class InventoryUI : BaseUI
 		GetInventorySlot(clikedSlot).SetIcon(null);
 
 		movingSlot.transform.localPosition = movingSlot.transform.parent.InverseTransformPoint(Input.mousePosition);
-		movingSlot.GetComponent<InventorySlotUI>().SetIcon(GetItemData(clikedSlot).ItemIcon);
+		movingSlot.GetComponent<InventorySlotUI>().SetIcon(GetItemData(clikedSlot));
 		movingSlot.SetActive(true);
 
 		while (true)

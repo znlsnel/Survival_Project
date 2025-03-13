@@ -23,5 +23,4 @@ public class BuildingData : ScriptableObject
     public Sprite buildingIcon;
 
     public List<ResourceCost> cost = new List<ResourceCost>();
-
 }

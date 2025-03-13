@@ -5,8 +5,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class BaseUI : MonoBehaviour
-{
+public class BaseUI : UIEventHandler
+{ 
 	// Start is called before the first frame update
 	Dictionary<Type, UnityEngine.Object[]> _objects = new Dictionary<Type, UnityEngine.Object[]>();
 	public void Bind<T>(Type type) where T : UnityEngine.Object
@@ -24,7 +24,7 @@ public class BaseUI : MonoBehaviour
 				objects[i] = Util.FindChild<T>(gameObject, names[i], true);
 		}
 	}
-	 
+
 	public T Get<T>(int idx) where T : UnityEngine.Object
 	{
 		if (_objects.TryGetValue(typeof(T), out UnityEngine.Object[] objects))
