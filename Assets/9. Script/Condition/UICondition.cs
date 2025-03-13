@@ -10,9 +10,9 @@ public class UICondition : MonoBehaviour
     public Conditions stamina;
     public Conditions temperautre;
 
-    void Start()
+    private void Start()
     {
-            
+        TestCharacterManager.Instance.Player.condition.uiCondition = this;
     }
 
 }

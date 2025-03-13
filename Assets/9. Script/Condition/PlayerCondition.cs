@@ -74,6 +74,10 @@ public class PlayerCondition : MonoBehaviour
         thirsty.Add(amount);
     }
     
+    public void Rest(float amount)
+    {
+        temperature.Add(amount * Time.deltaTime);
+    }
 
     public void Die()
     {
