@@ -18,7 +18,7 @@ public class BuildingUI : MonoBehaviour
     {
         if (EventManager.Instance != null)
         {
-            EventManager.Instance.OnStartBuildingRequested += OnlyDecOnUI;  //OnStartBuildingRequested가 오면 dec만 켜짐
+            EventManager.Instance.OnCanBuildingRequested += OnlyDecOnUI;  //OnStartBuildingRequested가 오면 dec만 켜짐
         }
     }
 
@@ -53,10 +53,13 @@ public class BuildingUI : MonoBehaviour
 
     }
 
-    private void OnlyDecOnUI()
+    private void OnlyDecOnUI(bool canStart)
     {
-        buildingMenuUIOBJ.SetActive(false);
-        buildingDesUIOBJ.SetActive(true);
+        if (canStart)
+        {
+            buildingMenuUIOBJ.SetActive(false);
+            buildingDesUIOBJ.SetActive(true);
+        }
     }
 
     private void OnlyMenuUIOn(bool on)

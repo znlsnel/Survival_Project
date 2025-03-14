@@ -22,7 +22,7 @@ public class BuildingManager : Singleton<BuildingManager>
 
         if (EventManager.Instance != null)
         {
-            EventManager.Instance.OnStartBuildingRequested += StartPlacement;
+            EventManager.Instance.OnStartBuildingRequested += StartPlacement; // 1. z들어왔어 체크해봐~
         }
     }
 
@@ -36,12 +36,13 @@ public class BuildingManager : Singleton<BuildingManager>
 
         if (EventManager.Instance != null)
         {
-            EventManager.Instance.OnStartBuildingRequested -= StartPlacement;
+            EventManager.Instance.OnStartBuildingRequested -= StartPlacement;  
         }
     }
 
     public void StartPlacement()
     {
+        if(!HasRequiredResource()) return;
         if (selectedData == null)
         {
             Debug.LogError("StartPlacement: 전달된 BuildingData가 없음");
@@ -61,10 +62,16 @@ public class BuildingManager : Singleton<BuildingManager>
 
 
         // 선택된 건축물의 원본 프리팹 -> 프리뷰
+
         GameObject previewObject = Instantiate(selectedData.prefab);
         currentPreview = previewObject.AddComponent<BuildingPreview>();
 
         currentPreview.SetPreviewMode();
+
+        //ㅇㅋ 됨 ㄱㄱ
+        EventManager.Instance.RequestCanStartBuilding(true);
+
+
 
     }
 
@@ -76,6 +83,7 @@ public class BuildingManager : Singleton<BuildingManager>
 
     private void OnPlaceBuilding(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
+
         if (HasRequiredResource())
         {
             TryPlaceBuilding();
@@ -113,6 +121,13 @@ public class BuildingManager : Singleton<BuildingManager>
             currentPreview = null;
             selectedData = null;
         }
+    }
+
+    private void UpdatePreviewColor()
+    {
+        if (currentPreview == null) return;
+        currentPreview.SetPreviewColor(HasRequiredResource());
+        Debug.Log($"있냐? - {HasRequiredResource()}");
     }
 
     private bool HasRequiredResource()  // 있냐 없냐 체크

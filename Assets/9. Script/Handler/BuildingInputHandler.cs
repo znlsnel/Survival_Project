@@ -76,7 +76,6 @@ public class BuildingInputHandler : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started)
         {
-            Debug.Log("배치");
         }
     }
 
@@ -84,7 +83,6 @@ public class BuildingInputHandler : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started)
         {
-            Debug.Log("취소");
         }
     }
     public void ToggleBuildMode(InputAction.CallbackContext context)
