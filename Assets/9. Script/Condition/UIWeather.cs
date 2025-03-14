@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; // UI 관련 네임스페이스 추가
+using UnityEngine.UI; 
 
 public class UIWeather : MonoBehaviour
 {
@@ -10,7 +10,7 @@ public class UIWeather : MonoBehaviour
     public GameObject rainy;
     public GameObject hot;
     public GameObject snow;
-    public Image color; // 색상을 변경할 UI 이미지
+    public Image color;
 
     public string sunnyColorCode = "#f8edbe";  
     public string rainyColorCode = "#bed3f8"; 
