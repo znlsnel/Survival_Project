@@ -10,9 +10,9 @@ public class PlayerController : MonoBehaviour
     private Vector3 moveDir;
     void Start()
     {
-        InputManager.Instance.Move.action.performed += MoveInput;
+        InputManager.GetInput(EPlayerInput.move).performed += MoveInput;
 	}
-
+     
 
     void Update()
     {

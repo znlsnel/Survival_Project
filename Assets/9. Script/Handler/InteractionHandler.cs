@@ -25,7 +25,7 @@ public class InteractionHandler : MonoBehaviour
 
     void Start()
     {
-		InputManager.Instance.Interaction.action.started += InputInteraction;
+		InputManager.Interaction.started += InputInteraction;
 		InvokeRepeating(nameof(FindObject), 0, 0.1f);
     }
 
