@@ -88,12 +88,14 @@ public class BuildingManager : Singleton<BuildingManager>
         {
             TryPlaceBuilding();
             ConsumeResources();
+            UpdatePreviewColor();
         }
     }
 
     private void OnCancelBuilding(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
         CancelPlacement();
+        buildingUI.ToggleUI(true);
     }
 
     private void TryPlaceBuilding()
@@ -105,7 +107,8 @@ public class BuildingManager : Singleton<BuildingManager>
             Instantiate(selectedData.prefab, currentPreview.transform.position, currentPreview.transform.rotation);
             Destroy(currentPreview.gameObject);
             currentPreview = null;
-            selectedData = null;
+
+            StartPlacement();
         }
         else
         {
