@@ -12,11 +12,16 @@ public class QuickSlotUI : BaseUI
 
 	[SerializeField] private GameObject slotPrefab;
 
+	// === List ===
 	private List<ItemSlot> quickSlot = new List<ItemSlot>();
 	private List<ItemSlot> itemSlots;
 	private List<ItemDataSO> itemDatas;
 
+	// === Component === 
 	private InventoryHandler inventory;
+
+	// === Value ===
+	private int prevSelectItem = -1;
 
 	private void OnValidate()
 	{
@@ -29,6 +34,7 @@ public class QuickSlotUI : BaseUI
 		itemSlots = inventory.QuickSlots;
 		itemDatas = inventory.QuickSlotItems;
 		inventory.onChangedSlot += UpdateItemInfo;
+		InputManager.Instance.inputNumber += SelectSlot;
 	}
 	private void Start()
 	{
@@ -62,4 +68,17 @@ public class QuickSlotUI : BaseUI
 			}
 		}
 	}
+	public void SelectSlot(int idx)
+	{
+		idx--;
+		if (idx < 0 || idx >= itemSlots.Count)
+			return;
+
+		if (prevSelectItem != -1)
+			quickSlot[prevSelectItem].SelectSlot(false);
+
+		quickSlot[idx].SelectSlot(true);
+		prevSelectItem = idx;
+	}
+
 } 

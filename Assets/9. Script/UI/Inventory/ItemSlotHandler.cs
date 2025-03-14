@@ -86,12 +86,14 @@ public class ItemSlotHandler : BaseUI
 	public void HoverEnterSlot(int idx, ESlotType type)
 	{
 		hoveredSlot = new SlotInfo(idx, type);
+		itemSlots[type][idx].SelectSlot(true);
 	}
 
 	public void HoverExitSlot(int idx, ESlotType type)
 	{
 		hoveredSlot.type = ESlotType.None;
-	}
+		itemSlots[type][idx].SelectSlot(false);
+	} 
 
 	private IEnumerator MoveItem(float time)
 	{

@@ -1,11 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class QuickSlotHandler : MonoBehaviour
 {
-	private List<ItemDataSO> myItems = new List<ItemDataSO>();
-	public List<ItemDataSO> MyItems => myItems;
+	// === List ===
+	private List<ItemDataSO> myItems;
 
-
+	// === Value ===
+	private int selectItem = 0;
+	
+	private void Awake()
+	{
+		InputManager.Instance.inputNumber += (num) => selectItem = num;
+		InventoryHandler inventory = FindFirstObjectByType<InventoryHandler>();
+		myItems = inventory.QuickSlotItems; 
+	} 
+	  
+	public ItemDataSO GetItemData() => myItems[selectItem];
 }

@@ -126,9 +126,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6609168206622262215}
   - component: {fileID: 7256908124666412316}
-  - component: {fileID: 7438694641742325302}
-  - component: {fileID: 2908549725826034924}
   - component: {fileID: 2667273705195723733}
+  - component: {fileID: 8438440504839859009}
   m_Layer: 5
   m_Name: ItemSlot
   m_TagString: Untagged
@@ -204,32 +203,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &7438694641742325302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1805302758175827545}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4185fcb3cbdbe4396911bf8c89d10be0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tooltip: {fileID: 3318526044764071250}
-  fadeTime: 0.1
---- !u!114 &2908549725826034924
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1805302758175827545}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dbacb641c823cf4ea0458ce55b9fa84, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2667273705195723733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,6 +213,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30cc82dbc5122c6498bfbe78945a5dc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8438440504839859009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1805302758175827545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dbacb641c823cf4ea0458ce55b9fa84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1940297552780553383
@@ -716,7 +701,7 @@ PrefabInstance:
     - target: {fileID: 6836615046734064239, guid: 18265b828da414e7aa34c006cdc54dc4,
         type: 3}
       propertyPath: m_Name
-      value: Item-Selected
+      value: ItemSelected
       objectReference: {fileID: 0}
     - target: {fileID: 6836615046734064240, guid: 18265b828da414e7aa34c006cdc54dc4,
         type: 3}

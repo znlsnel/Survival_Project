@@ -8,7 +8,13 @@ MonoImporter:
       type: 3}
   - move: {fileID: 8345802397018709986, guid: 167b6126200c2564d81467a33d97502d, type: 3}
   - jump: {instanceID: 0}
+  - toggleBuilding: {instanceID: 0}
+  - playerInput: {instanceID: 0}
+  - buildingInputHandler: {instanceID: 0}
   - interaction: {fileID: 6149264348853985044, guid: 167b6126200c2564d81467a33d97502d,
+      type: 3}
+  - inventory: {instanceID: 0}
+  - number: {fileID: 9097194844010913549, guid: 167b6126200c2564d81467a33d97502d,
       type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
