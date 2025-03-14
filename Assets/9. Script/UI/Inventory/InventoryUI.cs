@@ -34,6 +34,11 @@ public class InventoryUI : BaseUI
 		toggle_consumableItem,
 		toggle_resource,
 	}
+	enum GameObjects
+	{
+		PanelInventory
+	}
+
 	#endregion
 	 
 	// === Item List ===
@@ -46,29 +51,35 @@ public class InventoryUI : BaseUI
 	 
 	// === Values ===
 	private EItemType categoryType = EItemType.None;
+	private GameObject mainPanel;
 
-	private void Start()
+	private void OnValidate()
 	{
-		InputManager.Instance.Inventory.action.started += InputInventoryToggle;
-		itemSlotHandler = GetComponent<ItemSlotHandler>();	
-
+		Bind<Transform>(typeof(Transforms));
+		Bind<Toggle>(typeof(Toggles));
+		Bind<TextMeshProUGUI>(typeof(Texts));
+		Bind<GameObject>(typeof(GameObjects));
+		 
+		inventory = FindFirstObjectByType<InventoryHandler>();
+		itemSlotHandler = GetComponent<ItemSlotHandler>();
+		mainPanel = Get<GameObject>((int)GameObjects.PanelInventory);
+	}
+	private void Awake()
+	{
 		InitItemList();
 		InitItemSlots();
 		SetCategoryButton();
-		CloseUI();
-
+	}
+	private void Start()
+	{
+		InputManager.Instance.Inventory.action.started += InputInventoryToggle;
 		inventory.onChangedSlot += UpdateItemInfo;
+		CloseUI();
 	}
 
 	#region Inventory Function 
 	private void InitItemList()
 	{
-		Bind<Transform>(typeof(Transforms));
-		
-	   // Find Components
-	   inventory = FindFirstObjectByType<InventoryHandler>();
-
-		// Bind List & List Clear
 		itemSlots.Add(ESlotType.InventorySlot, inventory.MyItemSlots);
 		itemSlots.Add(ESlotType.QuickSlot, inventory.QuickSlots);
 		myItems.Add(ESlotType.InventorySlot, inventory.MyItems);
@@ -109,9 +120,6 @@ public class InventoryUI : BaseUI
 
 	private void SetCategoryButton()
 	{
-		Bind<Toggle>(typeof(Toggles));
-		Bind<TextMeshProUGUI>(typeof(Texts));
-
 		Action<EItemType, bool> action = (eItemType, active) => 
 		{ 
 			if (active) 
@@ -144,7 +152,7 @@ public class InventoryUI : BaseUI
 
 	private void InputInventoryToggle(InputAction.CallbackContext context)
 	{
-		if (gameObject.activeSelf)
+		if (mainPanel.activeSelf)
 			CloseUI(); 
 		else
 			OpenUI();
@@ -152,16 +160,16 @@ public class InventoryUI : BaseUI
 
 	private void OpenUI()
 	{
-		UpdateItemInfo(); 
-		gameObject.SetActive(true);
+		UpdateItemInfo();
+		mainPanel.SetActive(true);
 	}
 
 	private void CloseUI()
 	{
-		gameObject.SetActive(false);
+		mainPanel.SetActive(false);
 	}
 
-	public void UpdateItemInfo()
+	private void UpdateItemInfo()
 	{
 		var textAmount = Get<TextMeshProUGUI>((int)Texts.LabelAmount);
 

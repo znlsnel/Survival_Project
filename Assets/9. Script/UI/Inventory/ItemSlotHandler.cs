@@ -27,12 +27,15 @@ public class ItemSlotHandler : BaseUI
 	private SlotInfo selectSlot;
 
 	// === copmonent ===
-	//private InventoryUI inventoryUI;
 	private InventoryHandler inventory;
-	private void Awake()
+
+	private void OnValidate()
 	{
 		Bind<GameObject>(typeof(GameObjects));
+	}
 
+	private void Awake()
+	{
 		movingSlot = Get<GameObject>((int)GameObjects.movingSlot);
 		scrollRect = Get<GameObject>((int)GameObjects.InventoryScrollRect).GetComponent<ScrollRect>();
 		inventory = FindFirstObjectByType<InventoryHandler>();
@@ -47,7 +50,6 @@ public class ItemSlotHandler : BaseUI
 
 	public void ClickSlot(int idx, ESlotType type)
 	{
-		Debug.Log($"클릭 {idx} : 타입 : {type}");
 		clikedSlot = new SlotInfo(idx, type);
 		scrollRect.enabled = false;
 
@@ -57,7 +59,6 @@ public class ItemSlotHandler : BaseUI
 
 	public void ReleaseSlot(int idx, ESlotType type)
 	{
-		Debug.Log($"클릭 취소 {idx} : 타입 : {type}");
 		scrollRect.enabled = true;
 
 		if (moveSlotCrt != null)
@@ -68,10 +69,11 @@ public class ItemSlotHandler : BaseUI
 
 		// 아이템이 이동중이라면 슬롯의 아이템 데이터 교환
 		if (movingSlot.activeSelf)
-		{
-			if (hoveredSlot.type != ESlotType.None && clikedSlot.type != ESlotType.None)
+		{ 
+			if (hoveredSlot.type != ESlotType.None)
 				inventory.SwitchSlot(clikedSlot, hoveredSlot);
-
+			else
+				itemSlots[clikedSlot.type][clikedSlot.idx].SetIcon(myItems[clikedSlot.type][clikedSlot.idx]);
 
 			movingSlot.SetActive(false);
 		}
@@ -83,7 +85,6 @@ public class ItemSlotHandler : BaseUI
 
 	public void HoverEnterSlot(int idx, ESlotType type)
 	{
-		Debug.Log($"호버 {idx} : 타입 : {type}");
 		hoveredSlot = new SlotInfo(idx, type);
 	}
 

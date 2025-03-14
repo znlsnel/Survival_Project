@@ -24,6 +24,7 @@ public struct SlotInfo
 public class InventoryHandler : MonoBehaviour
 {
 	private Dictionary<ESlotType, List<ItemSlot>> itemSlots = new Dictionary<ESlotType, List<ItemSlot>>();
+
 	private Dictionary<ESlotType, List<ItemDataSO>> myItems = new Dictionary<ESlotType, List<ItemDataSO>>();
 
 	// === Accessible Lists ===
@@ -34,15 +35,15 @@ public class InventoryHandler : MonoBehaviour
 
 	// === Event ===
 	public event Action onChangedSlot;
-	private void Awake()
+	 
+	private void OnValidate()
 	{
 		foreach (ESlotType type in Enum.GetValues(typeof(ESlotType)))
 		{
 			myItems.Add(type, new List<ItemDataSO>());
-			itemSlots.Add(type, new List<ItemSlot>());
+			itemSlots.Add(type, new List<ItemSlot>()); 
 		}
 	}
-
 	private int GetEmptySlotIdx()
     {
         for (int i = 0; i < MyItems.Count; i++)

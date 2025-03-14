@@ -38,12 +38,14 @@ public class ItemSlot : BaseUI
 			UpdateStackAmount();
 		}
 	}
+
+
 	private void Awake()
 	{
 		Bind<Image>(typeof(Images));
 		Bind<TextMeshProUGUI>(typeof(TextMeshPros));
 		Bind<GameObject>(typeof(GameObjects));
-		 
+
 		itemImage = GetImage((int)Images.Item);
 		itemTypeImage = GetImage((int)Images.ItemTypeImage);
 		amountText = Get<TextMeshProUGUI>((int)TextMeshPros.amountText);
