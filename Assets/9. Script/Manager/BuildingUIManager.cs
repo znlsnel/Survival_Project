@@ -31,7 +31,7 @@ public class BuildingUIManager : MonoBehaviour
             return;
         }
 
-        buildingUI.InitializeUI(this, allBuildings);
+        buildingUI.InitializeUI(allBuildings);
     }
 
     private void HandleBuildingModeChange(bool isBuildingMode)

@@ -14,27 +14,35 @@ public class BuildingUI : MonoBehaviour
     [SerializeField] private BuildingMenuUI buildingMenuUI;
 
 
-    private BuildingUIManager buildingUIManager;
-
-
-    public void InitializeUI(BuildingUIManager manager, List<BuildingData> allBuildings)
+    private void OnEnable()
     {
-        // UI 매니저 설정
-        buildingUIManager = manager;
+        if (EventManager.Instance != null)
+        {
+            EventManager.Instance.OnStartBuildingRequested += OnlyDecOnUI;  //OnStartBuildingRequested가 오면 dec만 켜짐
+        }
+    }
 
+    public void InitializeUI(List<BuildingData> allBuildings)
+    {
         // BuildingMenuUI 초기화 (전체 건축물 리스트 전달)
         buildingMenuUI.InitializeUI(allBuildings);
 
         // 기본적으로 UI 비활성화
-        ToggleUI(false);
+        buildingMenuUIOBJ.SetActive(false);
+        buildingDesUIOBJ.SetActive(false);
     }
 
     public void ToggleUI(bool isBuildingMode)
     {
-        buildingMenuUIOBJ.SetActive(isBuildingMode);
-        buildingDesUIOBJ.SetActive(isBuildingMode);
-    }
+        if (isBuildingMode)
+            buildingMenuUIOBJ.SetActive(isBuildingMode);
+        else
+        {
+            buildingMenuUIOBJ.SetActive(isBuildingMode);
+            buildingDesUIOBJ.SetActive(isBuildingMode);
+        }
 
+    }
 
 
     private void SelectBuilding(BuildingData building)
@@ -46,5 +54,9 @@ public class BuildingUI : MonoBehaviour
         resourceUI.UpdateResourceUI(building);
     }
 
-
+    private void OnlyDecOnUI()
+    {
+        buildingMenuUIOBJ.SetActive(false);
+        buildingDesUIOBJ.SetActive(true);
+    }
 }

@@ -14,8 +14,6 @@ public class BuildingMenuUI : MonoBehaviour
     [SerializeField] private GameObject buttonPrefab;  // 건축물 버튼 프리팹
     [SerializeField] private GameObject toolTip;  // 건축물 버튼 프리팹
 
-
-    private BuildingUIManager buildingUIManager; 
     private GameObject lastSelectedButton;  // 마지막으로 선택된 버튼
     private List<BuildingData> allBuildings = new List<BuildingData>();  // 전체 건축물 데이터
 

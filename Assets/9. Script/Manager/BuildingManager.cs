@@ -56,6 +56,7 @@ public class BuildingManager : Singleton<BuildingManager>
             Destroy(currentPreview.gameObject);
         }
 
+
         // 선택된 건축물의 원본 프리팹 -> 프리뷰
         GameObject previewObject = Instantiate(selectedData.prefab);
         currentPreview = previewObject.AddComponent<BuildingPreview>();

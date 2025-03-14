@@ -13,12 +13,9 @@ public class EventManager : Singleton<EventManager>
 
     public event Action OnStartBuildingRequested;
 
-
-
-
-    public void BuildingModeChanged(bool isBuilding)
+    public void BuildingModeChanged(bool isBuildingMode)
     {
-        OnBuildingModeChanged?.Invoke(isBuilding);
+        OnBuildingModeChanged?.Invoke(isBuildingMode);
     }
 
     public void RequestToggleBuildMode()
@@ -31,4 +28,6 @@ public class EventManager : Singleton<EventManager>
     {
         OnStartBuildingRequested?.Invoke();
     }
+
+
 }
