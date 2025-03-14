@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum BuildingType { Furniture, Decoration }
-public enum ResourceType { Rock, Wood }
 
 [Serializable]
 public class ResourceCost
@@ -23,5 +22,4 @@ public class BuildingData : ScriptableObject
     public Sprite buildingIcon;
 
     public List<ResourceCost> cost = new List<ResourceCost>();
-
 }

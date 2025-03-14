@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuildingManager : MonoBehaviour
+public class BuildingManager : Singleton<BuildingManager>
 {
     private BuildingPreview currentPreview;
     private BuildingData selectedBuilding;
@@ -35,28 +35,37 @@ public class BuildingManager : MonoBehaviour
         }
     }
 
-    public void StartPlacement(BuildingData buildingData)
+    public void StartPlacement()
     {
-        if (buildingData == null)
+        if (selectedBuilding == null)
         {
             Debug.LogError("StartPlacement: 전달된 BuildingData가 없음");
             return;
         }
 
-        if (buildingData.prefab == null)
+        if (selectedBuilding.prefab == null)
         {
-            Debug.LogError($"StartPlacement: {buildingData.buildingName}의 프리팹이 설정되지 않음");
+            Debug.LogError($"StartPlacement: {selectedBuilding.buildingName}의 프리팹이 설정되지 않음");
             return;
         }
 
-        selectedBuilding = buildingData;
+        if (currentPreview != null)
+        {
+            Destroy(currentPreview.gameObject);
+        }
 
-        // 선택된 건물의 프리팹으로 프리뷰 생성
-        GameObject previewObject = Instantiate(buildingData.prefab);
+        // 선택된 건축물의 원본 프리팹 -> 프리뷰
+        GameObject previewObject = Instantiate(selectedBuilding.prefab);
         currentPreview = previewObject.AddComponent<BuildingPreview>();
+
+        currentPreview.SetPreviewMode();
 
     }
 
+    public void SetSelectedBuilding(BuildingData buildingData)
+    {
+        selectedBuilding = buildingData;
+    }
 
     private void OnPlaceBuilding(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
@@ -77,6 +86,7 @@ public class BuildingManager : MonoBehaviour
             Instantiate(selectedBuilding.prefab, currentPreview.transform.position, currentPreview.transform.rotation);
             Destroy(currentPreview.gameObject);
             currentPreview = null;
+            selectedBuilding = null;
         }
         else
         {
@@ -90,7 +100,9 @@ public class BuildingManager : MonoBehaviour
         {
             Destroy(currentPreview.gameObject);
             currentPreview = null;
+            selectedBuilding = null;
         }
     }
+
 
 }
