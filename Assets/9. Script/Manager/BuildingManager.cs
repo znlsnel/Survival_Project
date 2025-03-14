@@ -70,9 +70,6 @@ public class BuildingManager : Singleton<BuildingManager>
 
         //¤·¤» µÊ ¤¡¤¡
         EventManager.Instance.RequestCanStartBuilding(true);
-
-
-
     }
 
     public void SetSelectedBuilding(BuildingData buildingData)
@@ -95,7 +92,8 @@ public class BuildingManager : Singleton<BuildingManager>
     private void OnCancelBuilding(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
         CancelPlacement();
-        buildingUI.ToggleUI(true);
+        buildingUI.buildingMenuUIOBJ.SetActive(true);
+        buildingUI.buildingDesUIOBJ.SetActive(false);
     }
 
     private void TryPlaceBuilding()

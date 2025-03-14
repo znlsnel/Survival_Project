@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class BuildingUI : MonoBehaviour
 {
     [Header("UI OBJ")]
-    [SerializeField] private GameObject buildingMenuUIOBJ; // 메뉴 ui
-    [SerializeField] private GameObject buildingDesUIOBJ;  // 설명 ui (소비량)
+    public GameObject buildingMenuUIOBJ; // 메뉴 ui
+    public GameObject buildingDesUIOBJ;  // 설명 ui (소비량)
 
     [Header("UI CS")]   // CS파일도 걍 오브젝트에서 FIND해도 될듯?
     [SerializeField] private BuildingResourceUI resourceUI;
