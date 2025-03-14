@@ -14,7 +14,8 @@ public class BuildingUI : MonoBehaviour
     [SerializeField] private Transform listBG;      // 리스트
     [SerializeField] private GameObject buttonPrefab;   // 건설품 버튼
     [SerializeField] private Transform resourceListBG;  // 요구 자원 리스트
-    [SerializeField] private GameObject resourceItemPrefab;
+
+    [SerializeField] private BuildingResourceUI resourceUI;
 
 
     private BuildingUIManager buildingUIManager;
@@ -77,28 +78,7 @@ public class BuildingUI : MonoBehaviour
         selectedBuilding = building;
         BuildingManager.Instance.SetSelectedBuilding(building);
 
-        foreach (Transform child in resourceListBG)
-        {
-            Destroy(child.gameObject);
-        }
-
-        foreach (ResourceCost resource in building.cost)
-        {
-            GameObject newResourceItem = Instantiate(resourceItemPrefab, resourceListBG);
-
-            Image icon = newResourceItem.GetComponentInChildren<Image>();
-            if (icon != null && resource.resourceItem.ItemIcon != null)
-            {
-                icon.sprite = resource.resourceItem.ItemIcon;
-            }
-
-            TextMeshProUGUI amountText = newResourceItem.GetComponentInChildren<TextMeshProUGUI>();
-            if (amountText != null)
-            {
-                amountText.text = $"{resource.resourceItem.ItemName} - {resource.amount}";
-            }
-        }
-
+        resourceUI.UpdateResourceUI(building);
     }
 
 
