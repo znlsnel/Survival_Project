@@ -44,10 +44,13 @@ public class PlayerInputHandler: MonoBehaviour
         _isDashPressed = context.performed;
     }
 
-    // 공격은 되는데 콤보를 어떻게 넣는가?
     public void OnClick(InputAction.CallbackContext context)
     {
-        isClicked = context.performed; // notice: 기본적으로 누르고 있으면 지속 적용됨
+        // "Press (Release Only)" 설정 필수
+        if (context.phase == InputActionPhase.Canceled) 
+        {
+            isClicked = true;
+        }
     }
     
     // 카메라에게 필요한 정보

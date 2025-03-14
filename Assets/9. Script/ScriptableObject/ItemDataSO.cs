@@ -45,4 +45,10 @@ public class ItemDataSO : ScriptableObject
     public bool CanStackItems => canStackItems;
     public int MaxStackCount => maxStackCount;
 }
+
+[CreateAssetMenu(fileName = "new ItemData", menuName = "My ScriptableObject/ItemData")]
+public class WeaponItemSO : ItemDataSO
+{
+	
+}
  

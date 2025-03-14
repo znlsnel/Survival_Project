@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// do: 상태와 달리 프리팹만 변경하도록 처리
+[RequireComponent(typeof(MeleeWeaponAudioHandler))]
 public class MeleeWeaponController: MonoBehaviour
 {
     // melee resource handler
@@ -22,5 +24,11 @@ public class MeleeWeaponController: MonoBehaviour
     private void Awake()
     {
         audioHandler = GetComponent<MeleeWeaponAudioHandler>();
+    }
+
+    public void SetMeleeAttackAvailable(bool isAvailable)
+    {
+        isAttacking = isAvailable;
+        if(!isAttacking) ClearAttacking();
     }
 }

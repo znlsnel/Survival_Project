@@ -1,34 +1,42 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-[RequireComponent(typeof(ChomperNavigationHandler))]
+[RequireComponent(typeof(ChomperNavigationHandler), typeof(ChomperAudioHandler))]
 public class ChomperController: MonoBehaviour
 {
     private ChomperAnimationHandler _animation;
     private ChomperNavigationHandler _navigation;
-    private ChomperBehaviourHandler _behaviour;
-    [HideInInspector] public ChomperResourceHandler resource;
+    private ChomperMovementHandler _movement;
+    private ChomperAudioHandler _audio; 
+    public ChomperResourceHandler resource;
     
-    private Rigidbody _rigidbody;
 
     void Awake()
     {
         _animation = GetComponent<ChomperAnimationHandler>();
         _navigation = GetComponent<ChomperNavigationHandler>();
-        _behaviour = GetComponent<ChomperBehaviourHandler>();
+        _audio = GetComponent<ChomperAudioHandler>();
         resource = GetComponent<ChomperResourceHandler>();
-        
-        _rigidbody = GetComponent<Rigidbody>();
+        _movement = GetComponent<ChomperMovementHandler>();
     }
 
-    private void Start()
+    void Start()
     {
-        // StartCoroutine(_behaviour.WanderLoop(_navigation.agent));
+        _animation.OnIsAttacking += resource.SetIsAttacking;
     }
+
 
     // fix: 상태가 변경되지 않으면 업데이트 할 필요 없도록 캐싱 필요
     void FixedUpdate()
     {
+        if (_movement.isKnockBacked)
+        {
+            _animation.animator.ResetTrigger(ChomperAnimationHandler.HashAttackTrigger);
+
+            return;
+        }
+
         _navigation.UpdateNavigation();
         // if (!_navigation.IsStatusChanged()) return;
 
@@ -57,16 +65,26 @@ public class ChomperController: MonoBehaviour
     }
 
     // notice: 현재 무기의 특성상 트리거 형태로 동작
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.TryGetComponent(out MeleeWeaponController weapon))
+        // do: 무기 추상화 필요
+        if (other.gameObject.TryGetComponent(out MeleeWeaponController weaponController))
         {
-            Vector3 direction = (other.transform.position - transform.position).normalized;
-            direction.y = 0f;
+            // if (_movement.isKnockBacked) return;
+            if (!weaponController.isAttacking) return;
             
-            _rigidbody.AddForce(direction * weapon.knockBackForce, ForceMode.Impulse);
+            if (!weaponController.hitObjects.Contains(gameObject))
+            {
+                Vector3 direction = (transform.position - other.transform.position).normalized;
+                direction.y = 0f;
+                
+                if(_movement.KnockBackCoroutine != null) StopCoroutine(_movement.KnockBackCoroutine);
+                _movement.KnockBackCoroutine = StartCoroutine(_movement.ApplyKnockBack(_navigation.agent, direction, weaponController.knockBackForce));
+                _animation.animator.SetTrigger(ChomperAnimationHandler.HashHitTrigger);
             
-            Debug.Log($"{weapon.power} - 플레이어의 공격");
+                weaponController.hitObjects.Add(gameObject);
+               _audio.PlayRandomSound(ChomperSoundType.Damaged);
+            }
         }
     }
 }

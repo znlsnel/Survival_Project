@@ -23,8 +23,8 @@ public class ChomperNavigationHandler: MonoBehaviour
 
     public enum Status { Idle, Detected, Attackable }
 
-    [FormerlySerializedAs("status")] public Status currStatus;
-    public Status PrevStatus;
+    [HideInInspector] public Status currStatus;
+    [HideInInspector] public Status prevStatus;
 
     
     public void UpdateNavigation()
