@@ -31,8 +31,7 @@ public class BuildingUIManager : MonoBehaviour
             return;
         }
 
-        buildingUI.InitializeUI(this);
-        ShowBuildingsByCategory(BuildingType.Furniture);
+        buildingUI.InitializeUI(this, allBuildings);
     }
 
     private void HandleBuildingModeChange(bool isBuildingMode)
@@ -41,9 +40,4 @@ public class BuildingUIManager : MonoBehaviour
             buildingUI.ToggleUI(isBuildingMode);
     }
 
-    public void ShowBuildingsByCategory(BuildingType category)
-    {
-        if (buildingUI != null)
-            buildingUI.UpdateBuildingList(allBuildings, category);
-    }
 }
