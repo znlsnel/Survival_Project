@@ -40,6 +40,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "fd2a1e5e-c822-4c26-bbad-69900087a96a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -141,6 +150,17 @@
                     "action": "ToggleBuildMode",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "16a6d37b-7648-4ed6-81cb-6b362d81edb4",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -176,18 +196,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ToggleBuildMode",
+                    "name": "StartBuilding",
                     "type": "Button",
-                    "id": "8d3df5f5-2a34-4623-97da-487908cee101",
+                    "id": "7e7e7ba6-6df5-4fe1-bfff-6f13136de612",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "StartBuilding",
+                    "name": "ToggleBuildMode",
                     "type": "Button",
-                    "id": "7e7e7ba6-6df5-4fe1-bfff-6f13136de612",
+                    "id": "8d3df5f5-2a34-4623-97da-487908cee101",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -241,23 +261,23 @@
                 },
                 {
                     "name": "",
-                    "id": "33d8f846-6f05-426e-8e7e-f7dcdd671587",
-                    "path": "<Keyboard>/b",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ToggleBuildMode",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "519c18aa-bfad-48b9-a158-17eb6582a4fb",
                     "path": "<Keyboard>/z",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "StartBuilding",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "33d8f846-6f05-426e-8e7e-f7dcdd671587",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleBuildMode",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

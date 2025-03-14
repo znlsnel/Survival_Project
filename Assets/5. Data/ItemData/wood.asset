@@ -13,5 +13,11 @@ MonoBehaviour:
   m_Name: wood
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300014, guid: 74b7e35cda31cb7499b79fae64a30227, type: 3}
+  itemTypeIcon: {fileID: 21300000, guid: 1a5d843928a2ba545b671d2b3a45b2bc, type: 3}
+  itemType: 3
   itemName: "\uB098\uBB34 \uC870\uAC01"
   itemDescription: "\uB098\uBB34 \uC870\uAC01 \uC785\uB2C8\uB2E4."
+  dropItemPrefab: {fileID: 0}
+  weaponPrefab: {fileID: 0}
+  canStackItems: 1
+  maxStackCount: 2
