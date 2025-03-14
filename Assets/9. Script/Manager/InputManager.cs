@@ -87,22 +87,15 @@ public class InputManager : Singleton<InputManager>
 		inputSystem.Disable();
 	}
 
-	private void OnEnable()
-	{
+	private void Start()
+    {
 		if (ToggleBuilding != null)
 		{
 			ToggleBuilding.performed += ToggleBuildMode;
 			ToggleBuilding.Enable();
 		}
 	}
-	private void OnDisable()
-	{
-		if (ToggleBuilding != null)
-		{
-			ToggleBuilding.performed -= ToggleBuildMode;
-			ToggleBuilding.Disable();
-		}
-	}
+
 
 	private void BindAction()
 	{

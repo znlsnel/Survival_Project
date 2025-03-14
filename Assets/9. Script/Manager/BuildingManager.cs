@@ -12,7 +12,7 @@ public class BuildingManager : Singleton<BuildingManager>
 
     [SerializeField] private InventoryHandler InventoryHandler;
 
-    private void OnEnable()
+    private void Start()
     {
         if (InputManager.Instance != null)
         {
@@ -26,19 +26,7 @@ public class BuildingManager : Singleton<BuildingManager>
         }
     }
 
-    private void OnDisable()
-    {
-        if (InputManager.Instance != null)
-        {
-            InputManager.PlaceAction.performed -= OnPlaceBuilding;
-            InputManager.CancelAction.performed -= OnCancelBuilding;
-        }
 
-        if (EventManager.Instance != null)
-        {
-            EventManager.Instance.OnStartBuildingRequested -= StartPlacement;  
-        }
-    }
 
     public void StartPlacement()
     {

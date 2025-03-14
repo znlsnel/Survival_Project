@@ -14,7 +14,7 @@ public class BuildingUI : MonoBehaviour
     [SerializeField] private BuildingMenuUI buildingMenuUI;
 
 
-    private void OnEnable()
+    private void Start()
     {
         if (EventManager.Instance != null)
         {
