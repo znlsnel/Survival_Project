@@ -61,8 +61,8 @@ public class PlayerMovementHandler: MonoBehaviour
         // fix : 플레이어를 기준으로 해버리면 forward의 기준이 매번 변경되며 반전을 반복함
         
         // 카메라 회전에 대하여 옳바른 처리 필요
-        Vector3 cameraRight = mainCamera.transform.right;
-        Vector3 cameraForward = mainCamera.transform.forward; 
+        Vector3 cameraRight = Camera.main.transform.right;
+        Vector3 cameraForward = Camera.main.transform.forward;  
         cameraForward.y = 0;
 
         Vector3 direction = (cameraRight * inputValue.x + (cameraForward * inputValue.y)).normalized;

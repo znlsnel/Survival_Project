@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -26,14 +27,14 @@ public class InputManager : Singleton<InputManager>
 
 	public event Action<int> inputNumber;
 
-	public InputActionReference Interaction => interaction;
-	public InputActionReference Inventory => inventory;
-	public InputActionReference Move => move;
-	public InputActionReference Jump => jump;
-	public InputActionReference ToggleBuilding => toggleBuilding;
-	public InputAction RotateBuilding => buildingInputHandler?.RotateAction;
-	public InputAction PlaceBuilding => buildingInputHandler?.PlaceAction;
-	public InputAction CancelBuild => buildingInputHandler?.CancelAction;
+	 public InputActionReference Interaction => interaction;
+	 public InputActionReference Inventory => inventory;
+	 public InputActionReference Move => move; 
+	 public InputActionReference Jump => jump; 
+	 public InputActionReference ToggleBuilding => toggleBuilding;
+	 public InputAction RotateBuilding => buildingInputHandler?.RotateAction;
+	 public InputAction PlaceBuilding => buildingInputHandler?.PlaceAction;
+	 public InputAction CancelBuild => buildingInputHandler?.CancelAction;
 
 	private bool[] numKeyDown;
 	

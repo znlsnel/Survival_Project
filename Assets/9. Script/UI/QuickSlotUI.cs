@@ -21,18 +21,16 @@ public class QuickSlotUI : BaseUI
 	private InventoryHandler inventory;
 
 	// === Value ===
-	private int prevSelectItem = -1;
-
-	private void OnValidate()
-	{
-		Bind<GameObject>(typeof(GameObjects));
-		inventory = FindFirstObjectByType<InventoryHandler>();
-	}
+	private int prevSelectItem = 0;
 
 	private void Awake()
 	{
+		Bind<GameObject>(typeof(GameObjects));
+
+		inventory = FindFirstObjectByType<InventoryHandler>();
 		itemSlots = inventory.QuickSlots;
 		itemDatas = inventory.QuickSlotItems;
+
 		inventory.onChangedSlot += UpdateItemInfo;
 		InputManager.Instance.inputNumber += SelectSlot;
 	}
@@ -40,6 +38,7 @@ public class QuickSlotUI : BaseUI
 	{
 		InitItemList();
 		UpdateItemInfo();
+		quickSlot[0].SelectSlot(true); 
 	}
 	private void InitItemList()
 	{
@@ -74,9 +73,7 @@ public class QuickSlotUI : BaseUI
 		if (idx < 0 || idx >= itemSlots.Count)
 			return;
 
-		if (prevSelectItem != -1)
-			quickSlot[prevSelectItem].SelectSlot(false);
-
+		quickSlot[prevSelectItem].SelectSlot(false);
 		quickSlot[idx].SelectSlot(true);
 		prevSelectItem = idx;
 	}
