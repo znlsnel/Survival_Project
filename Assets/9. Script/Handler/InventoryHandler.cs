@@ -2,14 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ESlotType
+{
+	None,
+	InventorySlot,
+	QuickSlot
+}
+
+public struct SlotInfo
+{
+	public int idx;
+	public ESlotType type;
+	public SlotInfo(int idx, ESlotType type)
+	{
+		this.idx = idx;
+		this.type = type;
+	}
+}
+
 public class InventoryHandler : MonoBehaviour
 {
-    private List<ItemDataSO> myItems = new List<ItemDataSO>();
+	private List<ItemDataSO> myItems = new List<ItemDataSO>();
     private List<ItemDataSO> quickSlotItems = new List<ItemDataSO>();
+
     public List<ItemDataSO> MyItems => myItems; 
     public List<ItemDataSO> QuickSlotItems => quickSlotItems;
 
     private InventoryUI inventoryUI;
+
 	private void Awake()
 	{
 		inventoryUI = FindFirstObjectByType<InventoryUI>(); 
@@ -22,7 +42,6 @@ public class InventoryHandler : MonoBehaviour
 
         return -1;
     }
-
     private (ESlotType, int) FindItem(ItemDataSO item)
     {
         for (int i = 0; i < myItems.Count; i++)
@@ -42,7 +61,6 @@ public class InventoryHandler : MonoBehaviour
 
         return (ESlotType.None, -1);
 	}
-
     public bool AddItem(ItemDataSO item)
     {
         var (type, idx) = FindItem(item);

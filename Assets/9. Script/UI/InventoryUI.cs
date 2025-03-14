@@ -11,27 +11,16 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public enum ESlotType
-{
-	None,
-	InventorySlot,
-	QuickSlot
-}
+
 
 public class InventoryUI : BaseUI
 {
-	private struct SlotInfo
-	{
-		public int idx;
-		public ESlotType type;
-		public SlotInfo(int idx, ESlotType type)
-		{
-			this.idx = idx;
-			this.type = type;
-		}
-	}
-
 	#region Binding Enum
+	enum Texts
+	{
+		LabelTitle,
+		LabelAmount
+	}
 	enum Transforms
 	{
 		itemSlotParent,
@@ -70,14 +59,20 @@ public class InventoryUI : BaseUI
 	private SlotInfo clikedSlot; 
 	private SlotInfo selectSlot;
 
+	// === Event ===
+	public event Action onChangedSlot;
+
 	private void Awake() 
 	{
 		InputManager.Instance.Inventory.action.started += InputInventoryToggle;
+
+
 		InitInventory();
 	}
 	private void Start()
 	{
 		InitItemSlots();
+		SetCategoryButton();
 		CloseUI(); 
 	}
 
@@ -100,7 +95,6 @@ public class InventoryUI : BaseUI
 		myItems.Add(ESlotType.InventorySlot, inventory.MyItems);
 		myItems.Add(ESlotType.QuickSlot, inventory.QuickSlotItems); 
 	}
-
 	private void InitItemSlots()
 	{
 		// Find Objects
@@ -127,20 +121,32 @@ public class InventoryUI : BaseUI
 			myItems[ESlotType.QuickSlot].Add(null);
 		}
 
-		SetCategoryButton();
+		
 	}
-
 	private void SetCategoryButton()
 	{
 		Bind<Toggle>(typeof(Toggles));
-		Action<EItemType, bool> action = (eItemType, active) => { if (active) { categoryType = eItemType; UpdateItemInfo(); } };
+		Bind<TextMeshProUGUI>(typeof(Texts));
+
+		Action<EItemType, bool> action = (eItemType, active) => 
+		{ 
+			if (active) 
+			{ 
+				categoryType = eItemType;
+				string nameText = "Everything";
+				if (categoryType != EItemType.None)
+					nameText = categoryType.ToString();
+
+				Get<TextMeshProUGUI>((int)Texts.LabelTitle).text = nameText; 
+				UpdateItemInfo(); 
+			} 
+		};
 
 		Get<Toggle>((int)Toggles.toggle_consumableItem).onValueChanged.AddListener((active) => action.Invoke(EItemType.Consumable, active));
 		Get<Toggle>((int)Toggles.toggle_everything).onValueChanged.AddListener((active) => action.Invoke(EItemType.None, active));
 		Get<Toggle>((int)Toggles.toggle_resource).onValueChanged.AddListener((active) => action.Invoke(EItemType.Resource, active));
 		Get<Toggle>((int)Toggles.toggle_weapon).onValueChanged.AddListener((active) => action.Invoke(EItemType.Weapon, active));
 	}
-
 	private void SlotInit(InventorySlotUI slot, int idx, ESlotType type)
 	{
 		slot.SetIcon(null); 
@@ -169,34 +175,41 @@ public class InventoryUI : BaseUI
 	}
 	public void UpdateItemInfo()
 	{
+		var textAmount = Get<TextMeshProUGUI>((int)Texts.LabelAmount);
+
+		int cnt = 0;
 		foreach (var slots in itemSlots)
 		{
 			for (int i = 0; i < slots.Value.Count; i++)
 			{
-				slots.Value[i].SetIcon(myItems[slots.Key][i] == null ? null : myItems[slots.Key][i]);
+				bool hasItem = myItems[slots.Key][i] != null;
+				slots.Value[i].SetIcon(hasItem ? myItems[slots.Key][i] : null);
 				slots.Value[i].gameObject.SetActive(true);
+
+				if (hasItem)
+					cnt++;
 			}
 		}
 
-
-		if (categoryType == EItemType.None)
-			return;
-
-		int cnt = 0;
-		for (int i = 0; i < itemSlots[ESlotType.InventorySlot].Count; i++)
+		if (categoryType != EItemType.None)
 		{
+			cnt = 0;
+			for (int i = 0; i < itemSlots[ESlotType.InventorySlot].Count; i++)
+			{
+				InventorySlotUI slot = itemSlots[ESlotType.InventorySlot][i];
+				ItemDataSO item = myItems[ESlotType.InventorySlot][i];
 
-			InventorySlotUI targetSlot = itemSlots[ESlotType.InventorySlot][cnt];
-			InventorySlotUI slot = itemSlots[ESlotType.InventorySlot][i];
-			ItemDataSO item = myItems[ESlotType.InventorySlot][i];
+				bool usable = item != null && item.ItemType == categoryType;
+				slot.gameObject.SetActive(usable);
+				if (!usable)
+					continue;
 
-			bool usable = item != null && item.ItemType == categoryType;
-			slot.gameObject.SetActive(usable);
-			if (!usable)
-				continue;
+				cnt++;
+				slot.SetIcon(item);
+			}
+		}
 
-			slot.SetIcon(item);
-		}  
+		textAmount.text = cnt.ToString();
 	} 
 	public void AddItem(ESlotType type, int idx)
 	{
@@ -269,29 +282,6 @@ public class InventoryUI : BaseUI
 	}
 	#endregion
 
-	#region Popup
-
-	private void DropItem()
-	{
-		// 플레이어 앞으로 옮기는걸로 수정
-		Vector3 dropPos = inventory.transform.position + inventory.transform.forward * 1.0f;
-		var go = Instantiate(GetItemData(selectSlot).DropItemPrefab);
-		go.transform.position = dropPos;
-
-		SetItemData(selectSlot, null);
-		GetInventorySlot(selectSlot).SetIcon(null); 
-
-		
-		ClosePopup();
-		selectSlot.type = ESlotType.None;
-	}
-
-	private void ClosePopup()
-	{
-		selectSlot.type = ESlotType.None;
-	}
-	#endregion
-
 	#region Utility Function
 	private void SetItemData(SlotInfo slot, ItemDataSO data) => GetItemDataList(slot.type)[slot.idx] = data;
 	private ItemDataSO GetItemData(SlotInfo slot) => GetItemDataList(slot.type)[slot.idx];
@@ -306,6 +296,7 @@ public class InventoryUI : BaseUI
 		int cnt = itemSlots[slotA.type][slotA.idx].StackAmount;
 		itemSlots[slotA.type][slotA.idx].StackAmount = itemSlots[slotB.type][slotB.idx].StackAmount;
 		itemSlots[slotB.type][slotB.idx].StackAmount = cnt;
+		onChangedSlot?.Invoke();
 	}
 	#endregion
 }

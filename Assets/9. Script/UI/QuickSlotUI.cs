@@ -4,5 +4,10 @@ using UnityEngine;
 
 public class QuickSlotUI : MonoBehaviour
 {
-    private List<InventorySlotUI> slots = new List<InventorySlotUI>(); 
+    private List<InventorySlotUI> slots = new List<InventorySlotUI>();
+
+	private void Awake()
+	{
+		
+	}
 }
