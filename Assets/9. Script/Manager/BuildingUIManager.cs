@@ -11,6 +11,7 @@ public class BuildingUIManager : MonoBehaviour
     private void Awake()
     {
         buildingUI = FindObjectOfType<BuildingUI>();
+        LoadAllBuildings();
     }
 
 
@@ -34,4 +35,12 @@ public class BuildingUIManager : MonoBehaviour
             buildingUI.ToggleUI(isBuildingMode);
     }
 
+    private void LoadAllBuildings() // 리소스 폴더에서 빌딩데이터들을 싸그리 가져와봅시더
+    {
+        allBuildings = new List<BuildingData>();
+
+        BuildingData[] ladedBuildings = Resources.LoadAll<BuildingData>("BuildingData");
+
+        allBuildings.AddRange(ladedBuildings);
+    }
 }
