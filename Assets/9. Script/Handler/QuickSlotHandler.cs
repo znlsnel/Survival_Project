@@ -13,10 +13,20 @@ public class QuickSlotHandler : MonoBehaviour
 	
 	private void Awake()
 	{
-		InputManager.inputNumber += (num) => selectItem = num;
+		InputManager.inputNumber += SelectSlot; 
 		InventoryHandler inventory = FindFirstObjectByType<InventoryHandler>();
 		myItems = inventory.QuickSlotItems; 
 	} 
 	  
 	public ItemDataSO GetItemData() => myItems[selectItem];
+
+	public void SelectSlot(int num)
+	{
+		selectItem = num-1; 
+		
+		if (myItems[selectItem] != null)
+		{
+			
+		}
+	}
 }
