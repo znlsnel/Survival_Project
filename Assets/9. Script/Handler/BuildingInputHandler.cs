@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class BuildingInputHandler : MonoBehaviour
 {
 
-    private void OnEnable()
+    private void Start()
     {
         InputManager.RotateAction.performed += RotateBuilding;
 		InputManager.PlaceAction.performed += PlaceBuilding;
@@ -15,14 +15,6 @@ public class BuildingInputHandler : MonoBehaviour
 		InputManager.BuildingAction.performed += StartBuilding;
     }
 
-    private void OnDisable()
-    {
-		InputManager.RotateAction.performed -= RotateBuilding;
-		InputManager.PlaceAction.performed -= PlaceBuilding;
-		InputManager.CancelAction.performed -= CancelBuilding;
-		InputManager.ToggleAction.performed -= ToggleBuildMode;
-		InputManager.BuildingAction.performed -= StartBuilding;
-	}
 
 
     public void RotateBuilding(InputAction.CallbackContext context)
@@ -38,7 +30,6 @@ public class BuildingInputHandler : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started)
         {
-            Debug.Log("배치");
         }
     }
 
@@ -46,7 +37,6 @@ public class BuildingInputHandler : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started)
         {
-            Debug.Log("취소");
         }
     }
     public void ToggleBuildMode(InputAction.CallbackContext context)

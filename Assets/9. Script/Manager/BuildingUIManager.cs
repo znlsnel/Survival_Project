@@ -13,26 +13,19 @@ public class BuildingUIManager : MonoBehaviour
         buildingUI = FindObjectOfType<BuildingUI>();
     }
 
-    private void OnEnable()
-    {
-        EventManager.Instance.OnBuildingModeChanged += HandleBuildingModeChange;
-    }
 
-    private void OnDisable()
-    {
-        EventManager.Instance.OnBuildingModeChanged -= HandleBuildingModeChange;
-    }
 
     private void Start()
     {
+        EventManager.Instance.OnBuildingModeChanged += HandleBuildingModeChange;
+
         if (buildingUI == null)
         {
             Debug.LogError("BuildingUI가 할당되지 않았습니다.");
             return;
         }
 
-        buildingUI.InitializeUI(this);
-        ShowBuildingsByCategory(BuildingType.Furniture);
+        buildingUI.InitializeUI(allBuildings);
     }
 
     private void HandleBuildingModeChange(bool isBuildingMode)
@@ -41,9 +34,4 @@ public class BuildingUIManager : MonoBehaviour
             buildingUI.ToggleUI(isBuildingMode);
     }
 
-    public void ShowBuildingsByCategory(BuildingType category)
-    {
-        if (buildingUI != null)
-            buildingUI.UpdateBuildingList(allBuildings, category);
-    }
 }
