@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestFuniture
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: b476cabc75adebf4e998f44ada8db684, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b476cabc75adebf4e998f44ada8db684, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -59,7 +63,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100000, guid: b476cabc75adebf4e998f44ada8db684,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8277785467402122536}
+      addedObject: {fileID: 5122692756998261199}
   m_SourcePrefab: {fileID: 100100000, guid: b476cabc75adebf4e998f44ada8db684, type: 3}
 --- !u!1 &7484279822532589455 stripped
 GameObject:
@@ -67,8 +71,8 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7484279822532489519}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &8277785467402122536
-MeshCollider:
+--- !u!65 &5122692756998261199
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -85,7 +89,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300002, guid: b476cabc75adebf4e998f44ada8db684, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 4.6060414, y: 3.5025904, z: 3.3370821}
+  m_Center: {x: 0, y: 1.7227825, z: 0.06370497}
