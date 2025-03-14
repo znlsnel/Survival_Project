@@ -4653,6 +4653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8d3415461ba19a40ab0daed2f516925, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allItemsToggle: {fileID: 17885481556178628}
   funiToggle: {fileID: 6761997515935872902}
   decoToggle: {fileID: 3990752993400276739}
   listBG: {fileID: 1036868947501441135}

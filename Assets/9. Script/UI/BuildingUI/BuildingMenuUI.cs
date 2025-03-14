@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class BuildingMenuUI : MonoBehaviour
 {
     [Header("UI References")]
+    [SerializeField] private Toggle allItemsToggle;  // 전체보기
     [SerializeField] private Toggle funiToggle;  // 가구 버튼
     [SerializeField] private Toggle decoToggle;  // 장식 버튼
     [SerializeField] private Transform listBG;  // 건축물 리스트 배경
@@ -34,6 +35,7 @@ public class BuildingMenuUI : MonoBehaviour
     private void UpdateBuildingList()
     {
         int index = 0;
+        bool showAllItems = allItemsToggle.isOn;
 
         // 현재 UI 아이템 목록 가져오기
         foreach (BuildingData building in allBuildings)
@@ -41,7 +43,7 @@ public class BuildingMenuUI : MonoBehaviour
             bool isFurniture = funiToggle.isOn && building.buildingType == BuildingType.Furniture;
             bool isDecoration = decoToggle.isOn && building.buildingType == BuildingType.Decoration;
 
-            if (isFurniture || isDecoration)
+            if (showAllItems || isFurniture || isDecoration)
             {
                 GameObject item;
 
