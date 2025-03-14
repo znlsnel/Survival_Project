@@ -126,8 +126,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6609168206622262215}
   - component: {fileID: 7256908124666412316}
-  - component: {fileID: 151027698060541403}
   - component: {fileID: 7438694641742325302}
+  - component: {fileID: 2908549725826034924}
   m_Layer: 5
   m_Name: ItemSlot
   m_TagString: Untagged
@@ -203,18 +203,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &151027698060541403
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1805302758175827545}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f588d9236a92044cbc379eb5edb91f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7438694641742325302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,6 +217,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tooltip: {fileID: 3318526044764071250}
   fadeTime: 0.1
+--- !u!114 &2908549725826034924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1805302758175827545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dbacb641c823cf4ea0458ce55b9fa84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1940297552780553383
 GameObject:
   m_ObjectHideFlags: 0

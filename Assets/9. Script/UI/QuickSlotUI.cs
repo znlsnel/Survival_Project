@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class QuickSlotUI : MonoBehaviour
 {
-    private List<InventorySlotUI> slots = new List<InventorySlotUI>();
+	private List<ItemSlot> itemSlot;
+	private List<ItemDataSO> itemDatas;
 
-	private void Awake()
+	private InventoryHandler inventory;
+	private void Start()
 	{
+		inventory = FindFirstObjectByType<InventoryHandler>();	
 		
 	}
-}
+} 

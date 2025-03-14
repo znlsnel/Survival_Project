@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventorySlotUI : BaseUI
+public class ItemSlot : BaseUI
 {
 	enum Images
 	{
