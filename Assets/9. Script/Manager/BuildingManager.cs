@@ -7,6 +7,9 @@ public class BuildingManager : Singleton<BuildingManager>
     private BuildingPreview currentPreview;
     private BuildingData selectedData;
 
+    [SerializeField] private BuildingUI buildingUI;
+
+
     [SerializeField] private InventoryHandler InventoryHandler;
 
     private void OnEnable()
@@ -68,6 +71,7 @@ public class BuildingManager : Singleton<BuildingManager>
     public void SetSelectedBuilding(BuildingData buildingData)
     {
         selectedData = buildingData;
+        buildingUI.SelectBuilding(buildingData);
     }
 
     private void OnPlaceBuilding(UnityEngine.InputSystem.InputAction.CallbackContext context)

@@ -39,24 +39,29 @@ public class BuildingUI : MonoBehaviour
         else
         {
             buildingMenuUIOBJ.SetActive(isBuildingMode);
+
             buildingDesUIOBJ.SetActive(isBuildingMode);
         }
 
     }
 
 
-    private void SelectBuilding(BuildingData building)
+    public void SelectBuilding(BuildingData building)
     {
         Debug.Log($"선택된 건축물: {building.buildingName}");
-
-        BuildingManager.Instance.SetSelectedBuilding(building);
-
         resourceUI.UpdateResourceUI(building);
+
     }
 
     private void OnlyDecOnUI()
     {
         buildingMenuUIOBJ.SetActive(false);
         buildingDesUIOBJ.SetActive(true);
+    }
+
+    private void OnlyMenuUIOn(bool on)
+    {
+        buildingMenuUIOBJ.SetActive(on);
+        buildingDesUIOBJ.SetActive(!on);
     }
 }

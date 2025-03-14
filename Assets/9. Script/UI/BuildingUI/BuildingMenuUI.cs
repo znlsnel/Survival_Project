@@ -76,7 +76,7 @@ public class BuildingMenuUI : MonoBehaviour
                     {
                         if (isSelected)
                         {
-                            SelectBuilding(building);
+                            BuildingManager.Instance.SetSelectedBuilding(building); // select
                         }
                     });
                 }
@@ -100,12 +100,6 @@ public class BuildingMenuUI : MonoBehaviour
         }
     }
 
-
-    private void SelectBuilding(BuildingData building)
-    {
-        Debug.Log($"선택된 건축물: {building.buildingName}");
-        BuildingManager.Instance.SetSelectedBuilding(building);
-    }
 
 
     private void InitializeTooltip(GameObject item, BuildingData building)
