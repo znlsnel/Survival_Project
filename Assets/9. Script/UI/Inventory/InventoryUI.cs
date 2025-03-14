@@ -164,8 +164,8 @@ public class InventoryUI : BaseUI
 		UpdateItemInfo();
 		mainPanel.SetActive(true);
 
-		InputManager.Instance.Move.action.Disable();
-		InputManager.Instance.Jump.action.Disable(); 
+		InputManager.Move.Disable();
+		InputManager.Jump.Disable(); 
 
 
 	}
@@ -174,8 +174,8 @@ public class InventoryUI : BaseUI
 	{
 		mainPanel.SetActive(false);
 		
-		InputManager.Instance.Move.action.Enable();
-		InputManager.Instance.Jump.action.Enable();
+		InputManager.Move.Enable();
+		InputManager.Jump.Enable();
 
 	}
 

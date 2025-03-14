@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 [Serializable]
 public enum EItemType
 { 
@@ -13,7 +14,6 @@ public enum EItemType
     Consumable,
     Resource,
 }
-
 
 [CreateAssetMenu(fileName = "new ItemData", menuName = "My ScriptableObject/ItemData")]
 public class ItemDataSO : ScriptableObject
@@ -28,27 +28,22 @@ public class ItemDataSO : ScriptableObject
     [SerializeField] private string itemDescription;
     [SerializeField] private GameObject dropItemPrefab;
 
-	[Header("Weapon Info")]
-	[SerializeField] private GameObject weaponPrefab;
+    [Header("UsableItem Info")]
+    [SerializeField] private GameObject usableItemPrefab;
 
     [Header("Amountable")]
     [SerializeField] private bool canStackItems = false;
     [SerializeField] private int maxStackCount = 50;
 
+
 	public EItemType ItemType => itemType;
     public GameObject DropItemPrefab => dropItemPrefab;
-    public GameObject WeaponPrefab => weaponPrefab;
+    public GameObject UsableItemPrefab => usableItemPrefab;
     public Sprite ItemIcon => itemIcon;
     public Sprite ItemTypeIcon { get => itemTypeIcon; set => itemTypeIcon = value; }
     public string ItemName => itemName;
     public string ItemDescription => itemDescription;
     public bool CanStackItems => canStackItems;
     public int MaxStackCount => maxStackCount;
-}
-
-[CreateAssetMenu(fileName = "new ItemData", menuName = "My ScriptableObject/ItemData")]
-public class WeaponItemSO : ItemDataSO
-{
-	
 }
  
