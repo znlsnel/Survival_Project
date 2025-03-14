@@ -62,7 +62,7 @@ public class InventoryUI : BaseUI
 	}
 	private void Start()
 	{
-		InputManager.Instance.Inventory.action.started += InputInventoryToggle;
+		InputManager.Inventory.started += InputInventoryToggle;
 		inventory.onChangedSlot += UpdateItemInfo;
 		InitItemList();
 		InitItemSlots();

@@ -32,9 +32,9 @@ public class QuickSlotUI : BaseUI
 		itemDatas = inventory.QuickSlotItems;
 
 		inventory.onChangedSlot += UpdateItemInfo;
-		InputManager.Instance.inputNumber += SelectSlot;
+		InputManager.inputNumber += SelectSlot;
 	}
-	private void Start()
+	private void Start() 
 	{
 		InitItemList();
 		UpdateItemInfo();

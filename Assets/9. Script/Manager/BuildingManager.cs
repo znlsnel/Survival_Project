@@ -11,8 +11,8 @@ public class BuildingManager : Singleton<BuildingManager>
     {
         if (InputManager.Instance != null)
         {
-            InputManager.Instance.PlaceBuilding.performed += OnPlaceBuilding;
-            InputManager.Instance.CancelBuild.performed += OnCancelBuilding;
+            InputManager.PlaceAction.performed += OnPlaceBuilding;
+            InputManager.CancelAction.performed += OnCancelBuilding;
         }
 
         if (EventManager.Instance != null)
@@ -25,8 +25,8 @@ public class BuildingManager : Singleton<BuildingManager>
     {
         if (InputManager.Instance != null)
         {
-            InputManager.Instance.PlaceBuilding.performed -= OnPlaceBuilding;
-            InputManager.Instance.CancelBuild.performed -= OnCancelBuilding;
+            InputManager.PlaceAction.performed -= OnPlaceBuilding;
+            InputManager.CancelAction.performed -= OnCancelBuilding;
         }
 
         if (EventManager.Instance != null)

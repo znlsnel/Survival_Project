@@ -27,24 +27,6 @@
                     "name": "Inventory",
                     "type": "Button",
                     "id": "29df2af9-183e-4a50-ad04-f26fca72208a",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "click",
-                    "type": "Button",
-                    "id": "65fec5f3-5d88-462f-a8d0-69e0a822c696",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Press",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "run",
-                    "type": "Button",
-                    "id": "86a66a36-299c-4354-88d2-1877915e913b",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -60,22 +42,13 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "jump",
+                    "name": "Jump",
                     "type": "Button",
-                    "id": "df20c1f1-d84f-48a2-8170-1153391b6425",
+                    "id": "fd2a1e5e-c822-4c26-bbad-69900087a96a",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "look",
-                    "type": "Value",
-                    "id": "de41a7f6-805b-4d49-a069-2fee1de8eefb",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -180,34 +153,12 @@
                 },
                 {
                     "name": "",
-                    "id": "9340fe1f-6848-4ecc-bc9b-9a7dfdcb379d",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "click",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "15f53549-f9e1-41d1-bf3b-4d4a6fe2d404",
+                    "id": "16a6d37b-7648-4ed6-81cb-6b362d81edb4",
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "055169ad-fef5-45ef-8ca4-1cccc1f688f0",
-                    "path": "<Mouse>/delta",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "look",
+                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -245,18 +196,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ToggleBuildMode",
+                    "name": "StartBuilding",
                     "type": "Button",
-                    "id": "8d3df5f5-2a34-4623-97da-487908cee101",
+                    "id": "7e7e7ba6-6df5-4fe1-bfff-6f13136de612",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "StartBuilding",
+                    "name": "ToggleBuildMode",
                     "type": "Button",
-                    "id": "7e7e7ba6-6df5-4fe1-bfff-6f13136de612",
+                    "id": "8d3df5f5-2a34-4623-97da-487908cee101",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -310,23 +261,23 @@
                 },
                 {
                     "name": "",
-                    "id": "33d8f846-6f05-426e-8e7e-f7dcdd671587",
-                    "path": "<Keyboard>/b",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ToggleBuildMode",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "519c18aa-bfad-48b9-a158-17eb6582a4fb",
                     "path": "<Keyboard>/z",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "StartBuilding",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "33d8f846-6f05-426e-8e7e-f7dcdd671587",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleBuildMode",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
