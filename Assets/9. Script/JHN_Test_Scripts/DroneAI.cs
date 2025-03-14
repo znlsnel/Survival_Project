@@ -14,7 +14,6 @@ public class DroneAI : MonoBehaviour
     public NavMeshAgent agent;  // 네비게이션 이동
 
     private Transform targetResource; // 현재 목표 자원
-    [SerializeField] private ItemDataSO targetItem; // 타겟 아이템
 
     private float currentScanRange;
     private int scanAttempts = 0; // 탐색 시도 횟수

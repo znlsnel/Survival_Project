@@ -177,6 +177,7 @@ GameObject:
   - component: {fileID: 5285217994092207908}
   - component: {fileID: 6404990018072321453}
   - component: {fileID: 1019782228233234199}
+  - component: {fileID: 7777804589104465445}
   m_Layer: 16
   m_Name: Drone
   m_TagString: Untagged
@@ -239,9 +240,29 @@ MonoBehaviour:
   randomMoveRange: 15
   resourceLayer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 0
   agent: {fileID: 6404990018072321453}
-  targetItem: {fileID: 0}
+--- !u!65 &7777804589104465445
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136383350355168246}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2462666059184939802
 GameObject:
   m_ObjectHideFlags: 0
