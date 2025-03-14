@@ -13,10 +13,10 @@ public class UIEventHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IP
 	public event Action<PointerEventData> onHoverEnter;
 	public event Action<PointerEventData> onHoverExit;
 
-	public void OnBeginDrag(PointerEventData eventData) => OnBeginDragHandler?.Invoke(eventData);
-	public void OnDrag(PointerEventData eventData) => OnDragHandler?.Invoke(eventData);
-	public void OnPointerDown(PointerEventData eventData) => onClick?.Invoke(eventData);
-	public void OnPointerUp(PointerEventData eventData) => onRelease?.Invoke(eventData);
-	public void OnPointerEnter(PointerEventData eventData) => onHoverEnter?.Invoke(eventData);
-	public void OnPointerExit(PointerEventData eventData) => onHoverExit?.Invoke(eventData);
+	public virtual void OnBeginDrag(PointerEventData eventData) => OnBeginDragHandler?.Invoke(eventData);
+	public virtual void OnDrag(PointerEventData eventData) => OnDragHandler?.Invoke(eventData);
+	public virtual void OnPointerDown(PointerEventData eventData) => onClick?.Invoke(eventData);
+	public virtual void OnPointerUp(PointerEventData eventData) => onRelease?.Invoke(eventData);
+	public virtual void OnPointerEnter(PointerEventData eventData) => onHoverEnter?.Invoke(eventData);
+	public virtual void OnPointerExit(PointerEventData eventData) => onHoverExit?.Invoke(eventData);
 }

@@ -13,7 +13,6 @@ public class ItemSlot : BaseUI
 		Item,
 		ItemTypeImage,
 	}
-
 	enum TextMeshPros
 	{
 		amountText
@@ -24,7 +23,6 @@ public class ItemSlot : BaseUI
 		IndicatorType
 	}
 
-	private ESlotType slotType; 
 	private Image itemImage;
 	private Image itemTypeImage;
 	private TextMeshProUGUI amountText;
@@ -53,7 +51,10 @@ public class ItemSlot : BaseUI
 		itemTypeBg = Get<GameObject>((int)GameObjects.IndicatorType);
 		UpdateStackAmount();
 	}  
-	public ESlotType SlotType { get => slotType; set => slotType = value; }
+	private void UpdateStackAmount()
+	{
+		amountText.text = stackAmount.ToString();
+	}
 	public void SetIcon(ItemDataSO data)
 	{
 		itemImage.gameObject.SetActive(data != null);
@@ -66,9 +67,5 @@ public class ItemSlot : BaseUI
 		itemImage.sprite = data.ItemIcon;
 		itemTypeImage.sprite = data.ItemTypeIcon;
 	}  
-	private void UpdateStackAmount()
-	{
-		amountText.text = stackAmount.ToString();
-	}
 
 } 

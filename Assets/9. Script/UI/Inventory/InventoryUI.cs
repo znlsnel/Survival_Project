@@ -26,11 +26,7 @@ public class InventoryUI : BaseUI
 		itemSlotParent,
 		quickSlotParent,
 	} 
-	enum GameObjects
-	{
-		movingSlot,
-		InventoryScrollRect
-	}
+
 	enum Toggles
 	{
 		toggle_everything,
@@ -43,44 +39,34 @@ public class InventoryUI : BaseUI
 	// === Item List ===
 	private Dictionary<ESlotType, List<ItemSlot>> itemSlots = new Dictionary<ESlotType, List<ItemSlot>>();
 	private Dictionary<ESlotType, List<ItemDataSO>> myItems = new Dictionary<ESlotType, List<ItemDataSO>>();
-	  
-	// === Handler ===
-	private InventoryHandler inventory;
-	private QuickSlotHandler quickSlot;
 
-	// === Objects ===
-	private GameObject movingSlot;
-	private ScrollRect scrollRect;
+	// === component ===
+	private ItemSlotHandler itemSlotHandler;
+	private InventoryHandler inventory; 
 	 
 	// === Values ===
 	private EItemType categoryType = EItemType.None;
-	private Coroutine moveSlotCrt;
-	private SlotInfo hoveredSlot;
-	private SlotInfo clikedSlot; 
-	private SlotInfo selectSlot;
 
 	private void Start()
 	{
 		InputManager.Instance.Inventory.action.started += InputInventoryToggle;
+		itemSlotHandler = GetComponent<ItemSlotHandler>();	
 
-		InitInventory();
+		InitItemList();
 		InitItemSlots();
 		SetCategoryButton();
-		CloseUI(); 
+		CloseUI();
+
+		inventory.onChangedSlot += UpdateItemInfo;
 	}
 
 	#region Inventory Function 
-	private void InitInventory()
+	private void InitItemList()
 	{
 		Bind<Transform>(typeof(Transforms));
-		Bind<GameObject>(typeof(GameObjects));
-
-		movingSlot = Get<GameObject>((int)GameObjects.movingSlot);
-		scrollRect = Get<GameObject>((int)GameObjects.InventoryScrollRect).GetComponent<ScrollRect>();
-
+		
 	   // Find Components
 	   inventory = FindFirstObjectByType<InventoryHandler>();
-		quickSlot = FindFirstObjectByType<QuickSlotHandler>();
 
 		// Bind List & List Clear
 		itemSlots.Add(ESlotType.InventorySlot, inventory.MyItemSlots);
@@ -88,6 +74,7 @@ public class InventoryUI : BaseUI
 		myItems.Add(ESlotType.InventorySlot, inventory.MyItems);
 		myItems.Add(ESlotType.QuickSlot, inventory.QuickSlotItems); 
 	}
+
 	private void InitItemSlots()
 	{
 		// Find Objects
@@ -98,7 +85,8 @@ public class InventoryUI : BaseUI
 		foreach (Transform child in itemSlotParent)
 		{
 			ItemSlot slot = child.GetComponent<ItemSlot>();
-			SlotInit(slot, itemSlots[ESlotType.InventorySlot].Count, ESlotType.InventorySlot);
+			UIEventHandler evt = child.GetComponent<UIEventHandler>();
+			SlotInit(slot, evt, itemSlots[ESlotType.InventorySlot].Count, ESlotType.InventorySlot);
 
 			itemSlots[ESlotType.InventorySlot].Add(slot);
 			myItems[ESlotType.InventorySlot].Add(null);
@@ -108,7 +96,9 @@ public class InventoryUI : BaseUI
 		foreach (Transform child in quickSlotParent)
 		{
 			ItemSlot slot = child.GetComponent<ItemSlot>();
-			SlotInit(slot, itemSlots[ESlotType.QuickSlot].Count, ESlotType.QuickSlot);
+			UIEventHandler evt = child.GetComponent<UIEventHandler>();
+
+			SlotInit(slot, evt,itemSlots[ESlotType.QuickSlot].Count, ESlotType.QuickSlot);
 
 			itemSlots[ESlotType.QuickSlot].Add(slot);
 			myItems[ESlotType.QuickSlot].Add(null);
@@ -116,6 +106,7 @@ public class InventoryUI : BaseUI
 
 		
 	}
+
 	private void SetCategoryButton()
 	{
 		Bind<Toggle>(typeof(Toggles));
@@ -140,16 +131,17 @@ public class InventoryUI : BaseUI
 		Get<Toggle>((int)Toggles.toggle_resource).onValueChanged.AddListener((active) => action.Invoke(EItemType.Resource, active));
 		Get<Toggle>((int)Toggles.toggle_weapon).onValueChanged.AddListener((active) => action.Invoke(EItemType.Weapon, active));
 	}
-	private void SlotInit(ItemSlot slot, int idx, ESlotType type)
-	{
-		slot.SetIcon(null); 
-		slot.SlotType = type; 
 
-		slot.onClick += (PointerEventData data) =>ClickSlot(idx, type);
-		slot.onRelease += (PointerEventData data) => ReleaseSlot(idx, type);
-		slot.onHoverEnter += (PointerEventData data) => HoverEnterSlot(idx, type);
-		slot.onHoverExit += (PointerEventData data)=> HoverExitSlot(idx, type);
+	private void SlotInit(ItemSlot slot, UIEventHandler slotEvent, int idx, ESlotType type)
+	{
+		slot.SetIcon(null);
+
+		slotEvent.onClick += (PointerEventData data) => itemSlotHandler.ClickSlot(idx, type);
+		slotEvent.onRelease += (PointerEventData data) => itemSlotHandler.ReleaseSlot(idx, type);
+		slotEvent.onHoverEnter += (PointerEventData data) => itemSlotHandler.HoverEnterSlot(idx, type);
+		slotEvent.onHoverExit += (PointerEventData data)=> itemSlotHandler.HoverExitSlot(idx, type);
 	} 
+
 	private void InputInventoryToggle(InputAction.CallbackContext context)
 	{
 		if (gameObject.activeSelf)
@@ -157,15 +149,18 @@ public class InventoryUI : BaseUI
 		else
 			OpenUI();
 	}
+
 	private void OpenUI()
 	{
 		UpdateItemInfo(); 
 		gameObject.SetActive(true);
 	}
+
 	private void CloseUI()
 	{
 		gameObject.SetActive(false);
 	}
+
 	public void UpdateItemInfo()
 	{
 		var textAmount = Get<TextMeshProUGUI>((int)Texts.LabelAmount);
@@ -204,68 +199,6 @@ public class InventoryUI : BaseUI
 
 		textAmount.text = cnt.ToString();
 	} 
-	#endregion
-	 
-	#region Item Slot Control
-	// Item Slot  
-	private void ClickSlot(int idx, ESlotType type)
-	{
-		Debug.Log($"클릭 {idx} : 타입 : {type}");
-		clikedSlot = new SlotInfo(idx, type);
-		scrollRect.enabled = false;
 
-		if (myItems[type][idx] != null)
-			moveSlotCrt = StartCoroutine(MoveItem(0.5f));
-	} 
-	private void ReleaseSlot(int idx, ESlotType type)
-	{
-		Debug.Log($"클릭 취소 {idx} : 타입 : {type}");
-		scrollRect.enabled = true;
-
-		if (moveSlotCrt != null)
-		{
-			StopCoroutine(moveSlotCrt);
-			moveSlotCrt = null;
-		}  
-		 
-		// 아이템이 이동중이라면 슬롯의 아이템 데이터 교환
-		if (movingSlot.activeSelf) 
-		{
-			if (hoveredSlot.type != ESlotType.None && clikedSlot.type != ESlotType.None)
-				inventory.SwitchSlot(clikedSlot, hoveredSlot);
-
-
-			movingSlot.SetActive(false);
-			UpdateItemInfo(); 
-		} 
-		else
-			selectSlot = clikedSlot;
-
-		clikedSlot.type = ESlotType.None;
-	}
-	private void HoverEnterSlot(int idx, ESlotType type)
-	{
-		Debug.Log($"호버 {idx} : 타입 : {type}");
-		hoveredSlot = new SlotInfo(idx, type); 
-	}
-	private void HoverExitSlot(int idx, ESlotType type)
-	{
-		hoveredSlot.type = ESlotType.None;
-	}
-	private IEnumerator MoveItem(float time)
-	{
-		yield return new WaitForSeconds(time);
-
-		itemSlots[clikedSlot.type][clikedSlot.idx].SetIcon(null);
-		movingSlot.transform.localPosition = movingSlot.transform.parent.InverseTransformPoint(Input.mousePosition);
-		movingSlot.GetComponent<ItemSlot>().SetIcon(myItems[clikedSlot.type][clikedSlot.idx]);
-		movingSlot.SetActive(true);
-
-		while (true)
-		{
-			movingSlot.transform.localPosition = movingSlot.transform.parent.InverseTransformPoint(Input.mousePosition);
-			yield return null;
-		}
-	}
 	#endregion
 }

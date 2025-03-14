@@ -51,6 +51,7 @@ public class InventoryHandler : MonoBehaviour
 
         return -1;
     }
+
     private (ESlotType, int) FindItem(ItemDataSO item)
     {
         for (int i = 0; i < MyItems.Count; i++)
@@ -70,22 +71,23 @@ public class InventoryHandler : MonoBehaviour
 
         return (ESlotType.None, -1);
 	}
+
     public bool AddItem(ItemDataSO item)
     {
-        var (type, idx) = FindItem(item);
-        if (idx > -1)
-        {
+		var (type, idx) = FindItem(item);
+		if (idx > -1)
 			itemSlots[type][idx].StackAmount++;
-			return true;
-		}
-         
-	    idx = GetEmptySlotIdx();
-		if (idx == -1)
+		
+		else if ((idx = GetEmptySlotIdx()) == -1)
 			return false;
 
-		MyItems[idx] = item;
+		else
+			MyItems[idx] = item;
+		
+		onChangedSlot?.Invoke();
 		return true;
-    }
+	}
+
 	public void SwitchSlot(SlotInfo slotA, SlotInfo slotB)
 	{
 		ItemDataSO temp = myItems[slotA.type][slotA.idx];
@@ -97,5 +99,7 @@ public class InventoryHandler : MonoBehaviour
 		itemSlots[slotB.type][slotB.idx].StackAmount = cnt;
 		onChangedSlot?.Invoke();
 	}
+
 	public int GetSlotStackAmount(ESlotType type, int idx) => itemSlots[type][idx].StackAmount;
 }
+ 
