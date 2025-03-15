@@ -21,4 +21,4 @@ MonoBehaviour:
     type: 3}
   weaponPrefab: {fileID: 0}
   canStackItems: 1
-  maxStackCount: 2
+  maxStackCount: 3
