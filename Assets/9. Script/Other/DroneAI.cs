@@ -21,8 +21,9 @@ public class DroneAI : MonoBehaviour
     private List<ItemDataSO> droneInventory = new List<ItemDataSO>();
     [SerializeField] private int maxInventorySize = 10;  // 드론 인벤 최대 크기
 
-    [SerializeField] private Transform boxPos;   // 거점 위치 / 인벤 꽉 차면 돌아올 곳
+    private Transform boxPos;   // 거점 위치 / 인벤 꽉 차면 돌아올 곳
     private BoxInventory boxInventory;   // 박스 인벤토리 (저장소)
+    [SerializeField] private LayerMask boxLayer;
 
 
     private bool isFull = false;
@@ -34,7 +35,7 @@ public class DroneAI : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         currentScanRange = scanRange;
         StartCoroutine(ScanForResources());
-        boxInventory = boxPos.GetComponent<BoxInventory>();
+
     }
 
     private IEnumerator ScanForResources()
@@ -82,6 +83,26 @@ public class DroneAI : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
     }
+
+    private Transform FindNearestStorage()
+    {
+        Collider[] boxes = Physics.OverlapSphere(transform.position, maxScanRange, boxLayer);
+        Transform closestBox = null;
+        float closestDistance = Mathf.Infinity;
+
+        foreach (Collider box in boxes) 
+        { 
+            float distance = Vector3.Distance(transform.position, box.transform.position);
+
+            if(distance< closestDistance)
+            {
+                closestDistance = distance;
+                closestBox = box.transform;
+            }
+        }
+        return closestBox;
+    }
+
 
     private void StartPick(Transform target)
     {
@@ -206,18 +227,24 @@ public class DroneAI : MonoBehaviour
 
     private void ReturnToHome()
     {
-        if (boxPos==null || isNowHome) return;
-        if (isFull)
-        {
-            Debug.Log("집가자~");
+        if (isNowHome) return;
+        boxPos = FindNearestStorage();
+        if (boxPos == null) return;
+        boxInventory = boxPos.GetComponent<BoxInventory>();
 
-            agent.SetDestination(boxPos.position);
-            if (Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(boxPos.position.x, 0, boxPos.position.z)) < 1.0f)
-            {
-                isNowHome = true;
-            }
+ 
+        Debug.Log("집가자~");
+
+
+
+
+        agent.SetDestination(boxPos.position);
+        if (Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(boxPos.position.x, 0, boxPos.position.z)) < 1.0f)
+        {
+            isNowHome = true;
         }
     }
+    
 
     private void StoredItemsToBox()
     {
