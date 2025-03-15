@@ -7,11 +7,11 @@ namespace Enemy
     public class Animation: MonoBehaviour
     {
         [HideInInspector] public Animator animator;
-    
-        public static readonly int Idle = Animator.StringToHash("Idle");
-        public static readonly int Attack = Animator.StringToHash("Attack");
-        public static readonly int Move = Animator.StringToHash("Move");
-        public static readonly int Hit = Animator.StringToHash("Hit");
+
+        // feat: 기본 3가지
+        public static readonly int HashBoolRun = Animator.StringToHash("Run");
+        public static readonly int HashTriggerAttack = Animator.StringToHash("Attack");
+        public static readonly int HashTriggerHit = Animator.StringToHash("Hit");
 
         void Awake()
         {

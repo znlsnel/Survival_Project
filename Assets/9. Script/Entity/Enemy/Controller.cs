@@ -21,6 +21,11 @@ namespace Enemy
             _navigation = GetComponent<Navigation>();
             _resource = GetComponent<Resource>();
         }
+
+        void Start()
+        {
+            _navigation.WhenChangedStatus += (status) => Debug.Log(status);
+        }
     }
     
 }

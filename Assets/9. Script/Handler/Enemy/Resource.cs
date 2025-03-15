@@ -1,6 +1,8 @@
+using UnityEngine;
+
 namespace Enemy
 {
-    public class Resource
+    public class Resource: MonoBehaviour
     {
         
     }

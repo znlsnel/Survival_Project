@@ -17,8 +17,8 @@ namespace Player
         
         // equipment 관련 클래스 하나..
         
-        // 착용 시 따라오는 방향으로 코드 변경(
-        [FormerlySerializedAs("meleeWeaponController")] public Weapon.Melee.Controller controller;
+        // 착용 시 따라오는 방향으로 코드 변경
+        public Weapon.Melee.Controller meleeWeapon;
         // problem : 장비 상태를 변경하는 작업이 플레이어랑 연결되어야 하는 상황
       
         void Awake()
@@ -32,7 +32,7 @@ namespace Player
         void Start()
         {
             _animation.animator.SetTrigger(Animation.BreakIdleTrigger); // 애니메이터 자체를 수정
-            _animation.OnMeleeAttackAvailable += controller.SetMeleeAttackAvailable;
+            _animation.OnMeleeAttackAvailable += meleeWeapon.SetMeleeAttackAvailable;
         }
         
         void FixedUpdate()
