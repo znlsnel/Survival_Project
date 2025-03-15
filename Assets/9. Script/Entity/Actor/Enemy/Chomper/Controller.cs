@@ -13,7 +13,6 @@ public class Controller: MonoBehaviour
     private Audio _audio; 
     public Resource resource;
     
-
     void Awake()
     {
         _animation = GetComponent<Animation>();

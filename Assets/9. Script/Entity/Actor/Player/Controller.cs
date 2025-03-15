@@ -10,7 +10,6 @@ namespace Player
         private Movement _movement;
         // private Animation _animation;
         // private Audio _audio;
-
         // public int jumpCount = 2;
         // public int comboCount = 0;
         // public int knockBackForce = 10; // 상대의 공격에 따라 달라질 수 있음

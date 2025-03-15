@@ -7,6 +7,8 @@ namespace Enemy
     [RequireComponent(typeof(Navigation), typeof(Resource))]
     public class Controller : MonoBehaviour
     {
+        
+        
         private Animation _animation;
         private Audio _audio;
         private Movement _movement;
