@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Enemy
 {
+    [RequireComponent(typeof(Animator))]
     public class Animation: MonoBehaviour
     {
         [HideInInspector] public Animator animator;

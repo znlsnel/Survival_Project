@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Player
 {
-    [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(Rigidbody), (typeof(Collider)))]
     public class Movement: MonoBehaviour
     {
          private Rigidbody _rigidbody;
