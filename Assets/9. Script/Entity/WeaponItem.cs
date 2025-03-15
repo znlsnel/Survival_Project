@@ -1,18 +1,60 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using static ResourceObject;
 
-public abstract class WeaponItem : MonoBehaviour
+public interface IDamagable
 {
-    [Header("Item Info")]
-    [SerializeField] private float damage;
-    [SerializeField] private float delay;
-    [SerializeField] private float nockback;
-
-    // 무기의 위치를 고정 ( 캐릭터 손 Transform )
-    public abstract void InitItem(Transform parent);
-
-    // Attack 함수  -> PlayerAnimation Handler에 접근하여 공격 애님 실행
-    public abstract void Attack();
+	void TakePhysicalDamage(int damageAmout);
 }
+
+
+public class WeaponItem : ActiveItem
+{
+    [Header("Weapon Item")]
+    [SerializeField] private int damage;
+    [SerializeField] private float nockback;
+    [SerializeField] private float attackDistance;
+
+	[Header("Combat")]
+	[SerializeField] private bool doesDealDamage;
+
+	[Header("Resource Gathering")] 
+	[SerializeField] private EResourceType gatherableResourceType;
+
+	private GameObject player;
+
+	private void Awake()
+	{
+		player = GameManager.Instance.PlayerController.gameObject;
+	}
+	public override void Trigger()
+    {
+        Debug.Log("무기 사용");
+		OnHit();
+	}
+
+	private void OnHit()
+	{
+		Ray ray = new Ray(player.transform.position + Vector3.up * 1.0f, player.transform.forward);
+		RaycastHit hit;
+
+		if (Physics.Raycast(ray, out hit, attackDistance))
+		{
+
+			if (hit.collider.TryGetComponent(out ResourceObject resource))
+			{
+				if (gatherableResourceType == resource.Type)
+					resource.Hit(damage);
+			} 
+
+			if (doesDealDamage && hit.collider.TryGetComponent(out IDamagable damagable))
+			{
+				damagable.TakePhysicalDamage(damage);
+			}
+		} 
+	} 
+}   
  

@@ -28,14 +28,11 @@ public class ItemSlotHandler : BaseUI
 
 	// === copmonent ===
 	private InventoryHandler inventory;
-
-	private void OnValidate()
-	{
-		Bind<GameObject>(typeof(GameObjects));
-	}
-
+	 
 	private void Awake()
 	{
+		Bind<GameObject>(typeof(GameObjects));
+
 		movingSlot = Get<GameObject>((int)GameObjects.movingSlot);
 		scrollRect = Get<GameObject>((int)GameObjects.InventoryScrollRect).GetComponent<ScrollRect>();
 		inventory = FindFirstObjectByType<InventoryHandler>();

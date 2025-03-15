@@ -26,7 +26,6 @@ public class InventoryUI : BaseUI
 		itemSlotParent,
 		quickSlotParent,
 	} 
-
 	enum Toggles
 	{
 		toggle_everything,
@@ -53,30 +52,32 @@ public class InventoryUI : BaseUI
 	private EItemType categoryType = EItemType.None;
 	private GameObject mainPanel;
 
-	private void OnValidate()
-	{
-		Bind<Transform>(typeof(Transforms));
-		Bind<Toggle>(typeof(Toggles));
-		Bind<TextMeshProUGUI>(typeof(Texts));
-		Bind<GameObject>(typeof(GameObjects));
-		 
-		inventory = FindFirstObjectByType<InventoryHandler>();
-		itemSlotHandler = GetComponent<ItemSlotHandler>();
-		mainPanel = Get<GameObject>((int)GameObjects.PanelInventory);
-	}
 	private void Awake()
 	{
-		InitItemList();
-		InitItemSlots();
-		SetCategoryButton();
+		Binding();
+
+		mainPanel = Get<GameObject>((int)GameObjects.PanelInventory);
+		inventory = FindFirstObjectByType<InventoryHandler>();
+		itemSlotHandler = GetComponent<ItemSlotHandler>();
 	}
 	private void Start()
 	{
 		InputManager.Inventory.started += InputInventoryToggle;
 		inventory.onChangedSlot += UpdateItemInfo;
+		InitItemList();
+		InitItemSlots();
+		SetCategoryButton();
+		 
 		CloseUI();
-	}
+	} 
 
+	private void Binding()
+	{
+		Bind<Transform>(typeof(Transforms));
+		Bind<Toggle>(typeof(Toggles));
+		Bind<TextMeshProUGUI>(typeof(Texts));
+		Bind<GameObject>(typeof(GameObjects));
+	}
 	#region Inventory Function 
 	private void InitItemList()
 	{
@@ -162,11 +163,20 @@ public class InventoryUI : BaseUI
 	{
 		UpdateItemInfo();
 		mainPanel.SetActive(true);
+
+		InputManager.Move.Disable();
+		InputManager.Jump.Disable(); 
+
+
 	}
 
 	private void CloseUI()
 	{
 		mainPanel.SetActive(false);
+		
+		InputManager.Move.Enable();
+		InputManager.Jump.Enable();
+
 	}
 
 	private void UpdateItemInfo()
