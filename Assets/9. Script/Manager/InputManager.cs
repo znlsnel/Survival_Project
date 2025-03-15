@@ -10,7 +10,8 @@ public enum EPlayerInput
 	interaction,
 	Inventory,
 	ToggleBuildMode,
-	Jump
+	Jump,
+	LeftMouse
 }
 
 public enum EPlayerBuilding
@@ -44,13 +45,14 @@ public class InputManager : Singleton<InputManager>
 	// Input Action Map  
 	private InputActionMap playerInputMap;
 	private InputActionMap buildingInputMap;
-
+	 
 	// === Input Actions ===
 	static public event Action<int> inputNumber; 
 	static public InputAction Interaction => Instance.playerInputs[EPlayerInput.interaction];
 	static public InputAction Inventory => Instance.playerInputs[EPlayerInput.Inventory];
 	static public InputAction Move => Instance.playerInputs[EPlayerInput.move];
 	static public InputAction Jump => Instance.playerInputs[EPlayerInput.Jump];
+	static public InputAction LeftMouse => Instance.playerInputs[EPlayerInput.LeftMouse];
 	static public InputAction ToggleBuilding => Instance.playerInputMap.enabled ? 
 		Instance.playerInputs[EPlayerInput.ToggleBuildMode] : Instance.buildingInputs[EPlayerBuilding.ToggleBuildMode];
 	static public InputAction RotateAction => Instance.buildingInputs[EPlayerBuilding.RotateObject];

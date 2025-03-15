@@ -3,7 +3,7 @@ using UnityEngine;
 
 // do: 상태와 달리 프리팹만 변경하도록 처리
 [RequireComponent(typeof(MeleeWeaponAudioHandler))]
-public class MeleeWeaponController: MonoBehaviour
+public class MeleeWeaponController : MonoBehaviour
 {
     // melee resource handler
     public float power = 0f;
@@ -31,4 +31,5 @@ public class MeleeWeaponController: MonoBehaviour
         isAttacking = isAvailable;
         if(!isAttacking) ClearAttacking();
     }
+
 }

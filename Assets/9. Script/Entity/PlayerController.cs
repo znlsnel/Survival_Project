@@ -16,8 +16,9 @@ public class PlayerController : MonoBehaviour
 
 	// equipment 관련 클래스 하나..
 
-	// 착용 시 따라오는 방향으로 코드 변경(
+	// 착용 시 따라오는 방향으로 코드 변경( 
 	public MeleeWeaponController meleeWeaponController;
+	public ActiveItem usableItem;
 	// problem : 장비 상태를 변경하는 작업이 플레이어랑 연결되어야 하는 상황
 
 	void Awake()

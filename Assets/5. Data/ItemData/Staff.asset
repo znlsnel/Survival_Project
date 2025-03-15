@@ -20,5 +20,7 @@ MonoBehaviour:
   dropItemPrefab: {fileID: 44528519243842186, guid: 066243ff86b83a44ba7e5291c244a667,
     type: 3}
   isUsableItem: 1
+  activeItemPrefab: {fileID: 44528519243842186, guid: d685d3f685abfab4cacdc26b96240854,
+    type: 3}
   canStackItems: 0
   maxStackCount: 50

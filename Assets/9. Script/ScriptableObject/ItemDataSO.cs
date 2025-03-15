@@ -31,6 +31,7 @@ public class ItemDataSO : ScriptableObject
 
     [Header("UsableItem Info")]
     [SerializeField] private bool isUsableItem = false;
+    [SerializeField] private GameObject activeItemPrefab;
 
     [Header("Amountable")]
     [SerializeField] private bool canStackItems = false;
@@ -39,11 +40,15 @@ public class ItemDataSO : ScriptableObject
 
 	public EItemType ItemType => itemType; 
     public GameObject DropItemPrefab => dropItemPrefab;
+    public GameObject ActiveItemPrefab => activeItemPrefab; 
     public Sprite ItemIcon => itemIcon;
     public Sprite ItemTypeIcon { get => itemTypeIcon; set => itemTypeIcon = value; }
+
     public string ItemName => itemName;
     public string ItemDescription => itemDescription;
     public bool CanStackItems => canStackItems;
-    public int MaxStackCount => maxStackCount;
+	public bool IsUsableItem => isUsableItem;
+
+	public int MaxStackCount => maxStackCount;
 }
  

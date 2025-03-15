@@ -14,7 +14,7 @@ public class CameraController: MonoBehaviour
     private void Start()
     {
         if(!target) throw new UnityException("camera target is null");
-    }
+    } 
 
     
     void FixedUpdate()

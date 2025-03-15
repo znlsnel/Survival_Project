@@ -12,9 +12,11 @@ GameObject:
   - component: {fileID: 2816831865616699602}
   - component: {fileID: 2836507569713565428}
   - component: {fileID: 3701348212854243631}
-  - component: {fileID: 306514182755157780}
+  - component: {fileID: 2434495260898776693}
+  - component: {fileID: 7880708169234293271}
+  - component: {fileID: 4344407632814931560}
   m_Layer: 0
-  m_Name: Staff
+  m_Name: Active_Staff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,7 +100,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 49de5855b3fa19d468bab972a209fd9e, type: 2}
---- !u!114 &306514182755157780
+--- !u!65 &2434495260898776693
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44528519243842186}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.18983738, y: 1.3850393, z: 0.0838773}
+  m_Center: {x: 0, y: 0.29114458, z: -0.00007111952}
+--- !u!114 &7880708169234293271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44528519243842186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1de81f9795613b43a23a3f74500e9ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objName: "\uC2A4\uD0DC\uD504"
+  description: "\uC2A4\uD0DC\uD504 \uC785\uB2C8\uB2E4~"
+--- !u!114 &4344407632814931560
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
