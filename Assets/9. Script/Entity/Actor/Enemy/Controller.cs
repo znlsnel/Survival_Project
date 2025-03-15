@@ -26,11 +26,7 @@ namespace Enemy
 
         void Start()
         {
-            _animation.WhenAttack += (value) =>
-            {
-                _navigation.StopByAnimation(value);
-            };
-            
+            _animation.WhenAttack += _navigation.StopByAnimation;
             
             _navigation.WhenChangedStatus += (state) =>
             {
