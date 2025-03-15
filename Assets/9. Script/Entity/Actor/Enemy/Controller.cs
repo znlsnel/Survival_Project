@@ -30,12 +30,12 @@ namespace Enemy
             {
                 if (state == Navigation.Status.Idle)
                 {
-                    Debug.Log("Idle");
+                    _animation.animator.SetBool(Animation.HashBoolAttack, false);
                     _animation.animator.SetBool(Animation.HashBoolRun, false);
                 }
                 if (state == Navigation.Status.Detected)
                 {
-                    Debug.Log("detected");
+                    _animation.animator.SetBool(Animation.HashBoolAttack, false);
                     _animation.animator.SetBool(Animation.HashBoolRun, true);
                 }
 
