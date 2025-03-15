@@ -40,7 +40,8 @@ public class WeaponItem : ActiveItem
 	private void OnHit()
 	{
 		// 타격 위치를 임시로 설정함 차후 변경 
-		Ray ray = new Ray(player.transform.position + Vector3.up * 1.0f, player.transform.forward);
+		Vector3 startPos = player.transform.position + Vector3.up * 1.0f;
+		Ray ray = new Ray(startPos, player.transform.forward);
 		RaycastHit hit;
 
 		if (Physics.Raycast(ray, out hit, attackDistance))
@@ -49,6 +50,7 @@ public class WeaponItem : ActiveItem
 			if (doesGatherResource && hit.collider.TryGetComponent(out Resource resource))
 			{
 				resource.Gather(hit.point, hit.normal);
+				resource.StartHitAnim(hit.point - startPos); 
 			}  
 
 			if (doesDealDamage && hit.collider.TryGetComponent(out IDamagable damagable))
