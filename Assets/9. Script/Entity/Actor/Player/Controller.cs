@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 // ReSharper disable once CheckNamespace
 namespace Player
@@ -11,7 +12,7 @@ namespace Player
         private Movement _movement; public Actor.IMovement Movement => _movement;
         private Animation _animation;
         public Audio Audio {get; private set;}
-        // public int jumpCount = 2;
+        [FormerlySerializedAs("jumpCount")] public int addedJumpCount = 1;
         // public int comboCount = 0;
         // public int knockBackForce = 10; // 상대의 공격에 따라 달라질 수 있음
         
@@ -36,7 +37,6 @@ namespace Player
             // _animation.OnMeleeAttackAvailable += meleeWeapon.SetMeleeAttackAvailable;
             InputManager.Instance.Move.action.performed += (context) =>
             {
-                Debug.Log("move");
             };
 
             InputManager.Instance.Jump.action.performed += (context) => _movement.Jump();
@@ -98,16 +98,16 @@ namespace Player
             // }
             //
             // // refactor : 캐싱 필요
-            // if (_movement.IsGrounded())
-            // {
-            //     // fix: 뛰는 순간 바닥으로 인지되어 한번 더 뛰게 됨
-            //     jumpCount = 1;
-            //     _animation.animator.SetBool(Animation.IsGrounded, true);
-            // }
-            // else
-            // {
-            //     _animation.animator.SetBool(Animation.IsGrounded, false);
-            // }
+            if (_movement.IsGrounded())
+            {
+                // fix: 뛰는 순간 바닥으로 인지되어 한번 더 뛰게 됨
+                addedJumpCount = 1;
+                _animation.animator.SetBool(Animation.IsGrounded, true);
+            }
+            else
+            {
+                _animation.animator.SetBool(Animation.IsGrounded, false);
+            }
         }
 
         // fix: 공격이 확실할 때만 되도록 개선 필요
@@ -121,7 +121,7 @@ namespace Player
 
             Vector3 knockBackDirection = (transform.position - other.transform.position).normalized;
             knockBackDirection.y = 0;
-            Movement.ApplyKnockBack(knockBackDirection, 10f);
+            Movement.ApplyKnockBack(knockBackDirection, 5f);
             
             hitPoint.hitEnemies.Add(gameObject);
         }
