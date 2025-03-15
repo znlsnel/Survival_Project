@@ -147,6 +147,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 692a4cc004336e244a437b756ff5e703, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
-  delay: 0
+  delay: 1
+  damage: 12
   nockback: 0
+  attackDistance: 123
+  doesDealDamage: 1
+  doesGatherResource: 1

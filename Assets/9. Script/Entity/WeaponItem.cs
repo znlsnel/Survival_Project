@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static ResourceObject;
 
 public interface IDamagable
 {
@@ -22,13 +21,14 @@ public class WeaponItem : ActiveItem
 	[SerializeField] private bool doesDealDamage;
 
 	[Header("Resource Gathering")] 
-	[SerializeField] private EResourceType gatherableResourceType;
+	[SerializeField] private bool doesGatherResource;
 
 	private GameObject player;
 
 	private void Awake()
 	{
 		player = GameManager.Instance.PlayerController.gameObject;
+		InputManager.LeftMouse.started += (InputAction.CallbackContext context) => { Trigger(); };
 	}
 	public override void Trigger()
     {
@@ -44,11 +44,10 @@ public class WeaponItem : ActiveItem
 		if (Physics.Raycast(ray, out hit, attackDistance))
 		{
 
-			if (hit.collider.TryGetComponent(out ResourceObject resource))
+			if (doesGatherResource && hit.collider.TryGetComponent(out Resource resource))
 			{
-				if (gatherableResourceType == resource.Type)
-					resource.Hit(damage);
-			} 
+				resource.Gather(hit.point, hit.normal);
+			}  
 
 			if (doesDealDamage && hit.collider.TryGetComponent(out IDamagable damagable))
 			{
