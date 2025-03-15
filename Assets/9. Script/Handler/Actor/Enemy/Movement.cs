@@ -1,9 +1,10 @@
+using Actor;
 using UnityEngine;
 
 namespace Enemy
 {
     [RequireComponent(typeof(Rigidbody), typeof(Collider))]
-    public class Movement : MonoBehaviour
+    public class Movement : MonoBehaviour, IMovement
     {
         private Rigidbody _rigidbody;
 
@@ -24,6 +25,11 @@ namespace Enemy
         void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
+        }
+
+        public void ApplyKnockBack(Vector3 knockBackDirection, float force)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

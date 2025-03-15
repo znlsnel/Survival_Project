@@ -4,12 +4,13 @@ using UnityEngine;
 namespace Player
 {
     [RequireComponent(typeof(Movement))]
-    public class Controller : MonoBehaviour, Actor.IController
+    public class Controller : MonoBehaviour
     {
         // private Input _input;
-        private Movement _movement;
-        // private Animation _animation;
-        // private Audio _audio;
+        
+        private Movement _movement; public Actor.IMovement Movement => _movement;
+        private Animation _animation;
+        public Audio Audio {get; private set;}
         // public int jumpCount = 2;
         // public int comboCount = 0;
         // public int knockBackForce = 10; // 상대의 공격에 따라 달라질 수 있음
@@ -25,7 +26,7 @@ namespace Player
             // _input = GetComponent<Input>();
             _movement = GetComponent<Movement>();
             // _animation = GetComponent<Animation>();
-            // _audio = GetComponent<Audio>();
+            Audio = GetComponent<Audio>();
         }
         
 
@@ -112,22 +113,17 @@ namespace Player
         // fix: 공격이 확실할 때만 되도록 개선 필요
         void OnTriggerStay(Collider other)
         {
-            if (!other.gameObject.TryGetComponent(out Enemy.Movement controller)) return;
-            Debug.Log(controller.IsValidatedAttack);
+            if (!other.gameObject.TryGetComponent(out HitPoint hitPoint)) return;
+            if (hitPoint.hitEnemies.Contains(gameObject)) return;
 
-
-            // var chomper = other.gameObject.GetComponentInParent<Enemy.Chomper.Controller>();
-            //
-            // if (!chomper) return;
-            // if (!chomper.resource.isAttacking) return;
-            // chomper.resource.isAttacking = false;
-            //
-            // Vector3 direction = (transform.position - other.transform.position).normalized;
-            // direction.y = 0; // 위로 날라가는 현상 발생
-            //
             // _animation.animator.SetTrigger(Animation.HashHurtTrigger);
-            // _audio.PlayRandomSound(PlayerSoundType.Damaged);
-            // _movement.Knockback(direction * knockBackForce);
+            // Audio.PlayRandomSound(PlayerSoundType.Damaged);
+
+            Vector3 knockBackDirection = (transform.position - other.transform.position).normalized;
+            knockBackDirection.y = 0;
+            Movement.ApplyKnockBack(knockBackDirection, 10f);
+            
+            hitPoint.hitEnemies.Add(gameObject);
         }
     }
 }

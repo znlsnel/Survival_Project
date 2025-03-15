@@ -11,6 +11,21 @@ namespace Enemy
             animation.WhenAttack?.Invoke(true);
         }
 
+
+        private int prevLoopCount = 0;
+        override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        {
+            if (!animator.TryGetComponent(out Animation animation) || !stateInfo.IsName("Attack")) return;
+            
+            int currentLoopCount = Mathf.FloorToInt(stateInfo.normalizedTime);
+            if (currentLoopCount > prevLoopCount)
+            {
+                prevLoopCount = currentLoopCount;
+                animation.WhenAttack?.Invoke(false);
+            }
+
+        }
+
         override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             if (!animator.TryGetComponent(out Animation animation) || !stateInfo.IsName("Attack")) return;

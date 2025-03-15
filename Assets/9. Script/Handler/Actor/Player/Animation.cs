@@ -1,10 +1,11 @@
 using System;
+using Actor;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace Player
 {
-    public class Animation: MonoBehaviour
+    public class Animation: MonoBehaviour, IAnimation
     {
         [HideInInspector] public Animator animator;
         [FormerlySerializedAs("meeleStateMachine")] [HideInInspector] public MeleeAction meleeStateMachine;

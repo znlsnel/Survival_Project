@@ -1,9 +1,10 @@
+using Actor;
 using UnityEngine;
 
 namespace Player
 {
     [RequireComponent(typeof(Rigidbody), (typeof(Collider)))]
-    public class Movement: MonoBehaviour
+    public class Movement: MonoBehaviour, IMovement
     {
          private Rigidbody _rigidbody;
 
@@ -87,16 +88,16 @@ namespace Player
         _isPrevGrounded = value;
         return value;
     }
-
-    public void Knockback(Vector2 knockbackForce)
-    {
-        
-        _rigidbody.AddForce(knockbackForce, ForceMode.Impulse);
-    }
+    
     
     public void Stop()
     {
         _rigidbody.velocity = Vector3.zero;
+    }
+
+    public void ApplyKnockBack(Vector3 knockBackDirection, float force)
+    {
+        _rigidbody.AddForce(knockBackDirection * force, ForceMode.Impulse);
     }
     }
 }

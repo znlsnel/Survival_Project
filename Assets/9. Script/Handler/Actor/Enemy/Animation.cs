@@ -1,11 +1,12 @@
 using System;
+using Actor;
 // ReSharper disable once CheckNamespace
 using UnityEngine;
 
 namespace Enemy
 {
     [RequireComponent(typeof(Animator))]
-    public class Animation: MonoBehaviour
+    public class Animation: MonoBehaviour, IAnimation
     {
         [HideInInspector] public Animator animator;
 
