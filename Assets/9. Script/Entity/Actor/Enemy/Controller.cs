@@ -7,8 +7,6 @@ namespace Enemy
     [RequireComponent(typeof(Navigation), typeof(Resource))]
     public class Controller : MonoBehaviour
     {
-        
-        
         private Animation _animation;
         private Audio _audio;
         private Movement _movement;
@@ -32,15 +30,18 @@ namespace Enemy
             {
                 if (state == Navigation.Status.Idle)
                 {
+                    Debug.Log("Idle");
                     _animation.animator.SetBool(Animation.HashBoolRun, false);
                 }
                 if (state == Navigation.Status.Detected)
                 {
+                    Debug.Log("detected");
                     _animation.animator.SetBool(Animation.HashBoolRun, true);
                 }
 
                 if (state == Navigation.Status.Attackable)
                 {
+                    Debug.Log("attackable");
                     _animation.animator.SetBool(Animation.HashBoolRun, false);
                     _animation.animator.SetBool(Animation.HashBoolAttack, true);
                 }
