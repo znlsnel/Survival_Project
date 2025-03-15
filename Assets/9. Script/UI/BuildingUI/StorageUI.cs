@@ -68,34 +68,50 @@ public class StorageUI : MonoBehaviour
     {
         int index = 0;
 
+        Dictionary<ItemDataSO, int> itemStack = new Dictionary<ItemDataSO, int>();
+
         foreach (ItemDataSO item in allItems)
         {
-            bool matchesCategory = (selectedCategory == EItemType.None || item.ItemType == selectedCategory);
+            if (item.CanStackItems)
+            {
+                if (itemStack.ContainsKey(item))
+                    itemStack[item]++;
+                else
+                    itemStack[item] = 1;
+            }
+            else
+            {
+                itemStack[item] = 1; // 스택 불가능한 아이템은 개수 1로 유지
+            }
+        }
+
+        foreach (var pair in itemStack)
+        {
+            bool matchesCategory = (selectedCategory == EItemType.None || pair.Key.ItemType == selectedCategory);
 
             if (matchesCategory)
             {
-                GameObject itemUI;
+                GameObject itemSlotUI;
 
-                // 기존 아이템이 있다면 재사용, 없으면 새로 생성
+                // 기존 UI가 있다면 재사용, 없으면 새로 생성
                 if (index < listBG.childCount)
                 {
-                    itemUI = listBG.GetChild(index).gameObject;
-                    itemUI.SetActive(true);
+                    itemSlotUI = listBG.GetChild(index).gameObject;
+                    itemSlotUI.SetActive(true);
                 }
                 else
                 {
-                    itemUI = Instantiate(buttonPrefab, listBG);
+                    itemSlotUI = Instantiate(buttonPrefab, listBG);
                 }
 
-                itemUI.name = $"{item.ItemName}";
+                itemSlotUI.name = $"ItemSlot_{pair.Key.ItemName}";
 
-                Image itemIcon = itemUI.transform.Find("Item").GetComponent<Image>();
-                if (itemIcon != null)
+                ItemSlot slot = itemSlotUI.GetComponent<ItemSlot>();
+                if (slot != null)
                 {
-                    itemIcon.sprite = item.ItemIcon;
+                    slot.SetIcon(pair.Key);
+                    slot.StackAmount = pair.Value; // 스택 개수 업데이트
                 }
-
-                InitializeTooltip(itemUI, item);
 
                 index++;
             }
@@ -107,7 +123,6 @@ public class StorageUI : MonoBehaviour
             listBG.GetChild(i).gameObject.SetActive(false);
         }
     }
-
 
     private void InitializeTooltip(GameObject item, ItemDataSO itemdata)
     {
