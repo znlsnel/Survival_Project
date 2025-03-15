@@ -17,7 +17,9 @@ MonoBehaviour:
   itemType: 3
   itemName: "\uB098\uBB34 \uC870\uAC01"
   itemDescription: "\uB098\uBB34 \uC870\uAC01 \uC785\uB2C8\uB2E4."
-  dropItemPrefab: {fileID: 0}
-  weaponPrefab: {fileID: 0}
+  dropItemPrefab: {fileID: 113239300769747551, guid: ed1db633f726c974194848f52b89ec53,
+    type: 3}
+  isUsableItem: 0
+  activeItemPrefab: {fileID: 0}
   canStackItems: 1
   maxStackCount: 2

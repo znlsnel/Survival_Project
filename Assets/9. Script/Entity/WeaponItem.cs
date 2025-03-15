@@ -16,6 +16,7 @@ public class WeaponItem : ActiveItem
     [SerializeField] private int damage;
     [SerializeField] private float nockback;
     [SerializeField] private float attackDistance;
+    [SerializeField] private GameObject particlePrefab;
 
 	[Header("Combat")]
 	[SerializeField] private bool doesDealDamage;
@@ -38,6 +39,7 @@ public class WeaponItem : ActiveItem
 
 	private void OnHit()
 	{
+		// 타격 위치를 임시로 설정함 차후 변경 
 		Ray ray = new Ray(player.transform.position + Vector3.up * 1.0f, player.transform.forward);
 		RaycastHit hit;
 
@@ -53,6 +55,10 @@ public class WeaponItem : ActiveItem
 			{
 				damagable.TakePhysicalDamage(damage);
 			}
+
+			var go =Instantiate(particlePrefab);
+			go.transform.position = hit.point;	
+			Destroy(go, 2.0f);
 		} 
 	} 
 }   

@@ -151,5 +151,7 @@ MonoBehaviour:
   damage: 12
   nockback: 0
   attackDistance: 123
+  particlePrefab: {fileID: 2999681067450957434, guid: d0befce588fc3a44c9ef19ecd47be6bd,
+    type: 3}
   doesDealDamage: 1
   doesGatherResource: 1
