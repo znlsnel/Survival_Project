@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BuildingPreview : MonoBehaviour
 {
-    [SerializeField] private Material validMaterial; // ¹èÄ¡ °¡´É ½Ã (ÃÊ·Ï»ö)
+    [SerializeField] private Material validMaterial; // ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ (ï¿½Ê·Ï»ï¿½)
     [SerializeField] private Material invalidMaterial;
 
     private MeshRenderer meshRenderer;
@@ -18,10 +18,10 @@ public class BuildingPreview : MonoBehaviour
         previewCollider = GetComponent<Collider>();
 
         if (meshRenderer == null)
-            Debug.LogError("BuildingPreview: MeshRenderer°¡ ¾ø½À´Ï´Ù.");
+            Debug.LogError("BuildingPreview: MeshRendererï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
 
         if (previewCollider == null)
-            Debug.LogError("BuildingPreview: Collider°¡ ¾ø½À´Ï´Ù.");
+            Debug.LogError("BuildingPreview: Colliderï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
     }
 
 
@@ -32,7 +32,7 @@ public class BuildingPreview : MonoBehaviour
     }
     private void FollowMouse()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(UnityEngine.Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             transform.position = hit.point;

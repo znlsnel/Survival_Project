@@ -2,17 +2,17 @@ using UnityEngine;
 
 public class JHN_FollowCamera : MonoBehaviour
 {
-    public Transform target;  // µû¶ó°¥ ´ë»ó (ÇÃ·¹ÀÌ¾î)
-    public Vector3 offset = new Vector3(0, 2, -4); // Ä«¸Þ¶ó À§Ä¡ ¿ÀÇÁ¼Â
-    public float rotationSpeed = 3f; // ¸¶¿ì½º È¸Àü ¼Óµµ
+    public Transform target;  // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ (ï¿½Ã·ï¿½ï¿½Ì¾ï¿½)
+    public Vector3 offset = new Vector3(0, 2, -4); // Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public float rotationSpeed = 3f; // ï¿½ï¿½ï¿½ì½º È¸ï¿½ï¿½ ï¿½Óµï¿½
 
     private float currentX = 0f;
-    private float currentY = 25f; // ½ÃÀÛ °¢µµ¸¦ 25µµ·Î ¼³Á¤
-    private float minY = -30f, maxY = 60f; // À§/¾Æ·¡ È¸Àü Á¦ÇÑ
+    private float currentY = 25f; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 25ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    private float minY = -30f, maxY = 60f; // ï¿½ï¿½/ï¿½Æ·ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     private void Start()
     {
-        // ÃÊ±â È¸Àü°ª Àû¿ë
+        // ï¿½Ê±ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         Quaternion initialRotation = Quaternion.Euler(currentY, currentX, 0);
         transform.position = target.position + initialRotation * offset;
         transform.rotation = initialRotation;
@@ -22,17 +22,17 @@ public class JHN_FollowCamera : MonoBehaviour
     {
         if (target == null) return;
 
-        // ¸¶¿ì½º·Î È¸Àü (¿À¸¥ÂÊ ¹öÆ°À» ´©¸¦ ¶§¸¸)
-        if (Input.GetMouseButton(1))
+        // ï¿½ï¿½ï¿½ì½ºï¿½ï¿½ È¸ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
+        if (UnityEngine.Input.GetMouseButton(1))
         {
-            currentX += Input.GetAxis("Mouse X") * rotationSpeed;
-            currentY -= Input.GetAxis("Mouse Y") * rotationSpeed;
+            currentX += UnityEngine.Input.GetAxis("Mouse X") * rotationSpeed;
+            currentY -= UnityEngine.Input.GetAxis("Mouse Y") * rotationSpeed;
             currentY = Mathf.Clamp(currentY, minY, maxY);
         }
 
-        // È¸Àü Àû¿ë
+        // È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
         transform.position = target.position + rotation * offset;
-        transform.rotation = rotation; // LookAt() »ç¿ë ¾È ÇÔ
+        transform.rotation = rotation; // LookAt() ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½
     }
 }

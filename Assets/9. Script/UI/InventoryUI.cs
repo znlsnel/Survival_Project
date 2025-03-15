@@ -100,7 +100,7 @@ public class InventoryUI : MonoBehaviour
 
 	void ClickSlot(int idx)
 	{
-		Debug.Log($"Å¬¸¯ {idx}");
+		Debug.Log($"Å¬ï¿½ï¿½ {idx}");
 		clikedButtonIdx = idx;
 		
 		if (myItems[idx] != null)
@@ -109,7 +109,7 @@ public class InventoryUI : MonoBehaviour
 
 	void ReleaseSlot(int idx)
 	{
-		Debug.Log($"Å¬¸¯ Ãë¼Ò {idx}");
+		Debug.Log($"Å¬ï¿½ï¿½ ï¿½ï¿½ï¿½ {idx}");
 
 		if (moveSlotCrt != null)
 		{
@@ -117,7 +117,7 @@ public class InventoryUI : MonoBehaviour
 			moveSlotCrt = null;
 		} 
 		 
-		// if ¾ÆÀÌÅÛÀ» ÀÌµ¿ÁßÀÌ¶ó¸é
+		// if ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½
 		if (movingSlot.activeSelf)
 		{
 			if (hoveredButtonIdx != -1 && clikedButtonIdx != -1)
@@ -141,7 +141,7 @@ public class InventoryUI : MonoBehaviour
 
 	void HoverEnterSlot(int idx)
 	{
-		Debug.Log($"È£¹ö {idx}");
+		Debug.Log($"È£ï¿½ï¿½ {idx}");
 		hoveredButtonIdx = idx;
 
 		if (myItems[idx] == null)
@@ -164,19 +164,19 @@ public class InventoryUI : MonoBehaviour
 	{
 		yield return new WaitForSeconds(time);
 		itemSlots[clikedButtonIdx].SetIcon(null); 
-		movingSlot.transform.localPosition = movingSlot.transform.parent.InverseTransformPoint(Input.mousePosition);
+		movingSlot.transform.localPosition = movingSlot.transform.parent.InverseTransformPoint(UnityEngine.Input.mousePosition);
 		movingSlot.SetActive(true);
 		movingSlot.GetComponent<InventorySlotUI>().SetIcon(myItems[clikedButtonIdx].ItemIcon);
 		while (true)
 		{
-			movingSlot.transform.localPosition = movingSlot.transform.parent.InverseTransformPoint(Input.mousePosition);
+			movingSlot.transform.localPosition = movingSlot.transform.parent.InverseTransformPoint(UnityEngine.Input.mousePosition);
 			yield return null;
 		}
 	}
 
 	void DropItem()
 	{
-		// ÇÃ·¹ÀÌ¾î ¾ÕÀ¸·Î ¿Å±â´Â°É·Î ¼öÁ¤
+		// ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å±ï¿½Â°É·ï¿½ ï¿½ï¿½ï¿½ï¿½
 		Vector3 dropPos = inventory.transform.position + inventory.transform.forward * 1.0f;
 		var go = Instantiate(myItems[selectItemIdx].DropItemPrefab);
 		go.transform.position = dropPos;

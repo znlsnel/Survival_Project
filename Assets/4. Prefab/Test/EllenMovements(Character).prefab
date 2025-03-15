@@ -3229,6 +3229,14 @@ PrefabInstance:
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 13700002, guid: a5674d01884853d4e8f2386a171e14d9, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: b005565d63cd1a943b59195c8231f995, type: 3}
+    - target: {fileID: 13700002, guid: a5674d01884853d4e8f2386a171e14d9, type: 3}
+      propertyPath: m_RootBone
+      value: 
+      objectReference: {fileID: 4526243025766151524}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -3301,6 +3309,12 @@ Transform:
 --- !u!4 &4526243025766151374 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400536, guid: a5674d01884853d4e8f2386a171e14d9,
+    type: 3}
+  m_PrefabInstance: {fileID: 4526243025766541398}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4526243025766151524 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400690, guid: a5674d01884853d4e8f2386a171e14d9,
     type: 3}
   m_PrefabInstance: {fileID: 4526243025766541398}
   m_PrefabAsset: {fileID: 0}
