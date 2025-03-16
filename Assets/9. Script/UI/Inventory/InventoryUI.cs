@@ -12,7 +12,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 
-
+[RequireComponent(typeof(ItemSlotHandler))]
 public class InventoryUI : BaseUI
 {
 	#region Binding Enum
@@ -51,6 +51,7 @@ public class InventoryUI : BaseUI
 	// === Values ===
 	private EItemType categoryType = EItemType.None;
 	private GameObject mainPanel;
+	private GameObject popupPrefab;
 
 	private void Awake()
 	{

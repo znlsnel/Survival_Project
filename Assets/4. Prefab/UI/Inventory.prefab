@@ -331,6 +331,7 @@ GameObject:
   - component: {fileID: 6299483476078006339}
   - component: {fileID: 8984273480238286334}
   - component: {fileID: 8782547258409237863}
+  - component: {fileID: 4652533797087201898}
   m_Layer: 5
   m_Name: Inventory
   m_TagString: Untagged
@@ -445,6 +446,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cebe95fcfc9168d43819d7bc30708ed6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4652533797087201898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077935067743505207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff15ee82003679545a70f9ce139ca593, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupPrefab: {fileID: 6125694446655685766, guid: 5ee4cd6c99de9bc4291d29caa616afc1,
+    type: 3}
+  title: 
+  subTitle: 
+  description: 
+  image: {fileID: 0}
+  tintColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  Caption: 
+  buttons:
+  - Label: Close
+    ClosePopupWhenClicked: 1
+    IgnoreButtonClickedEvent: 0
+    OnClickedEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - Label: Drop
+    ClosePopupWhenClicked: 1
+    IgnoreButtonClickedEvent: 0
+    OnClickedEvent:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &1192335395925138972
 GameObject:
   m_ObjectHideFlags: 0
@@ -14865,7 +14901,7 @@ PrefabInstance:
     - target: {fileID: 374046249379491701, guid: 5f840202a162b4528849bf62ff36f7a6,
         type: 3}
       propertyPath: m_Size
-      value: 0.6577494
+      value: 0.6579616
       objectReference: {fileID: 0}
     - target: {fileID: 374046249379491701, guid: 5f840202a162b4528849bf62ff36f7a6,
         type: 3}
