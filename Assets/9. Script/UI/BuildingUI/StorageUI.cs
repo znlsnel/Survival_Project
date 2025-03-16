@@ -12,6 +12,9 @@ public class StorageUI : MonoBehaviour
     [SerializeField] private GameObject buttonPrefab; // 아이템 버튼 프리팹
     [SerializeField] private GameObject togglePrefab; // EItemType별 토글 버튼 프리팹
 
+    [SerializeField] private Button closeBtn; // 닫기 버튼
+
+
     [SerializeField] private BoxInventory boxInventory;
 
     private List<ItemDataSO> allItems = new List<ItemDataSO>(); // 전체 박스 아이템 목록
@@ -24,14 +27,17 @@ public class StorageUI : MonoBehaviour
         if (boxInventory != null)
         {
             InitializeUI(boxInventory.GetStoredItem()); // 박스 아이템을 가져와 UI 초기화
+            InitializeItemTypeToggles();
+
             boxInventory.OnInventoryChanged += InitializeUI;
+
+            closeBtn.onClick.AddListener(CloseUI);
         }
     }
 
     public void InitializeUI(List<ItemDataSO> items)
     {
         allItems = items;
-        InitializeItemTypeToggles();
         UpdateItemList();
     }
 
@@ -42,6 +48,14 @@ public class StorageUI : MonoBehaviour
             GameObject toggleObj = Instantiate(togglePrefab, toggleParent);
             toggleObj.name = $"{itemType}";
 
+
+            // 토글 그룹 설정
+            ToggleGroup parentToggleGroup = listBG.GetComponentInParent<ToggleGroup>();
+            if (parentToggleGroup == null)
+            {
+                return;
+            }
+
             TextMeshProUGUI toggleText = toggleObj.GetComponentInChildren<TextMeshProUGUI>();
             if (toggleText != null)
             {
@@ -49,6 +63,13 @@ public class StorageUI : MonoBehaviour
             }
 
             Toggle toggle = toggleObj.GetComponent<Toggle>();
+
+            if (toggle != null)
+            {
+                toggle.group = parentToggleGroup; // 부모의 `ToggleGroup` 사용
+                toggle.isOn = false;  // 기본적으로 선택되지 않도록 설정
+            }
+
             if (toggle != null)
             {
                 categoryToggles[itemType] = toggle;
@@ -83,6 +104,8 @@ public class StorageUI : MonoBehaviour
             {
                 itemStack[item] = 1; // 스택 불가능한 아이템은 개수 1로 유지
             }
+
+
         }
 
         foreach (var pair in itemStack)
@@ -113,6 +136,8 @@ public class StorageUI : MonoBehaviour
                     slot.StackAmount = pair.Value; // 스택 개수 업데이트
                 }
 
+
+                InitializeTooltip(itemSlotUI, pair.Key);
                 index++;
             }
         }
@@ -146,5 +171,11 @@ public class StorageUI : MonoBehaviour
         {
             bodyText.text = itemdata.ItemDescription; // 아이템 설명 적용
         }
+    }
+
+
+    public void CloseUI()
+    {
+        this.gameObject.SetActive(false);
     }
 }
