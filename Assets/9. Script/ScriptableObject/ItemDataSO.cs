@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 [Serializable]
 public enum EItemType
 { 
@@ -23,26 +24,31 @@ public class ItemDataSO : ScriptableObject
 	[SerializeField] private Sprite itemTypeIcon;
 
     [Header ("Item Info")]
-	[SerializeField] private EItemType itemType;
+	[SerializeField] private EItemType itemType; 
     [SerializeField] private string itemName; 
     [SerializeField] private string itemDescription;
     [SerializeField] private GameObject dropItemPrefab;
 
-	[Header("Weapon Info")]
-	[SerializeField] private GameObject weaponPrefab;
+    [Header("UsableItem Info")]
+    [SerializeField] private bool isUsableItem = false;
+    [SerializeField] private GameObject activeItemPrefab;
 
     [Header("Amountable")]
     [SerializeField] private bool canStackItems = false;
     [SerializeField] private int maxStackCount = 50;
 
-	public EItemType ItemType => itemType;
+
+	public EItemType ItemType => itemType; 
     public GameObject DropItemPrefab => dropItemPrefab;
-    public GameObject WeaponPrefab => weaponPrefab;
+    public GameObject ActiveItemPrefab => activeItemPrefab; 
     public Sprite ItemIcon => itemIcon;
     public Sprite ItemTypeIcon { get => itemTypeIcon; set => itemTypeIcon = value; }
+
     public string ItemName => itemName;
     public string ItemDescription => itemDescription;
     public bool CanStackItems => canStackItems;
-    public int MaxStackCount => maxStackCount;
+	public bool IsUsableItem => isUsableItem;
+
+	public int MaxStackCount => maxStackCount;
 }
  

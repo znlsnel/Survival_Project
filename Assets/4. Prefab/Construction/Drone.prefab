@@ -193,7 +193,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2136383350355168246}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 39.646072, y: 4.61, z: -30.396679}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -220,7 +220,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0
+  m_BaseOffset: 5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &1019782228233234199
@@ -235,13 +235,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bffa69967c9a38b4a9901c6acfde9df7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scanRange: 10
-  maxScanRange: 30
-  randomMoveRange: 15
+  scanRange: 100
+  maxScanRange: 300
+  randomMoveRange: 50
   resourceLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 384
   agent: {fileID: 6404990018072321453}
+  maxInventorySize: 1
+  boxLayer:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!65 &7777804589104465445
 BoxCollider:
   m_ObjectHideFlags: 0

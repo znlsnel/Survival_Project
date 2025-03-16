@@ -6,13 +6,19 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class BaseUI : MonoBehaviour
-{ 
+{
 	// Start is called before the first frame update
-	Dictionary<Type, UnityEngine.Object[]> _objects = new Dictionary<Type, UnityEngine.Object[]>();
+	[SerializeField] Dictionary<Type, UnityEngine.Object[]> _objects = new Dictionary<Type, UnityEngine.Object[]>();
+
+
 	public void Bind<T>(Type type) where T : UnityEngine.Object
 	{
-		string[] names = Enum.GetNames(type);
 
+		if (_objects.ContainsKey(typeof(T)))
+			return;
+		
+
+		string[] names = Enum.GetNames(type);
 		UnityEngine.Object[] objects = new UnityEngine.Object[names.Length];
 		_objects.Add(typeof(T), objects);
 
@@ -22,9 +28,10 @@ public class BaseUI : MonoBehaviour
 				objects[i] = Util.FindChild(gameObject, names[i], true);
 			else
 				objects[i] = Util.FindChild<T>(gameObject, names[i], true);
-		} 
-	}
+		}
 
+	}
+	 
 	public T Get<T>(int idx) where T : UnityEngine.Object
 	{
 		if (_objects.TryGetValue(typeof(T), out UnityEngine.Object[] objects))

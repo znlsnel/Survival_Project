@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Pool;
 using UnityEngine.ProBuilder;
 using UnityEngine.UI;
 
@@ -57,6 +58,12 @@ public class ItemSlot : BaseUI
 
 	private void Awake()
 	{
+		Binding();
+		UpdateStackAmount();
+	}  
+
+	private void Binding()
+	{
 		Bind<Image>(typeof(Images));
 		Bind<TextMeshProUGUI>(typeof(TextMeshPros));
 		Bind<GameObject>(typeof(GameObjects));
@@ -64,13 +71,12 @@ public class ItemSlot : BaseUI
 
 		itemImage = GetImage((int)Images.Item);
 		itemTypeImage = GetImage((int)Images.ItemTypeImage);
+
 		amountText = Get<TextMeshProUGUI>((int)TextMeshPros.amountText);
 		amountIndicator = Get<GameObject>((int)GameObjects.IndicatorAmount);
 		itemTypeBg = Get<GameObject>((int)GameObjects.IndicatorType);
 		selected = Get<CanvasGroup>((int)CanvasGroups.ItemSelected);
-		UpdateStackAmount();
-	}  
-
+	}
 	private void UpdateStackAmount()
 	{
 		amountText.text = stackAmount.ToString();
@@ -109,6 +115,8 @@ public class ItemSlot : BaseUI
 			yield return null;
 		}
 
+		selected.alpha = target;
 		fadeEffect = null;
+
 	}
 } 
