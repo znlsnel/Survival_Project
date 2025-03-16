@@ -15,7 +15,6 @@ public class HitPoint: MonoBehaviour
     {
         controller.Animation.WhenAttack += (isAttacking) =>
         {
-            Debug.Log(isAttacking);
             if (!isAttacking) Clear();
         };
     }

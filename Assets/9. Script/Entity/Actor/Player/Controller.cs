@@ -12,7 +12,7 @@ namespace Player
         private Movement _movement; public Actor.IMovement Movement => _movement;
         private Animation _animation;
         public Audio Audio {get; private set;}
-        [FormerlySerializedAs("jumpCount")] public int addedJumpCount = 1;
+        public int addedJumpCount = 1;
         // public int comboCount = 0;
         // public int knockBackForce = 10; // 상대의 공격에 따라 달라질 수 있음
         
@@ -26,7 +26,7 @@ namespace Player
         {
             // _input = GetComponent<Input>();
             _movement = GetComponent<Movement>();
-            // _animation = GetComponent<Animation>();
+            _animation = GetComponent<Animation>();
             Audio = GetComponent<Audio>();
         }
         
@@ -35,31 +35,42 @@ namespace Player
         {
             // _animation.animator.SetTrigger(Animation.BreakIdleTrigger); // 애니메이터 자체를 수정
             // _animation.OnMeleeAttackAvailable += meleeWeapon.SetMeleeAttackAvailable;
+            
             InputManager.Instance.Move.action.performed += (context) =>
             {
+                _movement.Rotate(context.ReadValue<Vector2>());
             };
 
-            InputManager.Instance.Jump.action.performed += (context) => _movement.Jump();
+            // Vector.Zero 에서 다른 값으로 변경될 때
+            InputManager.Instance.Move.action.started += (context) =>
+            {
+                _movement.currMoveInputValue = (context.ReadValue<Vector2>());
+
+            };
+            // Vector.Zero가 호출 될 때
+            InputManager.Instance.Move.action.canceled += (context) =>
+            {
+                _movement.currMoveInputValue = (context.ReadValue<Vector2>());
+            };
+
+            InputManager.Instance.Jump.action.performed += (context) =>
+            {
+                if (addedJumpCount == 0) return; 
+                addedJumpCount -= 1;
+                _movement.Jump();
+                Audio.PlayRandomSound(PlayerSoundType.Jump);
+            };
         }
         
         void FixedUpdate()
         {
-            
-            // notice: 애니메이션 진행 정도를 파악하여 콤보로 연결할 지 조건 분기
+            // 애니메이터의 역할
+            _animation.animator.SetFloat(Animation.HashStateTime, Mathf.Repeat(_animation.animator.GetCurrentAnimatorStateInfo(0).normalizedTime, 1f));
+            _animation.animator.SetFloat(Animation.HashForwardSpeed, _movement.currentSpeed);
+   
             // question: 도끼로 채집 등인 경우, 콤보 기능 끄기 필요한 지?
             // fix: stateMachine에서 할 수 있는 지 체크
-            // _animation.animator.SetFloat(Animation.HashStateTime, Mathf.Repeat(_animation.animator.GetCurrentAnimatorStateInfo(0).normalizedTime, 1f));
-            //
-            // // rotation
-            // _movement.Rotate(_input.movementValue);
-            //
-            // // move
-            // // var isRunning = _input.IsDashPressed; // running 방식: shift 또는 가속도
-            // _movement.Move(_input.movementValue);
-            // _animation.animator.SetFloat(Animation.HashForwardSpeed, _movement.currentSpeed);
-            // // _animation.animator.SetFloat(_animation.HashForwardSpeed, 0.5f); // 0인경우 제외
-            // // _audio.PlayFootstep(_movement.currentSpeed);
-            //
+            
             // // attack check
             // if (_animation.meleeStateMachine.isInStateMachine) { _movement.Stop(); }
             // // attack
@@ -79,34 +90,20 @@ namespace Player
             //     // feat: 쿨타임 개념 필요
             //     comboCount += 1; if(comboCount >= 2) comboCount = 0;
             // }
-            //
-            // // jump
-            // if (_input.IsJumpPressed && jumpCount > 0)
-            // {
-            //     // 컨디션 부족하면 점프 불가
-            //     // _condition.UseStemina(5);
-            //     jumpCount -= 1;
-            //
-            //     _movement.Jump();
-            //     _audio.PlayRandomSound(PlayerSoundType.Attack); // do: 점프 사운드로 변경 필요
-            // }
-            //
-            //
-            // if (_movement.isLanded)
-            // {
-            //     _audio.PlayRandomSound(PlayerSoundType.Landed);
-            // }
-            //
-            // // refactor : 캐싱 필요
+           
+            // movement의 역할
             if (_movement.IsGrounded())
             {
-                // fix: 뛰는 순간 바닥으로 인지되어 한번 더 뛰게 됨
-                addedJumpCount = 1;
+                addedJumpCount = 1; // bug: 뛰는 순간 바닥으로 인지되어 한번 더 뛰게 됨
                 _animation.animator.SetBool(Animation.IsGrounded, true);
             }
             else
             {
                 _animation.animator.SetBool(Animation.IsGrounded, false);
+            }
+            if (_movement.isLanded)
+            {
+                Audio.PlayRandomSound(PlayerSoundType.Landed);
             }
         }
 
@@ -116,8 +113,8 @@ namespace Player
             if (!other.gameObject.TryGetComponent(out HitPoint hitPoint)) return;
             if (hitPoint.hitEnemies.Contains(gameObject)) return;
 
-            // _animation.animator.SetTrigger(Animation.HashHurtTrigger);
-            // Audio.PlayRandomSound(PlayerSoundType.Damaged);
+            _animation.animator.SetTrigger(Animation.HashHurtTrigger);
+            Audio.PlayRandomSound(PlayerSoundType.Damaged);
 
             Vector3 knockBackDirection = (transform.position - other.transform.position).normalized;
             knockBackDirection.y = 0;

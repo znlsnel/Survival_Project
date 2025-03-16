@@ -1,4 +1,6 @@
-public enum PlayerSoundType { Attack, Damaged, Landed }
+public enum PlayerSoundType { Attack, Damaged, Landed,
+    Jump
+}
 
 namespace Player
 {
