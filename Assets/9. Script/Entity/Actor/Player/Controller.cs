@@ -65,12 +65,15 @@ namespace Player
 
             InputManager.Instance.Click.action.performed += (context) =>
             {
-                if (Animation.meleeStateMachine.isInStateMachine) { _movement.Stop(); }
-                
                 if (!_movement.IsGrounded()) return;
+                
+                // Debug.Log(_movement.isComboAble);
+                // if (!_movement.isComboAble) return;
                 
                 Animation.animator.SetTrigger(Animation.MeleeAttackTrigger); 
                 Audio.PlayRandomSound(PlayerSoundType.Attack);
+                
+                // _movement.isComboAble = false;
                 
                 // meleeWeaponController.audioHandler.PlayerOneShot(MeleeWeaponAudioHandler.SoundType.Attack);
                 // _animation.animator.SetBool(Animation.HashIsAbleRegisterCombo, false);
@@ -102,8 +105,10 @@ namespace Player
         // fix: 공격이 확실할 때만 되도록 개선 필요
         void OnTriggerStay(Collider other)
         {
-            if (!other.gameObject.TryGetComponent(out HitPoint hitPoint)) return;
+            if (!other.gameObject.TryGetComponent(out Enemy.HitPoint hitPoint)) return;
             if (hitPoint.hitEnemies.Contains(gameObject)) return;
+            
+            Debug.Log("akwdma");
 
             Vector3 lookDirection = (hitPoint.controller.transform.position - transform.position).normalized;
             lookDirection.y = 0;

@@ -22,7 +22,20 @@ namespace Player
     
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            animator.GetComponent<Movement>().isComboAble = true;
+            var movement = animator.GetComponent<Movement>();
+            movement.isAttacking = true;
+            movement.isComboAble = true;
+            
+            animator.GetComponent<Animation>().WhenAttack?.Invoke(true);
+        }
+        
+        public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        {
+            var movement = animator.GetComponent<Movement>();
+            Debug.Log(1);
+            movement.isAttacking = false;
+            
+            animator.GetComponent<Animation>().WhenAttack?.Invoke(false);
         }
     }
 }

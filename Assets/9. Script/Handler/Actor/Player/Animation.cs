@@ -38,6 +38,12 @@ namespace Player
             meleeStateMachine = animator.GetBehaviour<MeleeAction>();
         }
 
+        // private void OnAnimatorMove()
+        // {
+        //     animator.rootPosition = transform.position;
+        //     animator.rootRotation = transform.rotation;
+        // }
+
 
         public Action<bool> OnMeleeAttackAvailable;
     
@@ -50,4 +56,5 @@ namespace Player
         
         public Action<bool> WhenAttack;
     }
+    
 }

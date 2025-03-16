@@ -31,7 +31,8 @@ namespace Player
         
         private bool? _isPrevGrounded = null;
         [HideInInspector] public bool isLanded = false;
-        public bool isComboAble;
+        [HideInInspector] public bool isComboAble = true;
+        [HideInInspector] public bool isAttacking = false;
 
         void Awake()
         {
@@ -46,7 +47,6 @@ namespace Player
         // 정지 상태 체크 필요
         public void Move(Vector2 moveInputValue)
         {
-            Debug.Log(isMoveable);
             if (!isMoveable) return;
             
             isMoved = moveInputValue != Vector2.zero;

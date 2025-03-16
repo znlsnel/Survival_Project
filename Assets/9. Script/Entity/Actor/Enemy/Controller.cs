@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Actor;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -53,7 +54,35 @@ namespace Enemy
         {
             if (other.gameObject.TryGetComponent(out Player.HitPoint hitPoint))
             {
-                Debug.Log("맞음");
+                // if (!hitPoint.controller.GetComponent<Player.Movement>().isAttacking) return;
+                if (hitPoint.hitEnemies.Contains(gameObject)) return;
+                hitPoint.hitEnemies.Add(gameObject);
+                
+                Debug.Log("one time");
+                
+                var knockBackDirection = (transform.position - hitPoint.controller.transform.position).normalized;
+                knockBackDirection.y = 0;
+
+                Animation.animator.SetTrigger(Animation.HashTriggerHit);
+
+                _navigation.Agent.isStopped = true;
+                // _navigation.Agent.enabled = false;
+                
+                _movement.ApplyKnockBack(knockBackDirection, 1f);
+                StartCoroutine(RestoreNavMeshAgent());
+                
+                _audio.PlayRandomSound(Enemy.SoundType.Damaged);
+                _resource.Modify(10);
+            }
+            
+            
+            IEnumerator RestoreNavMeshAgent()
+            {
+                yield return new WaitForSeconds(1f);
+                _movement.Stop();
+                _navigation.Agent.isStopped = false;
+                // _navigation.Agent.enabled = true;
+                _navigation.Agent.Warp(transform.position);
             }
         }
     }

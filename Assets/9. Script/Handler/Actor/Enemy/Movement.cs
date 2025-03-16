@@ -29,7 +29,12 @@ namespace Enemy
 
         public void ApplyKnockBack(Vector3 knockBackDirection, float force)
         {
-            throw new System.NotImplementedException();
+            _rigidbody.AddForce(knockBackDirection * force, ForceMode.Impulse);
+        }
+
+        public void Stop()
+        {
+            _rigidbody.velocity = Vector3.zero;
         }
     }
 }
