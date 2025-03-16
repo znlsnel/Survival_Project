@@ -48,6 +48,14 @@ namespace Enemy
                 }
             };
         }
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.gameObject.TryGetComponent(out Player.HitPoint hitPoint))
+            {
+                Debug.Log("맞음");
+            }
+        }
     }
     
 }

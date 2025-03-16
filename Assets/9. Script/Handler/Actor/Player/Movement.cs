@@ -31,6 +31,7 @@ namespace Player
         
         private bool? _isPrevGrounded = null;
         [HideInInspector] public bool isLanded = false;
+        public bool isComboAble;
 
         void Awake()
         {

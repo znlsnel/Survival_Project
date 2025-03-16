@@ -10,7 +10,7 @@ namespace Player
         private Input _input;
         public Resource Resource {get; private set;}
         private Movement _movement; public Actor.IMovement Movement => _movement;
-        private Animation _animation;
+        public Animation Animation { get; private set; }
         public Audio Audio {get; private set;}
         
         public int addedJumpCount = 1;
@@ -28,7 +28,7 @@ namespace Player
             _input = GetComponent<Input>();
             Resource = GetComponent<Resource>();
             _movement = GetComponent<Movement>();
-            _animation = GetComponent<Animation>();
+            Animation = GetComponent<Animation>();
             Audio = GetComponent<Audio>();
         }
         
@@ -65,16 +65,11 @@ namespace Player
 
             InputManager.Instance.Click.action.performed += (context) =>
             {
-                if (_animation.meleeStateMachine.isInStateMachine) { _movement.Stop(); }
+                if (Animation.meleeStateMachine.isInStateMachine) { _movement.Stop(); }
                 
-                Debug.Log(1);
                 if (!_movement.IsGrounded()) return;
-                Debug.Log(2);
                 
-                Debug.Log(3);
-                
-                
-                _animation.animator.SetTrigger(Animation.MeleeAttackTrigger); 
+                Animation.animator.SetTrigger(Animation.MeleeAttackTrigger); 
                 Audio.PlayRandomSound(PlayerSoundType.Attack);
                 
                 // meleeWeaponController.audioHandler.PlayerOneShot(MeleeWeaponAudioHandler.SoundType.Attack);
@@ -85,18 +80,18 @@ namespace Player
         void FixedUpdate()
         {
             // 애니메이터의 역할
-            _animation.animator.SetFloat(Animation.HashStateTime, Mathf.Repeat(_animation.animator.GetCurrentAnimatorStateInfo(0).normalizedTime, 1f));
-            _animation.animator.SetFloat(Animation.HashForwardSpeed, _movement.currentSpeed);
+            Animation.animator.SetFloat(Animation.HashStateTime, Mathf.Repeat(Animation.animator.GetCurrentAnimatorStateInfo(0).normalizedTime, 1f));
+            Animation.animator.SetFloat(Animation.HashForwardSpeed, _movement.currentSpeed);
    
             // movement의 역할
             if (_movement.IsGrounded())
             {
                 addedJumpCount = 1; // bug: 뛰는 순간 바닥으로 인지되어 한번 더 뛰게 됨
-                _animation.animator.SetBool(Animation.IsGrounded, true);
+                Animation.animator.SetBool(Animation.IsGrounded, true);
             }
             else
             {
-                _animation.animator.SetBool(Animation.IsGrounded, false);
+                Animation.animator.SetBool(Animation.IsGrounded, false);
             }
             if (_movement.isLanded)
             {
@@ -114,7 +109,7 @@ namespace Player
             lookDirection.y = 0;
             transform.rotation = Quaternion.LookRotation(lookDirection);
             
-            _animation.animator.SetTrigger(Animation.HashHurtTrigger);
+            Animation.animator.SetTrigger(Animation.HashHurtTrigger);
             Audio.PlayRandomSound(PlayerSoundType.Damaged);
             Resource.Modify(-30);
             

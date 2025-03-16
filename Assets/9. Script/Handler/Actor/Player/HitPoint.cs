@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Enemy
+namespace Player
 {
     public class HitPoint: MonoBehaviour
     {

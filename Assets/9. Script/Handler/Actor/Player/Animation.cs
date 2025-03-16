@@ -47,5 +47,7 @@ namespace Player
             bool isAvailable = isActive != 0;
             OnMeleeAttackAvailable?.Invoke(isAvailable);
         }
+        
+        public Action<bool> WhenAttack;
     }
 }
