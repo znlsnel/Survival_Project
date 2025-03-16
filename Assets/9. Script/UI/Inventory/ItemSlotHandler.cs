@@ -24,11 +24,11 @@ public class ItemSlotHandler : BaseUI
 	private Coroutine moveSlotCrt;
 	private SlotInfo hoveredSlot;
 	private SlotInfo clikedSlot;
-	private SlotInfo selectSlot;
 
 	// === copmonent ===
 	private InventoryHandler inventory;
-	 
+	private PopupUIOpener popupUIOpener;
+
 	private void Awake()
 	{
 		Bind<GameObject>(typeof(GameObjects));
@@ -36,7 +36,9 @@ public class ItemSlotHandler : BaseUI
 		movingSlot = Get<GameObject>((int)GameObjects.movingSlot);
 		scrollRect = Get<GameObject>((int)GameObjects.InventoryScrollRect).GetComponent<ScrollRect>();
 		inventory = FindFirstObjectByType<InventoryHandler>();
-	} 
+		popupUIOpener = GetComponent<PopupUIOpener>();
+
+	}
 	private void Start()
 	{
 		itemSlots.Add(ESlotType.InventorySlot, inventory.MyItemSlots);
@@ -51,7 +53,7 @@ public class ItemSlotHandler : BaseUI
 		scrollRect.enabled = false;
 
 		if (myItems[type][idx] != null)
-			moveSlotCrt = StartCoroutine(MoveItem(0.5f));
+			moveSlotCrt = StartCoroutine(MoveItem(0.2f));
 	}
 
 	public void ReleaseSlot(int idx, ESlotType type)
@@ -64,6 +66,7 @@ public class ItemSlotHandler : BaseUI
 			moveSlotCrt = null;
 		}
 
+
 		// 아이템이 이동중이라면 슬롯의 아이템 데이터 교환
 		if (movingSlot.activeSelf)
 		{ 
@@ -74,9 +77,9 @@ public class ItemSlotHandler : BaseUI
 
 			movingSlot.SetActive(false);
 		}
-		else
-			selectSlot = clikedSlot;
-
+		else // 클릭 
+			OpenPopup(clikedSlot);
+		
 		clikedSlot.type = ESlotType.None;
 	}
 
@@ -106,5 +109,36 @@ public class ItemSlotHandler : BaseUI
 			movingSlot.transform.localPosition = movingSlot.transform.parent.InverseTransformPoint(Input.mousePosition);
 			yield return null;
 		}
+	}
+
+	private void OpenPopup(SlotInfo slot)
+	{
+		ItemDataSO item = myItems[slot.type][slot.idx];
+		if (item == null)
+			return;
+
+		popupUIOpener.title = item.ItemName;
+		popupUIOpener.subTitle = "";
+		popupUIOpener.description = item.ItemDescription;
+
+		popupUIOpener.image = item.ItemIcon;
+		popupUIOpener.Caption = item.ItemType.ToString(); 
+
+		popupUIOpener.buttons[1].OnClickedEvent.RemoveAllListeners();
+		popupUIOpener.buttons[1].OnClickedEvent.AddListener(() => DropItem(slot));
+		popupUIOpener.OpenPopup();
+
+	}
+
+	private void DropItem(SlotInfo slot)
+	{
+		ItemDataSO item = myItems[slot.type][slot.idx];
+
+		var dropItem = Instantiate<GameObject>(item.DropItemPrefab);
+
+		Transform tf = GameManager.Instance.PlayerController.transform; 
+		dropItem.transform.position = tf.position + tf.forward * 1.0f;
+		 
+		inventory.RemoveItem(slot.type, slot.idx);	
 	}
 }

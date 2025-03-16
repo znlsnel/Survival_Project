@@ -10,9 +10,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using DG.Tweening;
 
-
-
+[RequireComponent(typeof(ItemSlotHandler))]
 public class InventoryUI : BaseUI
 {
 	#region Binding Enum
@@ -51,6 +51,7 @@ public class InventoryUI : BaseUI
 	// === Values ===
 	private EItemType categoryType = EItemType.None;
 	private GameObject mainPanel;
+	private GameObject popupPrefab;
 
 	private void Awake()
 	{
@@ -161,22 +162,27 @@ public class InventoryUI : BaseUI
 
 	private void OpenUI()
 	{
+		mainPanel.transform.localScale = Vector3.zero;
+		mainPanel.transform.DOScale(1.0f, 0.1f);
+		 
 		UpdateItemInfo();
 		mainPanel.SetActive(true);
 
 		InputManager.Move.Disable();
 		InputManager.Jump.Disable(); 
-
-
 	}
 
 	private void CloseUI()
 	{
+		mainPanel.transform.DOScale(0f, 0.1f);
+		Invoke(nameof(Close), 0.1f);
+	} 
+	private void Close()
+	{
 		mainPanel.SetActive(false);
-		
+
 		InputManager.Move.Enable();
 		InputManager.Jump.Enable();
-
 	}
 
 	private void UpdateItemInfo()

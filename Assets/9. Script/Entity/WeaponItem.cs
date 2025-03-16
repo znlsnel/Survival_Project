@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static ResourceObject;
 
 public interface IDamagable
 {
@@ -17,18 +16,20 @@ public class WeaponItem : ActiveItem
     [SerializeField] private int damage;
     [SerializeField] private float nockback;
     [SerializeField] private float attackDistance;
+    [SerializeField] private GameObject particlePrefab;
 
 	[Header("Combat")]
 	[SerializeField] private bool doesDealDamage;
 
 	[Header("Resource Gathering")] 
-	[SerializeField] private EResourceType gatherableResourceType;
+	[SerializeField] private bool doesGatherResource;
 
 	private GameObject player;
 
 	private void Awake()
 	{
 		player = GameManager.Instance.PlayerController.gameObject;
+		InputManager.LeftMouse.started += (InputAction.CallbackContext context) => { Trigger(); };
 	}
 	public override void Trigger()
     {
@@ -38,22 +39,28 @@ public class WeaponItem : ActiveItem
 
 	private void OnHit()
 	{
-		Ray ray = new Ray(player.transform.position + Vector3.up * 1.0f, player.transform.forward);
+		// 타격 위치를 임시로 설정함 차후 변경 
+		Vector3 startPos = player.transform.position + Vector3.up * 1.0f;
+		Ray ray = new Ray(startPos, player.transform.forward);
 		RaycastHit hit;
 
 		if (Physics.Raycast(ray, out hit, attackDistance))
 		{
 
-			if (hit.collider.TryGetComponent(out ResourceObject resource))
+			if (doesGatherResource && hit.collider.TryGetComponent(out Resource resource))
 			{
-				if (gatherableResourceType == resource.Type)
-					resource.Hit(damage);
-			} 
+				resource.Gather(hit.point, hit.normal);
+				resource.StartHitAnim(hit.point - startPos); 
+			}  
 
 			if (doesDealDamage && hit.collider.TryGetComponent(out IDamagable damagable))
 			{
 				damagable.TakePhysicalDamage(damage);
 			}
+
+			var go =Instantiate(particlePrefab);
+			go.transform.position = hit.point;	
+			Destroy(go, 2.0f);
 		} 
 	} 
 }   

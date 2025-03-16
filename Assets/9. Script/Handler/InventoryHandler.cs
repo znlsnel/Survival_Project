@@ -57,14 +57,14 @@ public class InventoryHandler : MonoBehaviour
     {
         for (int i = 0; i < MyItems.Count; i++)
         {
-            bool canStack = item.CanStackItems && item.MaxStackCount > GetSlotStackAmount(ESlotType.InventorySlot, i);
+			bool canStack = item.CanStackItems && item.MaxStackCount > itemSlots[ESlotType.InventorySlot][i].StackAmount;
             if (MyItems[i] == item && canStack)
 				return (ESlotType.InventorySlot, i);
         }
 
 		for (int i = 0; i < QuickSlotItems.Count; i++)
         {
-            bool canStack = item.CanStackItems && item.MaxStackCount > GetSlotStackAmount(ESlotType.QuickSlot, i);
+			bool canStack = item.CanStackItems && item.MaxStackCount > itemSlots[ESlotType.QuickSlot][i].StackAmount;
 			if (QuickSlotItems[i] == item && canStack)
 				return (ESlotType.QuickSlot, i); 
 		}
@@ -101,6 +101,15 @@ public class InventoryHandler : MonoBehaviour
 		onChangedSlot?.Invoke();
 	}
 
-	public int GetSlotStackAmount(ESlotType type, int idx) => itemSlots[type][idx].StackAmount;
+	public void RemoveItem(ESlotType type, int idx)
+	{
+		ItemSlot itemslot = itemSlots[type][idx];
+		itemslot.StackAmount -= 1;
+
+		if (itemslot.StackAmount <= 0)
+			myItems[type][idx] = null;
+
+		onChangedSlot?.Invoke();
+	}
 }
  
