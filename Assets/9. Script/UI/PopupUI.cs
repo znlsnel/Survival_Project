@@ -69,4 +69,10 @@ public class PopupUI : MonoBehaviour
 			image.CrossFadeAlpha(0.0f, 0.2f, false);
 		}
 	}
+
+	private void OnDisable()
+	{
+		Destroy(background);
+		Destroy(gameObject); 
+	}
 }

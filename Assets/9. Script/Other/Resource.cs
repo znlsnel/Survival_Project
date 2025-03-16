@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Resource : MonoBehaviour
 {
+    public event Action onDestroy;
     public ItemDataSO itemToGive;
     public int quantityPerHit = 1;
     public int capacity;
@@ -30,7 +33,8 @@ public class Resource : MonoBehaviour
 
         if (capacity <= 0)
         {
-            Destroy(gameObject);
+            onDestroy?.Invoke();
+			Destroy(gameObject);
         }
 
         return gatheredItems;

@@ -22,4 +22,4 @@ MonoBehaviour:
   isUsableItem: 0
   activeItemPrefab: {fileID: 0}
   canStackItems: 1
-  maxStackCount: 2
+  maxStackCount: 50
