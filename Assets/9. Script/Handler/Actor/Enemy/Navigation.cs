@@ -61,7 +61,7 @@ namespace Enemy
         void Update()
         {
             UpdateStatus();
-            if(_currStatus == Status.Detected) Agent.SetDestination(target.position);
+            if(_currStatus == Status.Detected && !Agent.isStopped) Agent.SetDestination(target.position);
             if(_currStatus != Status.Idle) transform.rotation = Quaternion.Euler(0, Quaternion.LookRotation(target.position - transform.position).eulerAngles.y, 0);
         }
     }

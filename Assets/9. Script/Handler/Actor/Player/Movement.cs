@@ -27,6 +27,7 @@ namespace Player
         // Status로 관리할 수도 있음.
         [HideInInspector] public bool canAttack;
         [HideInInspector] public bool isMoved;
+        [HideInInspector] public bool isMoveable = true;
         
         private bool? _isPrevGrounded = null;
         [HideInInspector] public bool isLanded = false;
@@ -44,8 +45,11 @@ namespace Player
         // 정지 상태 체크 필요
         public void Move(Vector2 moveInputValue)
         {
+            Debug.Log(isMoveable);
+            if (!isMoveable) return;
+            
             isMoved = moveInputValue != Vector2.zero;
-
+            
             if (!isMoved) currentSpeed = Mathf.Lerp(currentSpeed, 0f, deceleration * Time.deltaTime);
             else currentSpeed = Mathf.Lerp(currentSpeed, speedFactor, acceleration * Time.deltaTime);
             
@@ -91,7 +95,15 @@ namespace Player
 
         public void ApplyKnockBack(Vector3 knockBackDirection, float force)
         {
+            isMoveable = false;
             _rigidbody.AddForce(knockBackDirection * force, ForceMode.Impulse);
+            StartCoroutine(GetStun());
+        }
+
+        private IEnumerator GetStun()
+        {
+            yield return new WaitForSeconds(0.5f);
+            isMoveable = true;
         }
     }
 }

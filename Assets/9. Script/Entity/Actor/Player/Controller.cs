@@ -4,14 +4,15 @@ using UnityEngine.Serialization;
 // ReSharper disable once CheckNamespace
 namespace Player
 {
-    [RequireComponent(typeof(Movement))]
+    [RequireComponent(typeof(Movement), typeof(Resource))]
     public class Controller : MonoBehaviour
     {
-        // private Input _input;
-        
+        private Input _input;
+        public Resource Resource {get; private set;}
         private Movement _movement; public Actor.IMovement Movement => _movement;
         private Animation _animation;
         public Audio Audio {get; private set;}
+        
         public int addedJumpCount = 1;
         // public int comboCount = 0;
         // public int knockBackForce = 10; // 상대의 공격에 따라 달라질 수 있음
@@ -24,7 +25,8 @@ namespace Player
       
         void Awake()
         {
-            // _input = GetComponent<Input>();
+            _input = GetComponent<Input>();
+            Resource = GetComponent<Resource>();
             _movement = GetComponent<Movement>();
             _animation = GetComponent<Animation>();
             Audio = GetComponent<Audio>();
@@ -60,6 +62,24 @@ namespace Player
                 _movement.Jump();
                 Audio.PlayRandomSound(PlayerSoundType.Jump);
             };
+
+            InputManager.Instance.Click.action.performed += (context) =>
+            {
+                if (_animation.meleeStateMachine.isInStateMachine) { _movement.Stop(); }
+                
+                Debug.Log(1);
+                if (!_movement.IsGrounded()) return;
+                Debug.Log(2);
+                
+                Debug.Log(3);
+                
+                
+                _animation.animator.SetTrigger(Animation.MeleeAttackTrigger); 
+                Audio.PlayRandomSound(PlayerSoundType.Attack);
+                
+                // meleeWeaponController.audioHandler.PlayerOneShot(MeleeWeaponAudioHandler.SoundType.Attack);
+                // _animation.animator.SetBool(Animation.HashIsAbleRegisterCombo, false);
+            };
         }
         
         void FixedUpdate()
@@ -68,29 +88,6 @@ namespace Player
             _animation.animator.SetFloat(Animation.HashStateTime, Mathf.Repeat(_animation.animator.GetCurrentAnimatorStateInfo(0).normalizedTime, 1f));
             _animation.animator.SetFloat(Animation.HashForwardSpeed, _movement.currentSpeed);
    
-            // question: 도끼로 채집 등인 경우, 콤보 기능 끄기 필요한 지?
-            // fix: stateMachine에서 할 수 있는 지 체크
-            
-            // // attack check
-            // if (_animation.meleeStateMachine.isInStateMachine) { _movement.Stop(); }
-            // // attack
-            // if (_input.isClicked)
-            // {
-            //     _input.isClicked = false; // fix - learn : 내부 로직 도중 에러가 나면 false 처리가 안되면서 무한 재생되는 버그 발생
-            //     if (_input.IsJumpPressed) return;
-            //     
-            //     if (!_animation.animator.GetBool(Animation.HashIsAbleRegisterCombo)) return;
-            //
-            //     
-            //     _animation.animator.SetTrigger(Animation.MeleeAttackTrigger); 
-            //     _audio.PlayRandomSound(PlayerSoundType.Attack); // notice: 클래스 내부 enum의 경우 plyWeight에 따라 자동으로 static 처리
-            //     // meleeWeaponController.audioHandler.PlayerOneShot(MeleeWeaponAudioHandler.SoundType.Attack);
-            //     _animation.animator.SetBool(Animation.HashIsAbleRegisterCombo, false);
-            //     
-            //     // feat: 쿨타임 개념 필요
-            //     comboCount += 1; if(comboCount >= 2) comboCount = 0;
-            // }
-           
             // movement의 역할
             if (_movement.IsGrounded())
             {
@@ -113,12 +110,17 @@ namespace Player
             if (!other.gameObject.TryGetComponent(out HitPoint hitPoint)) return;
             if (hitPoint.hitEnemies.Contains(gameObject)) return;
 
+            Vector3 lookDirection = (hitPoint.controller.transform.position - transform.position).normalized;
+            lookDirection.y = 0;
+            transform.rotation = Quaternion.LookRotation(lookDirection);
+            
             _animation.animator.SetTrigger(Animation.HashHurtTrigger);
             Audio.PlayRandomSound(PlayerSoundType.Damaged);
-
-            Vector3 knockBackDirection = (transform.position - other.transform.position).normalized;
+            Resource.Modify(-30);
+            
+            Vector3 knockBackDirection = (transform.position - hitPoint.controller.transform.position).normalized;
             knockBackDirection.y = 0;
-            Movement.ApplyKnockBack(knockBackDirection, 5f);
+            Movement.ApplyKnockBack(knockBackDirection, 10f);
             
             hitPoint.hitEnemies.Add(gameObject);
         }

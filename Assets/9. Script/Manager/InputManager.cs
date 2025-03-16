@@ -7,10 +7,11 @@ public class InputManager : Singleton<InputManager>
 	[SerializeField] private InputActionAsset inputSystem;
 	[SerializeField] private InputActionReference move;
 	[SerializeField] private InputActionReference jump;
+	[SerializeField] private InputActionReference click;
     [SerializeField] private InputActionReference toggleBuilding;
 
-    [SerializeField] private PlayerInput playerInput;	// ÇÃ·¹ÀÌ¾î ÀÎÇ²¿¬°á
-    [SerializeField] private BuildingInputHandler buildingInputHandler;	// °ÇÃà¿¡ ¾²ÀÌ´Â ÇÚµé·¯
+    [SerializeField] private PlayerInput playerInput;	// ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½Ç²ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] private BuildingInputHandler buildingInputHandler;	// ï¿½ï¿½ï¿½à¿¡ ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½Úµé·¯
 
 	[SerializeField] private InputActionReference interaction;
 	[SerializeField] private InputActionReference inventory;
@@ -24,6 +25,7 @@ public class InputManager : Singleton<InputManager>
 
     public InputActionReference Move => move; 
 	public InputActionReference Jump => jump;
+	public InputActionReference Click => click;
     public InputActionReference ToggleBuilding => toggleBuilding;
 
 
@@ -48,7 +50,7 @@ public class InputManager : Singleton<InputManager>
 
 
 
-    // ³ªÁß¿¡ ÀÏ¹Ý ÇÚµé·¯ »ý±â¸é ¿Å±æ°Ô¿ä
+    // ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½Ï¹ï¿½ ï¿½Úµé·¯ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å±ï¿½Ô¿ï¿½
     private void OnEnable()
     {
         if (toggleBuilding != null)
