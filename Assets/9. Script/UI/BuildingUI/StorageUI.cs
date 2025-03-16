@@ -30,6 +30,7 @@ public class StorageUI : MonoBehaviour
             InitializeItemTypeToggles();
 
             boxInventory.OnInventoryChanged += InitializeUI;
+            boxInventory.OnInventoryUIOpen += OnUI;
 
             closeBtn.onClick.AddListener(CloseUI);
         }
@@ -129,11 +130,11 @@ public class StorageUI : MonoBehaviour
 
                 itemSlotUI.name = $"ItemSlot_{pair.Key.ItemName}";
 
-                ItemSlot slot = itemSlotUI.GetComponent<ItemSlot>();
+                StorageSlot slot = itemSlotUI.GetComponent<StorageSlot>();
                 if (slot != null)
                 {
-                    slot.SetIcon(pair.Key);
-                    slot.StackAmount = pair.Value; // 스택 개수 업데이트
+                    slot.SetItem(pair.Key, pair.Value);
+                   // slot.StackAmount = pair.Value; // 스택 개수 업데이트
                 }
 
 
@@ -173,9 +174,14 @@ public class StorageUI : MonoBehaviour
         }
     }
 
-
     public void CloseUI()
     {
         this.gameObject.SetActive(false);
     }
+
+    public void OnUI()
+    {
+        this.gameObject.SetActive(true);
+    }
+
 }

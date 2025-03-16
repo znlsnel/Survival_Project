@@ -3,10 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoxInventory : MonoBehaviour
+public class BoxInventory : MonoBehaviour, IInteractableObject
 {
     private List<ItemDataSO> storedItem = new List<ItemDataSO>();
     public event Action<List<ItemDataSO>> OnInventoryChanged;
+
+    public event Action OnInventoryUIOpen;
+
 
     public void StoreItem(List<ItemDataSO> items)
     {
@@ -25,5 +28,13 @@ public class BoxInventory : MonoBehaviour
     {
         return storedItem;
     }
+
+
+    public void Interaction()
+    {
+        // 여기 박스 ui 열기
+        OnInventoryUIOpen?.Invoke();
+    }
+
 
 }
