@@ -23104,7 +23104,7 @@ MonoBehaviour:
   thirsty: {fileID: 554739732}
   stamina: {fileID: 1115914574}
   temperature: {fileID: 1804391188}
-  temperatureBar: {fileID: 1966861343}
+  temperatureBar: {fileID: 1955403603}
 --- !u!1 &1711344058
 GameObject:
   m_ObjectHideFlags: 0

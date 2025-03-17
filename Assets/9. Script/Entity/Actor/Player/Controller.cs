@@ -30,11 +30,11 @@ namespace Player
         // public Weapon.Melee.Controller meleeWeapon;
         // problem : 장비 상태를 변경하는 작업이 플레이어랑 연결되어야 하는 상황
       
-        void Awake()
+        void Awake() 
         {
 			equipHandler = GetComponent<EquipHandler>();
 			_input = GetComponent<Input>();
-            ResourceHandler = GetComponent<ResourceHandler>();
+           // ResourceHandler = GetComponent<ResourceHandler>();
 
             playerCondition = GetComponent<PlayerCondition>();
             UICondition uICondition = GetComponent<UICondition>();
