@@ -1,12 +1,16 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 // ReSharper disable once CheckNamespace
 namespace Player
 {
-    [RequireComponent(typeof(MovementHandler), typeof(ResourceHandler))]
+    [RequireComponent(typeof(MovementHandler), typeof(ResourceHandler), typeof(EquipHandler))]
     public class Controller : MonoBehaviour
     {
+
+        private EquipHandler equipHandler;
+
         private Input _input;
         public ResourceHandler ResourceHandler {get; private set;}
         private MovementHandler movementHandler; public Actor.IMovement MovementHandler => movementHandler;
@@ -25,7 +29,8 @@ namespace Player
       
         void Awake()
         {
-            _input = GetComponent<Input>();
+			equipHandler = GetComponent<EquipHandler>();
+			_input = GetComponent<Input>();
             ResourceHandler = GetComponent<ResourceHandler>();
             movementHandler = GetComponent<MovementHandler>();
             AnimationHandler = GetComponent<AnimationHandler>();
@@ -103,10 +108,14 @@ namespace Player
         // fix: 공격이 확실할 때만 되도록 개선 필요
         void OnTriggerStay(Collider other)
         {
-            if (!other.gameObject.TryGetComponent(out Enemy.HitPoint hitPoint)) return;
-            if (hitPoint.hitEnemies.Contains(gameObject)) return;
-            
-            Vector3 lookDirection = (hitPoint.controller.transform.position - transform.position).normalized;
+            if (!other.gameObject.TryGetComponent(out Enemy.HitPoint hitPoint)) 
+                return;
+
+            if (hitPoint.hitEnemies.Contains(gameObject)) 
+                return;
+
+
+			Vector3 lookDirection = (hitPoint.controller.transform.position - transform.position).normalized;
             lookDirection.y = 0;
             transform.rotation = Quaternion.LookRotation(lookDirection);
             
@@ -120,5 +129,8 @@ namespace Player
             
             hitPoint.hitEnemies.Add(gameObject);
         }
+
+
+        
     }
 }

@@ -26,7 +26,7 @@ public class WeaponItem : ActiveItem
 
 	private GameObject player;
 
-	private void Awake()
+	private void Start()
 	{
 		player = GameManager.Instance.PlayerController.gameObject;
 		InputManager.LeftMouse.started += (InputAction.CallbackContext context) => { Trigger(); };
