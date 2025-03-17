@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 // ReSharper disable once CheckNamespace
@@ -67,20 +68,15 @@ namespace Player
                 movementHandler.Jump();
                 AudioHandler.PlayRandomSound(PlayerSoundType.Jump);
             };
-            
-            InputManager.LeftMouse.performed += (context) =>
-            {
-                if (!movementHandler.IsGrounded()) return;
-                // Debug.Log(_movement.isComboAble);
-                // if (!_movement.isComboAble) return;
+
+            InputManager.LeftMouse.performed += InputLeftMouse;
                 
-                AnimationHandler.animator.SetTrigger(AnimationHandler.MeleeAttackTrigger); 
                 
                 // _movement.isComboAble = false;
                 
                 // meleeWeaponController.audioHandler.PlayerOneShot(MeleeWeaponAudioHandler.SoundType.Attack);
                 // _animation.animator.SetBool(Animation.HashIsAbleRegisterCombo, false);
-            };
+            
         }
         
         void FixedUpdate()
@@ -131,6 +127,18 @@ namespace Player
         }
 
 
-        
+        private void InputLeftMouse(InputAction.CallbackContext context)
+        {
+			if (!movementHandler.IsGrounded()) return;
+
+
+            ActiveItem activeItem = equipHandler.GetActiveItem();
+            if (activeItem != null)
+            {
+				AnimationHandler.animator.SetTrigger(AnimationHandler.MeleeAttackTrigger);
+                activeItem.Trigger();
+			}
+
+		}
     }
 }

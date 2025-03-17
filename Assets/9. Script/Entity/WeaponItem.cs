@@ -29,15 +29,14 @@ public class WeaponItem : ActiveItem
 	private void Start()
 	{
 		player = GameManager.Instance.PlayerController.gameObject;
-		InputManager.LeftMouse.started += (InputAction.CallbackContext context) => { Trigger(); };
-	}
-	public override void Trigger()
-    {
-        Debug.Log("무기 사용");
-		OnHit();
 	}
 
-	private void OnHit()
+	public override void Trigger() 
+    {
+		Attack();
+	}
+
+	private void Attack()
 	{
 		// 타격 위치를 임시로 설정함 차후 변경 
 		Vector3 startPos = player.transform.position + Vector3.up * 1.0f;

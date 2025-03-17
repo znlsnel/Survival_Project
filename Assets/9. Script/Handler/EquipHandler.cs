@@ -29,6 +29,7 @@ public class EquipHandler : MonoBehaviour
 		prevItem.transform.localPosition = Vector3.zero; 
 	}
 
-	public ItemDataSO GetEquipedItem() => currentItem;
+	public ItemDataSO GetEquipedItemData() => currentItem;
+	public ActiveItem GetActiveItem() => prevItem?.GetComponent<ActiveItem>();	
 	
 }
