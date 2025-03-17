@@ -19,8 +19,8 @@ public class QuickSlotHandler : MonoBehaviour
 		myItems = inventory.QuickSlotItems; 
 	} 
 	  
-	public ItemDataSO GetItemData() => myItems[selectItem];
-	 
+	public ItemDataSO GetSelectedItem() => myItems[selectItem];
+	  
 	public void SelectSlot(int num)
 	{
 		if (selectItem == num-1)
