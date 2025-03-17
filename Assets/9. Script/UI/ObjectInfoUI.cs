@@ -11,39 +11,37 @@ public class ObjectInfoUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI descriptionText;
 
     private Coroutine closeCrt;
+    private Animator anim;
+
+    bool isOpened = false;
     private void Awake()
     {
-        CloseUI();
+        panel.transform.localScale = Vector3.zero; 
     }
 
     public void OpenUI(string name, string description)
     {
-        if (closeCrt != null)
-        {
-            StopCoroutine(closeCrt);
-            closeCrt = null;
-        }
+        if (isOpened)
+            return; 
 
-        panel.transform.localScale = Vector3.one / 2f;
+        isOpened = true;
+
+		panel.transform.localScale = Vector3.zero;
+		panel.transform.DOScale(1.0f, 0.3f);
 
 		nameText.text = name;
         descriptionText.text = description;
-		panel.SetActive(true);
-
-        panel.transform.DOScale(1.0f, 0.2f);
     }
 
-    public void CloseUI()
+    public void CloseUI() 
     {
-		panel.transform.DOScale(0.5f, 0.2f); 
-        closeCrt = StartCoroutine(CloseRegister(0.2f));
+        if (!isOpened)
+            return;
+
+        isOpened = false; 
+
+		panel.transform.localScale = Vector3.one; 
+        panel.transform.DOScale(0.0f, 0.3f); 
 	}
 
-    private IEnumerator CloseRegister(float time)
-    {
-        yield return new WaitForSeconds(time);
-		panel.SetActive(false);
-		closeCrt = null;
-
-	}
 }

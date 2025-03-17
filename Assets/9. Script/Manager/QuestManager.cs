@@ -50,6 +50,7 @@ public class QuestManager : Singleton<QuestManager>
 
 	static IEnumerator AddItem(List<ItemDataSO> items, float delay)
 	{
+		yield return new WaitForSeconds(2.0f);
 		foreach (ItemDataSO item in items)
 		{
 			yield return new WaitForSeconds(delay);
