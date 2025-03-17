@@ -53,6 +53,7 @@ namespace Player
         private void FixedUpdate()
         {
             Move(currMoveInputValue);
+            if (isAttacking) return;
             Rotate();
         }
 
