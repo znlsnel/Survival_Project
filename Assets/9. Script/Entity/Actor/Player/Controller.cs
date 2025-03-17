@@ -66,12 +66,10 @@ namespace Player
             InputManager.LeftMouse.performed += (context) =>
             {
                 if (!movementHandler.IsGrounded()) return;
-                
                 // Debug.Log(_movement.isComboAble);
                 // if (!_movement.isComboAble) return;
                 
                 AnimationHandler.animator.SetTrigger(AnimationHandler.MeleeAttackTrigger); 
-                AudioHandler.PlayRandomSound(PlayerSoundType.Attack);
                 
                 // _movement.isComboAble = false;
                 
