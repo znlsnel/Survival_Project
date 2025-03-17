@@ -13,7 +13,13 @@ MonoBehaviour:
   m_Name: GatherWood
   m_EditorClassIdentifier: 
   category: 4
-  target: 0
+  target: "\uB098\uBB34 \uC870\uAC01"
   questIcon: {fileID: 21300000, guid: 9f65d9d1083564d759a06ad7f808e8b0, type: 3}
   questTitle: "\uB098\uBB34 10\uAC1C \uBAA8\uC73C\uAE30"
   targetNum: 10
+  childs:
+  - {fileID: 11400000, guid: d196b7b7e6572314f92374d26954eabf, type: 2}
+  rewards:
+  - {fileID: 11400000, guid: 1228856a23ec4ea4595a21efec72d563, type: 2}
+  - {fileID: 11400000, guid: 1228856a23ec4ea4595a21efec72d563, type: 2}
+  - {fileID: 11400000, guid: 1228856a23ec4ea4595a21efec72d563, type: 2}

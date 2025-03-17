@@ -8,6 +8,10 @@ MonoImporter:
       type: 3}
   - quickSlotPrefab: {fileID: 3882036600047888988, guid: dc3fbc695a6cbc844aab06a09f4d4b4a,
       type: 3}
+  - ObjectInfoUIPrefab: {fileID: 8077376420853387971, guid: 1aae6eaa4f8247d47b9932ee5d2c366d,
+      type: 3}
+  - mesageUIPrefab: {fileID: 5747594801066769159, guid: 296f1eb4f48abd2498cbacd22079678b,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.ProBuilder.MeshOperations;
+using UnityEngine.UI;
 
 public interface IInteractableObject
 {
@@ -18,15 +19,21 @@ public class InteractionHandler : MonoBehaviour
 	[SerializeField] private LayerMask interactionLayer;
 	[SerializeField, Range(-1, 1)] private float xOffset = 0f;
 	[SerializeField, Range(-1, 1)]private float yOffset = 0f;
+	[SerializeField] private GameObject aimUIPrefab;
 
 
 	private IInteractableObject interactableObject;
 	private InfoDisplayHandler displayObject;
+	private Image aimUI;
 
     void Start()
     {
+		
+		aimUI = Instantiate(aimUIPrefab).GetComponentInChildren<Image>(); 
+		aimUI.transform.localPosition = aimUI.transform.parent.InverseTransformPoint(new Vector3(Screen.width * (xOffset + 1f) / 2f, Screen.height * (yOffset + 1f) / 2f, 0));
+
 		InputManager.Interaction.started += InputInteraction;
-		InvokeRepeating(nameof(FindObject), 0, 0.1f);
+		InvokeRepeating(nameof(FindObject), 0, 0.1f); 
     }
 
 
@@ -70,9 +77,16 @@ public class InteractionHandler : MonoBehaviour
 		if (displayObject == null)
 		{
 			GetComponent<PlayerUIHandler>().ObjectInfoUI.CloseUI();
-		} 
+		}
+
+
+		if (displayObject != null || interactableObject != null)
+			aimUI.color = new Color(0.3f, 1f, 0.3f, 1f);
+		else
+			aimUI.color = new Color(1f, 1f, 1f, 1f); 
+
 	}
-	
+
 
 
 	void InputInteraction(InputAction.CallbackContext context)

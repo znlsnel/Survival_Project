@@ -20,7 +20,7 @@ MonoBehaviour:
     \uC788\uC744 \uAC83 \uAC19\uB2E4."
   dropItemPrefab: {fileID: 3810244032439071693, guid: 2f0bb80b07dc1324c8b3f6bd1f4ffe15,
     type: 3}
-  isUsableItem: 0
+  isActiveItem: 0
   activeItemPrefab: {fileID: 0}
-  canStackItems: 0
+  canStackItems: 1
   maxStackCount: 50
