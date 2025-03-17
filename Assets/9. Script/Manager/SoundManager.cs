@@ -16,9 +16,9 @@ public enum ESound
 
 public class SoundManager : Singleton<SoundManager>
 {
-    AudioSource[] _audioSources = new AudioSource[(int)ESound.MaxCount];
-    Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>();
-
+    private AudioSource[] _audioSources = new AudioSource[(int)ESound.MaxCount];
+	private Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>();
+	 
 
 	protected override void Awake()
 	{
@@ -32,10 +32,6 @@ public class SoundManager : Singleton<SoundManager>
         }
 
         _audioSources[(int)ESound.Bgm].loop = true;
-
-		InputManager.LeftMouse.started += (InputAction.CallbackContext context) => { 
-			Play($"Sounds/Player/Jump/Ellen_Emotes_Jumps_0{Random.Range(1, 10)}"); 
-		};
 	} 
 
     static public void Clear()
