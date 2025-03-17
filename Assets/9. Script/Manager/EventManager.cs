@@ -11,35 +11,30 @@ public class EventManager : Singleton<EventManager>
 
     public event Action OnToggleBuildModeRequested;
 
-    public event Action<BuildingData> OnStartBuildingRequested;
-
-    private BuildingData selectedBuilding;
-
+    public event Action<bool> OnCanBuildingRequested;   // bool값 필요없을지도?
+    public event Action OnStartBuildingRequested;
 
 
-    public void BuildingModeChanged(bool isBuilding)
+
+    public void BuildingModeChanged(bool isBuildingMode)
     {
-        OnBuildingModeChanged?.Invoke(isBuilding);
+        OnBuildingModeChanged?.Invoke(isBuildingMode);
     }
 
     public void RequestToggleBuildMode()
     {
-        Debug.Log("이벤트 요청");
         OnToggleBuildModeRequested?.Invoke();
     }
 
-    public void SetSelectedBuilding(BuildingData buildingData)
+    public void RequestCanStartBuilding(bool canStart)
     {
-        selectedBuilding = buildingData;
+        OnCanBuildingRequested?.Invoke(canStart);
     }
 
     public void RequestStartBuilding()
     {
-        if (selectedBuilding == null)
-        {
-            return;
-        }
-        Debug.Log($"이벤트 요청: {selectedBuilding.buildingName} 빌딩 시작");
-        OnStartBuildingRequested?.Invoke(selectedBuilding);
+        OnStartBuildingRequested?.Invoke();
     }
+
+
 }

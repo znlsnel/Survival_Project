@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eeeb4370de184141b2a30855170e48e, type: 3}
+  m_Name: Deco_Wall1
+  m_EditorClassIdentifier: 
+  buildingName: "\uBCBD1"
+  buildingType: 1
+  description: "\uC544\uBB34\uB7F0 \uAE30\uB2A5 \uC5C6\uB294 \uBCBD\uC785\uB2C8\uB2E4."
+  prefab: {fileID: 8105646103584327732, guid: 03aba59e9ef24b04da9e619beb7b9c09, type: 3}
+  buildingIcon: {fileID: 0}
+  cost:
+  - resourceItem: {fileID: 11400000, guid: 2b11c7e023a420245aed3ff8fc603fc9, type: 2}
+    amount: 1
