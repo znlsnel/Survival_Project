@@ -29,8 +29,18 @@ namespace Player
         
         [HideInInspector] public bool isClicked = false;
         [HideInInspector] public Vector2 mouseDelta;
-        
-        public void OnMove(InputAction.CallbackContext context)
+		private void Awake()
+		{
+            InputManager.Move.started += OnMove;
+            InputManager.Move.canceled += OnMove;
+            InputManager.Move.performed += OnMove;
+
+            InputManager.Jump.performed += OnJump;
+            InputManager.LeftMouse.canceled += OnClick;
+             
+		}
+
+		public void OnMove(InputAction.CallbackContext context)
         {
             movementValue = context.ReadValue<Vector2>();
         }
