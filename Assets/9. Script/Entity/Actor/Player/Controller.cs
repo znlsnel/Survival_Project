@@ -40,7 +40,7 @@ namespace Player
             
             InputManager.Move.performed += (context) =>
             {
-                movementHandler.Rotate(context.ReadValue<Vector2>());
+                movementHandler.CheckRotateValue(context.ReadValue<Vector2>());
             };
             
             // Vector.Zero 에서 다른 값으로 변경될 때

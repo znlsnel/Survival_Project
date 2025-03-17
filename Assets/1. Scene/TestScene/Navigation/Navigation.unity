@@ -877,6 +877,11 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 1435631440}
+    - target: {fileID: 1505311895135130891, guid: c2d329868bbf84847a9a8f5b460c8337,
+        type: 3}
+      propertyPath: rotationSpeed
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 1745328338400667986, guid: c2d329868bbf84847a9a8f5b460c8337,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1003,7 +1008,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 80
+  field of view: 90
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -1052,7 +1057,7 @@ MonoBehaviour:
   radius: 5
   sensitivity: 1
   verticalSensitivity: 20
-  height: 7
+  height: 6
 --- !u!1 &1459715966
 GameObject:
   m_ObjectHideFlags: 0
