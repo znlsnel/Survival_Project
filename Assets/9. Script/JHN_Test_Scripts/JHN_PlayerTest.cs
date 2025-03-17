@@ -22,8 +22,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Move()
     {
-        float moveX = Input.GetAxis("Horizontal"); // A, D
-        float moveZ = Input.GetAxis("Vertical");   // W, S
+        float moveX = UnityEngine.Input.GetAxis("Horizontal"); // A, D
+        float moveZ = UnityEngine.Input.GetAxis("Vertical");   // W, S
 
         Vector3 move = transform.right * moveX + transform.forward * moveZ;
         controller.Move(move * moveSpeed * Time.deltaTime);
@@ -31,11 +31,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Rotate()
     {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
+        float mouseX = UnityEngine.Input.GetAxis("Mouse X") * mouseSensitivity;
+        float mouseY = UnityEngine.Input.GetAxis("Mouse Y") * mouseSensitivity;
 
         rotationX -= mouseY;
-        rotationX = Mathf.Clamp(rotationX, -90f, 90f); // À§¾Æ·¡ È¸Àü Á¦ÇÑ
+        rotationX = Mathf.Clamp(rotationX, -90f, 90f); // ï¿½ï¿½ï¿½Æ·ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
         cameraTransform.localRotation = Quaternion.Euler(rotationX, 0f, 0f);
         transform.Rotate(Vector3.up * mouseX);
