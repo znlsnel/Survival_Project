@@ -87,6 +87,10 @@ namespace Player
             cameraForward.y = 0;
 
             Vector3 direction = (cameraRight * currRotateValue.x + (cameraForward * currRotateValue.y)).normalized;
+            if (direction.magnitude <= 0)
+                return;
+
+            
             currTargetRotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, currTargetRotation, Time.deltaTime * rotationSpeed);
         }

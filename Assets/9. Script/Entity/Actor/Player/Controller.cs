@@ -14,11 +14,14 @@ namespace Player
         private EquipHandler equipHandler;
 
         private Input _input;
+
         public ResourceHandler ResourceHandler {get; private set;}
-        private MovementHandler movementHandler; public Actor.IMovement MovementHandler => movementHandler;
+        private MovementHandler movementHandler; 
+
+        public Actor.IMovement MovementHandler => movementHandler;
         public AnimationHandler AnimationHandler { get; private set; }
         public AudioHandler AudioHandler {get; private set;}
-        
+
         public int addedJumpCount = 1;
 
         // public int comboCount = 0;
@@ -42,6 +45,8 @@ namespace Player
             movementHandler = GetComponent<MovementHandler>();
             AnimationHandler = GetComponent<AnimationHandler>();
             AudioHandler = GetComponent<AudioHandler>();
+
+        
         }
         
 
@@ -137,7 +142,6 @@ namespace Player
         {
 			if (!movementHandler.IsGrounded()) return;
 
-
             ActiveItem activeItem = equipHandler.GetActiveItem();
             if (activeItem != null)
             {
@@ -146,11 +150,19 @@ namespace Player
 			}
 		}
 
+
         private void AE_Attack()
         {
 			ActiveItem activeItem = equipHandler.GetActiveItem();
             if (activeItem != null)
 				activeItem.Trigger();
 		}
+
+
+        public void AE_StartGame()
+        {
+           InputManager.SetActive(true); 
+            Debug.Log("ㅎㅇ");
+        }
     }
 }
