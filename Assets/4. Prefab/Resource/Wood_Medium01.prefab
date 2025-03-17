@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4425968831638158640}
   - component: {fileID: 2843829498394355249}
   - component: {fileID: 5853528447103605169}
-  m_Layer: 18
+  m_Layer: 8
   m_Name: VegetationMedium01_LOD02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 2211994385809519170}
   - component: {fileID: 7205594918997521328}
   - component: {fileID: 7828665379899861467}
-  m_Layer: 18
+  m_Layer: 8
   m_Name: VegetationMedium01_LOD00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 5144403272899437571}
   - component: {fileID: 8684095128089688822}
   - component: {fileID: 6505197752742812308}
-  m_Layer: 18
+  m_Layer: 8
   m_Name: VegetationMedium01_LOD01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 6555450553277787951}
   - component: {fileID: 8550332491323135640}
   - component: {fileID: 9203604953071204094}
-  m_Layer: 18
+  m_Layer: 8
   m_Name: Wood_Medium01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -367,6 +367,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbc6d5db3955c4c45b70e2b218902dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemToGive: {fileID: 11400000, guid: 7561059690f84ef49a31c818584c3406, type: 2}
+  itemToGive: {fileID: 11400000, guid: 949ad358af220e04cb4212f030b8c71e, type: 2}
   quantityPerHit: 1
   capacity: 2

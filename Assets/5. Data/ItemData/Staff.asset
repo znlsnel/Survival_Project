@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1932c9805c51b864cb0b6c22db6f1029, type: 3}
   m_Name: Staff
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 21300000, guid: b8ce075626dde4c769a66b0039123517, type: 3}
-  itemTypeIcon: {fileID: 21300000, guid: f2ccf1b4ff822064b8329b65476cb30f, type: 3}
+  itemIcon: {fileID: 21300000, guid: f2ccf1b4ff822064b8329b65476cb30f, type: 3}
+  itemTypeIcon: {fileID: 21300000, guid: b8ce075626dde4c769a66b0039123517, type: 3}
   itemType: 1
   itemName: "\uC2A4\uD0DC\uD504"
   itemDescription: "\uAC15\uD55C \uC2A4\uD0DC\uD504~"
