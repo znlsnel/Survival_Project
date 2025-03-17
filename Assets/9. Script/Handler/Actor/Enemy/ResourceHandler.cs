@@ -5,6 +5,7 @@ namespace Enemy
 {
     public class ResourceHandler: MonoBehaviour
     {
+        public bool isDying = false;
         public int maxHealth = 100;
         public int health = 100;
         

@@ -76,6 +76,16 @@ namespace Player
                 // meleeWeaponController.audioHandler.PlayerOneShot(MeleeWeaponAudioHandler.SoundType.Attack);
                 // _animation.animator.SetBool(Animation.HashIsAbleRegisterCombo, false);
             };
+
+            InputManager.Dash.started += (context) =>
+            {
+                AnimationHandler.animator.SetTrigger(AnimationHandler.HashTriggerDash);
+                movementHandler.isDashing = true;
+            };
+            InputManager.Dash.canceled += (context) =>
+            {
+                movementHandler.isDashing = false;
+            };
         }
         
         void FixedUpdate()

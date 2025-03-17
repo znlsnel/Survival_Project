@@ -38,6 +38,7 @@ namespace Player
         [FormerlySerializedAs("rotateValue")] [HideInInspector] public Vector2 currRotateValue = Vector2.zero;
 
         public Quaternion currTargetRotation;
+        public bool isDashing = false;
 
         void Awake()
         {
@@ -68,6 +69,11 @@ namespace Player
             else currentSpeed = Mathf.Lerp(currentSpeed, speedFactor, acceleration * Time.deltaTime);
             
             Vector3 moveVelocity = transform.forward * currentSpeed; // 서서히 증가
+            if (isDashing)
+            {
+                Debug.Log("Dashing");
+                moveVelocity *= 2;
+            }
             moveVelocity.y = _rigidbody.velocity.y; // 점프 등 Y축 속도 유지
             _rigidbody.velocity = moveVelocity;
         }
