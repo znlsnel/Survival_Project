@@ -30,7 +30,7 @@ public class ItemDataSO : ScriptableObject
     [SerializeField] private GameObject dropItemPrefab;
 
     [Header("UsableItem Info")]
-    [SerializeField] private bool isUsableItem = false;
+    [SerializeField] private bool isActiveItem = false;
     [SerializeField] private GameObject activeItemPrefab;
 
     [Header("Amountable")]
@@ -47,7 +47,7 @@ public class ItemDataSO : ScriptableObject
     public string ItemName => itemName;
     public string ItemDescription => itemDescription;
     public bool CanStackItems => canStackItems;
-	public bool IsUsableItem => isUsableItem;
+	public bool IsActiveItem => isActiveItem;
 
 	public int MaxStackCount => maxStackCount;
 }

@@ -1,14 +1,21 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 // ReSharper disable once CheckNamespace
 namespace Player
 {
-    [RequireComponent(typeof(MovementHandler), typeof(ResourceHandler))]
+    [RequireComponent(typeof(MovementHandler), typeof(ResourceHandler), typeof(EquipHandler))]
     public class Controller : MonoBehaviour
     {
+
+        private EquipHandler equipHandler;
+
         private Input _input;
-        public ResourceHandler ResourceHandler {get; private set;}
+        //public ResourceHandler ResourceHandler {get; private set;}
+        private PlayerCondition playerCondition;
+        private UICondition uICondition;
         private MovementHandler movementHandler; public Actor.IMovement MovementHandler => movementHandler;
         public AnimationHandler AnimationHandler { get; private set; }
         public AudioHandler AudioHandler {get; private set;}
@@ -25,8 +32,13 @@ namespace Player
       
         void Awake()
         {
-            _input = GetComponent<Input>();
+			equipHandler = GetComponent<EquipHandler>();
+			_input = GetComponent<Input>();
             ResourceHandler = GetComponent<ResourceHandler>();
+
+            playerCondition = GetComponent<PlayerCondition>();
+            UICondition uICondition = GetComponent<UICondition>();
+
             movementHandler = GetComponent<MovementHandler>();
             AnimationHandler = GetComponent<AnimationHandler>();
             AudioHandler = GetComponent<AudioHandler>();
@@ -62,22 +74,15 @@ namespace Player
                 movementHandler.Jump();
                 AudioHandler.PlayRandomSound(PlayerSoundType.Jump);
             };
-            
-            InputManager.LeftMouse.performed += (context) =>
-            {
-                if (!movementHandler.IsGrounded()) return;
+
+            InputManager.LeftMouse.performed += InputLeftMouse;
                 
-                // Debug.Log(_movement.isComboAble);
-                // if (!_movement.isComboAble) return;
-                
-                AnimationHandler.animator.SetTrigger(AnimationHandler.MeleeAttackTrigger); 
-                AudioHandler.PlayRandomSound(PlayerSoundType.Attack);
                 
                 // _movement.isComboAble = false;
                 
                 // meleeWeaponController.audioHandler.PlayerOneShot(MeleeWeaponAudioHandler.SoundType.Attack);
                 // _animation.animator.SetBool(Animation.HashIsAbleRegisterCombo, false);
-            };
+            
         }
         
         void FixedUpdate()
@@ -105,16 +110,20 @@ namespace Player
         // fix: 공격이 확실할 때만 되도록 개선 필요
         void OnTriggerStay(Collider other)
         {
-            if (!other.gameObject.TryGetComponent(out Enemy.HitPoint hitPoint)) return;
-            if (hitPoint.hitEnemies.Contains(gameObject)) return;
-            
-            Vector3 lookDirection = (hitPoint.controller.transform.position - transform.position).normalized;
+            if (!other.gameObject.TryGetComponent(out Enemy.HitPoint hitPoint)) 
+                return;
+
+            if (hitPoint.hitEnemies.Contains(gameObject)) 
+                return;
+
+
+			Vector3 lookDirection = (hitPoint.controller.transform.position - transform.position).normalized;
             lookDirection.y = 0;
             transform.rotation = Quaternion.LookRotation(lookDirection);
             
             AnimationHandler.animator.SetTrigger(AnimationHandler.HashHurtTrigger);
             AudioHandler.PlayRandomSound(PlayerSoundType.Damaged);
-            ResourceHandler.Modify(-30);
+            //ResourceHandler.Modify(-30);
             
             Vector3 knockBackDirection = (transform.position - hitPoint.controller.transform.position).normalized;
             knockBackDirection.y = 0;
@@ -122,5 +131,20 @@ namespace Player
             
             hitPoint.hitEnemies.Add(gameObject);
         }
+
+
+        private void InputLeftMouse(InputAction.CallbackContext context)
+        {
+			if (!movementHandler.IsGrounded()) return;
+
+
+            ActiveItem activeItem = equipHandler.GetActiveItem();
+            if (activeItem != null)
+            {
+				AnimationHandler.animator.SetTrigger(AnimationHandler.MeleeAttackTrigger);
+                activeItem.Trigger();
+			}
+
+		}
     }
 }

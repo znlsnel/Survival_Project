@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 namespace Enemy
 {
     [RequireComponent(typeof(AnimationHandler), typeof(AudioHandler), typeof(MovementHandler))]
-    [RequireComponent(typeof(NavigationHandler), typeof(ResourceHandler))]
+    [RequireComponent(typeof(NavigationHandler), typeof(ResourceHandler), typeof(RewardHandler))]
     public class Controller : MonoBehaviour
     {
         public AnimationHandler AnimationHandler { get; private set; }
@@ -15,6 +15,7 @@ namespace Enemy
         private MovementHandler movementHandler; public Actor.IMovement MovementHandler => movementHandler;
         private NavigationHandler navigationHandler;
         private ResourceHandler resourceHandler;
+        private RewardHandler rewardHandler;
 
         void Awake()
         {
@@ -23,6 +24,7 @@ namespace Enemy
             movementHandler = GetComponent<MovementHandler>();
             navigationHandler = GetComponent<NavigationHandler>();
             resourceHandler = GetComponent<ResourceHandler>();
+            rewardHandler = GetComponent<RewardHandler>();
         }
 
         void Start()
@@ -48,6 +50,12 @@ namespace Enemy
                     AnimationHandler.animator.SetBool(AnimationHandler.HashBoolAttack, true);
                 }
             };
+
+            resourceHandler.OnDeath += () =>
+            {
+                AnimationHandler.animator.SetTrigger(AnimationHandler.HashTriggerDeath);
+                // rewardHandler.DropItem();
+            };
         }
 
         private void OnTriggerStay(Collider other)
@@ -57,8 +65,6 @@ namespace Enemy
                 // if (!hitPoint.controller.GetComponent<Player.Movement>().isAttacking) return;
                 if (hitPoint.hitEnemies.Contains(gameObject)) return;
                 hitPoint.hitEnemies.Add(gameObject);
-                
-                Debug.Log("one time");
                 
                 var lookDirection = (hitPoint.controller.transform.position - transform.position).normalized;
                 transform.rotation = Quaternion.LookRotation(lookDirection);
