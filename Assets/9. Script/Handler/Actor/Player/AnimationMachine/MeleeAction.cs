@@ -17,7 +17,10 @@ namespace Player
     
         public override void OnStateMachineExit(Animator animator, int stateMachinePathHash)
         {
-            animator.GetComponent<MovementHandler>().isMoveable = true;
+            var movement = animator.GetComponent<MovementHandler>();
+            movement.isMoveable = true;
+            movement.isAttacking = false;
+
             // 콤보 이후 공격 모션 일시 방지
             animator.GetComponent<AnimationHandler>().animator.ResetTrigger(AnimationHandler.MeleeAttackTrigger);
         }
@@ -33,9 +36,6 @@ namespace Player
         
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            var movement = animator.GetComponent<MovementHandler>();
-            movement.isAttacking = false;
-            
             animator.GetComponent<AnimationHandler>().WhenAttack?.Invoke(false);
         }
     }
