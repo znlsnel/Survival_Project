@@ -11,7 +11,7 @@ namespace Player
     {
          private Rigidbody _rigidbody;
          private HitPoint _hitPoint;
-
+        private PlayerCondition playerCondition;
          public Camera mainCamera;
 
         [SerializeField] float moveSpeed = 5f;
@@ -43,6 +43,7 @@ namespace Player
         {
             _rigidbody = GetComponent<Rigidbody>();
             _hitPoint = GetComponentInChildren<HitPoint>();
+            playerCondition = GetComponentInChildren<PlayerCondition>();
         }
 
         void Start()
@@ -93,6 +94,8 @@ namespace Player
         public void Jump()
         {
             _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            playerCondition.UseStamina(20);
+            
         }
         
         // fix: 자기 자신과 충돌하는 현상 발생 - 레이어로 수정
