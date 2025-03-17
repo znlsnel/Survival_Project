@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 3494860243411108713}
   - component: {fileID: 2919909208956409630}
   - component: {fileID: 4173328337254372509}
-  m_Layer: 16
+  - component: {fileID: -5765289286890336619}
+  m_Layer: 6
   m_Name: Switch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77,6 +78,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 3, z: 2}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!54 &-5765289286890336619
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3993956625089289065}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &6780377717566353002
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,7 +116,7 @@ GameObject:
   - component: {fileID: 4520018417503668405}
   - component: {fileID: 7126997283950607117}
   - component: {fileID: 2124720312086656231}
-  m_Layer: 16
+  m_Layer: 6
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4989,7 +5017,7 @@ GameObject:
   - component: {fileID: 4592111405321934194}
   - component: {fileID: 4728159003026292829}
   - component: {fileID: 1478031946502554014}
-  m_Layer: 16
+  m_Layer: 6
   m_Name: SwitchCrystal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5074,7 +5102,7 @@ GameObject:
   - component: {fileID: 1028251887027543305}
   - component: {fileID: 5898792181838946572}
   - component: {fileID: 6634492565567304648}
-  m_Layer: 16
+  m_Layer: 6
   m_Name: SwitchBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5179,7 +5207,7 @@ GameObject:
   - component: {fileID: 1633066501121954602}
   - component: {fileID: 8756604392832492346}
   - component: {fileID: 6457230802551850665}
-  m_Layer: 16
+  m_Layer: 6
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
