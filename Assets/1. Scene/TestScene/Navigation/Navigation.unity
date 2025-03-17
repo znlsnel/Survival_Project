@@ -1050,8 +1050,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1226531802}
   radius: 5
-  sensitivity: 10
-  height: 5
+  sensitivity: 1
+  verticalSensitivity: 20
+  height: 7
 --- !u!1 &1459715966
 GameObject:
   m_ObjectHideFlags: 0
@@ -1207,7 +1208,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1633103817
 Transform:
   m_ObjectHideFlags: 0
