@@ -102,7 +102,8 @@ public class InventoryHandler : MonoBehaviour
 		}
 
 		onChangedSlot?.Invoke();
-		messageUI.AddItem(item); 
+		messageUI.AddItem(item);
+		QuestManager.ProgressQuest(EQuestCategory.Pickup, item.ItemName); 
 		return true;
 	}
 
