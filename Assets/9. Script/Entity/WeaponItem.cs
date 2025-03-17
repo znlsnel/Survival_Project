@@ -48,7 +48,7 @@ public class WeaponItem : ActiveItem
 			resource.Gather(hitPoint, normal);
 			resource.StartHitAnim(-normal);
 
-			var go = Instantiate(particlePrefab);
+			var go = Instantiate(particlePrefab); 
 			go.transform.position = hitPoint;
 			Destroy(go, 2.0f);
 		}

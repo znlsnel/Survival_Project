@@ -44,14 +44,18 @@ public class InventoryHandler : MonoBehaviour
 			itemSlots.Add(type, new List<ItemSlot>()); 
 		}
 	}
-	private int GetEmptySlotIdx()
+	private (ESlotType, int) GetEmptySlotIdx()
     {
-        for (int i = 0; i < MyItems.Count; i++)
-            if (MyItems[i] == null)
-                return i;
+		for (int i = 0; i < QuickSlotItems.Count; i++)
+			if (QuickSlotItems[i] == null)
+				return (ESlotType.QuickSlot, i); 
 
-        return -1;
-    }
+		for (int i = 0; i < MyItems.Count; i++)
+            if (MyItems[i] == null)
+				return (ESlotType.InventorySlot, i);
+
+		return (ESlotType.InventorySlot, -1);
+	}
 
     private (ESlotType, int) FindItem(ItemDataSO item)
     {
@@ -77,14 +81,18 @@ public class InventoryHandler : MonoBehaviour
     {
 		var (type, idx) = FindItem(item);
 		if (idx > -1)
+		{
 			itemSlots[type][idx].StackAmount++;
-		
-		else if ((idx = GetEmptySlotIdx()) == -1)
-			return false;
-
+		}
 		else
-			MyItems[idx] = item;
-		
+		{
+			(type, idx) = GetEmptySlotIdx();
+			if (idx == -1)
+				return false;
+			else
+				myItems[type][idx] = item;
+		}
+
 		onChangedSlot?.Invoke();
 		return true;
 	}
