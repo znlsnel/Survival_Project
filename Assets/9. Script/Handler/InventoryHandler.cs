@@ -35,7 +35,10 @@ public class InventoryHandler : MonoBehaviour
 
 	// === Event ===
 	public event Action onChangedSlot;
-	 
+
+	// === Component ===
+	private MessageUI messageUI;
+
 	private void OnValidate()
 	{
 		foreach (ESlotType type in Enum.GetValues(typeof(ESlotType)))
@@ -43,6 +46,11 @@ public class InventoryHandler : MonoBehaviour
 			myItems.Add(type, new List<ItemDataSO>());
 			itemSlots.Add(type, new List<ItemSlot>()); 
 		}
+	}
+	private void Awake()
+	{
+		messageUI = GetComponent<PlayerUIHandler>().MessageUI;
+
 	}
 	private (ESlotType, int) GetEmptySlotIdx()
     {
@@ -94,6 +102,7 @@ public class InventoryHandler : MonoBehaviour
 		}
 
 		onChangedSlot?.Invoke();
+		messageUI.AddItem(item); 
 		return true;
 	}
 
