@@ -2,11 +2,12 @@ using System;
 using System.Collections;
 using Actor;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Player
 {
     [RequireComponent(typeof(Rigidbody), (typeof(Collider)))]
-    public class Movement: MonoBehaviour, IMovement
+    public class MovementHandler: MonoBehaviour, IMovement
     {
          private Rigidbody _rigidbody;
 
@@ -15,7 +16,7 @@ namespace Player
         [SerializeField] float moveSpeed = 5f;
         // runningSpeed
         [SerializeField] private float jumpForce = 5f;
-        [SerializeField] private float rotationSpeed = 200f; 
+        [SerializeField] private float rotationSpeed = 0.1f; 
         [HideInInspector] public Vector2 currMoveInputValue = Vector2.zero;
         
         public LayerMask groundLayerMask; 
@@ -33,6 +34,9 @@ namespace Player
         [HideInInspector] public bool isLanded = false;
         [HideInInspector] public bool isComboAble = true;
         [HideInInspector] public bool isAttacking = false;
+        [FormerlySerializedAs("rotateValue")] [HideInInspector] public Vector2 currRotateValue = Vector2.zero;
+
+        public Quaternion currTargetRotation;
 
         void Awake()
         {
@@ -42,6 +46,7 @@ namespace Player
         private void FixedUpdate()
         {
             Move(currMoveInputValue);
+            Rotate();
         }
 
         // 정지 상태 체크 필요
@@ -59,19 +64,22 @@ namespace Player
             _rigidbody.velocity = moveVelocity;
         }
 
-        
-        public void Rotate(Vector2 inputValue)
+        public void CheckRotateValue(Vector2 inputValue)
         {
             if (inputValue.sqrMagnitude <= 0.01f) return;
-            
+            currRotateValue = inputValue;
+        }
+
+        
+        private void Rotate()
+        {
             Vector3 cameraRight = mainCamera.transform.right;
             Vector3 cameraForward = mainCamera.transform.forward; 
             cameraForward.y = 0;
 
-            Vector3 direction = (cameraRight * inputValue.x + (cameraForward * inputValue.y)).normalized;
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
-            
-            transform.rotation = targetRotation;
+            Vector3 direction = (cameraRight * currRotateValue.x + (cameraForward * currRotateValue.y)).normalized;
+            currTargetRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, currTargetRotation, Time.deltaTime * rotationSpeed);
         }
         
         public void Jump()

@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 namespace Enemy
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    public class Navigation: MonoBehaviour
+    public class NavigationHandler: MonoBehaviour
     {
         public NavMeshAgent Agent { get; private set; } // notice: 가급적 접근 금지
         public Transform target;

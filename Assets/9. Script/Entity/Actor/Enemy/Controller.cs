@@ -6,46 +6,46 @@ using UnityEngine.Serialization;
 
 namespace Enemy
 {
-    [RequireComponent(typeof(Animation), typeof(Audio), typeof(Movement))]
-    [RequireComponent(typeof(Navigation), typeof(Resource))]
+    [RequireComponent(typeof(AnimationHandler), typeof(AudioHandler), typeof(MovementHandler))]
+    [RequireComponent(typeof(NavigationHandler), typeof(ResourceHandler))]
     public class Controller : MonoBehaviour
     {
-        public Animation Animation { get; private set; }
-        private Audio _audio;
-        private Movement _movement; public Actor.IMovement Movement => _movement;
-        private Navigation _navigation;
-        private Resource _resource;
+        public AnimationHandler AnimationHandler { get; private set; }
+        private AudioHandler audioHandler;
+        private MovementHandler movementHandler; public Actor.IMovement MovementHandler => movementHandler;
+        private NavigationHandler navigationHandler;
+        private ResourceHandler resourceHandler;
 
         void Awake()
         {
-            Animation = GetComponent<Animation>();
-            _audio = GetComponent<Audio>();
-            _movement = GetComponent<Movement>();
-            _navigation = GetComponent<Navigation>();
-            _resource = GetComponent<Resource>();
+            AnimationHandler = GetComponent<AnimationHandler>();
+            audioHandler = GetComponent<AudioHandler>();
+            movementHandler = GetComponent<MovementHandler>();
+            navigationHandler = GetComponent<NavigationHandler>();
+            resourceHandler = GetComponent<ResourceHandler>();
         }
 
         void Start()
         {
-            Animation.WhenAttack += _navigation.StopByAnimation;
+            AnimationHandler.WhenAttack += navigationHandler.StopByAnimation;
             
-            _navigation.WhenChangedStatus += (state) =>
+            navigationHandler.WhenChangedStatus += (state) =>
             {
-                Animation.animator.SetBool(Animation.HashBoolAttack, false);
+                AnimationHandler.animator.SetBool(AnimationHandler.HashBoolAttack, false);
 
-                if (state == Navigation.Status.Idle)
+                if (state == NavigationHandler.Status.Idle)
                 {
-                    Animation.animator.SetBool(Animation.HashBoolRun, false);
+                    AnimationHandler.animator.SetBool(AnimationHandler.HashBoolRun, false);
                 }
-                if (state == Navigation.Status.Detected)
+                if (state == NavigationHandler.Status.Detected)
                 {
-                    Animation.animator.SetBool(Animation.HashBoolRun, true);
+                    AnimationHandler.animator.SetBool(AnimationHandler.HashBoolRun, true);
                 }
 
-                if (state == Navigation.Status.Attackable)
+                if (state == NavigationHandler.Status.Attackable)
                 {
-                    Animation.animator.SetBool(Animation.HashBoolRun, false);
-                    Animation.animator.SetBool(Animation.HashBoolAttack, true);
+                    AnimationHandler.animator.SetBool(AnimationHandler.HashBoolRun, false);
+                    AnimationHandler.animator.SetBool(AnimationHandler.HashBoolAttack, true);
                 }
             };
         }
@@ -66,26 +66,26 @@ namespace Enemy
                 var knockBackDirection = (transform.position - hitPoint.controller.transform.position).normalized;
                 knockBackDirection.y = 0;
 
-                Animation.animator.SetTrigger(Animation.HashTriggerHit);
+                AnimationHandler.animator.SetTrigger(AnimationHandler.HashTriggerHit);
 
-                _navigation.Agent.isStopped = true;
+                navigationHandler.Agent.isStopped = true;
                 // _navigation.Agent.enabled = false;
                 
-                _movement.ApplyKnockBack(knockBackDirection, 1f);
+                movementHandler.ApplyKnockBack(knockBackDirection, 1f);
                 StartCoroutine(RestoreNavMeshAgent());
                 
-                _audio.PlayRandomSound(Enemy.SoundType.Damaged);
-                _resource.ModifyHealth(-50);
+                audioHandler.PlayRandomSound(Enemy.SoundType.Damaged);
+                resourceHandler.ModifyHealth(-50);
             }
             
             
             IEnumerator RestoreNavMeshAgent()
             {
                 yield return new WaitForSeconds(1f);
-                _movement.Stop();
-                _navigation.Agent.isStopped = false;
+                movementHandler.Stop();
+                navigationHandler.Agent.isStopped = false;
                 // _navigation.Agent.enabled = true;
-                _navigation.Agent.Warp(transform.position);
+                navigationHandler.Agent.Warp(transform.position);
             }
         }
     }

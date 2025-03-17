@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public class Resource: MonoBehaviour
+    public class ResourceHandler: MonoBehaviour
     {
         [HideInInspector] public int health = 500;
 

@@ -10,32 +10,32 @@ namespace Player
     
         public override void OnStateMachineEnter(Animator animator, int stateMachinePathHash)
         {
-            var movement = animator.GetComponent<Movement>();
+            var movement = animator.GetComponent<MovementHandler>();
             movement.Stop();
             movement.isMoveable = false;
         }
     
         public override void OnStateMachineExit(Animator animator, int stateMachinePathHash)
         {
-            animator.GetComponent<Movement>().isMoveable = true;
+            animator.GetComponent<MovementHandler>().isMoveable = true;
         }
     
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            var movement = animator.GetComponent<Movement>();
+            var movement = animator.GetComponent<MovementHandler>();
             movement.isAttacking = true;
             movement.isComboAble = true;
             
-            animator.GetComponent<Animation>().WhenAttack?.Invoke(true);
+            animator.GetComponent<AnimationHandler>().WhenAttack?.Invoke(true);
         }
         
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            var movement = animator.GetComponent<Movement>();
+            var movement = animator.GetComponent<MovementHandler>();
             Debug.Log(1);
             movement.isAttacking = false;
             
-            animator.GetComponent<Animation>().WhenAttack?.Invoke(false);
+            animator.GetComponent<AnimationHandler>().WhenAttack?.Invoke(false);
         }
     }
 }
