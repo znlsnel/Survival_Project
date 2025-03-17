@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 3013137983324809986}
   - component: {fileID: 2304998116501838555}
   - component: {fileID: 4142908700480600661}
-  m_Layer: 18
+  - component: {fileID: 2815892823552531513}
+  m_Layer: 7
   m_Name: VegetationMedium05_LOD00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,6 +85,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &2815892823552531513
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86027790950802045}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 4e6d935ac5b6b8c43a7c623bec3f9d0d, type: 3}
 --- !u!1 &3277801398770487287
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,7 +118,8 @@ GameObject:
   - component: {fileID: 4377844920940505309}
   - component: {fileID: 533934453671238755}
   - component: {fileID: 3587311745521506594}
-  m_Layer: 18
+  - component: {fileID: 6265558857985473449}
+  m_Layer: 7
   m_Name: VegetationMedium05_LOD01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,6 +192,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &6265558857985473449
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3277801398770487287}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300002, guid: 4e6d935ac5b6b8c43a7c623bec3f9d0d, type: 3}
 --- !u!1 &4603586942937052519
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,10 +224,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2854294194254980548}
   - component: {fileID: 5444084262142875985}
-  - component: {fileID: 1792881545780705177}
   - component: {fileID: 7898760510081473702}
   - component: {fileID: 3854398978715343418}
-  m_Layer: 18
+  - component: {fileID: 2833108793058468231}
+  m_Layer: 7
   m_Name: Wood_Medium02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -233,28 +279,6 @@ LODGroup:
     renderers:
     - renderer: {fileID: 2442923504344674307}
   m_Enabled: 1
---- !u!64 &1792881545780705177
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4603586942937052519}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 1e0f7402756954a42affb251ce087e19, type: 3}
 --- !u!114 &7898760510081473702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,6 +310,27 @@ MonoBehaviour:
   itemToGive: {fileID: 11400000, guid: 7561059690f84ef49a31c818584c3406, type: 2}
   quantityPerHit: 1
   capacity: 2
+--- !u!65 &2833108793058468231
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4603586942937052519}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 3, z: 1}
+  m_Center: {x: 0, y: 1.39, z: 0}
 --- !u!1 &8221859305511516894
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,7 +342,8 @@ GameObject:
   - component: {fileID: 6229673530267586740}
   - component: {fileID: 8300031033334309006}
   - component: {fileID: 2442923504344674307}
-  m_Layer: 18
+  - component: {fileID: 5109638187549905516}
+  m_Layer: 7
   m_Name: VegetationMedium05_LOD02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -370,3 +416,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &5109638187549905516
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8221859305511516894}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300004, guid: 4e6d935ac5b6b8c43a7c623bec3f9d0d, type: 3}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6497354670283765655}
   - component: {fileID: 2805535347403105107}
   - component: {fileID: 4109085766054035075}
-  m_Layer: 18
+  m_Layer: 7
   m_Name: VegetationMedium03_LOD01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,10 +94,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4932534685777856948}
   - component: {fileID: 6109993548907879863}
-  - component: {fileID: 7866878043755659102}
   - component: {fileID: 8453700355030994966}
   - component: {fileID: 4915792813768294236}
-  m_Layer: 18
+  - component: {fileID: -5029113521129640898}
+  m_Layer: 7
   m_Name: Wood_Medium03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,29 +149,6 @@ LODGroup:
     renderers:
     - renderer: {fileID: 7586075977468522993}
   m_Enabled: 1
---- !u!136 &7866878043755659102
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5261389994615045593}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.27
-  m_Height: 5.62
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.88, z: 0}
 --- !u!114 &8453700355030994966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,6 +180,27 @@ MonoBehaviour:
   maxScale: 1
   gameObjects:
   - {fileID: 5261389994615045593}
+--- !u!65 &-5029113521129640898
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5261389994615045593}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 3, z: 1}
+  m_Center: {x: 0, y: 1.39, z: 0}
 --- !u!1 &6921906619788674293
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,7 +212,7 @@ GameObject:
   - component: {fileID: 7014629810148127608}
   - component: {fileID: 3190348092486109118}
   - component: {fileID: 8989626330444322839}
-  m_Layer: 18
+  m_Layer: 7
   m_Name: VegetationMedium03_LOD00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -298,7 +296,7 @@ GameObject:
   - component: {fileID: 5522305001381442450}
   - component: {fileID: 8004821772982090085}
   - component: {fileID: 7586075977468522993}
-  m_Layer: 18
+  m_Layer: 7
   m_Name: VegetationMedium03_LOD02
   m_TagString: Untagged
   m_Icon: {fileID: 0}

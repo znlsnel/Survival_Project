@@ -47,14 +47,14 @@ namespace Player
 
         void Start()
         {
-            _hitPoint.gameObject.SetActive(false);
+           // _hitPoint.gameObject.SetActive(false);
         }
 
         private void FixedUpdate()
         {
             Move(currMoveInputValue);
             if (isAttacking) return;
-            Rotate();
+            Rotate(); 
         }
 
         // 정지 상태 체크 필요
@@ -105,8 +105,8 @@ namespace Player
         }
 
         public void SetHitPoint(int inputValue)
-        {
-            _hitPoint.gameObject.SetActive(inputValue == 1);
+        { 
+         //   _hitPoint.gameObject.SetActive(inputValue == 1);
         }
         
         

@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6059595600839638648}
   - component: {fileID: 222819181484018432}
-  - component: {fileID: 7341799732907413007}
   - component: {fileID: 6579626179347951812}
   - component: {fileID: 2992150516955042627}
-  m_Layer: 18
+  - component: {fileID: -5736464755666286854}
+  m_Layer: 7
   m_Name: Wood_Large03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65,28 +65,6 @@ LODGroup:
     renderers:
     - renderer: {fileID: 8628788058797604570}
   m_Enabled: 1
---- !u!64 &7341799732907413007
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3982968329491422642}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300004, guid: 963d66c7000d793448bc1424962886ab, type: 3}
 --- !u!114 &6579626179347951812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,6 +96,27 @@ MonoBehaviour:
   itemToGive: {fileID: 11400000, guid: 7561059690f84ef49a31c818584c3406, type: 2}
   quantityPerHit: 1
   capacity: 5
+--- !u!65 &-5736464755666286854
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3982968329491422642}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 3, z: 1}
+  m_Center: {x: 0, y: 1.39, z: 0}
 --- !u!1 &5951196556952248062
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,7 +128,8 @@ GameObject:
   - component: {fileID: 8032310651993583341}
   - component: {fileID: 4933504695846268799}
   - component: {fileID: 6991933630443950813}
-  m_Layer: 18
+  - component: {fileID: 8885846189606587270}
+  m_Layer: 7
   m_Name: VegetationLarge03_LOD01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -202,6 +202,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &8885846189606587270
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5951196556952248062}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300002, guid: 963d66c7000d793448bc1424962886ab, type: 3}
 --- !u!1 &7082625513702225404
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,7 +235,8 @@ GameObject:
   - component: {fileID: 451320169673601933}
   - component: {fileID: 3419000972240831042}
   - component: {fileID: 1780411325592421226}
-  m_Layer: 18
+  - component: {fileID: 1892921653427021349}
+  m_Layer: 7
   m_Name: VegetationLarge03_LOD00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -286,6 +309,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1892921653427021349
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7082625513702225404}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 963d66c7000d793448bc1424962886ab, type: 3}
 --- !u!1 &8183756406598191821
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,7 +342,8 @@ GameObject:
   - component: {fileID: 325257835944499440}
   - component: {fileID: 3372537139492738334}
   - component: {fileID: 8628788058797604570}
-  m_Layer: 18
+  - component: {fileID: 1019144518492306917}
+  m_Layer: 7
   m_Name: VegetationLarge03_LOD02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -370,3 +416,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1019144518492306917
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8183756406598191821}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300004, guid: 963d66c7000d793448bc1424962886ab, type: 3}

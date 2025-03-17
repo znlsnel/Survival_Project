@@ -30,6 +30,6 @@ public class EquipHandler : MonoBehaviour
 	}
 
 	public ItemDataSO GetEquipedItemData() => currentItem;
-	public ActiveItem GetActiveItem() => prevItem?.GetComponent<ActiveItem>();	
+	public ActiveItem GetActiveItem() => prevItem == null ? null : prevItem.GetComponent<ActiveItem>();	
 	
 }
