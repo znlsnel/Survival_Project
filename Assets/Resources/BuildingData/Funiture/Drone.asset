@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingName: "\uB4DC\uB860"
   buildingType: 0
-  description: "\uC790\uC6D0 \uCC44\uCDE8\uB97C \uD560 \uC218 \uC788\uB294 \uB4DC\uB860\uC785\uB2C8\uB2E4."
-  prefab: {fileID: 2136383350355168246, guid: cb6d3bfff858daa4687f7374863ea72c, type: 3}
-  buildingIcon: {fileID: 0}
+  description: "\uC790\uC6D0\uC744 \uC790\uB3D9\uC73C\uB85C \uCC44\uC9D1\uD558\uB294
+    \uB4DC\uB860\uC774\uB2E4."
+  prefab: {fileID: 141928867472011816, guid: 4518cab8404845542904676e50fac519, type: 3}
+  buildingIcon: {fileID: 21300000, guid: 9ae2b057151ad1743b26ce986a22a79c, type: 3}
   cost: []
