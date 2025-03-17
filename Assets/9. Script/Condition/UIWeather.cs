@@ -13,6 +13,7 @@ public class UIWeather : MonoBehaviour
     public Image color;
     public ParticleSystem rainParticle;
     public ParticleSystem snowParticle;
+    private Transform cameraTransform;
 
     public string sunnyColorCode = "#f8edbe";  
     public string rainyColorCode = "#bed3f8"; 
@@ -26,6 +27,8 @@ public class UIWeather : MonoBehaviour
         snowParticle = GameObject.Find("Snow").GetComponent<ParticleSystem>();
 
 
+
+        cameraTransform = Camera.main.transform;
     }
 
     void Update()
@@ -64,5 +67,14 @@ public class UIWeather : MonoBehaviour
         }
 
         color.color = newColor; 
+    }
+    void LateUpdate()
+    {
+
+        if (rainParticle != null)
+            rainParticle.transform.position = cameraTransform.position + new Vector3(0, 10, 0); 
+
+        if (snowParticle != null)
+            snowParticle.transform.position = cameraTransform.position + new Vector3(0, 10, 0); 
     }
 }

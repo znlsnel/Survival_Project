@@ -94,9 +94,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4932534685777856948}
   - component: {fileID: 6109993548907879863}
+  - component: {fileID: 7866878043755659102}
   - component: {fileID: 8453700355030994966}
   - component: {fileID: 4915792813768294236}
-  - component: {fileID: -5029113521129640898}
   m_Layer: 8
   m_Name: Wood_Medium03
   m_TagString: Untagged
@@ -149,6 +149,29 @@ LODGroup:
     renderers:
     - renderer: {fileID: 7586075977468522993}
   m_Enabled: 1
+--- !u!136 &7866878043755659102
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5261389994615045593}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.27
+  m_Height: 5.62
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.88, z: 0}
 --- !u!114 &8453700355030994966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,7 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbc6d5db3955c4c45b70e2b218902dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemToGive: {fileID: 11400000, guid: 7561059690f84ef49a31c818584c3406, type: 2}
+  itemToGive: {fileID: 11400000, guid: 949ad358af220e04cb4212f030b8c71e, type: 2}
   quantityPerHit: 1
   capacity: 2
 --- !u!114 &4915792813768294236
@@ -180,27 +203,6 @@ MonoBehaviour:
   maxScale: 1
   gameObjects:
   - {fileID: 5261389994615045593}
---- !u!65 &-5029113521129640898
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5261389994615045593}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 3, z: 1}
-  m_Center: {x: 0, y: 1.39, z: 0}
 --- !u!1 &6921906619788674293
 GameObject:
   m_ObjectHideFlags: 0
