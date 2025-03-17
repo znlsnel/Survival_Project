@@ -63,21 +63,21 @@ namespace Player
                 AudioHandler.PlayRandomSound(PlayerSoundType.Jump);
             };
             
-            // InputManager.Click.performed += (context) =>
-            // {
-            //     if (!_movement.IsGrounded()) return;
-            //     
-            //     // Debug.Log(_movement.isComboAble);
-            //     // if (!_movement.isComboAble) return;
-            //     
-            //     Animation.animator.SetTrigger(Animation.MeleeAttackTrigger); 
-            //     Audio.PlayRandomSound(PlayerSoundType.Attack);
-            //     
-            //     // _movement.isComboAble = false;
-            //     
-            //     // meleeWeaponController.audioHandler.PlayerOneShot(MeleeWeaponAudioHandler.SoundType.Attack);
-            //     // _animation.animator.SetBool(Animation.HashIsAbleRegisterCombo, false);
-            // };
+            InputManager.LeftMouse.performed += (context) =>
+            {
+                if (!movementHandler.IsGrounded()) return;
+                
+                // Debug.Log(_movement.isComboAble);
+                // if (!_movement.isComboAble) return;
+                
+                AnimationHandler.animator.SetTrigger(AnimationHandler.MeleeAttackTrigger); 
+                AudioHandler.PlayRandomSound(PlayerSoundType.Attack);
+                
+                // _movement.isComboAble = false;
+                
+                // meleeWeaponController.audioHandler.PlayerOneShot(MeleeWeaponAudioHandler.SoundType.Attack);
+                // _animation.animator.SetBool(Animation.HashIsAbleRegisterCombo, false);
+            };
         }
         
         void FixedUpdate()
