@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Enemy
 {
     [RequireComponent(typeof(Animator))]
-    public class Animation: MonoBehaviour
+    public class AnimationHandler: MonoBehaviour
     {
         [HideInInspector] public Animator animator;
         [HideInInspector] public Renderer mesh;

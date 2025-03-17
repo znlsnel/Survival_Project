@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Enemy
 {
-    public class Resource: MonoBehaviour
+    public class ResourceHandler: MonoBehaviour
     {
         public int maxHealth = 100;
         public int health = 100;

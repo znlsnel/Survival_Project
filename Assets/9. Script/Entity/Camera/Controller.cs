@@ -43,8 +43,8 @@ namespace GameCamera
             // 상하 회전에 의해 높이 변경 및 반경 변동 발생
             // refactor : 감도 계산 필요
             _cumulativeMoveAmount.y += inputValue.y;
-            _cumulativeMoveAmount.y = Mathf.Clamp(_cumulativeMoveAmount.y, -4, 2);
-            currentHeight += _cumulativeMoveAmount.y;
+            _cumulativeMoveAmount.y = Mathf.Clamp(_cumulativeMoveAmount.y, -2, 8);
+            currentHeight -= _cumulativeMoveAmount.y / 2;
             _computedRadius = radius - (Mathf.Abs(_cumulativeMoveAmount.y / 4)); // 높이 값에 의한 반경 변경 발생 
         
         

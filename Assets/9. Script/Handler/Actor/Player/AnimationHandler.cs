@@ -5,7 +5,7 @@ using UnityEngine.Serialization;
 
 namespace Player
 {
-    public class Animation: MonoBehaviour, IAnimation
+    public class AnimationHandler: MonoBehaviour, IAnimation
     {
         [HideInInspector] public Animator animator;
         [FormerlySerializedAs("meeleStateMachine")] [HideInInspector] public MeleeAction meleeStateMachine;

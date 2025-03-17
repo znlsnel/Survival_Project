@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Player
 {
     [RequireComponent(typeof(Rigidbody), (typeof(Collider)))]
-    public class Movement: MonoBehaviour, IMovement
+    public class MovementHandler: MonoBehaviour, IMovement
     {
          private Rigidbody _rigidbody;
 
@@ -15,7 +15,7 @@ namespace Player
         [SerializeField] float moveSpeed = 5f;
         // runningSpeed
         [SerializeField] private float jumpForce = 5f;
-        [SerializeField] private float rotationSpeed = 200f; 
+        [SerializeField] private float rotationSpeed = 0.1f; 
         [HideInInspector] public Vector2 currMoveInputValue = Vector2.zero;
         
         public LayerMask groundLayerMask; 
@@ -34,6 +34,8 @@ namespace Player
         [HideInInspector] public bool isComboAble = true;
         [HideInInspector] public bool isAttacking = false;
 
+        public Quaternion currTargetRotation;
+
         void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
@@ -42,6 +44,7 @@ namespace Player
         private void FixedUpdate()
         {
             Move(currMoveInputValue);
+            transform.rotation = Quaternion.Slerp(transform.rotation, currTargetRotation, Time.deltaTime * rotationSpeed);
         }
 
         // 정지 상태 체크 필요
@@ -69,9 +72,7 @@ namespace Player
             cameraForward.y = 0;
 
             Vector3 direction = (cameraRight * inputValue.x + (cameraForward * inputValue.y)).normalized;
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
-            
-            transform.rotation = targetRotation;
+            currTargetRotation = Quaternion.LookRotation(direction);
         }
         
         public void Jump()
