@@ -68,7 +68,9 @@ public class InteractionHandler : MonoBehaviour
 		}
 
 		if (displayObject == null)
-			UIManager.Instance.ObjectInfoUI.CloseUI();
+		{
+			GetComponent<PlayerUIHandler>().ObjectInfoUI.CloseUI();
+		} 
 	}
 	
 
