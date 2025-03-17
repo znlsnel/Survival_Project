@@ -26,6 +26,8 @@ public class UIWeather : MonoBehaviour
         rainParticle = GameObject.Find("GameObject").GetComponent<ParticleSystem>();
         snowParticle = GameObject.Find("Snow").GetComponent<ParticleSystem>();
 
+
+
         cameraTransform = Camera.main.transform;
     }
 
