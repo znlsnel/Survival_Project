@@ -18,14 +18,16 @@ namespace Player
         public override void OnStateMachineExit(Animator animator, int stateMachinePathHash)
         {
             animator.GetComponent<MovementHandler>().isMoveable = true;
+            // 콤보 이후 공격 모션 일시 방지
+            animator.GetComponent<AnimationHandler>().animator.ResetTrigger(AnimationHandler.MeleeAttackTrigger);
         }
     
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             var movement = animator.GetComponent<MovementHandler>();
             movement.isAttacking = true;
-            movement.isComboAble = true;
             
+            animator.GetComponent<AudioHandler>().PlayRandomSound(PlayerSoundType.Attack);
             animator.GetComponent<AnimationHandler>().WhenAttack?.Invoke(true);
         }
         

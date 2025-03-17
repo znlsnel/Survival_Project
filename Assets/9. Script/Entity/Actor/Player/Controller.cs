@@ -71,7 +71,6 @@ namespace Player
                 // if (!_movement.isComboAble) return;
                 
                 AnimationHandler.animator.SetTrigger(AnimationHandler.MeleeAttackTrigger); 
-                AudioHandler.PlayRandomSound(PlayerSoundType.Attack);
                 
                 // _movement.isComboAble = false;
                 

@@ -850,7 +850,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 3
     m_ConditionEvent: StateTime
-    m_EventTreshold: 0.24
+    m_EventTreshold: 0.2
   - m_ConditionMode: 4
     m_ConditionEvent: StateTime
     m_EventTreshold: 1
@@ -1047,7 +1047,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 3
     m_ConditionEvent: StateTime
-    m_EventTreshold: 0.16
+    m_EventTreshold: 0.2
   - m_ConditionMode: 4
     m_ConditionEvent: StateTime
     m_EventTreshold: 1
