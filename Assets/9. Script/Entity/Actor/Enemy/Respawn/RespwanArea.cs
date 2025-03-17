@@ -8,21 +8,6 @@ using Random = UnityEngine.Random;
 
 namespace Respawn
 {
-    public class DestroyedDetector: MonoBehaviour
-    {
-        private RespawnArea _respawnArea;
-
-        public void RegisterArea(RespawnArea respawnArea)
-        {
-            _respawnArea = respawnArea;
-        }
-        
-        private void OnDestroy()
-        {
-            _respawnArea.UnRegister(gameObject);
-        }
-    }
-    
     public class RespawnArea: MonoBehaviour
     {
            public List<GameObject> list;
@@ -39,6 +24,7 @@ namespace Respawn
                
                Vector3 randomPosition = new Vector3(Random.Range(area.min.x, area.max.x), area.min.y, Random.Range(area.min.z, area.max.z));
                GameObject instantiate = Instantiate(list[Random.Range(0, list.Count)], randomPosition, Quaternion.identity);
+               instantiate.gameObject.SetActive(true);
                
                DestroyedDetector detector = instantiate.AddComponent<DestroyedDetector>();
                detector.RegisterArea(this);
@@ -66,11 +52,12 @@ namespace Respawn
                _currentList.Remove(instantiate);
            }
            
-           
+           void OnDrawGizmos()
+           {
+               Gizmos.color = Color.green;
+               Gizmos.DrawWireCube(area.center, area.size);
+           }
            
            void Start() { StartCoroutine(ReSpawn()); }
-           
-           
-           
     }
 }

@@ -60,6 +60,9 @@ namespace Enemy
                 
                 Debug.Log("one time");
                 
+                var lookDirection = (hitPoint.controller.transform.position - transform.position).normalized;
+                transform.rotation = Quaternion.LookRotation(lookDirection);
+                
                 var knockBackDirection = (transform.position - hitPoint.controller.transform.position).normalized;
                 knockBackDirection.y = 0;
 
@@ -72,7 +75,7 @@ namespace Enemy
                 StartCoroutine(RestoreNavMeshAgent());
                 
                 _audio.PlayRandomSound(Enemy.SoundType.Damaged);
-                _resource.Modify(10);
+                _resource.ModifyHealth(-50);
             }
             
             

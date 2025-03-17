@@ -25,26 +25,5 @@ namespace Enemy
         }
         
         public Action<bool> WhenAttack;
-
-        
-        // IEnumerator ChangeColorCoroutine()
-        // {
-        //     // Renderer 컴포넌트를 가져와 원래 색상을 저장합니다.
-        //     Color originalColor = mesh.material.color;
-        //
-        //     // 색상을 빨간색으로 변경합니다.
-        //     mesh.material.color = Color.red;
-        //
-        //     // 0.5초 동안 대기합니다.
-        //     yield return new WaitForSeconds(0.5f);
-        //
-        //     // 원래 색상으로 복구합니다.
-        //     mesh.material.color = originalColor;
-        // }
-        //
-        // public void ChangeHitColor()
-        // {
-        //     StartCoroutine(ChangeColorCoroutine());
-        // }
     }
 }

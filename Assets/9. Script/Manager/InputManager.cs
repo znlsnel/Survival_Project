@@ -8,6 +8,7 @@ public class InputManager : Singleton<InputManager>
 	[SerializeField] private InputActionReference move;
 	[SerializeField] private InputActionReference jump;
 	[SerializeField] private InputActionReference click;
+	[SerializeField] private InputActionReference view;
     [SerializeField] private InputActionReference toggleBuilding;
 
     [SerializeField] private PlayerInput playerInput;	// �÷��̾� ��ǲ����
@@ -26,6 +27,7 @@ public class InputManager : Singleton<InputManager>
     public InputActionReference Move => move; 
 	public InputActionReference Jump => jump;
 	public InputActionReference Click => click;
+	public InputActionReference View => view;
     public InputActionReference ToggleBuilding => toggleBuilding;
 
 

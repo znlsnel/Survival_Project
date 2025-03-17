@@ -9,6 +9,7 @@ namespace Enemy
             // problem: 애니메이션 이름을 직접 할당 중
             if (!animator.TryGetComponent(out Animation animation) || !stateInfo.IsName("Attack")) return;
             animation.WhenAttack?.Invoke(true);
+            animator.GetComponent<Navigation>().SetAttacking(true);
         }
 
 
@@ -22,6 +23,7 @@ namespace Enemy
             {
                 prevLoopCount = currentLoopCount;
                 animation.WhenAttack?.Invoke(false);
+                animator.GetComponent<Navigation>().SetAttacking(false);
             }
 
         }
@@ -30,6 +32,7 @@ namespace Enemy
         {
             if (!animator.TryGetComponent(out Animation animation) || !stateInfo.IsName("Attack")) return;
             animation.WhenAttack?.Invoke(false);
+            animator.GetComponent<Navigation>().SetAttacking(false);
         }
     }
 }

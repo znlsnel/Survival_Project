@@ -16,6 +16,10 @@ namespace GameCamera
         private void Start()
         {
             if(!target) throw new UnityException("camera target is null");
+            InputManager.Instance.View.action.performed += (context) =>
+            {
+
+            };
         }
 
     

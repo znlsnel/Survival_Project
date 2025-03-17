@@ -17,7 +17,7 @@ namespace Enemy
         [SerializeField] private float stoppingDistance = 2f; // 멈추는 위치
         [SerializeField] private float chaseRange = 16f;// 추적 거리
     
-        public enum Status { Idle, Detected, Attackable } // question: 확장되면 어떻게 관리해야하나?
+        public enum Status { Idle, Detected, Attackable, Attacking } // question: 확장되면 어떻게 관리해야하나?
     
         // feat: 캐싱
         private Status _currStatus;
@@ -38,13 +38,21 @@ namespace Enemy
             if (!target) throw new UnityException("enemy navigation: target not set");
     
             var distanceToTarget = Vector3.Distance(transform.position, target.position);
-            
-            _currStatus = Status.Idle;
-            if(distanceToTarget <= chaseRange) _currStatus = Status.Detected;
-            if(distanceToTarget <= stoppingDistance) _currStatus = Status.Attackable;
+
+            if (_currStatus != Status.Attacking)
+            {
+                _currStatus = Status.Idle;
+                if(distanceToTarget <= chaseRange) _currStatus = Status.Detected;
+                if(distanceToTarget <= stoppingDistance) _currStatus = Status.Attackable;
+            }
 
             if (_currStatus != _prevStatus) WhenChangedStatus?.Invoke(_currStatus);
             _prevStatus = _currStatus;
+        }
+
+        public void SetAttacking(bool isAttacking)
+        {
+            if(isAttacking) _currStatus = Status.Attacking; else _currStatus = Status.Attackable;
         }
         
         void Awake()
@@ -62,7 +70,7 @@ namespace Enemy
         {
             UpdateStatus();
             if(_currStatus == Status.Detected && !Agent.isStopped) Agent.SetDestination(target.position);
-            if(_currStatus != Status.Idle) transform.rotation = Quaternion.Euler(0, Quaternion.LookRotation(target.position - transform.position).eulerAngles.y, 0);
+            if(_currStatus != Status.Idle && _currStatus != Status.Attacking) transform.rotation = Quaternion.Euler(0, Quaternion.LookRotation(target.position - transform.position).eulerAngles.y, 0);
         }
 
     }
