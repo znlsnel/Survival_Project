@@ -8,8 +8,7 @@ public class Conditions : MonoBehaviour
     public float maxValue;
     public float startValue;
     public float passiveValue;
-    //public Image uiBar;
-    public Slider slider;
+    public Image uiBar;
 
     private void Start()
     {
@@ -18,8 +17,8 @@ public class Conditions : MonoBehaviour
 
     private void Update()
     {
-        //uiBar.fillAmount = GetPercentage();
-        slider.value = GetPercentage();
+        uiBar.fillAmount = GetPercentage();
+
 
     }
 
