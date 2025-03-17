@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-	private PlayerController playerController;
+	private Player.Controller playerController;
 
-	public PlayerController PlayerController => playerController;
+	public Player.Controller PlayerController => playerController;
 	protected override void Awake()
 	{
 		base.Awake();
-		playerController = FindFirstObjectByType<PlayerController>();	
+		playerController = FindFirstObjectByType<Player.Controller>();	
 	}
 
 
