@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &16394706265798682
+--- !u!1 &2965228089549126874
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,10 +8,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8114152715176118747}
-  - component: {fileID: 3478122622526919586}
-  - component: {fileID: 4814761563580184433}
-  - component: {fileID: 8468131806837358226}
+  - component: {fileID: 307919598605992781}
+  - component: {fileID: 5451622481441807168}
+  - component: {fileID: 7217174011245640357}
+  - component: {fileID: 7906040270113191441}
   m_Layer: 0
   m_Name: Fire
   m_TagString: Untagged
@@ -19,28 +19,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8114152715176118747
+--- !u!4 &307919598605992781
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 16394706265798682}
+  m_GameObject: {fileID: 2965228089549126874}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.231, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3107787209435117168}
+  m_Father: {fileID: 7760557510750493413}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!198 &3478122622526919586
+--- !u!198 &5451622481441807168
 ParticleSystem:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 16394706265798682}
+  m_GameObject: {fileID: 2965228089549126874}
   serializedVersion: 8
   lengthInSec: 5
   simulationSpeed: 1
@@ -4769,14 +4769,14 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!199 &4814761563580184433
+--- !u!199 &7217174011245640357
 ParticleSystemRenderer:
   serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 16394706265798682}
+  m_GameObject: {fileID: 2965228089549126874}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -4843,13 +4843,13 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!108 &8468131806837358226
+--- !u!108 &7906040270113191441
 Light:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 16394706265798682}
+  m_GameObject: {fileID: 2965228089549126874}
   m_Enabled: 1
   serializedVersion: 10
   m_Type: 2
@@ -4905,7 +4905,7 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!1 &5511086594215306222
+--- !u!1 &6923115114559137145
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4913,11 +4913,11 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3107787209435117168}
-  - component: {fileID: 6452572647943056878}
-  - component: {fileID: 8912241014194608264}
-  - component: {fileID: 264888198393965743}
-  - component: {fileID: 3767526489012000696}
+  - component: {fileID: 7760557510750493413}
+  - component: {fileID: 2985041517668008840}
+  - component: {fileID: 1723306896519141527}
+  - component: {fileID: 2330864947194354577}
+  - component: {fileID: 2923115381750210006}
   m_Layer: 0
   m_Name: CampFire
   m_TagString: Untagged
@@ -4925,37 +4925,37 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
---- !u!4 &3107787209435117168
+--- !u!4 &7760557510750493413
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5511086594215306222}
+  m_GameObject: {fileID: 6923115114559137145}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 8.97, y: 0.245, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8114152715176118747}
+  - {fileID: 307919598605992781}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &6452572647943056878
+--- !u!33 &2985041517668008840
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5511086594215306222}
+  m_GameObject: {fileID: 6923115114559137145}
   m_Mesh: {fileID: 4300000, guid: 76e0ad8bbe5fca64f90e1cb33a04e75e, type: 3}
---- !u!23 &8912241014194608264
+--- !u!23 &1723306896519141527
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5511086594215306222}
+  m_GameObject: {fileID: 6923115114559137145}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -4991,13 +4991,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &264888198393965743
+--- !u!135 &2330864947194354577
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5511086594215306222}
+  m_GameObject: {fileID: 6923115114559137145}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -5012,13 +5012,13 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &3767526489012000696
+--- !u!114 &2923115381750210006
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5511086594215306222}
+  m_GameObject: {fileID: 6923115114559137145}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1840d9a4ebe903248a9a788c0514adb4, type: 3}
