@@ -38,32 +38,32 @@ namespace Player
             // _animation.animator.SetTrigger(Animation.BreakIdleTrigger); // 애니메이터 자체를 수정
             // _animation.OnMeleeAttackAvailable += meleeWeapon.SetMeleeAttackAvailable;
             
-            // InputManager.Instance.Move.action.performed += (context) =>
-            // {
-            //     _movement.Rotate(context.ReadValue<Vector2>());
-            // };
-            //
-            // // Vector.Zero 에서 다른 값으로 변경될 때
-            // InputManager.Instance.Move.action.started += (context) =>
-            // {
-            //     _movement.currMoveInputValue = (context.ReadValue<Vector2>());
-            //
-            // };
-            // // Vector.Zero가 호출 될 때
-            // InputManager.Instance.Move.action.canceled += (context) =>
-            // {
-            //     _movement.currMoveInputValue = (context.ReadValue<Vector2>());
-            // };
-            //
-            // InputManager.Instance.Jump.action.performed += (context) =>
-            // {
-            //     if (addedJumpCount == 0) return; 
-            //     addedJumpCount -= 1;
-            //     _movement.Jump();
-            //     Audio.PlayRandomSound(PlayerSoundType.Jump);
-            // };
-            //
-            // InputManager.Instance.Click.action.performed += (context) =>
+            InputManager.Move.performed += (context) =>
+            {
+                _movement.Rotate(context.ReadValue<Vector2>());
+            };
+            
+            // Vector.Zero 에서 다른 값으로 변경될 때
+            InputManager.Move.started += (context) =>
+            {
+                _movement.currMoveInputValue = (context.ReadValue<Vector2>());
+            
+            };
+            // Vector.Zero가 호출 될 때
+            InputManager.Move.canceled += (context) =>
+            {
+                _movement.currMoveInputValue = (context.ReadValue<Vector2>());
+            };
+            
+            InputManager.Jump.performed += (context) =>
+            {
+                if (addedJumpCount == 0) return; 
+                addedJumpCount -= 1;
+                _movement.Jump();
+                Audio.PlayRandomSound(PlayerSoundType.Jump);
+            };
+            
+            // InputManager.Click.performed += (context) =>
             // {
             //     if (!_movement.IsGrounded()) return;
             //     
