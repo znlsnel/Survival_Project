@@ -10,8 +10,8 @@ namespace Player
     public class MovementHandler: MonoBehaviour, IMovement
     {
          private Rigidbody _rigidbody;
-
          public Camera mainCamera;
+        private PlayerCondition playerCondition;
 
         [SerializeField] float moveSpeed = 5f;
         // runningSpeed
@@ -41,6 +41,7 @@ namespace Player
         void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
+            playerCondition = GetComponent<PlayerCondition>();
         }
 
         private void FixedUpdate()
@@ -85,6 +86,8 @@ namespace Player
         public void Jump()
         {
             _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            playerCondition.UseStamina(20);
+
         }
         
         // fix: 자기 자신과 충돌하는 현상 발생 - 레이어로 수정

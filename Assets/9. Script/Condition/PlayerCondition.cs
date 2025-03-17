@@ -1,3 +1,4 @@
+using Player;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ public class PlayerCondition : MonoBehaviour
     public UICondition uiCondition;
     public DayNightCycle dayNightCycle;
     public Weather weather;
+    public MovementHandler movementHandler;
     Conditions health { get { return uiCondition.health; } }
     Conditions hunger { get { return uiCondition.hunger; } }
     Conditions thirsty { get { return uiCondition.thirsty; } }
@@ -111,9 +113,9 @@ public class PlayerCondition : MonoBehaviour
     {
         temperature.Add(amount * Time.deltaTime);
     }
-    public void Dash(float amounut)
+    public void UseStamina(float amounut)
     {
-        stamina.Subtract(amounut * Time.deltaTime);
+        stamina.Subtract(amounut);
     }
 
     public void Die()
