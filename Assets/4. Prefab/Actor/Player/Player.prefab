@@ -783,7 +783,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400166, guid: ec2987b5607a14e61947b9249fdfb51e, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.6387679
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400166, guid: ec2987b5607a14e61947b9249fdfb51e, type: 3}
       propertyPath: m_LocalRotation.x
@@ -791,7 +791,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400166, guid: ec2987b5607a14e61947b9249fdfb51e, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7693995
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400166, guid: ec2987b5607a14e61947b9249fdfb51e, type: 3}
       propertyPath: m_LocalRotation.z
@@ -803,7 +803,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400166, guid: ec2987b5607a14e61947b9249fdfb51e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 100.6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400166, guid: ec2987b5607a14e61947b9249fdfb51e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -1825,10 +1825,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4671294902662727085}
-    - targetCorrespondingSourceObject: {fileID: 100166, guid: ec2987b5607a14e61947b9249fdfb51e,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8823859721905176026}
   m_SourcePrefab: {fileID: 100100000, guid: ec2987b5607a14e61947b9249fdfb51e, type: 3}
 --- !u!4 &1745328338400669420 stripped
 Transform:
@@ -1905,7 +1901,7 @@ MonoBehaviour:
   mainCamera: {fileID: 0}
   moveSpeed: 5
   jumpForce: 5
-  rotationSpeed: 200
+  rotationSpeed: 8
   currMoveInputValue: {x: 0, y: 0}
   groundLayerMask:
     serializedVersion: 2
@@ -1919,6 +1915,7 @@ MonoBehaviour:
   isLanded: 0
   isComboAble: 0
   isAttacking: 0
+  currTargetRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &4010915854865428184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1958,7 +1955,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2074,19 +2071,6 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 294825915c0374b9884335dd1ffff953, type: 3}
     - {fileID: 8300000, guid: 8af4f5d15d2da4f56ae3070a34a82f2c, type: 3}
 --- !u!114 &4671294902662727085
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1745328338400769330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63a800824b794d9183643e31db9d891d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 500
---- !u!114 &8823859721905176026
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

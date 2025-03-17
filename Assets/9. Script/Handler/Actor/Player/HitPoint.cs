@@ -14,7 +14,7 @@ namespace Player
         private void Start()
         {
             // 플레이어의 경우 시작될 때 초기화
-            controller.Animation.WhenAttack += (isAttacking) =>
+            controller.AnimationHandler.WhenAttack += (isAttacking) =>
             {
                 Debug.Log("clear");
                 if (isAttacking) Clear();

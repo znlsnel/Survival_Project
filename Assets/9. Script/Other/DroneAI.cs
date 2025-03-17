@@ -36,6 +36,9 @@ public class DroneAI : MonoBehaviour
         currentScanRange = scanRange;
         StartCoroutine(ScanForResources());
 
+        agent.baseOffset += 5;
+
+
     }
 
     private IEnumerator ScanForResources()

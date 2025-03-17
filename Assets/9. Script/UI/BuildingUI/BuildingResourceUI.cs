@@ -19,6 +19,12 @@ public class BuildingResourceUI : MonoBehaviour
     private void Awake()
     {
 
+        if (InventoryHandler == null)
+        {
+            Debug.LogError("InventoryHandler가 할당되지 않았습니다! Inspector에서 설정하세요.");
+            return;
+        }
+
         playerItemList = InventoryHandler.MyItems;
     }
 
@@ -106,6 +112,12 @@ public class BuildingResourceUI : MonoBehaviour
 
     public int GetItemAmount(ItemDataSO item)
     {
+        if (playerItemList == null)
+        {
+            Debug.LogError("playerItemList 가 null이다?");
+            return 0;
+        }
+
         int count = 0;
         foreach (ItemDataSO inventoryItem in playerItemList)
         {

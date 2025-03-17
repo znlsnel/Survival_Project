@@ -18,6 +18,17 @@ public class BuildingMenuUI : MonoBehaviour
     private List<BuildingData> allBuildings = new List<BuildingData>();  // 전체 건축물 데이터
 
 
+    private void Awake()
+    {
+        if (allBuildings == null || allBuildings.Count == 0)
+        {
+            allBuildings = new List<BuildingData>(); // 빈 리스트라도 만들어줌
+        }
+
+        InitializeUI(allBuildings);
+    }
+
+
     public void InitializeUI(List<BuildingData> buildings)
     {
         allBuildings = buildings;
