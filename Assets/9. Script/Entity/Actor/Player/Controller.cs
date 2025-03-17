@@ -1,6 +1,4 @@
-using Enemy;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 // ReSharper disable once CheckNamespace
@@ -14,8 +12,6 @@ namespace Player
         private MovementHandler movementHandler; public Actor.IMovement MovementHandler => movementHandler;
         public AnimationHandler AnimationHandler { get; private set; }
         public AudioHandler AudioHandler {get; private set;}
-
-        private QuickSlotHandler quickSlot;
         
         public int addedJumpCount = 1;
         // public int comboCount = 0;
@@ -66,16 +62,20 @@ namespace Player
                 movementHandler.Jump();
                 AudioHandler.PlayRandomSound(PlayerSoundType.Jump);
             };
-
-            InputManager.LeftMouse.performed += CheckWeapon;
-
-
-
-				// _movement.isComboAble = false;
-
-				// meleeWeaponController.audioHandler.PlayerOneShot(MeleeWeaponAudioHandler.SoundType.Attack);
-				// _animation.animator.SetBool(Animation.HashIsAbleRegisterCombo, false);
-			
+            
+            InputManager.LeftMouse.performed += (context) =>
+            {
+                if (!movementHandler.IsGrounded()) return;
+                // Debug.Log(_movement.isComboAble);
+                // if (!_movement.isComboAble) return;
+                
+                AnimationHandler.animator.SetTrigger(AnimationHandler.MeleeAttackTrigger); 
+                
+                // _movement.isComboAble = false;
+                
+                // meleeWeaponController.audioHandler.PlayerOneShot(MeleeWeaponAudioHandler.SoundType.Attack);
+                // _animation.animator.SetBool(Animation.HashIsAbleRegisterCombo, false);
+            };
         }
         
         void FixedUpdate()
@@ -120,20 +120,5 @@ namespace Player
             
             hitPoint.hitEnemies.Add(gameObject);
         }
-
-        private void CheckWeapon(InputAction.CallbackContext context)
-        {
-		    if (!movementHandler.IsGrounded()) 
-                return;
-
-            ItemDataSO equip = quickSlot.GetSelectedItem();
-            if (equip == null)
-                return;
-
-
-		    AnimationHandler.animator.SetTrigger(AnimationHandler.MeleeAttackTrigger);
-		    AudioHandler.PlayRandomSound(PlayerSoundType.Attack);
-
-		}
     }
 }

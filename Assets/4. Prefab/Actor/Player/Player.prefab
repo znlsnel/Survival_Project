@@ -32,7 +32,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6716921615842194703}
+  m_Father: {fileID: 1745328338400667986}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &9164227857538591390
 MeshFilter:
@@ -61,8 +61,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.25, y: 0.25, z: 1.04}
-  m_Center: {x: 0, y: 0.05, z: 0.51}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 1, z: 0.7}
 --- !u!114 &6988727290340287402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1788,6 +1788,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 400166, guid: ec2987b5607a14e61947b9249fdfb51e,
+        type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 2360904421093822944}
     - targetCorrespondingSourceObject: {fileID: 400536, guid: ec2987b5607a14e61947b9249fdfb51e,
         type: 3}
       insertIndex: -1
@@ -1826,6 +1830,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 4671294902662727085}
   m_SourcePrefab: {fileID: 100100000, guid: ec2987b5607a14e61947b9249fdfb51e, type: 3}
+--- !u!4 &1745328338400667986 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400166, guid: ec2987b5607a14e61947b9249fdfb51e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1745328338400801396}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1745328338400669420 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400536, guid: ec2987b5607a14e61947b9249fdfb51e,
@@ -1915,6 +1925,7 @@ MonoBehaviour:
   isLanded: 0
   isComboAble: 0
   isAttacking: 0
+  currRotateValue: {x: 0, y: 0}
   currTargetRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &4010915854865428184
 MonoBehaviour:
@@ -2147,10 +2158,6 @@ PrefabInstance:
     - {fileID: 9500000, guid: ffae9263bd1a66245bd2bad16f271364, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 400000, guid: ffae9263bd1a66245bd2bad16f271364,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2360904421093822944}
     - targetCorrespondingSourceObject: {fileID: 400000, guid: ffae9263bd1a66245bd2bad16f271364,
         type: 3}
       insertIndex: -1

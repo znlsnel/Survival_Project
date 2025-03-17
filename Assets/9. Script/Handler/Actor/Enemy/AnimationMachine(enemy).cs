@@ -30,9 +30,16 @@ namespace Enemy
 
         override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
+            if (stateInfo.IsName("Die"))
+            {
+                Destroy(animator.gameObject);
+                return;
+            }
+            
             if (!animator.TryGetComponent(out AnimationHandler animation) || !stateInfo.IsName("Attack")) return;
             animation.WhenAttack?.Invoke(false);
             animator.GetComponent<NavigationHandler>().SetAttacking(false);
+            
         }
     }
 }
