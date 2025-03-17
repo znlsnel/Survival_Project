@@ -1166,16 +1166,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputSystem: {fileID: -944628639613478452, guid: 167b6126200c2564d81467a33d97502d,
     type: 3}
-  move: {fileID: 8345802397018709986, guid: 167b6126200c2564d81467a33d97502d, type: 3}
-  jump: {fileID: -3964325111436666334, guid: 167b6126200c2564d81467a33d97502d, type: 3}
-  click: {fileID: -5817435250438488119, guid: 167b6126200c2564d81467a33d97502d, type: 3}
-  view: {fileID: 8741366725976718599, guid: 167b6126200c2564d81467a33d97502d, type: 3}
-  toggleBuilding: {fileID: 0}
-  playerInput: {fileID: 0}
-  buildingInputHandler: {fileID: 0}
-  interaction: {fileID: 6149264348853985044, guid: 167b6126200c2564d81467a33d97502d,
-    type: 3}
-  inventory: {fileID: 0}
 --- !u!4 &1462179948
 Transform:
   m_ObjectHideFlags: 0
@@ -1599,5 +1589,5 @@ SceneRoots:
   - {fileID: 1041406672}
   - {fileID: 303453447}
   - {fileID: 569547219}
-  - {fileID: 143928102}
   - {fileID: 1226531801}
+  - {fileID: 143928102}
