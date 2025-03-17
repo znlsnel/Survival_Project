@@ -33,6 +33,7 @@ public class ExchangeUI : MonoBehaviour
         {
             buttonCancel.onClick.AddListener(CloseUI);
         }
+        if(inventoryHandler == null) inventoryHandler = FindObjectOfType<InventoryHandler>();
 
     }
 
