@@ -13,7 +13,9 @@ namespace Player
         private EquipHandler equipHandler;
 
         private Input _input;
-        public ResourceHandler ResourceHandler {get; private set;}
+        //public ResourceHandler ResourceHandler {get; private set;}
+        private PlayerCondition playerCondition;
+        private UICondition uICondition;
         private MovementHandler movementHandler; public Actor.IMovement MovementHandler => movementHandler;
         public AnimationHandler AnimationHandler { get; private set; }
         public AudioHandler AudioHandler {get; private set;}
@@ -33,6 +35,10 @@ namespace Player
 			equipHandler = GetComponent<EquipHandler>();
 			_input = GetComponent<Input>();
             ResourceHandler = GetComponent<ResourceHandler>();
+
+            playerCondition = GetComponent<PlayerCondition>();
+            UICondition uICondition = GetComponent<UICondition>();
+
             movementHandler = GetComponent<MovementHandler>();
             AnimationHandler = GetComponent<AnimationHandler>();
             AudioHandler = GetComponent<AudioHandler>();
@@ -117,7 +123,7 @@ namespace Player
             
             AnimationHandler.animator.SetTrigger(AnimationHandler.HashHurtTrigger);
             AudioHandler.PlayRandomSound(PlayerSoundType.Damaged);
-            ResourceHandler.Modify(-30);
+            //ResourceHandler.Modify(-30);
             
             Vector3 knockBackDirection = (transform.position - hitPoint.controller.transform.position).normalized;
             knockBackDirection.y = 0;

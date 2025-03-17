@@ -11,6 +11,8 @@ public class UIWeather : MonoBehaviour
     public GameObject hot;
     public GameObject snow;
     public Image color;
+    public ParticleSystem rainParticle;
+    public ParticleSystem snowParticle;
 
     public string sunnyColorCode = "#f8edbe";  
     public string rainyColorCode = "#bed3f8"; 
@@ -20,6 +22,10 @@ public class UIWeather : MonoBehaviour
     void Start()
     {
         weather = GameObject.Find("DayAndNight").GetComponent<Weather>();
+        rainParticle = GameObject.Find("GameObject").GetComponent<ParticleSystem>();
+        snowParticle = GameObject.Find("Snow").GetComponent<ParticleSystem>();
+
+
     }
 
     void Update()
@@ -28,6 +34,9 @@ public class UIWeather : MonoBehaviour
         rainy.SetActive(false);
         hot.SetActive(false);
         snow.SetActive(false);
+
+        if (rainParticle != null) rainParticle.Stop();
+        if (snowParticle != null) snowParticle.Stop();
 
         Color newColor = Color.white; // 기본 색상
 
@@ -40,6 +49,8 @@ public class UIWeather : MonoBehaviour
             case Weather.WeatherType.Rainy:
                 rainy.SetActive(true);
                 ColorUtility.TryParseHtmlString(rainyColorCode, out newColor);
+                if (rainParticle != null) rainParticle.Play();
+
                 break;
             case Weather.WeatherType.Hot:
                 hot.SetActive(true);
@@ -48,6 +59,7 @@ public class UIWeather : MonoBehaviour
             case Weather.WeatherType.Snow:
                 snow.SetActive(true);
                 ColorUtility.TryParseHtmlString(snowColorCode, out newColor);
+                if (snowParticle != null) snowParticle.Play();
                 break;
         }
 
