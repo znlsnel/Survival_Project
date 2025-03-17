@@ -32,7 +32,6 @@ namespace Player
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             var movement = animator.GetComponent<MovementHandler>();
-            Debug.Log(1);
             movement.isAttacking = false;
             
             animator.GetComponent<AnimationHandler>().WhenAttack?.Invoke(false);

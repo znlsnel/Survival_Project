@@ -1,3 +1,4 @@
+using System;
 using Actor;
 using UnityEngine;
 
@@ -21,6 +22,11 @@ namespace Enemy
         {
             _rigidbody = GetComponent<Rigidbody>();
             _hitPoint = GetComponentInChildren<HitPoint>();
+        }
+
+        private void Start()
+        {
+            _hitPoint.gameObject.SetActive(false);
         }
 
         public void SetIsValidatedAttack(int value)

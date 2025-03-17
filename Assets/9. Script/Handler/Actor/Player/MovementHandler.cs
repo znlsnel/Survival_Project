@@ -10,6 +10,7 @@ namespace Player
     public class MovementHandler: MonoBehaviour, IMovement
     {
          private Rigidbody _rigidbody;
+         private HitPoint _hitPoint;
 
          public Camera mainCamera;
 
@@ -41,6 +42,12 @@ namespace Player
         void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
+            _hitPoint = GetComponentInChildren<HitPoint>();
+        }
+
+        void Start()
+        {
+            _hitPoint.gameObject.SetActive(false);
         }
 
         private void FixedUpdate()
@@ -94,6 +101,11 @@ namespace Player
             if(_isPrevGrounded == false && value) isLanded = true; else isLanded = false;
             _isPrevGrounded = value;
             return value;
+        }
+
+        public void SetHitPoint(int inputValue)
+        {
+            _hitPoint.gameObject.SetActive(inputValue == 1);
         }
         
         
