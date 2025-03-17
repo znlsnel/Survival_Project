@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1932c9805c51b864cb0b6c22db6f1029, type: 3}
+  m_Name: Water
+  m_EditorClassIdentifier: 
+  itemIcon: {fileID: 21300000, guid: cec93aa512da05c4ca751b7bd7248af3, type: 3}
+  itemTypeIcon: {fileID: 21300000, guid: cec93aa512da05c4ca751b7bd7248af3, type: 3}
+  itemType: 2
+  itemName: "\uBB3C"
+  itemDescription: "\uAE68\uB057\uD55C \uBB3C\uC774\uB2E4."
+  dropItemPrefab: {fileID: 6035693609971393280, guid: e3b00be89cd2a8a4d80b2307dff02e5c,
+    type: 3}
+  isActiveItem: 0
+  activeItemPrefab: {fileID: 0}
+  canStackItems: 0
+  maxStackCount: 50

@@ -20,6 +20,7 @@ public class BuildingPreview : MonoBehaviour
     private Material[] previewMaterials;
 
     private static Material previewMaterial;    // 한번만 가져오기
+    private bool lastCanPlace = false;
 
     private void OnValidate()
     {
@@ -65,7 +66,7 @@ public class BuildingPreview : MonoBehaviour
     private void Update()
     {
         FollowMouse();
-        UpdatePreviewColor();
+
     }
     private void FollowMouse()
     {
@@ -73,16 +74,25 @@ public class BuildingPreview : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, placementLayer))
         {
             targetPosition = new Vector3(hit.point.x, hit.point.y, hit.point.z);
-            targetPosition.y = targetPosition.y+ previewCollider.bounds.size.y/2;
+            targetPosition.y = targetPosition.y + previewCollider.bounds.size.y / 2;
             transform.position = targetPosition;
             // AdjustToGround();
             canPlace = true;
         }
-        else canPlace = false;
+        else
+        {
+            canPlace = false;
+        }
+
+        if (lastCanPlace != canPlace)
+        {
+            lastCanPlace = canPlace;
+            UpdatePreviewColor();
+        }
     }
 
 
-    private void UpdatePreviewColor()
+    public void UpdatePreviewColor()
     {
         if (previewMaterials == null || previewMaterials.Length == 0)
             return;
@@ -90,6 +100,18 @@ public class BuildingPreview : MonoBehaviour
         Color targetColor = canPlace ? Color.green : Color.red;
 
         // 모든 Material 색상 변경
+        foreach (Material mat in previewMaterials)
+        {
+            mat.color = new Color(targetColor.r, targetColor.g, targetColor.b, 0.5f); // 반투명
+        }
+    }
+
+    public void SetPreviewColor(bool hasResources)
+    {
+        if (previewMaterials == null || previewMaterials.Length == 0) return;
+
+        Color targetColor = hasResources ? Color.green : Color.yellow;
+
         foreach (Material mat in previewMaterials)
         {
             mat.color = new Color(targetColor.r, targetColor.g, targetColor.b, 0.5f); // 반투명
@@ -129,6 +151,7 @@ public class BuildingPreview : MonoBehaviour
         // 새 Material 적용
         meshRenderer.materials = previewMaterials;
     }
+
 
 
 

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8588f6d0926fcc44a9806ca820df9c6, type: 3}
+  m_Name: WaterFilter
+  m_EditorClassIdentifier: 
+  exchangeRequirements:
+  - item: {fileID: 11400000, guid: 83f9efc6179380146a2ff2a47c80e6b2, type: 2}
+    amount: 1
+  exchangeRewards: {fileID: 11400000, guid: e68863e364ec1e2428b76070f706f08c, type: 2}
+  exchangeIcon: {fileID: 21300000, guid: cec93aa512da05c4ca751b7bd7248af3, type: 3}
+  exchangeTitle: "\uAE68\uB057\uD55C \uBB3C"
+  exchangeDesc: "\uC624\uC5FC\uB41C \uBB3C\uC744 \uAE68\uB057\uD558\uAC8C \uC815\uD654\uC2DC\uD0AC
+    \uC218 \uC788\uB2E4."

@@ -5,19 +5,20 @@ TagManager:
   serializedVersion: 2
   tags:
   - FlythroughCam
+  - Weapon
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Ground
+  - Player
   - Water
   - UI
   - Construction
-  - 
-  - 
-  - 
-  - 
-  - 
+  - PickResource
+  - DigResource
+  - StorageBox
+  - Interaction
+  - Ground
   - 
   - 
   - 

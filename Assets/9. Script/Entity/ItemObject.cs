@@ -14,8 +14,21 @@ public class ItemObject : MonoBehaviour, IInteractableObject
 	public void Interaction()
 	{
 		inventoryHandler.AddItem(itemData);
-		Destroy(gameObject);
+        Destroy(gameObject);
 	}
 
-	 
+	public ItemDataSO GetItemDataSO()
+	{
+		return itemData;
+	}
+
+	private void OnCollisionEnter(Collision collision)
+	{
+		if (collision.gameObject.GetComponent<InventoryHandler>() != null)
+		{
+			inventoryHandler.AddItem(itemData);
+			Destroy(gameObject);
+
+		}
+	}
 }

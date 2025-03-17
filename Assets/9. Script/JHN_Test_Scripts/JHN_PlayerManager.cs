@@ -25,15 +25,12 @@ public class JHN_PlayerManager : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    private void Start()
     {
         EventManager.Instance.OnToggleBuildModeRequested += ToggleBuildingMode;
     }
 
-    private void OnDisable()
-    {
-        EventManager.Instance.OnToggleBuildModeRequested -= ToggleBuildingMode;
-    }
+
 
     public void ToggleBuildingMode()
     {
