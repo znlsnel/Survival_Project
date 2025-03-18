@@ -110687,7 +110687,7 @@ AnimationClip:
     intParameter: 1
     messageOptions: 0
   - time: 0.35
-    functionName: AE_Attack
+    functionName: AE_ActiveItemTrigger
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

@@ -11,8 +11,12 @@ public class UICondition : MonoBehaviour
 
     public Image temperatureBar;
 
+	private void Start()
+	{
+		GameManager.Instance.PlayerController.GetComponent<PlayerCondition>().UICondition = this;
+	} 
 
-    private void Update()
+	private void Update() 
     {
 
 

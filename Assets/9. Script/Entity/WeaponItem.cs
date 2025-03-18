@@ -33,9 +33,9 @@ public class WeaponItem : ActiveItem
 		player = GameManager.Instance.PlayerController.gameObject;
 	}  
 
-	public override void Trigger() 
-    { 
-
+	protected override void UseItem()  
+    {
+		controller.AnimationHandler.Attack();
 		Player.HitPoint hp = player.GetComponentInChildren<Player.HitPoint>();
 		foreach (var resource in hp.GetTargetResources())
 		{
@@ -52,8 +52,12 @@ public class WeaponItem : ActiveItem
 			go.transform.position = hitPoint;
 			Destroy(go, 2.0f);
 		}
-
-		
 	}
+
+	public override void Trigger()
+	{
+
+	}
+
 }   
  

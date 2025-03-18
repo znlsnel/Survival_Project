@@ -8,6 +8,14 @@ public abstract class ActiveItem : MonoBehaviour
 	[Header ("Active Item")]
 	[SerializeField] protected float delay;
 
-	public abstract void Trigger();
+	protected Player.Controller controller;
+	public void UseItem(Player.Controller controller)
+	{
+		this.controller = controller;
+		UseItem();
+	} 
+	protected abstract void UseItem();
+
+	public abstract void Trigger(); 
 }
  

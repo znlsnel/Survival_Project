@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public enum ESlotType
 {
@@ -118,16 +119,29 @@ public class InventoryHandler : MonoBehaviour
 		itemSlots[slotB.type][slotB.idx].StackAmount = cnt;
 		onChangedSlot?.Invoke();
 	}
+	public void RemoveItem(ItemDataSO data)
+	{
+		var (type, idx) = FindItem(data);
+		if (idx == -1)
+			return;
 
+		RemoveItem(type, idx);
+	}
+	 
 	public void RemoveItem(ESlotType type, int idx)
 	{
 		ItemSlot itemslot = itemSlots[type][idx];
 		itemslot.StackAmount -= 1;
 
 		if (itemslot.StackAmount <= 0)
+		{
 			myItems[type][idx] = null;
+			itemslot.StackAmount = 1;
+		}
+		
 
 		onChangedSlot?.Invoke();
 	}
+
+
 }
- 

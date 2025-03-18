@@ -13,13 +13,19 @@ MonoBehaviour:
   m_Name: Water
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: cec93aa512da05c4ca751b7bd7248af3, type: 3}
-  itemTypeIcon: {fileID: 21300000, guid: cec93aa512da05c4ca751b7bd7248af3, type: 3}
+  itemTypeIcon: {fileID: 21300000, guid: cc95fae3ac7176249b8d53c71472dedd, type: 3}
   itemType: 2
   itemName: "\uBB3C"
   itemDescription: "\uAE68\uB057\uD55C \uBB3C\uC774\uB2E4."
   dropItemPrefab: {fileID: 6035693609971393280, guid: e3b00be89cd2a8a4d80b2307dff02e5c,
     type: 3}
-  isActiveItem: 0
-  activeItemPrefab: {fileID: 0}
-  canStackItems: 0
+  isActiveItem: 1
+  activeItemPrefab: {fileID: 7098219115928240129, guid: beb44d9acb9844042828c9a73b45f27f,
+    type: 3}
+  canStackItems: 1
   maxStackCount: 50
+  health: 3
+  hunger: 0
+  thirsty: 8
+  stamina: 3
+  temperature: 3

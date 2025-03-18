@@ -16,9 +16,7 @@ namespace Player
         private Input _input;
 
         public ResourceHandler ResourceHandler {get; private set;}
-        private MovementHandler movementHandler; 
-
-        public Actor.IMovement MovementHandler => movementHandler;
+        private MovementHandler movementHandler;
         public AnimationHandler AnimationHandler { get; private set; }
         public AudioHandler AudioHandler {get; private set;}
 
@@ -79,16 +77,9 @@ namespace Player
                 movementHandler.Jump();
                 AudioHandler.PlayRandomSound(PlayerSoundType.Jump);
             };
-
             InputManager.LeftMouse.performed += InputLeftMouse;
-                
-                
-                // _movement.isComboAble = false;
-                
-                // meleeWeaponController.audioHandler.PlayerOneShot(MeleeWeaponAudioHandler.SoundType.Attack);
-                // _animation.animator.SetBool(Animation.HashIsAbleRegisterCombo, false);
-            
-        }
+
+		}
         
         void FixedUpdate()
         {
@@ -132,31 +123,28 @@ namespace Player
             
             Vector3 knockBackDirection = (transform.position - hitPoint.controller.transform.position).normalized;
             knockBackDirection.y = 0;
-            MovementHandler.ApplyKnockBack(knockBackDirection, 10f);
+            movementHandler.ApplyKnockBack(knockBackDirection, 10f);
             
             hitPoint.hitEnemies.Add(gameObject);
         }
 
-
+         
         private void InputLeftMouse(InputAction.CallbackContext context)
         {
 			if (!movementHandler.IsGrounded()) return;
 
-            ActiveItem activeItem = equipHandler.GetActiveItem();
-            if (activeItem != null)
-            {
-                // 소모형 아이템이면 사용하는 애니메이션 실행
-				AnimationHandler.animator.SetTrigger(AnimationHandler.MeleeAttackTrigger);
-			}
+			ActiveItem activeItem = equipHandler.GetActiveItem();
+			if (activeItem != null)
+				activeItem.UseItem(this); 
 		}
 
 
-        private void AE_Attack()
+        private void AE_ActiveItemTrigger()
         {
 			ActiveItem activeItem = equipHandler.GetActiveItem();
             if (activeItem != null)
 				activeItem.Trigger();
-		}
+		} 
 
 
         public void AE_StartGame()
