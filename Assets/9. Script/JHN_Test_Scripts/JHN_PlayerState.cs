@@ -23,8 +23,8 @@ public class NormalState : JHN_PlayerState
     }
 
     public override void EnterState()
-    {
-        playerInput.SwitchCurrentActionMap("PlayerInput");
+    { 
+        InputManager.ModeChange(true);
         Debug.Log("일반 모드 활성화");
     }
 }
@@ -39,8 +39,8 @@ public class BuildState : JHN_PlayerState
     }
 
     public override void EnterState()
-    {
-        playerInput.SwitchCurrentActionMap("PlayerBuilding");
+    { 
+		InputManager.ModeChange(false);
         Debug.Log("건축 모드 활성화");
     }
 }

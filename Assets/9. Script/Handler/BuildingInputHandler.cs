@@ -11,9 +11,12 @@ public class BuildingInputHandler : MonoBehaviour
         InputManager.RotateAction.performed += RotateBuilding;
 		InputManager.PlaceAction.performed += PlaceBuilding;
 		InputManager.CancelAction.performed += CancelBuilding;
-		InputManager.ToggleAction.performed += ToggleBuildMode;
 		InputManager.BuildingAction.performed += StartBuilding;
-    }
+
+
+		InputManager.GetInput(EPlayerInput.ToggleBuildMode).performed += ToggleBuildMode;
+		InputManager.GetInput(EPlayerBuilding.ToggleBuildMode).performed += ToggleBuildMode;
+    } 
 
 
 

@@ -55,8 +55,7 @@ public class InputManager : Singleton<InputManager>
 	static public InputAction LeftMouse => Instance.playerInputs[EPlayerInput.LeftMouse];
 	static public InputAction ToggleBuilding => Instance.playerInputMap.enabled ? 
 		Instance.playerInputs[EPlayerInput.ToggleBuildMode] : Instance.buildingInputs[EPlayerBuilding.ToggleBuildMode];
-	static public InputAction RotateAction => Instance.buildingInputs[EPlayerBuilding.RotateObject];
-	static public InputAction ToggleAction => Instance.buildingInputs[EPlayerBuilding.ToggleBuildMode];
+	static public InputAction RotateAction => Instance.buildingInputs[EPlayerBuilding.RotateObject]; 
 	static public InputAction CancelAction => Instance.buildingInputs[EPlayerBuilding.CancelBuild];
 	static public InputAction PlaceAction => Instance.buildingInputs[EPlayerBuilding.PlaceObject];
 	static public InputAction BuildingAction => Instance.buildingInputs[EPlayerBuilding.StartBuilding];
@@ -76,7 +75,7 @@ public class InputManager : Singleton<InputManager>
 		base.Awake();
 		SetActive(false);
 
-			numKeyDown = new bool[numKeyCodes.Length];
+		numKeyDown = new bool[numKeyCodes.Length];
 	}
 
 	private void Update()
@@ -91,7 +90,7 @@ public class InputManager : Singleton<InputManager>
     {
 		if (ToggleBuilding != null)
 		{
-			ToggleBuilding.performed += ToggleBuildMode;
+			ToggleBuilding.started += ToggleBuildMode;
 			ToggleBuilding.Enable();
 		}
 	}
@@ -122,7 +121,7 @@ public class InputManager : Singleton<InputManager>
 
 	} 
 	public static void SetActive(bool active)
-	{
+	{ 
 		if (active)
 		{
 			Instance.inputSystem.Enable();
@@ -135,12 +134,27 @@ public class InputManager : Singleton<InputManager>
 
     public void ToggleBuildMode(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Started)
+        if (context.phase == InputActionPhase.Started) 
         {
             EventManager.Instance.RequestToggleBuildMode();
         }
     }
-	 
+
+	public static void ModeChange(bool playMode)
+	{
+		if (playMode)
+		{
+			Instance.playerInputMap.Enable();
+			Instance.buildingInputMap.Disable();
+		} 
+		else
+		{ 
+			Instance.playerInputMap.Disable();
+			Instance.buildingInputMap.Enable();
+		}
+
+	}
+
     private void CheckInputNumber()
     {
 		for (int i = 0; i < numKeyCodes.Length; i++)
