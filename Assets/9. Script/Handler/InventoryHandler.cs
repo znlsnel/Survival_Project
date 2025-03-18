@@ -84,7 +84,7 @@ public class InventoryHandler : MonoBehaviour
 			
 
         return (ESlotType.None, -1);
-	}
+	} 
 
     public bool AddItem(ItemDataSO item)
     {
