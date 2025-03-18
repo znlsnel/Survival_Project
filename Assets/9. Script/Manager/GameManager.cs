@@ -13,5 +13,15 @@ public class GameManager : Singleton<GameManager>
 		playerController = FindFirstObjectByType<Player.Controller>();	
 	}
 
+	public void StartGame()
+	{
+		playerController.AnimationHandler.animator.speed = 1.0f; 
+
+		
+	}
+	public void GameEnd()
+	{
+
+	}
 
 }

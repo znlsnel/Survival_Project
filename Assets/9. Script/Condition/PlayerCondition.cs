@@ -124,7 +124,7 @@ public class PlayerCondition : MonoBehaviour
             }
         }
     }
-
+     
 
     public void Heal(float amount)
     {
@@ -135,13 +135,12 @@ public class PlayerCondition : MonoBehaviour
     {
         hunger.Add(amount);
     }
-    public void Drink(float amount, float amount2)
+    public void Drink(float amount)
     {
         thirsty.Add(amount);
         if (temperature.curValue > 50)
-        {
-            temperature.curValue = Mathf.Max(temperature.curValue - amount2, 50);
-        }
+            temperature.curValue = Mathf.Max(temperature.curValue - (amount / 3), 50);
+        
     }
     
     public void Rest(float amount)

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI; 
 
@@ -14,25 +15,27 @@ public class UIWeather : MonoBehaviour
     public ParticleSystem snowParticle;
     private Transform cameraTransform;
 
-    void Start()
-    {
-        weather = GameObject.Find("DayAndNight").GetComponent<Weather>();
-        rainParticle = GameObject.Find("Rain").GetComponent<ParticleSystem>();
-        snowParticle = GameObject.Find("Snow").GetComponent<ParticleSystem>();
+
+	private void Start()
+	{
+		weather = GameObject.Find("DayAndNight").GetComponent<Weather>();
+        rainParticle = Instantiate(rainParticle);
+		snowParticle = Instantiate(snowParticle); 
+		//snowParticle = GameObject.Find("Snow").GetComponent<ParticleSystem>();
 
 
-        cameraTransform = Camera.main.transform;
-    }
+		cameraTransform = Camera.main.transform;
+	}
 
-    void Update()
+	private void Update()
     {
         sunny.SetActive(false);
         rainy.SetActive(false);
         hot.SetActive(false);
         snow.SetActive(false);
 
-        if (rainParticle != null) rainParticle.Stop();
-        if (snowParticle != null) snowParticle.Stop();
+        rainParticle.Stop();
+        snowParticle.Stop(); 
 
 
         switch (weather.currentWeather)
@@ -40,17 +43,19 @@ public class UIWeather : MonoBehaviour
             case Weather.WeatherType.Sunny:
                 sunny.SetActive(true);
                 break;
+
             case Weather.WeatherType.Rainy:
                 rainy.SetActive(true);
-                if (rainParticle != null) rainParticle.Play();
-
+                rainParticle.Play();
                 break;
+
             case Weather.WeatherType.Hot:
                 hot.SetActive(true);
-                break;
+                break; 
+
             case Weather.WeatherType.Snow:
                 snow.SetActive(true);
-                if (snowParticle != null) snowParticle.Play();
+                snowParticle.Play();
                 break;
         }
 

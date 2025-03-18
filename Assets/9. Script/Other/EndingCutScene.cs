@@ -46,6 +46,12 @@ public class EndingCutScene : MonoBehaviour
         StartCoroutine(PlayEndingCutScene());
     }
 
+    public void InitScene(CinemachineVirtualCamera cam, Transform target)
+    {
+        skyTarget = target;
+        vCam = cam;
+    }
+
     private IEnumerator PlayEndingCutScene()
     {
         Vector3 startPos = airplane.transform.position;

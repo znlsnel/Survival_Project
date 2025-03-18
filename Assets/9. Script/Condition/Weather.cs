@@ -7,6 +7,7 @@ public class Weather : MonoBehaviour
     public enum WeatherType { Sunny, Rainy, Hot, Snow }
     public WeatherType currentWeather; 
 
+
     void Start()
     {
         SetRandomWeather(); 

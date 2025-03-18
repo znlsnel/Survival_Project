@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExchangeManager : MonoBehaviour
+public class ExchangeManager : MonoBehaviour, IInteractableObject
 {
     [SerializeField] private ExchangeDataSO exchangeData; // 모든 교환 가능 데이터
     [SerializeField] private ExchangeUI exchangeUI;
@@ -29,4 +29,9 @@ public class ExchangeManager : MonoBehaviour
         exchangeUI.gameObject.SetActive(true);
         exchangeUI.UpdateExchangeUI(exchangeData);
     }
+
+	public void Interaction()
+	{
+		exchangeUI?.gameObject.SetActive(true);
+	}
 }

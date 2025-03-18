@@ -39,7 +39,7 @@ public class InventoryHandler : MonoBehaviour
 
 	// === Component ===
 	private MessageUI messageUI;
-
+	 
 	private void OnValidate()
 	{
 		foreach (ESlotType type in Enum.GetValues(typeof(ESlotType)))
@@ -48,7 +48,7 @@ public class InventoryHandler : MonoBehaviour
 			itemSlots.Add(type, new List<ItemSlot>()); 
 		}
 	}
-	private void Awake()
+	private void Start()
 	{
 		messageUI = GetComponent<PlayerUIHandler>().MessageUI;
 
@@ -103,8 +103,10 @@ public class InventoryHandler : MonoBehaviour
 		}
 
 		onChangedSlot?.Invoke();
-		messageUI.AddItem(item);
+		messageUI.AddItem(item); 
 		QuestManager.ProgressQuest(EQuestCategory.Pickup, item.ItemName); 
+
+		
 		return true;
 	}
 

@@ -42,8 +42,9 @@ namespace Player
             AnimationHandler = GetComponent<AnimationHandler>();
             AudioHandler = GetComponent<AudioHandler>();
 
-        
-        }
+            AnimationHandler.animator.speed = 0.0f;
+
+		}
         
 
         void Start()

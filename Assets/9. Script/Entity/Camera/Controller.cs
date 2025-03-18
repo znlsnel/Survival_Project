@@ -5,7 +5,6 @@ namespace GameCamera
 {
     public class Controller: MonoBehaviour
     {
-        [SerializeField] private Transform target;
         [SerializeField] private float radius = 5f; // 타겟을 중심으로 카메라 position 반경
         [SerializeField] private float sensitivity = 3f; // 회전 감지 민감도
         [SerializeField] private float verticalSensitivity = 3f; // 회전 감지 민감도
@@ -13,9 +12,11 @@ namespace GameCamera
 
         private Vector2 _cumulativeMoveAmount = Vector2.zero; // 누적 마우스 델타 이동 값
         private float _computedRadius = 5f;
+        private Transform target;
 
-        private void Start()
+        private void Start() 
         {
+            target = GameManager.Instance.PlayerController.transform;
             if(!target) throw new UnityException("camera target is null");
         }
 

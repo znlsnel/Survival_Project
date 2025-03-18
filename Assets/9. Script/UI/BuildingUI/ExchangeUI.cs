@@ -15,7 +15,8 @@ public class ExchangeUI : MonoBehaviour
     [SerializeField] private GameObject topContentPrefab;
     [SerializeField] private Button buttonMake;  // 교환 버튼
     [SerializeField] private Button buttonCancel; // 취소 버튼
-
+    [SerializeField] private ItemDataSO engineItemData;
+    
     private ExchangeDataSO currentExchangeData; // 현재 선택된 교환 데이터
     private List<ItemDataSO> playerItemList;
 
@@ -49,6 +50,7 @@ public class ExchangeUI : MonoBehaviour
 
         buttonMake.onClick.AddListener(ProcessExchange);
         buttonCancel.onClick.AddListener(CloseUI);
+        CloseUI();
     }
 
 
@@ -173,6 +175,9 @@ public class ExchangeUI : MonoBehaviour
         // 교환 아이템 추가
         playerItemList.Add(currentExchangeData.ExchangeRewards);
         Debug.Log($"교환 완료! {currentExchangeData.ExchangeRewards.ItemName}을 획득했습니다.");
+
+        var go = Instantiate(currentExchangeData.ExchangeRewards.DropItemPrefab);
+        go.transform.position = GameManager.Instance.transform.position; 
 
         // UI 업데이트
         UpdateExchangeUI(currentExchangeData);
