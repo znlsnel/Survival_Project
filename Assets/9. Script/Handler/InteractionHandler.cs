@@ -19,19 +19,17 @@ public class InteractionHandler : MonoBehaviour
 	[SerializeField] private LayerMask interactionLayer;
 	[SerializeField, Range(-1, 1)] private float xOffset = 0f;
 	[SerializeField, Range(-1, 1)]private float yOffset = 0f;
-	[SerializeField] private GameObject aimUIPrefab;
+	[SerializeField] private Image aimUI;
 
 
 	private IInteractableObject interactableObject;
 	private InfoDisplayHandler displayObject;
-	private Image aimUI;
 
     void Start()
     {
 		
-		aimUI = Instantiate(aimUIPrefab).GetComponentInChildren<Image>(); 
 		aimUI.transform.localPosition = aimUI.transform.parent.InverseTransformPoint(new Vector3(Screen.width * (xOffset + 1f) / 2f, Screen.height * (yOffset + 1f) / 2f, 0));
-
+		 
 		InputManager.Interaction.started += InputInteraction;
 		InvokeRepeating(nameof(FindObject), 0, 0.1f); 
     }

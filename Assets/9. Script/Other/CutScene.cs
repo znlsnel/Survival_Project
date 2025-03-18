@@ -46,7 +46,9 @@ public class CutScene : MonoBehaviour
 
     private IEnumerator PlayCutScene()
     {
-        Vector3 startPos = startPosition.position;
+        yield return new WaitForSeconds(0.1f);
+        GameManager.Instance.ActiveUI(false);
+		Vector3 startPos = startPosition.position;
         Vector3 endPos = dropTarget.position;
 
         float startFOV = defaultFOV;
@@ -102,8 +104,9 @@ public class CutScene : MonoBehaviour
 		vCam.enabled = false;
         gameObject.SetActive(false);
         ptc.SetActive(false);
-         
-        GameManager.Instance.StartGame();
+
+		GameManager.Instance.ActiveUI(true); 
+		GameManager.Instance.StartGame();
 		StopAllCoroutines();
     }
 

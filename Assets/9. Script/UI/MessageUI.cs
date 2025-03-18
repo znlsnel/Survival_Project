@@ -6,7 +6,6 @@ using UnityEngine.Pool;
 public class MessageUI : MonoBehaviour
 {
     [SerializeField] private GameObject messagePrefab;
-    [SerializeField] private Transform messagePanel;
     ObjectPool<GameObject> pool;
 
 	private void Awake()
@@ -20,7 +19,7 @@ public class MessageUI : MonoBehaviour
 	{
 		var go = pool.Get();
 		go.GetComponent<MessageSlot>().Initialize(data);
-		go.transform.SetParent(messagePanel, false);
+		go.transform.SetParent(transform, false);
 		go.transform.localPosition = Vector3.zero;
 		go.SetActive(true);
 

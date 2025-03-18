@@ -9,16 +9,13 @@ public class QuestManager : Singleton<QuestManager>
 	[SerializeField] private QuestDataSO firstQuest;
 	Dictionary<(EQuestCategory, string), QuestDataSO> _questSlot = new Dictionary<(EQuestCategory, string), QuestDataSO>();
 
-    [SerializeField] private GameObject questUIPrefab;
-
 	private QuestUI questUI;
 	private InventoryHandler inventory;
 
 	protected override void Awake()
 	{
 		base.Awake();
-		var go = Instantiate(questUIPrefab);
-		questUI = go.GetComponent<QuestUI>();
+		questUI = FindFirstObjectByType<QuestUI>();
 		AddQuest(firstQuest);
 
 		inventory = FindFirstObjectByType<InventoryHandler>();	

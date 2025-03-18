@@ -5,8 +5,12 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
 	[SerializeField] private GameObject endingCutScene;
-	private Player.Controller playerController;
+	[SerializeField] private GameObject uiParent;
 
+	public GameObject UIParent => uiParent;
+
+
+	private Player.Controller playerController;
 	public Player.Controller PlayerController => playerController;
 	protected override void Awake()
 	{
@@ -25,4 +29,8 @@ public class GameManager : Singleton<GameManager>
 		endingCutScene.gameObject.SetActive(true);
 	}
 
+	public void ActiveUI(bool active)
+	{
+		uiParent.SetActive(active); 
+	}
 }
