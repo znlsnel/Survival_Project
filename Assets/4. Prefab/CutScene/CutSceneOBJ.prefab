@@ -14600,6 +14600,7 @@ MonoBehaviour:
   explosionPrefab: {fileID: 3897789388411180017, guid: d78ad3c8137421f49b968fd1c0b922bf,
     type: 3}
   dropTarget: {fileID: 0}
+  startPosition: {fileID: 0}
   fadeCanvas: {fileID: 7312684459339282117}
   dropDuration: 5
   vCam: {fileID: 0}
@@ -19481,7 +19482,7 @@ Transform:
   m_GameObject: {fileID: 8424499149856621489}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 148.6, z: -255.8}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
