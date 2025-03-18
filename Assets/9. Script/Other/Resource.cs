@@ -25,7 +25,7 @@ public class Resource : MonoBehaviour
 
             if (itemToGive.DropItemPrefab != null)
             {
-                Instantiate(itemToGive.DropItemPrefab, hitPoint + Vector3.up, Quaternion.LookRotation(hitNormal, Vector3.up));
+                Instantiate(itemToGive.DropItemPrefab, hitPoint + Vector3.up*2, Quaternion.LookRotation(hitNormal, Vector3.up));
             }
 
             gatheredItems.Add(itemToGive);
