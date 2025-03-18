@@ -14,11 +14,16 @@ public class EventManager : Singleton<EventManager>
     public event Action<bool> OnCanBuildingRequested;   // bool값 필요없을지도?
     public event Action OnStartBuildingRequested;
 
+    private bool isBuildMode = false;
+    public bool IsBuildMode => isBuildMode;
+
 	protected override void Awake()
 	{
         base.Awake();
-		InputManager.GetInput(EPlayerBuilding.ToggleBuildMode).started += ToggleBuildMode;
-		InputManager.GetInput(EPlayerInput.ToggleBuildMode).started += ToggleBuildMode;
+        InputManager.GetInput(EPlayerBuilding.ToggleBuildMode).started += ToggleBuildMode;
+        InputManager.GetInput(EPlayerInput.ToggleBuildMode).started += ToggleBuildMode;
+
+		BuildingModeChanged(false);
 	}
      
 	public void ToggleBuildMode(InputAction.CallbackContext context) => RequestToggleBuildMode();
@@ -26,7 +31,8 @@ public class EventManager : Singleton<EventManager>
 
 	public void BuildingModeChanged(bool isBuildingMode)
     {
-        OnBuildingModeChanged?.Invoke(isBuildingMode);
+        isBuildMode = isBuildingMode;
+		OnBuildingModeChanged?.Invoke(isBuildingMode);
     }
 
     public void RequestToggleBuildMode()

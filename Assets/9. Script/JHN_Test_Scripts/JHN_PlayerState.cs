@@ -15,9 +15,9 @@ public abstract class JHN_PlayerState
 
 public class NormalState : JHN_PlayerState
 {
-    private JHN_PlayerManager playerManager;
+    private PlayerModeHandler playerManager;
 
-    public NormalState(PlayerInput input, JHN_PlayerManager manager) : base(input)
+    public NormalState(PlayerInput input, PlayerModeHandler manager) : base(input)
     {
         playerManager = manager;
     }
@@ -31,9 +31,9 @@ public class NormalState : JHN_PlayerState
 
 public class BuildState : JHN_PlayerState
 {
-    private JHN_PlayerManager playerManager;
+    private PlayerModeHandler playerManager;
 
-    public BuildState(PlayerInput input, JHN_PlayerManager manager) : base(input)
+    public BuildState(PlayerInput input, PlayerModeHandler manager) : base(input)
     {
         playerManager = manager;
     }

@@ -67,12 +67,13 @@ public class InputManager : Singleton<InputManager>
 	 
 	private void OnValidate()
 	{
-		BindAction(); 
 	}
 
 	protected override void Awake()
 	{
 		base.Awake();
+
+		BindAction(); 
 		SetActive(false);
 
 		numKeyDown = new bool[numKeyCodes.Length];
@@ -83,7 +84,12 @@ public class InputManager : Singleton<InputManager>
 		CheckInputNumber();
 	}
 
-	 
+	private void Start()
+	{
+		ModeChange(true);
+
+	}
+
 	private void BindAction()
 	{
 		string mapName = typeof(EPlayerInput).Name;
@@ -107,11 +113,14 @@ public class InputManager : Singleton<InputManager>
 			buildingInputs.Add(type, buildingInputMap.FindAction(name));
 		}
 
+		
 	} 
+
 	public static void SetActive(bool active)
 	{ 
 		if (active)
 		{
+			
 			Instance.inputSystem.Enable();
 		}
 		else 
@@ -119,6 +128,7 @@ public class InputManager : Singleton<InputManager>
 			Instance.inputSystem.Disable(); 
 		}
 	}
+
 
 	public static void ModeChange(bool playMode)
 	{
@@ -134,6 +144,7 @@ public class InputManager : Singleton<InputManager>
 		}
 
 	}
+
 
     private void CheckInputNumber()
     {
