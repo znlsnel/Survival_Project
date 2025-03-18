@@ -13,8 +13,8 @@ public class Dropship : MonoBehaviour, IInteractableObject
             exchangeUI = GameObject.Find("CanvasUI/ExchangeUI");
         }
 
-        }
-        public void Interaction()
+    }
+    public void Interaction()
     {
         if (exchangeUI != null)
         {

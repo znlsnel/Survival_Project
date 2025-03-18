@@ -1,3 +1,4 @@
+using Enemy;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,18 +10,20 @@ namespace Player
     [RequireComponent(typeof(MovementHandler), typeof(ResourceHandler), typeof(EquipHandler))]
     public class Controller : MonoBehaviour
     {
-
+        private HitPoint hitPoint;
         private EquipHandler equipHandler;
 
         private Input _input;
-        //public ResourceHandler ResourceHandler {get; private set;}
-        private PlayerCondition playerCondition;
-        private UICondition uICondition;
-        private MovementHandler movementHandler; public Actor.IMovement MovementHandler => movementHandler;
+
+        public ResourceHandler ResourceHandler {get; private set;}
+        private MovementHandler movementHandler; 
+
+        public Actor.IMovement MovementHandler => movementHandler;
         public AnimationHandler AnimationHandler { get; private set; }
         public AudioHandler AudioHandler {get; private set;}
-        
+
         public int addedJumpCount = 1;
+
         // public int comboCount = 0;
         // public int knockBackForce = 10; // 상대의 공격에 따라 달라질 수 있음
         
@@ -32,16 +35,18 @@ namespace Player
       
         void Awake()
         {
+			hitPoint= GetComponentInChildren<HitPoint>();
 			equipHandler = GetComponent<EquipHandler>();
 			_input = GetComponent<Input>();
             //ResourceHandler = GetComponent<ResourceHandler>();
 
-            playerCondition = GetComponent<PlayerCondition>();
-            UICondition uICondition = GetComponent<UICondition>();
-
+            //playerCondition = GetComponent<PlayerCondition>();
+            UICondition uICondition = GetComponent<UICondition>(); 
             movementHandler = GetComponent<MovementHandler>();
             AnimationHandler = GetComponent<AnimationHandler>();
             AudioHandler = GetComponent<AudioHandler>();
+
+        
         }
         
 
@@ -123,7 +128,7 @@ namespace Player
             
             AnimationHandler.animator.SetTrigger(AnimationHandler.HashHurtTrigger);
             AudioHandler.PlayRandomSound(PlayerSoundType.Damaged);
-            //ResourceHandler.Modify(-30);
+            ResourceHandler.Modify(-30);
             
             Vector3 knockBackDirection = (transform.position - hitPoint.controller.transform.position).normalized;
             knockBackDirection.y = 0;
@@ -137,14 +142,27 @@ namespace Player
         {
 			if (!movementHandler.IsGrounded()) return;
 
-
             ActiveItem activeItem = equipHandler.GetActiveItem();
             if (activeItem != null)
             {
+                // 소모형 아이템이면 사용하는 애니메이션 실행
 				AnimationHandler.animator.SetTrigger(AnimationHandler.MeleeAttackTrigger);
-                activeItem.Trigger();
 			}
-
 		}
+
+
+        private void AE_Attack()
+        {
+			ActiveItem activeItem = equipHandler.GetActiveItem();
+            if (activeItem != null)
+				activeItem.Trigger();
+		}
+
+
+        public void AE_StartGame()
+        {
+           InputManager.SetActive(true); 
+            Debug.Log("ㅎㅇ");
+        }
     }
 }

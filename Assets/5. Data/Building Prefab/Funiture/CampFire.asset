@@ -16,5 +16,5 @@ MonoBehaviour:
   buildingType: 0
   description: "\uCCB4\uC628\uC744 \uD68C\uBCF5\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
   prefab: {fileID: 4736621048045062050, guid: 87c3f6f09c9ff0742b475095dd14c05e, type: 3}
-  buildingIcon: {fileID: 21300000, guid: 0eb4fabd70cb42c4e853c56d1227a3fd, type: 3}
+  buildingIcon: {fileID: 21300000, guid: d21fd46897628e64fa1c37c390990a3e, type: 3}
   cost: []

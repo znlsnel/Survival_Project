@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6883429288474457963}
   - component: {fileID: 768463575086249202}
   - component: {fileID: 2768475848502886612}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CampFire 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 4736621048045062050}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.5, y: 19.5, z: 15.1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 6392177188564474263}
   - component: {fileID: 3232910306493127904}
   - component: {fileID: 9071157114782049887}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}

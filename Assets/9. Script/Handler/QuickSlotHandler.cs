@@ -15,14 +15,15 @@ public class QuickSlotHandler : MonoBehaviour
 
 		InputManager.inputNumber += SelectSlot; 
 		InventoryHandler inventory = FindFirstObjectByType<InventoryHandler>();
-		myItems = inventory.QuickSlotItems; 
-	} 
+		myItems = inventory.QuickSlotItems;
+		inventory.onChangedSlot += ()=>SelectSlot(selectItem+1);
+	}  
 	  
 	public ItemDataSO GetSelectedItem() => myItems[selectItem];
 	  
 	public void SelectSlot(int num)
 	{
-		selectItem = num - 1;
+		selectItem = num - 1; 
 		equipHandler.EquipItem(GetSelectedItem()); 
 	}
 }

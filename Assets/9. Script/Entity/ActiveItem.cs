@@ -6,7 +6,8 @@ using UnityEngine.InputSystem;
 public abstract class ActiveItem : MonoBehaviour
 {
 	[Header ("Active Item")]
-	[SerializeField] private float delay;
+	[SerializeField] protected float delay;
+
 	public abstract void Trigger();
 }
  

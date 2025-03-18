@@ -48,14 +48,14 @@ namespace Player
 
         void Start()
         {
-            _hitPoint.gameObject.SetActive(false);
+           // _hitPoint.gameObject.SetActive(false);
         }
 
         private void FixedUpdate()
         {
             Move(currMoveInputValue);
             if (isAttacking) return;
-            Rotate();
+            Rotate(); 
         }
 
         // 정지 상태 체크 필요
@@ -87,6 +87,10 @@ namespace Player
             cameraForward.y = 0;
 
             Vector3 direction = (cameraRight * currRotateValue.x + (cameraForward * currRotateValue.y)).normalized;
+            if (direction.magnitude <= 0)
+                return;
+
+            
             currTargetRotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, currTargetRotation, Time.deltaTime * rotationSpeed);
         }
@@ -108,8 +112,8 @@ namespace Player
         }
 
         public void SetHitPoint(int inputValue)
-        {
-            _hitPoint.gameObject.SetActive(inputValue == 1);
+        { 
+         //   _hitPoint.gameObject.SetActive(inputValue == 1);
         }
         
         

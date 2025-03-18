@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: mineralBox
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 32735b9ee3b90df4fbc4a5f3a47f17e1, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 32735b9ee3b90df4fbc4a5f3a47f17e1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.67
@@ -75,7 +79,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100000, guid: 32735b9ee3b90df4fbc4a5f3a47f17e1,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5282422839892362888}
+      addedObject: {fileID: 4704166641665136405}
   m_SourcePrefab: {fileID: 100100000, guid: 32735b9ee3b90df4fbc4a5f3a47f17e1, type: 3}
 --- !u!1 &6523353924584713002 stripped
 GameObject:
@@ -114,7 +118,7 @@ MonoBehaviour:
   itemToGive: {fileID: 11400000, guid: 2b11c7e023a420245aed3ff8fc603fc9, type: 2}
   quantityPerHit: 1
   capacity: 3
---- !u!65 &5282422839892362888
+--- !u!65 &4704166641665136405
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

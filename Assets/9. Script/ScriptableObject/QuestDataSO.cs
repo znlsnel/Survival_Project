@@ -16,31 +16,26 @@ public enum EQuestCategory
 }
 
 
-[Serializable]
-public enum EQuestTarget
-{
-	wood = 0,
-	Object = 1,
-	Jump,
-	Monster,
-	Item,
-} 
-
-
 [CreateAssetMenu (fileName ="new QuestData", menuName = "My ScriptableObject/QuestData")]
 public class QuestDataSO : ScriptableObject
 {
     [SerializeField] private EQuestCategory category;
-    [SerializeField] private EQuestTarget target;
+    [SerializeField] private string target;
     [SerializeField] private Sprite questIcon; 
     [SerializeField] private string questTitle;
     [SerializeField] private int targetNum;
+    [SerializeField] private List<QuestDataSO> childs = new List<QuestDataSO>();
+    [SerializeField] private List<ItemDataSO> rewards = new List<ItemDataSO>();
 
     public EQuestCategory Categoty => category;
-    public EQuestTarget Target => target;
+    public string Target => target;
     public Sprite QuestIcon => questIcon;
     public string QuestTitle => questTitle;
     public int TargetNum => targetNum;
+    
+    public List<QuestDataSO> ChildQuest => childs;
+    public List<ItemDataSO> Rewards => rewards;
+
 } 
  
 

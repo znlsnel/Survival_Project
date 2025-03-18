@@ -162,6 +162,7 @@ public class InventoryUI : BaseUI
 
 	private void OpenUI()
 	{
+		QuestManager.ProgressQuest(EQuestCategory.Action, "Inventory"); 
 		mainPanel.transform.localScale = Vector3.zero;
 		mainPanel.transform.DOScale(1.0f, 0.1f);
 		 

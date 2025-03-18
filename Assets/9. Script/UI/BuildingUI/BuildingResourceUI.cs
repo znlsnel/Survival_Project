@@ -16,6 +16,11 @@ public class BuildingResourceUI : MonoBehaviour
 
     List<ItemDataSO> playerItemList;
 
+    private void OnValidate()
+    {
+        if (InventoryHandler == null) InventoryHandler = FindObjectOfType<InventoryHandler>();
+    }
+
     private void Awake()
     {
 
