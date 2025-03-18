@@ -22,8 +22,10 @@ public class MessageUI : MonoBehaviour
 		go.GetComponent<MessageSlot>().Initialize(data);
 		go.transform.SetParent(messagePanel, false);
 		go.transform.localPosition = Vector3.zero;
+		go.SetActive(true);
+
 		StartCoroutine(ReleaseSlot(go, 2.0f)); 
-		SoundManager.Play("Sounds/UI/Button_Click_01"); 
+		SoundManager.Play("Sounds/UI/Button_Click_01");  
 	}
 
 	private IEnumerator ReleaseSlot(GameObject slot, float time)
