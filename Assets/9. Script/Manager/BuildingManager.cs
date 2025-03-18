@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BuildingManager : Singleton<BuildingManager>
 {
@@ -8,7 +9,7 @@ public class BuildingManager : Singleton<BuildingManager>
     private BuildingData selectedData;
 
     [SerializeField] private BuildingUI buildingUI;
-    private InventoryHandler InventoryHandler;
+	[SerializeField] private InventoryHandler InventoryHandler;
 
     private void Start()
     {
@@ -22,7 +23,7 @@ public class BuildingManager : Singleton<BuildingManager>
         {
             EventManager.Instance.OnStartBuildingRequested += StartPlacement; // 1. z들어왔어 체크해봐~
         }
-		InventoryHandler = GetComponent<InventoryHandler>();    
+
 
 	}
 
@@ -52,6 +53,12 @@ public class BuildingManager : Singleton<BuildingManager>
         // 선택된 건축물의 원본 프리팹 -> 프리뷰
 
         GameObject previewObject = Instantiate(selectedData.prefab);
+        if (previewObject.TryGetComponent(out DroneAI drone))
+		{
+            drone.enabled = false;
+
+		}
+
         currentPreview = previewObject.AddComponent<BuildingPreview>();
 
         currentPreview.SetPreviewMode();
@@ -90,7 +97,9 @@ public class BuildingManager : Singleton<BuildingManager>
 
         if (currentPreview.CanPlace()) // 설치 가능 여부 확인
         {
-            Instantiate(selectedData.prefab, currentPreview.transform.position, currentPreview.transform.rotation);
+            currentPreview.gameObject.SetActive(false); 
+
+			Instantiate(selectedData.prefab, currentPreview.transform.position, currentPreview.transform.rotation);
             Destroy(currentPreview.gameObject);
             currentPreview = null;
 

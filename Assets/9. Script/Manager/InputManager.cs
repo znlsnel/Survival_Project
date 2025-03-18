@@ -128,7 +128,7 @@ public class InputManager : Singleton<InputManager>
 			Instance.buildingInputMap.Disable();
 		} 
 		else
-		{ 
+		{  
 			Instance.playerInputMap.Disable();
 			Instance.buildingInputMap.Enable();
 		}

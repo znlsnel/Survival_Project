@@ -33,7 +33,7 @@ namespace Enemy
 		private void Start()
 		{
             target = GameManager.Instance.PlayerController.transform;
-
+             
 		}
 
 		private void Initialized()

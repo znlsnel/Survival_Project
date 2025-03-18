@@ -9,27 +9,33 @@ public class UICondition : MonoBehaviour
     public Conditions stamina;
     public Conditions temperature;
 
-    public Image temperatureBar;
+    public Slider temperatureBar;
+    public Image temperatureFillImage;
 
-	private void Start()
-	{
-		GameManager.Instance.PlayerController.GetComponent<PlayerCondition>().UICondition = this;
-	} 
-
-	private void Update() 
+    private void Start()
     {
+        GameManager.Instance.PlayerController.GetComponent<PlayerCondition>().UICondition = this;
 
+        temperatureFillImage = temperatureBar.fillRect.GetComponent<Image>();
+    }
 
-        if (temperature.curValue <= 50)
+    private void Update()
+    {
+        if (temperature != null && temperatureFillImage != null)
         {
-            float lerpValue = Mathf.InverseLerp(0, 50, temperature.curValue);
-            temperatureBar.color = Color.Lerp(Color.blue, Color.green, lerpValue);
-        }
-        else
-        {
-            float lerpValue = Mathf.InverseLerp(50, 100, temperature.curValue);
-            temperatureBar.color = Color.Lerp(Color.green, Color.red, lerpValue);
+            float curValue = temperature.curValue;
+            temperatureBar.value = curValue / 100f;
+
+            if (curValue <= 50)
+            {
+                float lerpValue = Mathf.InverseLerp(0, 50, curValue);
+                temperatureFillImage.color = Color.Lerp(Color.blue, Color.green, lerpValue);
+            }
+            else
+            {
+                float lerpValue = Mathf.InverseLerp(50, 100, curValue);
+                temperatureFillImage.color = Color.Lerp(Color.green, Color.red, lerpValue);
+            }
         }
     }
 }
-

@@ -105,13 +105,14 @@ namespace Player
         {
             _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             playerCondition.UseStamina(20);
+
             
         }
         
         // fix: 자기 자신과 충돌하는 현상 발생 - 레이어로 수정
-        public bool IsGrounded()
+        public bool IsGrounded() 
         {
-            bool value = Physics.CheckSphere(transform.position, 0.2f, groundLayerMask);
+            bool value = Physics.CheckSphere(transform.position, 0.2f, groundLayerMask); 
             if(_isPrevGrounded == false && value) isLanded = true; else isLanded = false;
             _isPrevGrounded = value;
             return value;

@@ -36,10 +36,8 @@ namespace Player
 			hitPoint= GetComponentInChildren<HitPoint>();
 			equipHandler = GetComponent<EquipHandler>();
 			_input = GetComponent<Input>();
-            ResourceHandler = GetComponent<ResourceHandler>();
+            //ResourceHandler = GetComponent<ResourceHandler>();
 
-            //playerCondition = GetComponent<PlayerCondition>();
-            UICondition uICondition = GetComponent<UICondition>(); 
             movementHandler = GetComponent<MovementHandler>();
             AnimationHandler = GetComponent<AnimationHandler>();
             AudioHandler = GetComponent<AudioHandler>();

@@ -18,9 +18,39 @@ public class PlayerCondition : MonoBehaviour
 
 
     public float healthDecay;
-    public float thirstyDecay;
-    public float fullHungerHealthImprove;
+    //public float fullHungerHealthImprove;
     public float temperatureDecayRate;
+
+    private void Start()
+    {
+        if (uiCondition == null)
+        {
+            uiCondition = FindObjectOfType<UICondition>(); 
+            if (uiCondition == null)
+            {
+                Debug.LogError(" UICondition이 할당되지 않았습니다! 인스펙터에서 확인하세요.");
+            }
+        }
+
+        if (weather == null)
+        {
+            weather = FindObjectOfType<Weather>();
+            if (weather == null)
+            {
+                Debug.LogError("Weather 스크립트가 할당되지 않았습니다! 인스펙터에서 확인하세요.");
+            }
+        }
+
+        if (dayNightCycle == null)
+        {
+            dayNightCycle = FindObjectOfType<DayNightCycle>();
+            if (dayNightCycle == null)
+            {
+                Debug.LogError(" DayNightCycle 스크립트가 할당되지 않았습니다! 인스펙터에서 확인하세요.");
+            }
+        }
+    }
+
 
     private void Update()
     {
@@ -37,7 +67,7 @@ public class PlayerCondition : MonoBehaviour
 
         health.Subtract(decayCount * healthDecay * Time.deltaTime);
 
-     //   UpdateTemperature(); 
+        UpdateTemperature(); 
 
         if (health.curValue < 0f)
         {
@@ -105,9 +135,13 @@ public class PlayerCondition : MonoBehaviour
     {
         hunger.Add(amount);
     }
-    public void Drink(float amount)
+    public void Drink(float amount, float amount2)
     {
         thirsty.Add(amount);
+        if (temperature.curValue > 50)
+        {
+            temperature.curValue = Mathf.Max(temperature.curValue - amount2, 50);
+        }
     }
     
     public void Rest(float amount)

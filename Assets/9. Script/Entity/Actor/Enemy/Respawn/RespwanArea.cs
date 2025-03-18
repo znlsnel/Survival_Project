@@ -23,7 +23,9 @@ namespace Respawn
                if (list.Count == 0) return;
                
                Vector3 randomPosition = new Vector3(Random.Range(area.min.x, area.max.x), area.min.y, Random.Range(area.min.z, area.max.z));
-               GameObject instantiate = Instantiate(list[Random.Range(0, list.Count)], randomPosition, Quaternion.identity);
+                randomPosition += transform.position;
+
+			   GameObject instantiate = Instantiate(list[Random.Range(0, list.Count)], randomPosition, Quaternion.identity);
                instantiate.gameObject.SetActive(true);
                
                DestroyedDetector detector = instantiate.AddComponent<DestroyedDetector>();
@@ -31,21 +33,19 @@ namespace Respawn
                
                _currentList.Add(instantiate);
            }
-           
+            
            
            private IEnumerator ReSpawn()
            {
                while (true)
                {
-                   yield return new WaitForSeconds(spawnInterval);
+                   yield return new WaitForSeconds(Random.Range(spawnInterval, spawnInterval * 2));
 
                    if (_currentList.Count < maxCount)
-                   {
                        Generate();
-                   }
                }
-               // ReSharper disable once IteratorNeverReturns
            }
+
 
            public void UnRegister(GameObject instantiate)
            {
@@ -55,7 +55,7 @@ namespace Respawn
            void OnDrawGizmos()
            {
                Gizmos.color = Color.green;
-               Gizmos.DrawWireCube(area.center, area.size);
+               Gizmos.DrawWireCube(transform.position + area.center, area.size);
            }
            
            void Start() { StartCoroutine(ReSpawn()); }

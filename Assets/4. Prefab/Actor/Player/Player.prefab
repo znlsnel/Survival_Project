@@ -882,15 +882,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400166, guid: ec2987b5607a14e61947b9249fdfb51e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 31
+      value: 45.4
       objectReference: {fileID: 0}
     - target: {fileID: 400166, guid: ec2987b5607a14e61947b9249fdfb51e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -30
+      value: -31.456272
       objectReference: {fileID: 0}
     - target: {fileID: 400166, guid: ec2987b5607a14e61947b9249fdfb51e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 38
+      value: 40.46
       objectReference: {fileID: 0}
     - target: {fileID: 400166, guid: ec2987b5607a14e61947b9249fdfb51e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1999,15 +1999,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100166, guid: ec2987b5607a14e61947b9249fdfb51e,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5820834848003977310}
-    - targetCorrespondingSourceObject: {fileID: 100166, guid: ec2987b5607a14e61947b9249fdfb51e,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 9177589117753846455}
     - targetCorrespondingSourceObject: {fileID: 100166, guid: ec2987b5607a14e61947b9249fdfb51e,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1445606995445694008}
+      addedObject: {fileID: 399143224704865369}
+    - targetCorrespondingSourceObject: {fileID: 100166, guid: ec2987b5607a14e61947b9249fdfb51e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4958045168684137555}
   m_SourcePrefab: {fileID: 100100000, guid: ec2987b5607a14e61947b9249fdfb51e, type: 3}
 --- !u!4 &1745328338400667986 stripped
 Transform:
@@ -2093,7 +2093,7 @@ MonoBehaviour:
   currMoveInputValue: {x: 0, y: 0}
   groundLayerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 4087
   acceleration: 5
   deceleration: 5
   currentSpeed: 0
@@ -2363,22 +2363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthDecay: 0
-  thirstyDecay: 0
-  fullHungerHealthImprove: 0
   temperatureDecayRate: 0
---- !u!114 &5820834848003977310
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1745328338400769330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a38720f6c00a2544fa9df66c5af78fbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buildingUI: {fileID: 0}
 --- !u!114 &9177589117753846455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2391,8 +2376,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd9a536250612c2448b5bc1f5d138151, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInput: {fileID: 1445606995445694008}
---- !u!114 &1445606995445694008
+  playerInput: {fileID: 4958045168684137555}
+--- !u!114 &399143224704865369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745328338400769330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a38720f6c00a2544fa9df66c5af78fbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingUI: {fileID: 0}
+  InventoryHandler: {fileID: 2039272989801455482}
+--- !u!114 &4958045168684137555
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
