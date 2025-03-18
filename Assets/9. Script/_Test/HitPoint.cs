@@ -14,10 +14,14 @@ namespace Enemy
         // q: 이렇게 작성하면 두명에게 동시에 공격 당하면 두번 다 맞을 수 있음.
         private void Start()
         {
-            controller.AnimationHandler.WhenAttack += (isAttacking) =>
+            if (controller.AnimationHandler)
             {
-                if (!isAttacking) Clear();
-            };
+                controller.AnimationHandler.WhenAttack += (isAttacking) =>
+                {
+                    if (!isAttacking) Clear();
+                };
+            }
+              
         }
     }
 
