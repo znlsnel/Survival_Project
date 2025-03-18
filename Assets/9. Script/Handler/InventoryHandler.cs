@@ -53,7 +53,6 @@ public class InventoryHandler : MonoBehaviour
 		messageUI = GetComponent<PlayerUIHandler>().MessageUI;
 	}
 
-
 	private (ESlotType, int) GetEmptySlotIdx()
     {
 		for (int i = 0; i < QuickSlotItems.Count; i++)

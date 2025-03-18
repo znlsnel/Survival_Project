@@ -54,7 +54,9 @@ public class EndingCutScene : MonoBehaviour
 
     private IEnumerator PlayEndingCutScene()
     {
-        Vector3 startPos = airplane.transform.position;
+		GameManager.Instance.ActiveUI(false);
+
+		Vector3 startPos = airplane.transform.position;
         Vector3 endPos = skyTarget.position;
 
         float startFOV = defaultFOV;
@@ -103,7 +105,9 @@ public class EndingCutScene : MonoBehaviour
         yield return new WaitForSeconds(3.0f);
         yield return StartCoroutine(Fade(0, 1, fadeDuration));
 
-        Debug.Log("°ÔÀÓ ¿£µù ÄÆ¾À Á¾·á!");
+		GameManager.Instance.ActiveUI(true);
+
+		Debug.Log("°ÔÀÓ ¿£µù ÄÆ¾À Á¾·á!");
     }
 
     private IEnumerator ContinuousTakeoff()

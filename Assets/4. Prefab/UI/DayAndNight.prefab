@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8385940949528790042}
   - component: {fileID: 161617332728027172}
   - component: {fileID: 7536868092069182596}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: DayAndNight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,7 +295,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7279382811663320723}
   - component: {fileID: 147854912117299352}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Moon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -389,7 +389,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2850927510213359965}
   - component: {fileID: 4176646600346183095}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Sun
   m_TagString: Untagged
   m_Icon: {fileID: 0}

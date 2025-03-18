@@ -15,7 +15,7 @@ public class ExchangeManager : MonoBehaviour, IInteractableObject
     {
         if (exchangeUI == null)
         {
-            exchangeUI = GetComponentInChildren<ExchangeUI>();
+            exchangeUI = FindFirstObjectByType<ExchangeUI>();
         }
 	}
 
@@ -27,8 +27,8 @@ public class ExchangeManager : MonoBehaviour, IInteractableObject
         }
         exchangeUI.UpdateExchangeUI(exchangeData);
 		inventory = FindFirstObjectByType<InventoryHandler>();
-		popupOpener = GetComponentInChildren<PopupUIOpener>();
-
+		popupOpener = GetComponent<PopupUIOpener>();
+         
         popupOpener.buttons[1].OnClickedEvent.AddListener(GameClear);
 	}
 

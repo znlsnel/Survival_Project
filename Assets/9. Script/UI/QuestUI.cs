@@ -5,14 +5,13 @@ using UnityEngine;
 public class QuestUI : MonoBehaviour
 {
 	[SerializeField] private GameObject questSlotPrefab;
-	[SerializeField] private Transform slotParent;
 
 	private Dictionary<QuestDataSO, QuestSlot> questSlots = new Dictionary<QuestDataSO, QuestSlot>();
 
 	public void AddQuest(QuestDataSO data)
 	{
-		var go = Instantiate(questSlotPrefab);
-		go.transform.SetParent(slotParent, false);
+		var go = Instantiate(questSlotPrefab); 
+		go.transform.SetParent(transform, false);
 
 		QuestSlot newSlot = go.GetComponent<QuestSlot>();
 		newSlot.Initialize(data);

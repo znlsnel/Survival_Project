@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1299455894928766564}
   - component: {fileID: 149235926621219010}
   - component: {fileID: 1110033016746119611}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Snow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

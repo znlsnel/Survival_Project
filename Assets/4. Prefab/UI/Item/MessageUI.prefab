@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6043823891745293709}
   - component: {fileID: 1575372361939204663}
   - component: {fileID: 3091477858058914119}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 4725134884367937584}
   - component: {fileID: 5921966446386431624}
   - component: {fileID: 3568711921698256293}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: MessageUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}

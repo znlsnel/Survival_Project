@@ -38,6 +38,13 @@ public class PopupUIOpener : MonoBehaviour
 	{
 		var popup = Instantiate(popupPrefab, transform, false);
 		popup.SetActive(true);
+
+		popup.transform.SetParent(GameManager.Instance.UIParent.transform);
+		popup.transform.localPosition = Vector3.zero;
+		popup.transform.localScale = Vector3.one; 
+		popup.transform.eulerAngles = Vector3.zero;
+
+
 		var popupModularUI = popup.GetComponent<PopupModularUI>();
 		popupModularUI.Open();
 		popupModularUI.Initialize(this);

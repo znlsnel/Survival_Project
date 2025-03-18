@@ -256,7 +256,7 @@ CanvasGroup:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6125694446655685766}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
@@ -314,7 +314,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backgroundColor: {r: 0.039215688, g: 0.039215688, b: 0.039215688, a: 0.6}
-  destroyTime: 0.5
+  destroyTime: 0.1
   title: {fileID: 7126083909196558882}
   subTitle: {fileID: 4832224229389980205}
   Caption: {fileID: 5216565417489890822}

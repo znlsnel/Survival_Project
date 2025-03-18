@@ -22,7 +22,7 @@ public class InventoryUI : BaseUI
 		LabelAmount
 	}
 	enum Transforms
-	{
+	{ 
 		itemSlotParent,
 		quickSlotParent,
 	} 
@@ -32,10 +32,6 @@ public class InventoryUI : BaseUI
 		toggle_weapon,
 		toggle_consumableItem,
 		toggle_resource,
-	}
-	enum GameObjects
-	{
-		PanelInventory
 	}
 
 	#endregion
@@ -57,7 +53,7 @@ public class InventoryUI : BaseUI
 	{
 		Binding();
 
-		mainPanel = Get<GameObject>((int)GameObjects.PanelInventory);
+		mainPanel = gameObject;
 		inventory = FindFirstObjectByType<InventoryHandler>();
 		itemSlotHandler = GetComponent<ItemSlotHandler>();
 	}
@@ -77,7 +73,6 @@ public class InventoryUI : BaseUI
 		Bind<Transform>(typeof(Transforms));
 		Bind<Toggle>(typeof(Toggles));
 		Bind<TextMeshProUGUI>(typeof(Texts));
-		Bind<GameObject>(typeof(GameObjects));
 	}
 	#region Inventory Function 
 	private void InitItemList()
