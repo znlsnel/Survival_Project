@@ -54,7 +54,7 @@ namespace Enemy
             resourceHandler.OnDeath += () =>
             {
                 AnimationHandler.animator.SetTrigger(AnimationHandler.HashTriggerDeath);
-                // rewardHandler.DropItem();
+                 rewardHandler.DropItem();
             };
         }
 
