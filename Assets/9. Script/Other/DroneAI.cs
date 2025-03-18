@@ -30,32 +30,27 @@ public class DroneAI : MonoBehaviour
     private bool isNowHome = false;
 
 
-    //private void OnEnable()
-    //{
+    private IEnumerator EnsureNavMeshPlacement()
+    {
+        yield return new WaitForSeconds(0.1f);
 
-    //    StartCoroutine(EnsureNavMeshPlacement());
-    //}
-
-    //private IEnumerator EnsureNavMeshPlacement()
-    //{
-    //    yield return new WaitForSeconds(0.1f);
-
-    //    if (!agent.isOnNavMesh)
-    //    {
-    //        NavMeshHit hit;
-    //        if (NavMesh.SamplePosition(transform.position, out hit, 2.0f, NavMesh.AllAreas))
-    //        {
-    //            transform.position = hit.position;
-    //        }
-    //        else
-    //        {
-    //        }
-    //    }
-    //}
-
+        if (!agent.isOnNavMesh)
+        {
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(transform.position, out hit, 2.0f, NavMesh.AllAreas))
+            {
+                agent.Warp(hit.position);
+            }
+            else
+            {
+                yield break;
+            }
+        }
+    }
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        StartCoroutine(EnsureNavMeshPlacement());
         currentScanRange = scanRange;
         StartCoroutine(ScanForResources());
 
