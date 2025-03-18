@@ -38,8 +38,6 @@ namespace Player
 			_input = GetComponent<Input>();
             ResourceHandler = GetComponent<ResourceHandler>();
 
-            //playerCondition = GetComponent<PlayerCondition>();
-            UICondition uICondition = GetComponent<UICondition>(); 
             movementHandler = GetComponent<MovementHandler>();
             AnimationHandler = GetComponent<AnimationHandler>();
             AudioHandler = GetComponent<AudioHandler>();

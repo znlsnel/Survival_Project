@@ -8,7 +8,7 @@ public class BuildingManager : Singleton<BuildingManager>
     private BuildingData selectedData;
 
     [SerializeField] private BuildingUI buildingUI;
-    private InventoryHandler InventoryHandler;
+	[SerializeField] private InventoryHandler InventoryHandler;
 
     private void Start()
     {
@@ -22,7 +22,7 @@ public class BuildingManager : Singleton<BuildingManager>
         {
             EventManager.Instance.OnStartBuildingRequested += StartPlacement; // 1. z들어왔어 체크해봐~
         }
-		InventoryHandler = GetComponent<InventoryHandler>();    
+
 
 	}
 
