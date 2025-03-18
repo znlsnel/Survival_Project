@@ -13,8 +13,8 @@ namespace Enemy
         public AnimationHandler AnimationHandler { get; private set; }
         private AudioHandler audioHandler;
         private MovementHandler movementHandler; public Actor.IMovement MovementHandler => movementHandler;
-        private NavigationHandler navigationHandler;
-        private ResourceHandler resourceHandler;
+        protected NavigationHandler navigationHandler;
+        protected ResourceHandler resourceHandler;
         private RewardHandler rewardHandler;
 
         void Awake()
@@ -27,7 +27,7 @@ namespace Enemy
             rewardHandler = GetComponent<RewardHandler>();
         }
 
-        void Start()
+        protected virtual void Start()
         {
             AnimationHandler.WhenAttack += navigationHandler.StopByAnimation;
             
@@ -35,16 +35,16 @@ namespace Enemy
             {
                 AnimationHandler.animator.SetBool(AnimationHandler.HashBoolAttack, false);
 
-                if (state == NavigationHandler.Status.Idle)
+                if (state == Status.Idle)
                 {
                     AnimationHandler.animator.SetBool(AnimationHandler.HashBoolRun, false);
                 }
-                if (state == NavigationHandler.Status.Detected)
+                if (state == Status.Detected)
                 {
                     AnimationHandler.animator.SetBool(AnimationHandler.HashBoolRun, true);
                 }
 
-                if (state == NavigationHandler.Status.Attackable)
+                if (state == Status.Attackable)
                 {
                     AnimationHandler.animator.SetBool(AnimationHandler.HashBoolRun, false);
                     AnimationHandler.animator.SetBool(AnimationHandler.HashBoolAttack, true);
@@ -54,6 +54,7 @@ namespace Enemy
             resourceHandler.OnDeath += () =>
             {
                 AnimationHandler.animator.SetTrigger(AnimationHandler.HashTriggerDeath);
+                resourceHandler.isDying = true;
                  rewardHandler.DropItem();
             };
         }
@@ -62,6 +63,8 @@ namespace Enemy
         {
             if (other.gameObject.TryGetComponent(out Player.HitPoint hitPoint))
             {
+                if (resourceHandler.isDying) return;
+                
                 // if (!hitPoint.controller.GetComponent<Player.Movement>().isAttacking) return;
                 if (hitPoint.hitEnemies.Contains(gameObject)) return;
                 hitPoint.hitEnemies.Add(gameObject);

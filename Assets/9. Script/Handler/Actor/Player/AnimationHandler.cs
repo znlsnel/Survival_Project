@@ -30,7 +30,8 @@ namespace Player
         public static readonly int HashEllenCombo1 = Animator.StringToHash("EllenCombo1");
         public static readonly int HashEllenCombo2 = Animator.StringToHash("EllenCombo2");
         public static readonly int HashEllenCombo3 = Animator.StringToHash("EllenCombo3");
-        public static readonly int HashEllenCombo4 = Animator.StringToHash("EllenCombo4");
+        
+        public static readonly int HashTriggerDash = Animator.StringToHash("Dash");
 
         void Awake()
         {

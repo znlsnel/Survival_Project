@@ -17,6 +17,7 @@ namespace Enemy
         public static readonly int HashBoolAttack = Animator.StringToHash("Attack");
         public static readonly int HashTriggerHit = Animator.StringToHash("Hit");
         public static readonly int HashTriggerDeath = Animator.StringToHash("Death");
+        public static readonly int HashBoolEscape = Animator.StringToHash("Escape");
 
         void Awake()
         {
