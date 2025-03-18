@@ -17,11 +17,11 @@ public class Weather : MonoBehaviour
     {
         int randomNumber = Random.Range(1, 101); // 1~100 »çÀÌ ³­¼ö »ı¼º
 
-        if (randomNumber <= 50)
+        if (randomNumber <= 25)
             currentWeather = WeatherType.Sunny; // 50% È®·ü·Î ¸¼À½
-        else if (randomNumber> 50 && randomNumber <= 65)
+        else if (randomNumber> 25 && randomNumber <= 50)
             currentWeather = WeatherType.Rainy; // 15% È®·ü·Î ºñ
-        else if (randomNumber > 65 && randomNumber <= 85)
+        else if (randomNumber > 50 && randomNumber <= 75)
             currentWeather = WeatherType.Hot; // 20% È®·ü·Î ´õ¿î ³¯¾¾
         else
             currentWeather = WeatherType.Snow; // 15% È®·ü·Î ÆøÇ³¿ì
