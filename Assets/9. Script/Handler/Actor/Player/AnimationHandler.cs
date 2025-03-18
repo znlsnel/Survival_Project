@@ -57,5 +57,4 @@ namespace Player
         
         public Action<bool> WhenAttack;
     }
-    
 }

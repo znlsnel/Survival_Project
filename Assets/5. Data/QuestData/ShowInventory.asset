@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b7ff39c7ad5e2d4ca8b6c719afe0d6e, type: 3}
+  m_Name: ShowInventory
+  m_EditorClassIdentifier: 
+  category: 5
+  target: Inventory
+  questIcon: {fileID: 21300000, guid: 0cd0f5d66043b49ff8178296ccd4f1ef, type: 3}
+  questTitle: "[I]\uB97C \uD1B5\uD574 \uC778\uBCA4\uD1A0\uB9AC\uB97C \uC5F4\uC5B4\uBCF4\uC138\uC694"
+  targetNum: 1
+  childs: []
+  rewards:
+  - {fileID: 11400000, guid: f5f0b435bf10ebf4f8322ecb0eca6917, type: 2}
+  - {fileID: 11400000, guid: f5f0b435bf10ebf4f8322ecb0eca6917, type: 2}
+  - {fileID: 11400000, guid: f5f0b435bf10ebf4f8322ecb0eca6917, type: 2}

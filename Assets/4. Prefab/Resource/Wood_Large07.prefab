@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1122528880765002288}
   - component: {fileID: 5469090392369969210}
   - component: {fileID: 7979704074437028246}
-  m_Layer: 18
+  m_Layer: 8
   m_Name: VegetationLarge07_LOD02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 2104205568218578634}
   - component: {fileID: 596444880249226637}
   - component: {fileID: 6914714920010158799}
-  m_Layer: 18
+  m_Layer: 8
   m_Name: VegetationLarge07_LOD00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 6170838069912994326}
   - component: {fileID: 9068797786094453826}
   - component: {fileID: 8658510332084164580}
-  m_Layer: 18
+  m_Layer: 8
   m_Name: VegetationLarge07_LOD01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 7579462692259135145}
   - component: {fileID: 2250745990706304272}
   - component: {fileID: 2584367093747367369}
-  m_Layer: 18
+  m_Layer: 8
   m_Name: Wood_Large07
   m_TagString: Untagged
   m_Icon: {fileID: 0}

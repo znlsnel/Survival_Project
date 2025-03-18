@@ -37,7 +37,7 @@ public class BuildingMenuUI : MonoBehaviour
         decoToggle.onValueChanged.AddListener((isOn) => UpdateBuildingList());
 
         // 기본적으로 가구 카테고리 활성화
-        funiToggle.isOn = true;
+        funiToggle.isOn = false;
         decoToggle.isOn = false;
         UpdateBuildingList();
     }

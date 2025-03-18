@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1932c9805c51b864cb0b6c22db6f1029, type: 3}
+  m_Name: ContaminatedWater
+  m_EditorClassIdentifier: 
+  itemIcon: {fileID: 21300000, guid: 35d76210b41d93c4dbb845b6edfb89ba, type: 3}
+  itemTypeIcon: {fileID: 21300000, guid: 35d76210b41d93c4dbb845b6edfb89ba, type: 3}
+  itemType: 3
+  itemName: "\uC624\uC5FC\uB41C \uBB3C"
+  itemDescription: "\uC624\uC5FC\uB41C \uBB3C\uC774\uB2E4. \uC815\uD654\uD574\uC57C
+    \uB9C8\uC2E4 \uC218 \uC788\uB2E4."
+  dropItemPrefab: {fileID: 2271454730633498925, guid: a2f4773a7bdc24541864693775bd51b9,
+    type: 3}
+  isActiveItem: 0
+  activeItemPrefab: {fileID: 0}
+  canStackItems: 1
+  maxStackCount: 50

@@ -55,7 +55,7 @@ namespace Enemy
             {
                 AnimationHandler.animator.SetTrigger(AnimationHandler.HashTriggerDeath);
                 resourceHandler.isDying = true;
-                // rewardHandler.DropItem();
+                 rewardHandler.DropItem();
             };
         }
 

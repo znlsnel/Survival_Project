@@ -35,7 +35,10 @@ public class InventoryHandler : MonoBehaviour
 
 	// === Event ===
 	public event Action onChangedSlot;
-	 
+
+	// === Component ===
+	private MessageUI messageUI;
+
 	private void OnValidate()
 	{
 		foreach (ESlotType type in Enum.GetValues(typeof(ESlotType)))
@@ -44,14 +47,23 @@ public class InventoryHandler : MonoBehaviour
 			itemSlots.Add(type, new List<ItemSlot>()); 
 		}
 	}
-	private int GetEmptySlotIdx()
-    {
-        for (int i = 0; i < MyItems.Count; i++)
-            if (MyItems[i] == null)
-                return i;
+	private void Awake()
+	{
+		messageUI = GetComponent<PlayerUIHandler>().MessageUI;
 
-        return -1;
-    }
+	}
+	private (ESlotType, int) GetEmptySlotIdx()
+    {
+		for (int i = 0; i < QuickSlotItems.Count; i++)
+			if (QuickSlotItems[i] == null)
+				return (ESlotType.QuickSlot, i); 
+
+		for (int i = 0; i < MyItems.Count; i++)
+            if (MyItems[i] == null)
+				return (ESlotType.InventorySlot, i);
+
+		return (ESlotType.InventorySlot, -1);
+	}
 
     private (ESlotType, int) FindItem(ItemDataSO item)
     {
@@ -77,15 +89,21 @@ public class InventoryHandler : MonoBehaviour
     {
 		var (type, idx) = FindItem(item);
 		if (idx > -1)
+		{
 			itemSlots[type][idx].StackAmount++;
-		
-		else if ((idx = GetEmptySlotIdx()) == -1)
-			return false;
-
+		}
 		else
-			MyItems[idx] = item;
-		
+		{
+			(type, idx) = GetEmptySlotIdx();
+			if (idx == -1)
+				return false;
+			else
+				myItems[type][idx] = item;
+		}
+
 		onChangedSlot?.Invoke();
+		messageUI.AddItem(item);
+		QuestManager.ProgressQuest(EQuestCategory.Pickup, item.ItemName); 
 		return true;
 	}
 

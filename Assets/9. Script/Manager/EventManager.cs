@@ -35,6 +35,4 @@ public class EventManager : Singleton<EventManager>
     {
         OnStartBuildingRequested?.Invoke();
     }
-
-
 }

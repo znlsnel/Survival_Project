@@ -1,8 +1,10 @@
+using Enemy.Chomper;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.HID;
 
 public interface IDamagable
 {
@@ -25,43 +27,33 @@ public class WeaponItem : ActiveItem
 	[SerializeField] private bool doesGatherResource;
 
 	private GameObject player;
-
-	private void Awake()
+	private float lastTriggeTime = 0f;
+	private void Start()
 	{
 		player = GameManager.Instance.PlayerController.gameObject;
-		InputManager.LeftMouse.started += (InputAction.CallbackContext context) => { Trigger(); };
-	}
-	public override void Trigger()
-    {
-        Debug.Log("무기 사용");
-		OnHit();
-	}
+	}  
 
-	private void OnHit()
-	{
-		// 타격 위치를 임시로 설정함 차후 변경 
-		Vector3 startPos = player.transform.position + Vector3.up * 1.0f;
-		Ray ray = new Ray(startPos, player.transform.forward);
-		RaycastHit hit;
+	public override void Trigger() 
+    { 
 
-		if (Physics.Raycast(ray, out hit, attackDistance))
+		Player.HitPoint hp = player.GetComponentInChildren<Player.HitPoint>();
+		foreach (var resource in hp.GetTargetResources())
 		{
+			if (resource == null)
+				continue;
 
-			if (doesGatherResource && hit.collider.TryGetComponent(out Resource resource))
-			{
-				resource.Gather(hit.point, hit.normal);
-				resource.StartHitAnim(hit.point - startPos); 
-			}  
+			Vector3 normal = (transform.position - resource.transform.position).normalized;
+			Vector3 hitPoint = resource.transform.position + normal * 0.3f;
 
-			if (doesDealDamage && hit.collider.TryGetComponent(out IDamagable damagable))
-			{
-				damagable.TakePhysicalDamage(damage);
-			}
+			resource.Gather(hitPoint, normal);
+			resource.StartHitAnim(-normal);
 
-			var go =Instantiate(particlePrefab);
-			go.transform.position = hit.point;	
+			var go = Instantiate(particlePrefab); 
+			go.transform.position = hitPoint;
 			Destroy(go, 2.0f);
-		} 
-	} 
+		}
+
+		
+	}
 }   
  

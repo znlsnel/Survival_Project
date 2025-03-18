@@ -14,8 +14,6 @@ public class ResourceSpawner : MonoBehaviour
 {
 	[SerializeField] private List<GameObject> woodPrefabs = new List<GameObject>();
 	[SerializeField] private List<GameObject> mineralPrefabs = new List<GameObject>();
-	[SerializeField] private Transform spanwablePosParent;
-	[SerializeField] private int spawnCnt = 10;
 
 	public HashSet<GameObject> activeObjs = new HashSet<GameObject>();
 	public HashSet<Vector3> spawnablePos = new HashSet<Vector3>();
@@ -30,14 +28,7 @@ public class ResourceSpawner : MonoBehaviour
 			resource.onDestroy += () => RemoveObj(resource.gameObject);
 			cnt++;
 		}
-
-		foreach (Transform child in spanwablePosParent)
-			spawnablePos.Add(child.position);
-
-		while (cnt++ <= spawnCnt)
-			AddResourceItem();
-
-	}
+	} 
 
 
 	void RemoveObj(GameObject obj)
@@ -51,26 +42,23 @@ public class ResourceSpawner : MonoBehaviour
 	{
 		Vector3[] pos = spawnablePos.ToArray();
 		Vector3 spawnPos = pos[Random.Range(0, pos.Length - 1)];
-		int cnt = Random.Range(1, 6);
+		 
+		Vector3 targetPos = spawnPos + new Vector3(Random.Range(-3f, 3f), 0, Random.Range(-3f, 3f));
+		int rand = Random.Range(0, 100);
+		GameObject prefab = woodPrefabs[Random.Range(0, woodPrefabs.Count - 1)];
 
-		while (cnt-- > 0)
-		{
-			Vector3 targetPos = spawnPos + new Vector3(Random.Range(-3f, 3f), 0, Random.Range(-3f, 3f));
-			int rand = Random.Range(0, 100);
-			GameObject prefab = woodPrefabs[Random.Range(0, woodPrefabs.Count - 1)];
+		if (rand < 10)
+			prefab = mineralPrefabs[Random.Range(0, mineralPrefabs.Count - 1)];
 
-			if (rand < 10)
-				prefab = mineralPrefabs[Random.Range(0, mineralPrefabs.Count - 1)];
+		var go = Instantiate<GameObject>(prefab);
+		go.transform.position = targetPos;
 
-			var go = Instantiate<GameObject>(prefab);
-			go.transform.position = targetPos;
+		float randomYaw = Random.Range(0f, 360f);
+		go.transform.rotation = Quaternion.Euler(0, randomYaw, 0);
 
-			float randomYaw = Random.Range(0f, 360f);
-			go.transform.rotation = Quaternion.Euler(0, randomYaw, 0);
-
-			var resource = go.GetComponent<Resource>();
-			resource.onDestroy += () => RemoveObj(resource.gameObject);
-		}
+		var resource = go.GetComponent<Resource>();
+		resource.onDestroy += () => RemoveObj(resource.gameObject);
+		
 
 		spawnablePos.Remove(spawnPos);
 	}

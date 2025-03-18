@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1932c9805c51b864cb0b6c22db6f1029, type: 3}
   m_Name: stone
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 21300000, guid: db1119505b88ac244ab924ad71d3ece3, type: 3}
-  itemTypeIcon: {fileID: 21300000, guid: cc95fae3ac7176249b8d53c71472dedd, type: 3}
+  itemIcon: {fileID: 21300006, guid: ce97ed62c0a56e84ab25e22c8dfd5bca, type: 3}
+  itemTypeIcon: {fileID: 21300000, guid: 1a5d843928a2ba545b671d2b3a45b2bc, type: 3}
   itemType: 2
   itemName: "\uB3CC\uB9F9\uC774"
   itemDescription: "\uB3CC\uB9F9\uC774\uC785\uB2C8\uB2E4"
   dropItemPrefab: {fileID: 113239300769747551, guid: 5553226c4a9ba4e44be4bc889c1e276f,
     type: 3}
-  isUsableItem: 0
+  isActiveItem: 0
   activeItemPrefab: {fileID: 0}
   canStackItems: 1
   maxStackCount: 50

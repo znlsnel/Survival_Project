@@ -1,19 +1,27 @@
+using Enemy;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 // ReSharper disable once CheckNamespace
 namespace Player
 {
-    [RequireComponent(typeof(MovementHandler), typeof(ResourceHandler))]
+    [RequireComponent(typeof(MovementHandler), typeof(ResourceHandler), typeof(EquipHandler))]
     public class Controller : MonoBehaviour
     {
+        private HitPoint hitPoint;
+        private EquipHandler equipHandler;
+
         private Input _input;
+
         public ResourceHandler ResourceHandler {get; private set;}
         private MovementHandler movementHandler;
         public AnimationHandler AnimationHandler { get; private set; }
         public AudioHandler AudioHandler {get; private set;}
-        
+
         public int addedJumpCount = 1;
+
         // public int comboCount = 0;
         // public int knockBackForce = 10; // 상대의 공격에 따라 달라질 수 있음
         
@@ -25,11 +33,18 @@ namespace Player
       
         void Awake()
         {
-            _input = GetComponent<Input>();
+			hitPoint= GetComponentInChildren<HitPoint>();
+			equipHandler = GetComponent<EquipHandler>();
+			_input = GetComponent<Input>();
             ResourceHandler = GetComponent<ResourceHandler>();
+
+            //playerCondition = GetComponent<PlayerCondition>();
+            UICondition uICondition = GetComponent<UICondition>(); 
             movementHandler = GetComponent<MovementHandler>();
             AnimationHandler = GetComponent<AnimationHandler>();
             AudioHandler = GetComponent<AudioHandler>();
+
+        
         }
         
 
@@ -61,8 +76,7 @@ namespace Player
                 addedJumpCount -= 1;
                 movementHandler.Jump();
                 AudioHandler.PlayRandomSound(PlayerSoundType.Jump);
-            };
-            
+            };            
             InputManager.LeftMouse.performed += (context) =>
             {
                 // ProjectileManager.Instance.Generate(0, transform);
@@ -70,16 +84,6 @@ namespace Player
                 if (!movementHandler.IsGrounded()) return;
                 AnimationHandler.animator.SetTrigger(AnimationHandler.MeleeAttackTrigger); 
             };
-
-            // InputManager.Dash.started += (context) =>
-            // {
-            //     AnimationHandler.animator.SetTrigger(AnimationHandler.HashTriggerDash);
-            //     movementHandler.isDashing = true;
-            // };
-            // InputManager.Dash.canceled += (context) =>
-            // {
-            //     movementHandler.isDashing = false;
-            // };
         }
         
         void FixedUpdate()
@@ -107,10 +111,14 @@ namespace Player
         // fix: 공격이 확실할 때만 되도록 개선 필요
         void OnTriggerStay(Collider other)
         {
-            if (!other.gameObject.TryGetComponent(out Enemy.HitPoint hitPoint)) return;
-            if (hitPoint.hitEnemies.Contains(gameObject)) return;
-            
-            Vector3 lookDirection = (hitPoint.controller.transform.position - transform.position).normalized;
+            if (!other.gameObject.TryGetComponent(out Enemy.HitPoint hitPoint)) 
+                return;
+
+            if (hitPoint.hitEnemies.Contains(gameObject)) 
+                return;
+
+
+			Vector3 lookDirection = (hitPoint.controller.transform.position - transform.position).normalized;
             lookDirection.y = 0;
             transform.rotation = Quaternion.LookRotation(lookDirection);
             
@@ -123,6 +131,34 @@ namespace Player
             movementHandler.ApplyKnockBack(knockBackDirection, 10f);
             
             hitPoint.hitEnemies.Add(gameObject);
+        }
+
+
+        private void InputLeftMouse(InputAction.CallbackContext context)
+        {
+			if (!movementHandler.IsGrounded()) return;
+
+            ActiveItem activeItem = equipHandler.GetActiveItem();
+            if (activeItem != null)
+            {
+                // 소모형 아이템이면 사용하는 애니메이션 실행
+				AnimationHandler.animator.SetTrigger(AnimationHandler.MeleeAttackTrigger);
+			}
+		}
+
+
+        private void AE_Attack()
+        {
+			ActiveItem activeItem = equipHandler.GetActiveItem();
+            if (activeItem != null)
+				activeItem.Trigger();
+		}
+
+
+        public void AE_StartGame()
+        {
+           InputManager.SetActive(true); 
+            Debug.Log("ㅎㅇ");
         }
     }
 }

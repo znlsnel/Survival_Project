@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4285716050604912816}
   - component: {fileID: 7643978555587333424}
   - component: {fileID: 6345902867618573771}
-  m_Layer: 18
+  m_Layer: 8
   m_Name: VegetationLarge01_LOD00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 5404249461202733455}
   - component: {fileID: 5143028665335167567}
   - component: {fileID: 5637671729092258152}
-  m_Layer: 18
+  m_Layer: 8
   m_Name: VegetationLarge01_LOD02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 7983590396109940429}
   - component: {fileID: 2036503147866872786}
   - component: {fileID: 983605317931701412}
-  m_Layer: 18
+  m_Layer: 8
   m_Name: VegetationLarge01_LOD01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -264,7 +264,8 @@ GameObject:
   - component: {fileID: 8486843098959237841}
   - component: {fileID: 5236349581877845409}
   - component: {fileID: 4901789951986209782}
-  m_Layer: 18
+  - component: {fileID: -2821700223263008062}
+  m_Layer: 8
   m_Name: VegetationLarge01_item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -354,3 +355,18 @@ MonoBehaviour:
   maxScale: 1
   gameObjects:
   - {fileID: 8698837638083151281}
+--- !u!114 &-2821700223263008062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8698837638083151281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbc6d5db3955c4c45b70e2b218902dc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemToGive: {fileID: 11400000, guid: 7561059690f84ef49a31c818584c3406, type: 2}
+  quantityPerHit: 1
+  capacity: 3
