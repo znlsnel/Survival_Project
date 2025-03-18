@@ -10,14 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8588f6d0926fcc44a9806ca820df9c6, type: 3}
-  m_Name: spacecraft
+  m_Name: test
   m_EditorClassIdentifier: 
   exchangeRequirements:
-  - item: {fileID: 11400000, guid: f5f0b435bf10ebf4f8322ecb0eca6917, type: 2}
-    amount: 1
-  - item: {fileID: 11400000, guid: a3a3ec96ec451984bacd26ea9491f547, type: 2}
-    amount: 1
-  - item: {fileID: 11400000, guid: 1228856a23ec4ea4595a21efec72d563, type: 2}
+  - item: {fileID: 11400000, guid: 2b11c7e023a420245aed3ff8fc603fc9, type: 2}
     amount: 1
   exchangeRewards: {fileID: 11400000, guid: d73a1b6033a32714fa4b8ea5bd9b4aca, type: 2}
   exchangeIcon: {fileID: 21300000, guid: 74b7e35cda31cb7499b79fae64a30227, type: 3}
