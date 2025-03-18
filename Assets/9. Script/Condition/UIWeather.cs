@@ -23,8 +23,8 @@ public class UIWeather : MonoBehaviour
     void Start()
     {
         weather = GameObject.Find("DayAndNight").GetComponent<Weather>();
-        rainParticle = GameObject.Find("Rain").GetComponent<ParticleSystem>();
-        snowParticle = GameObject.Find("Snow").GetComponent<ParticleSystem>();
+        rainParticle = Instantiate(rainParticle);
+        snowParticle = Instantiate(snowParticle);
 
         // 메인 카메라의 Transform 가져오기
         cameraTransform = Camera.main.transform;

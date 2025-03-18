@@ -22,7 +22,7 @@ public class EndingCutScene : MonoBehaviour
     private float defaultFOV;
     private bool isTakeoff = true;
 
-    private void OnValidate()
+    private void Awake()
     {
         if (airplane == null) airplane = GameObject.Find("CutSceneOBJ_Ending");
         if (vCam == null) vCam = FindObjectOfType<CinemachineVirtualCamera>();

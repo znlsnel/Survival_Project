@@ -146,12 +146,12 @@ public class PlayerCondition : MonoBehaviour
     }
 
     // 갈증 회복 및 체온 감소 메서드
-    public void Drink(float amount, float amount2)
+    public void Drink(float amount)
     {
         thirsty.Add(amount);
         if (temperature.curValue > 50)
         {
-            temperature.curValue = Mathf.Max(temperature.curValue - amount2, 50);
+            temperature.curValue = Mathf.Max(temperature.curValue - amount / 3, 50);
         }
     }
 
