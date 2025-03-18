@@ -67,11 +67,7 @@ namespace Enemy
             if(isAttacking) _currStatus = Status.Attacking; else _currStatus = Status.Attackable;
         }
         
-        void Awake()
-        {
-            Agent = GetComponent<NavMeshAgent>();
-            Initialized();
-        }
+
 
         public void StopByAnimation(bool isAnimated)
         {

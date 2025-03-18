@@ -76,15 +76,10 @@ namespace Player
                 addedJumpCount -= 1;
                 movementHandler.Jump();
                 AudioHandler.PlayRandomSound(PlayerSoundType.Jump);
-            };            
-            InputManager.LeftMouse.performed += (context) =>
-            {
-                // ProjectileManager.Instance.Generate(0, transform);
-
-                if (!movementHandler.IsGrounded()) return;
-                AnimationHandler.animator.SetTrigger(AnimationHandler.MeleeAttackTrigger); 
             };
-        }
+            InputManager.LeftMouse.performed += InputLeftMouse;
+
+		}
         
         void FixedUpdate()
         {
