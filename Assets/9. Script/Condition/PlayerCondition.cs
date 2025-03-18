@@ -29,7 +29,6 @@ public class PlayerCondition : MonoBehaviour
             uiCondition = FindFirstObjectByType<UICondition>(); 
             if (uiCondition == null)
             {
-                Debug.LogError(" UICondition이 할당되지 않았습니다! 인스펙터에서 확인하세요.");
             }
         }
          
@@ -38,7 +37,6 @@ public class PlayerCondition : MonoBehaviour
             weather = FindFirstObjectByType<Weather>();
             if (weather == null)
             {
-                Debug.LogError("Weather 스크립트가 할당되지 않았습니다! 인스펙터에서 확인하세요.");
             }
         } 
 
@@ -47,7 +45,6 @@ public class PlayerCondition : MonoBehaviour
             dayNightCycle = FindFirstObjectByType<DayNightCycle>();
             if (dayNightCycle == null)
             {
-                Debug.LogError(" DayNightCycle 스크립트가 할당되지 않았습니다! 인스펙터에서 확인하세요.");
             }
         }
     }

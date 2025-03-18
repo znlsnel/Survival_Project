@@ -35,13 +35,11 @@ public class BuildingManager : Singleton<BuildingManager>
         if(!HasRequiredResource()) return;
         if (selectedData == null)
         {
-            Debug.LogError("StartPlacement: 전달된 BuildingData가 없음");
             return;
         }
 
         if (selectedData.prefab == null)
         {
-            Debug.LogError($"StartPlacement: {selectedData.buildingName}의 프리팹이 설정되지 않음");
             return;
         }
 

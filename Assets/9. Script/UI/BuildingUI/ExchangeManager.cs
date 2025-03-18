@@ -23,7 +23,6 @@ public class ExchangeManager : MonoBehaviour, IInteractableObject
     {
         if (exchangeUI == null)
         {
-            Debug.LogError("ExchangeUI가 할당되지 않았습니다.");
         }
         exchangeUI.UpdateExchangeUI(exchangeData);
 		inventory = FindFirstObjectByType<InventoryHandler>();

@@ -48,7 +48,6 @@ public class ExchangeUI : MonoBehaviour
     {
         if (inventoryHandler == null)
         {
-            Debug.LogError("InventoryHandler가 할당되지 않았습니다! Inspector에서 설정하세요.");
             return;
         }
 
@@ -66,7 +65,6 @@ public class ExchangeUI : MonoBehaviour
 
         if (exchangeData == null)
         {
-            Debug.LogError("선택된 교환 데이터가 없습니다.");
             return;
         }
 
@@ -142,7 +140,6 @@ public class ExchangeUI : MonoBehaviour
     {
         if (playerItemList == null)
         {
-            Debug.LogError("playerItemList 가 null이다?");
             return 0;
         }
 
@@ -160,7 +157,6 @@ public class ExchangeUI : MonoBehaviour
     {
         if (currentExchangeData == null)
         {
-            Debug.LogError("교환할 아이템이 선택되지 않았습니다.");
             return;
         }
 
