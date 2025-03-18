@@ -19,7 +19,13 @@ MonoBehaviour:
   itemDescription: "\uAE68\uB057\uD55C \uBB3C\uC774\uB2E4."
   dropItemPrefab: {fileID: 6035693609971393280, guid: e3b00be89cd2a8a4d80b2307dff02e5c,
     type: 3}
-  isActiveItem: 0
-  activeItemPrefab: {fileID: 0}
+  isActiveItem: 1
+  activeItemPrefab: {fileID: 2377993157461282318, guid: 321147a4dde44954a8828fe7f0f41a78,
+    type: 3}
   canStackItems: 1
   maxStackCount: 50
+  health: 0
+  hunger: 0
+  thirsty: 0
+  stamina: 0
+  temperature: 0

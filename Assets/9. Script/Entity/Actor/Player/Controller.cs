@@ -137,26 +137,23 @@ namespace Player
             hitPoint.hitEnemies.Add(gameObject);
         }
 
-
+         
         private void InputLeftMouse(InputAction.CallbackContext context)
         {
 			if (!movementHandler.IsGrounded()) return;
 
-            ActiveItem activeItem = equipHandler.GetActiveItem();
-            if (activeItem != null)
-            {
-                // 소모형 아이템이면 사용하는 애니메이션 실행
-				AnimationHandler.animator.SetTrigger(AnimationHandler.MeleeAttackTrigger);
-			}
+			ActiveItem activeItem = equipHandler.GetActiveItem();
+			if (activeItem != null)
+				activeItem.UseItem(this); 
 		}
 
 
-        private void AE_Attack()
+        private void AE_ActiveItemTrigger()
         {
 			ActiveItem activeItem = equipHandler.GetActiveItem();
             if (activeItem != null)
 				activeItem.Trigger();
-		}
+		} 
 
 
         public void AE_StartGame()

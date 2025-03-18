@@ -32,7 +32,9 @@ namespace Player
         public static readonly int HashEllenCombo3 = Animator.StringToHash("EllenCombo3");
         public static readonly int HashEllenCombo4 = Animator.StringToHash("EllenCombo4");
 
-        void Awake()
+		public static readonly int DrinkTrigger = Animator.StringToHash("Drink");
+
+		void Awake()
         {
             animator = GetComponent<Animator>();
             meleeStateMachine = animator.GetBehaviour<MeleeAction>();
@@ -55,5 +57,17 @@ namespace Player
         }
         
         public Action<bool> WhenAttack;
-    }
+
+
+        public void Attack()
+        {
+			animator.SetTrigger(MeleeAttackTrigger);
+		}
+
+        public void Drink()
+        {
+			animator.SetTrigger(DrinkTrigger);  
+
+		}
+	}
 }

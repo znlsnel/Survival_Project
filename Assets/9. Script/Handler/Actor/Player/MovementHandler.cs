@@ -12,7 +12,7 @@ namespace Player
          private Rigidbody _rigidbody;
          private HitPoint _hitPoint;
         private PlayerCondition playerCondition;
-         public Camera mainCamera;
+		private Camera mainCamera; 
 
         [SerializeField] float moveSpeed = 5f;
         // runningSpeed
@@ -41,7 +41,8 @@ namespace Player
 
         void Awake()
         {
-            _rigidbody = GetComponent<Rigidbody>();
+            mainCamera = Camera.main;
+			_rigidbody = GetComponent<Rigidbody>();
             _hitPoint = GetComponentInChildren<HitPoint>();
             playerCondition = GetComponentInChildren<PlayerCondition>();
         }
