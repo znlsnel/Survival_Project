@@ -8,11 +8,16 @@ public class EndingCutScene : MonoBehaviour
     [SerializeField] private GameObject airplane;   // 출발하는 비행기
     [SerializeField] private Transform skyTarget;   // 목표 상승 지점
     [SerializeField] private CanvasGroup fadeCanvas; // 페이드 인/아웃용 캔버스
+    [SerializeField] private CanvasGroup endingUI;
+
+
     [SerializeField] private CinemachineVirtualCamera vCam;
     [SerializeField] private float takeoffDuration = 5f; // 이륙 시간
     [SerializeField] private float fadeDuration = 2f; // 페이드아웃 시간
     [SerializeField] private float finalSpeed = 10f; // 최종 상승 속도
     [SerializeField] private float rotationSpeed = 2f; // 회전 속도
+
+    [SerializeField] private float uiFadeInDuration = 2f; // 엔딩 UI 등장 시간
 
     private float defaultFOV;
     private bool isTakeoff = true;
@@ -21,14 +26,22 @@ public class EndingCutScene : MonoBehaviour
     {
         if (airplane == null) airplane = GameObject.Find("CutSceneOBJ_Ending");
         if (vCam == null) vCam = FindObjectOfType<CinemachineVirtualCamera>();
-        if (fadeCanvas == null) fadeCanvas = FindObjectOfType<CanvasGroup>();
+        if (fadeCanvas == null) fadeCanvas = GameObject.Find("fade").GetComponent<CanvasGroup>();
+        if (endingUI == null) endingUI = GameObject.Find("EndingUI").GetComponent<CanvasGroup>();
 
-        vCam.Follow = airplane.transform;
-        vCam.LookAt = airplane.transform;
+
+        if (endingUI != null)
+        {
+            endingUI.alpha = 0;
+            endingUI.gameObject.SetActive(false);
+        }
     }
 
     private void Start()
     {
+        vCam.Follow = airplane.transform;
+        vCam.LookAt = airplane.transform;
+
         defaultFOV = vCam.m_Lens.FieldOfView;
         StartCoroutine(PlayEndingCutScene());
     }
@@ -123,6 +136,21 @@ public class EndingCutScene : MonoBehaviour
         }
 
         fadeCanvas.alpha = endAlpha;
+
+        if (endingUI != null)
+        {
+            endingUI.gameObject.SetActive(true);
+
+            elapsedTime = 0f;
+            while (elapsedTime < uiFadeInDuration)
+            {
+                endingUI.alpha = Mathf.Lerp(0, 1, elapsedTime / uiFadeInDuration);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+            endingUI.alpha = 1;
+        }
+
         isTakeoff = false; // 상승 종료
     }
 }
