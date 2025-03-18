@@ -65,7 +65,7 @@ public class InputManager : Singleton<InputManager>
 	static public InputAction GetInput(EPlayerBuilding type) => Instance.buildingInputs[type];  
 
 	private bool[] numKeyDown;
-
+	 
 	private void OnValidate()
 	{
 		BindAction(); 
@@ -74,8 +74,9 @@ public class InputManager : Singleton<InputManager>
 	protected override void Awake()
 	{
 		base.Awake();
-		inputSystem.Enable();
-		numKeyDown = new bool[numKeyCodes.Length];
+		SetActive(false);
+
+			numKeyDown = new bool[numKeyCodes.Length];
 	}
 
 	private void Update()
@@ -84,10 +85,7 @@ public class InputManager : Singleton<InputManager>
 	
 
 	}
-	private void OnDestroy()
-	{
-		inputSystem.Disable();
-	}
+
 
 	private void Start()
     {
@@ -126,9 +124,13 @@ public class InputManager : Singleton<InputManager>
 	public static void SetActive(bool active)
 	{
 		if (active)
-			Instance.inputSystem.Enable(); 
-		else
-			Instance.inputSystem.Disable();
+		{
+			Instance.inputSystem.Enable();
+		}
+		else 
+		{
+			Instance.inputSystem.Disable(); 
+		}
 	}
 
     public void ToggleBuildMode(InputAction.CallbackContext context)
