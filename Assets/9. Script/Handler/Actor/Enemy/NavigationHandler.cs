@@ -6,6 +6,8 @@ using UnityEngine.Serialization;
 
 namespace Enemy
 {
+    public enum Status { Idle, Detected, Attackable, Attacking, Escape, Skill } // question: 확장되면 어떻게 관리해야하나?
+
     [RequireComponent(typeof(NavMeshAgent))]
     public class NavigationHandler: MonoBehaviour
     {
@@ -14,14 +16,13 @@ namespace Enemy
         
         // ReSharper disable once InconsistentNaming
         [SerializeField] private float moveSpeed = 4f; // 몬스터의 이동속도
-        [SerializeField] private float stoppingDistance = 2f; // 멈추는 위치
-        [SerializeField] private float chaseRange = 16f;// 추적 거리
+        [SerializeField] protected float stoppingDistance = 2f; // 멈추는 위치
+        [SerializeField] protected float chaseRange = 16f;// 추적 거리
     
-        public enum Status { Idle, Detected, Attackable, Attacking } // question: 확장되면 어떻게 관리해야하나?
     
         // feat: 캐싱
-        private Status _currStatus;
-        private Status _prevStatus;
+        protected Status _currStatus;
+        protected Status _prevStatus;
         public Action<Status> WhenChangedStatus;
 
 		void Awake()
@@ -44,7 +45,7 @@ namespace Enemy
         }
 
         // notice: Update에서 체크 필요
-        public void UpdateStatus()
+        public virtual void UpdateStatus()
         {
             if (!target) throw new UnityException("enemy navigation: target not set");
     
@@ -66,14 +67,18 @@ namespace Enemy
             if(isAttacking) _currStatus = Status.Attacking; else _currStatus = Status.Attackable;
         }
         
-
+        void Awake()
+        {
+            Agent = GetComponent<NavMeshAgent>();
+            Initialized();
+        }
 
         public void StopByAnimation(bool isAnimated)
         {
             Agent.isStopped = isAnimated;
         }
-        
-        void Update()
+
+        protected virtual void Update()
         {
             UpdateStatus();
             if(_currStatus == Status.Detected && !Agent.isStopped) Agent.SetDestination(target.position);
