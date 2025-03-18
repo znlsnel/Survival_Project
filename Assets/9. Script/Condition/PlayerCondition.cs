@@ -5,21 +5,22 @@ using UnityEngine;
 
 public class PlayerCondition : MonoBehaviour
 {
-    public UICondition uiCondition;
-    public DayNightCycle dayNightCycle;
-    public Weather weather;
-    public MovementHandler movementHandler;
+    private UICondition uiCondition;
+	private DayNightCycle dayNightCycle;
+	private Weather weather;
+     
+    public UICondition UICondition { get=>uiCondition; set=>uiCondition = value; } 
     Conditions health { get { return uiCondition.health; } }
     Conditions hunger { get { return uiCondition.hunger; } }
     Conditions thirsty { get { return uiCondition.thirsty; } }
     Conditions stamina { get { return uiCondition.stamina; } }
     Conditions temperature { get { return uiCondition.temperature; } }
 
+
     public float healthDecay;
     public float thirstyDecay;
     public float fullHungerHealthImprove;
     public float temperatureDecayRate;
-    //public event Action onTakeDamage;
 
     private void Update()
     {
@@ -36,7 +37,7 @@ public class PlayerCondition : MonoBehaviour
 
         health.Subtract(decayCount * healthDecay * Time.deltaTime);
 
-        UpdateTemperature();
+     //   UpdateTemperature(); 
 
         if (health.curValue < 0f)
         {

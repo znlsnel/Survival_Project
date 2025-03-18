@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: 35d76210b41d93c4dbb845b6edfb89ba, type: 3}
   itemTypeIcon: {fileID: 21300000, guid: 35d76210b41d93c4dbb845b6edfb89ba, type: 3}
-  itemType: 2
+  itemType: 3
   itemName: "\uC624\uC5FC\uB41C \uBB3C"
   itemDescription: "\uC624\uC5FC\uB41C \uBB3C\uC774\uB2E4. \uC815\uD654\uD574\uC57C
     \uB9C8\uC2E4 \uC218 \uC788\uB2E4."
@@ -22,5 +22,5 @@ MonoBehaviour:
     type: 3}
   isActiveItem: 0
   activeItemPrefab: {fileID: 0}
-  canStackItems: 0
+  canStackItems: 1
   maxStackCount: 50

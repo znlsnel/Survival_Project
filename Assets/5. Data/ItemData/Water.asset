@@ -21,5 +21,5 @@ MonoBehaviour:
     type: 3}
   isActiveItem: 0
   activeItemPrefab: {fileID: 0}
-  canStackItems: 0
+  canStackItems: 1
   maxStackCount: 50

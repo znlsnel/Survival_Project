@@ -24,7 +24,18 @@ namespace Enemy
         private Status _prevStatus;
         public Action<Status> WhenChangedStatus;
 
-        private void Initialized()
+		void Awake()
+		{
+			Agent = GetComponent<NavMeshAgent>();
+			Initialized();
+		}
+		private void Start()
+		{
+            target = GameManager.Instance.PlayerController.transform;
+
+		}
+
+		private void Initialized()
         {
             Agent.speed = moveSpeed;
             Agent.acceleration = moveSpeed * 2;
@@ -55,11 +66,7 @@ namespace Enemy
             if(isAttacking) _currStatus = Status.Attacking; else _currStatus = Status.Attackable;
         }
         
-        void Awake()
-        {
-            Agent = GetComponent<NavMeshAgent>();
-            Initialized();
-        }
+
 
         public void StopByAnimation(bool isAnimated)
         {
