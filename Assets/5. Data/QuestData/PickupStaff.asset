@@ -21,7 +21,8 @@ MonoBehaviour:
   childs:
   - {fileID: 11400000, guid: 0f8a9b029c60b374096c5766f0e98f10, type: 2}
   - {fileID: 11400000, guid: e2a4c651682982b45a46512837706a84, type: 2}
+  - {fileID: 11400000, guid: 6f9c00f7a3baca049bb350e07bc5251c, type: 2}
   rewards:
-  - {fileID: 11400000, guid: d73a1b6033a32714fa4b8ea5bd9b4aca, type: 2}
-  - {fileID: 11400000, guid: d73a1b6033a32714fa4b8ea5bd9b4aca, type: 2}
-  - {fileID: 11400000, guid: d73a1b6033a32714fa4b8ea5bd9b4aca, type: 2}
+  - {fileID: 11400000, guid: a3a3ec96ec451984bacd26ea9491f547, type: 2}
+  - {fileID: 11400000, guid: 5c9c592218fcbbd42ab2f3187af00e92, type: 2}
+  - {fileID: 11400000, guid: d613c72bdb950a248bfbc28637e717b9, type: 2}

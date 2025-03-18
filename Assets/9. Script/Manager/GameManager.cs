@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
+	[SerializeField] private GameObject endingCutScene;
 	private Player.Controller playerController;
 
 	public Player.Controller PlayerController => playerController;
@@ -21,7 +22,7 @@ public class GameManager : Singleton<GameManager>
 	}
 	public void GameEnd()
 	{
-
+		endingCutScene.gameObject.SetActive(true);
 	}
 
 }
