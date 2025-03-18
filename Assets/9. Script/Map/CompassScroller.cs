@@ -1,11 +1,12 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class CompassScroll : MonoBehaviour
 {
-    public RectTransform content; 
-    public Transform player; 
-    public float scrollSpeed;
+    public RectTransform content;
+    public Transform player;
+    public float scrollSpeed = 10f;
+    public float loopThreshold = 600f;
 
     private float lastPlayerAngle;
     private float contentWidth;
@@ -13,7 +14,7 @@ public class CompassScroll : MonoBehaviour
     void Start()
     {
         lastPlayerAngle = player.eulerAngles.y;
-        contentWidth = content.rect.width / 2; 
+        contentWidth = content.rect.width / 2;
     }
 
     void Update()
@@ -23,7 +24,6 @@ public class CompassScroll : MonoBehaviour
         lastPlayerAngle = currentAngle;
 
         content.anchoredPosition += Vector2.left * deltaAngle * scrollSpeed;
-
 
         if (content.anchoredPosition.x <= -contentWidth)
         {

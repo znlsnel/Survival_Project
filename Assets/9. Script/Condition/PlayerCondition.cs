@@ -18,8 +18,7 @@ public class PlayerCondition : MonoBehaviour
 
 
     public float healthDecay;
-    public float thirstyDecay;
-    public float fullHungerHealthImprove;
+    //public float fullHungerHealthImprove;
     public float temperatureDecayRate;
 
     private void Update()
@@ -37,7 +36,7 @@ public class PlayerCondition : MonoBehaviour
 
         health.Subtract(decayCount * healthDecay * Time.deltaTime);
 
-     //   UpdateTemperature(); 
+        //UpdateTemperature(); 
 
         if (health.curValue < 0f)
         {
