@@ -30,6 +30,29 @@ public class DroneAI : MonoBehaviour
     private bool isNowHome = false;
 
 
+    //private void OnEnable()
+    //{
+
+    //    StartCoroutine(EnsureNavMeshPlacement());
+    //}
+
+    //private IEnumerator EnsureNavMeshPlacement()
+    //{
+    //    yield return new WaitForSeconds(0.1f);
+
+    //    if (!agent.isOnNavMesh)
+    //    {
+    //        NavMeshHit hit;
+    //        if (NavMesh.SamplePosition(transform.position, out hit, 2.0f, NavMesh.AllAreas))
+    //        {
+    //            transform.position = hit.position;
+    //        }
+    //        else
+    //        {
+    //        }
+    //    }
+    //}
+
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -52,7 +75,7 @@ public class DroneAI : MonoBehaviour
                 // 1. 가까운 거 찾는다.
                 targetResource = FindNearestResource();
             }
-            
+
 
             // 2. 가장 가까운게 자원이냐 채취자원이냐
 
@@ -60,8 +83,8 @@ public class DroneAI : MonoBehaviour
             {
                 if (isFull)
                 {
-                    ReturnToHome(); 
-                    if(isNowHome)
+                    ReturnToHome();
+                    if (isNowHome)
                         StoredItemsToBox();
                 }
 
@@ -185,23 +208,41 @@ public class DroneAI : MonoBehaviour
         }
     }
 
+    private bool isGathering = false; // 자원 채집 중인지 확인
 
     private void StartGathering(Transform target)
     {
-        Vector3 a = target.position;
-        agent.SetDestination(a);  // 간다~
-        if (Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(a.x, 0, a.z)) < 0.1f)
+        if (isGathering) return; // 이미 채굴 중이라면 실행 안 함
+        isGathering = true;
+
+        Vector3 targetPosition = target.position;
+        agent.SetDestination(targetPosition);
+        Debug.Log("StartGathering: 자원 채집을 위해 이동 시작");
+
+        StartCoroutine(GatheringRoutine(target));
+    }
+
+    private IEnumerator GatheringRoutine(Transform target)
+    {
+        while (true)
         {
-
-            Resource resource = targetResource.GetComponent<Resource>();
-            if (resource != null)
+            if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
             {
-                resource.DropItem(transform.position, transform.forward);
-            }
-            targetResource = null;
+                Debug.Log("GatheringRoutine: 채굴 시작");
 
+                Resource resource = target.GetComponent<Resource>();
+                if (resource != null)
+                {
+                    resource.DropItem(transform.position, transform.forward);
+                }
+
+                targetResource = null;
+                isGathering = false; // 채굴 완료 후 다시 활성화 가능
+                yield break; // 코루틴 종료
+            }
+
+            yield return null;
         }
-        
     }
 
     // 1. 가까운거 
