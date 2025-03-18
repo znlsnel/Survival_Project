@@ -51,8 +51,9 @@ public class InventoryHandler : MonoBehaviour
 	private void Start()
 	{
 		messageUI = GetComponent<PlayerUIHandler>().MessageUI;
-
 	}
+
+
 	private (ESlotType, int) GetEmptySlotIdx()
     {
 		for (int i = 0; i < QuickSlotItems.Count; i++)
@@ -148,5 +149,18 @@ public class InventoryHandler : MonoBehaviour
 		onChangedSlot?.Invoke();
 	}
 
+	public bool HasItem(ItemDataSO data)
+	{
+		foreach ( var item in MyItems)
+			if (item == data)
+				return true;
+		
+		foreach ( var item in QuickSlotItems)
+			if (item == data)
+				return true;
+
+
+		return false;
+	}
 
 }

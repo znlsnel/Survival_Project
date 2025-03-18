@@ -4,7 +4,11 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
+using UnityEngine.ProBuilder.Shapes;
 using UnityEngine.UI;
+using static System.Net.Mime.MediaTypeNames;
+using Image = UnityEngine.UI.Image;
+using Sprite = UnityEngine.Sprite;
 
 public class PopupModularUI : PopupUI
 {
@@ -23,6 +27,7 @@ public class PopupModularUI : PopupUI
 
 	public void Initialize(PopupUIOpener opener)
 	{
+
 		SetLabel(title, opener.title);
 		SetLabel(subTitle, opener.subTitle);
 		SetLabel(description, opener.description);
@@ -43,15 +48,20 @@ public class PopupModularUI : PopupUI
 
 	private void SetLabel(TextMeshProUGUI label, string text)
 	{
+		label.gameObject.SetActive(string.IsNullOrEmpty(text) == false);
+
 		if (label == null)
 			return;
-
+		 
 		label.text = text;
 		label.gameObject.SetActive(!string.IsNullOrEmpty(text));
 	}
 
+
 	private void SetImage(Image image, Sprite sprite, Color32 color)
 	{
+		image.gameObject.SetActive(sprite != null);
+
 		if (image == null)
 			return;
 
@@ -63,6 +73,8 @@ public class PopupModularUI : PopupUI
 
 	private void SetButton(Button button, ButtonInfo info)
 	{
+		button.gameObject.SetActive(info != null);
+		 
 		if (button == null) 
 			return;
 
