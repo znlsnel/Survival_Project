@@ -766,10 +766,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dynamite_1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3451118302482216456, guid: d7e7e72aa25bca845b5f447d4762b1b3, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d7e7e72aa25bca845b5f447d4762b1b3,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2975338893322176731}
   m_SourcePrefab: {fileID: 100100000, guid: d7e7e72aa25bca845b5f447d4762b1b3, type: 3}
 --- !u!4 &8171762120171309531 stripped
 Transform:
@@ -777,3 +782,30 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8569601492169829936}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8803480600628269921 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d7e7e72aa25bca845b5f447d4762b1b3,
+    type: 3}
+  m_PrefabInstance: {fileID: 8569601492169829936}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &2975338893322176731
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8803480600628269921}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.09062285, y: 0.50751144, z: 0.09062287}
+  m_Center: {x: 0.00018239346, y: 0.25375572, z: 0.0021957364}
