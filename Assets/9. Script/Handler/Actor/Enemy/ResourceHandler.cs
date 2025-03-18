@@ -11,7 +11,7 @@ namespace Enemy
         
         public Action OnDeath;
 
-        public void ModifyHealth(int amount)
+        public virtual void ModifyHealth(int amount)
         {
             health = Mathf.Clamp(health + amount, 0, maxHealth);
             if (health <= 0) OnDeath?.Invoke();

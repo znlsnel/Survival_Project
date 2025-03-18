@@ -13,8 +13,8 @@ namespace Enemy
         public AnimationHandler AnimationHandler { get; private set; }
         private AudioHandler audioHandler;
         private MovementHandler movementHandler; public Actor.IMovement MovementHandler => movementHandler;
-        private NavigationHandler navigationHandler;
-        private ResourceHandler resourceHandler;
+        protected NavigationHandler navigationHandler;
+        protected ResourceHandler resourceHandler;
         private RewardHandler rewardHandler;
 
         void Awake()
@@ -27,7 +27,7 @@ namespace Enemy
             rewardHandler = GetComponent<RewardHandler>();
         }
 
-        void Start()
+        protected virtual void Start()
         {
             AnimationHandler.WhenAttack += navigationHandler.StopByAnimation;
             

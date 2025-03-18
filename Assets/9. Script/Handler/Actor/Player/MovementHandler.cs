@@ -53,6 +53,7 @@ namespace Player
 
         private void FixedUpdate()
         {
+            if (!isMoveable) return;
             Move(currMoveInputValue);
             if (isAttacking) return;
             Rotate();
@@ -61,8 +62,6 @@ namespace Player
         // 정지 상태 체크 필요
         public void Move(Vector2 moveInputValue)
         {
-            if (!isMoveable) return;
-            
             isMoved = moveInputValue != Vector2.zero;
             
             if (!isMoved) currentSpeed = Mathf.Lerp(currentSpeed, 0f, deceleration * Time.deltaTime);

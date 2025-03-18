@@ -34,7 +34,7 @@ namespace Enemy
         }
 
         // notice: Update에서 체크 필요
-        public void UpdateStatus()
+        public virtual void UpdateStatus()
         {
             if (!target) throw new UnityException("enemy navigation: target not set");
     
@@ -58,6 +58,7 @@ namespace Enemy
         
         void Awake()
         {
+            Debug.Log("??");
             Agent = GetComponent<NavMeshAgent>();
             Initialized();
         }
@@ -67,7 +68,7 @@ namespace Enemy
             Agent.isStopped = isAnimated;
         }
 
-        protected void Update()
+        protected virtual void Update()
         {
             UpdateStatus();
             if(_currStatus == Status.Detected && !Agent.isStopped) Agent.SetDestination(target.position);

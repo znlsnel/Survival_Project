@@ -9,7 +9,7 @@ namespace Player
     {
         private Input _input;
         public ResourceHandler ResourceHandler {get; private set;}
-        private MovementHandler movementHandler; public Actor.IMovement MovementHandler => movementHandler;
+        private MovementHandler movementHandler;
         public AnimationHandler AnimationHandler { get; private set; }
         public AudioHandler AudioHandler {get; private set;}
         
@@ -65,16 +65,10 @@ namespace Player
             
             InputManager.LeftMouse.performed += (context) =>
             {
+                // ProjectileManager.Instance.Generate(0, transform);
+
                 if (!movementHandler.IsGrounded()) return;
-                // Debug.Log(_movement.isComboAble);
-                // if (!_movement.isComboAble) return;
-                
                 AnimationHandler.animator.SetTrigger(AnimationHandler.MeleeAttackTrigger); 
-                
-                // _movement.isComboAble = false;
-                
-                // meleeWeaponController.audioHandler.PlayerOneShot(MeleeWeaponAudioHandler.SoundType.Attack);
-                // _animation.animator.SetBool(Animation.HashIsAbleRegisterCombo, false);
             };
 
             // InputManager.Dash.started += (context) =>
@@ -126,7 +120,7 @@ namespace Player
             
             Vector3 knockBackDirection = (transform.position - hitPoint.controller.transform.position).normalized;
             knockBackDirection.y = 0;
-            MovementHandler.ApplyKnockBack(knockBackDirection, 10f);
+            movementHandler.ApplyKnockBack(knockBackDirection, 10f);
             
             hitPoint.hitEnemies.Add(gameObject);
         }
