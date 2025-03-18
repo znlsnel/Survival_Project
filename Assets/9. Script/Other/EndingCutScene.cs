@@ -60,6 +60,9 @@ public class EndingCutScene : MonoBehaviour
         float startFOV = defaultFOV;
         float targetFOV = 30f; // 점점 멀어지는 효과
 
+        SoundManager.Play("Sounds/UI/Flying");
+
+
         CinemachineTransposer transposer = vCam.GetCinemachineComponent<CinemachineTransposer>();
         if (transposer == null)
         {

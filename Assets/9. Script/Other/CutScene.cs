@@ -53,6 +53,8 @@ public class CutScene : MonoBehaviour
         float targetFOV = 30f;
 
 
+        SoundManager.Play("Sounds/UI/PlaneCrash", ESound.Effect, null, 0.55f);
+
         CinemachineTransposer transposer = vCam.GetCinemachineComponent<CinemachineTransposer>();
         if (transposer == null)
         {

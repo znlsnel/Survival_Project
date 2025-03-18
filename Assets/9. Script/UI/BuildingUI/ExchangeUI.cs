@@ -184,6 +184,8 @@ public class ExchangeUI : MonoBehaviour
         inventoryHandler.AddItem(currentExchangeData.ExchangeRewards);
         Debug.Log($"교환 완료! {currentExchangeData.ExchangeRewards.ItemName}을 획득했습니다.");
 
+        gameObject.SetActive(false);
+
         var go = Instantiate(currentExchangeData.ExchangeRewards.DropItemPrefab);
         go.transform.position = GameManager.Instance.transform.position;
 
