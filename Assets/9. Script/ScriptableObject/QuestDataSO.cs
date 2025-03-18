@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 [Serializable]
@@ -27,7 +28,7 @@ public class QuestDataSO : ScriptableObject
     [SerializeField] private List<QuestDataSO> childs = new List<QuestDataSO>();
     [SerializeField] private List<ItemDataSO> rewards = new List<ItemDataSO>();
 
-    public EQuestCategory Categoty => category;
+	public EQuestCategory Categoty => category;
     public string Target => target;
     public Sprite QuestIcon => questIcon;
     public string QuestTitle => questTitle;
@@ -35,6 +36,7 @@ public class QuestDataSO : ScriptableObject
     
     public List<QuestDataSO> ChildQuest => childs;
     public List<ItemDataSO> Rewards => rewards;
+
 
 } 
  
