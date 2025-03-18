@@ -1,58 +1,72 @@
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class CompassResourceTracker : MonoBehaviour
 {
-    public Transform player; 
-    public RectTransform compassUI; 
-    public GameObject resourceMarkerPrefab; 
-    public float detectionRadius = 50f; 
-    public LayerMask resourceLayer; 
-
+    public Transform player;
+    public RectTransform compassUI;
+    public GameObject resourceMarkerPrefab;
+    public float detectionRadius = 50f;
+    public LayerMask resourceLayer;
     private RectTransform rectTransform;
-    private GameObject resourceMarker;
     private float compassWidth;
+    private Dictionary<Transform, GameObject> resourceMarkers = new Dictionary<Transform, GameObject>();
 
     void Start()
     {
         compassWidth = compassUI.rect.width / 2;
-        resourceMarker = Instantiate(resourceMarkerPrefab, compassUI);
-        resourceMarker.SetActive(false);
         rectTransform = GetComponent<RectTransform>();
         rectTransform.sizeDelta = new Vector2(110, rectTransform.sizeDelta.y);
-    
-}
+
+
+    }
 
     void Update()
     {
-         rectTransform.sizeDelta = new Vector2(110, rectTransform.sizeDelta.y);
-    
-        UpdateResourceMarker();
+        UpdateResourceMarkers();
+        rectTransform.sizeDelta = new Vector2(110, rectTransform.sizeDelta.y);
     }
 
-    void UpdateResourceMarker()
+    void UpdateResourceMarkers()
     {
         Collider[] resources = Physics.OverlapSphere(player.position, detectionRadius, resourceLayer);
+        HashSet<Transform> detectedResources = new HashSet<Transform>();
 
-        if (resources.Length > 0)
+        foreach (Collider resource in resources)
         {
-            Transform closestResource = resources[0].transform;
-            Vector3 dirToResource = closestResource.position - player.position;
-            dirToResource.y = 0; 
+            Transform resourceTransform = resource.transform;
+            detectedResources.Add(resourceTransform);
+
+            if (!resourceMarkers.ContainsKey(resourceTransform))
+            {
+                GameObject marker = Instantiate(resourceMarkerPrefab, compassUI);
+                resourceMarkers[resourceTransform] = marker;
+            }
+
+            Vector3 dirToResource = resourceTransform.position - player.position;
+            dirToResource.y = 0;
 
             Vector3 forward = player.forward;
             forward.y = 0;
             forward.Normalize();
 
             float angle = Vector3.SignedAngle(forward, dirToResource, Vector3.up);
-
             float markerX = (angle / 180f) * compassWidth;
-            resourceMarker.GetComponent<RectTransform>().anchoredPosition = new Vector2(markerX, 0);
-            resourceMarker.SetActive(true);
+
+            // 마커 UI 업데이트
+            GameObject markerObject = resourceMarkers[resourceTransform];
+            markerObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(markerX, 0);
+            markerObject.SetActive(true);
         }
-        else
+
+        // 사라진 자원 마커 제거
+        foreach (var resource in new List<Transform>(resourceMarkers.Keys))
         {
-            resourceMarker.SetActive(false);
+            if (!detectedResources.Contains(resource))
+            {
+                Destroy(resourceMarkers[resource]);
+                resourceMarkers.Remove(resource);
+            }
         }
     }
 }
