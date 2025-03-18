@@ -9,7 +9,9 @@ public class PlayerCondition : MonoBehaviour
 	private DayNightCycle dayNightCycle;
 	private Weather weather;
      
-    public UICondition UICondition { get=>uiCondition; set=>uiCondition = value; } 
+    public UICondition UICondition { get=>uiCondition; set=>uiCondition = value; }
+
+    // UICondition에서 가져온 플레이어 상태
     Conditions health { get { return uiCondition.health; } }
     Conditions hunger { get { return uiCondition.hunger; } }
     Conditions thirsty { get { return uiCondition.thirsty; } }
@@ -17,9 +19,8 @@ public class PlayerCondition : MonoBehaviour
     Conditions temperature { get { return uiCondition.temperature; } }
 
 
-    public float healthDecay;
-    //public float fullHungerHealthImprove;
-    public float temperatureDecayRate;
+    public float healthDecay; // 체력 감소율
+    public float temperatureDecayRate; // 체온 감소율
 
     private void Start()
     {
@@ -54,12 +55,14 @@ public class PlayerCondition : MonoBehaviour
 
     private void Update()
     {
+        // 배고픔, 갈증 감소/  스태미나 회복 계산
         hunger.Subtract(hunger.passiveValue * Time.deltaTime/4);
         thirsty.Subtract(thirsty.passiveValue * Time.deltaTime/2);
         stamina.Add(stamina.passiveValue * Time.deltaTime);
 
         int decayCount = 0;
 
+        // 특정 조건에서 체력 감소
         if (hunger.curValue <= 0f) decayCount++;
         if (thirsty.curValue <= 0f) decayCount++;
         if (temperature.curValue <= 20f) decayCount++;
@@ -67,18 +70,22 @@ public class PlayerCondition : MonoBehaviour
 
         health.Subtract(decayCount * healthDecay * Time.deltaTime);
 
-        UpdateTemperature(); 
+        // 체온 업데이트
+        UpdateTemperature();
 
+        // 체력이 0 이하일 경우 사망 처리
         if (health.curValue < 0f)
         {
             Die();
         }
     }
 
+    // 체온 변화 로직
     void UpdateTemperature()
     {
         float temperatureMultiplier = 1f;
 
+        // 날씨에 따른 온도 변화 배율 설정
         switch (weather.currentWeather)
         {
             case Weather.WeatherType.Rainy:
@@ -95,7 +102,7 @@ public class PlayerCondition : MonoBehaviour
                 break;
         }
 
-
+        // 밤일 때 Hot을 제외한 나머지 날씨는 배율에 맞게 체온 감소
         if (dayNightCycle.Night())
         {
             if(weather.currentWeather == Weather.WeatherType.Hot)
@@ -107,6 +114,7 @@ public class PlayerCondition : MonoBehaviour
                 temperature.Subtract(temperatureDecayRate * temperatureMultiplier * Time.deltaTime);
             }
         }
+        // 낮일 때 rainy, snow를 제외한 나머지 날씨는 배율에 맞게 체온 증가
         else
         {
 
@@ -124,34 +132,42 @@ public class PlayerCondition : MonoBehaviour
             }
         }
     }
-     
 
+    // 체력 회복 메서드
     public void Heal(float amount)
     {
         health.Add(amount);
     }
 
+    // 배고픔 회복 메서드
     public void Eat(float amount)
     {
         hunger.Add(amount);
     }
-    public void Drink(float amount)
+
+    // 갈증 회복 및 체온 감소 메서드
+    public void Drink(float amount, float amount2)
     {
         thirsty.Add(amount);
         if (temperature.curValue > 50)
-            temperature.curValue = Mathf.Max(temperature.curValue - (amount / 3), 50);
-        
+        {
+            temperature.curValue = Mathf.Max(temperature.curValue - amount2, 50);
+        }
     }
-    
+
+    // 모닥불과 가까이 있으면 체온 상승 메서드
     public void Rest(float amount)
     {
         temperature.Add(amount * Time.deltaTime);
     }
+
+    // 스태미나 사용 메서드
     public void UseStamina(float amounut)
     {
         stamina.Subtract(amounut);
     }
 
+    // 플레이어 사망 메서드
     public void Die()
     {
         Debug.Log("플레이어가 죽었다.");
