@@ -134,7 +134,11 @@ public class InventoryHandler : MonoBehaviour
 		itemslot.StackAmount -= 1;
 
 		if (itemslot.StackAmount <= 0)
+		{
 			myItems[type][idx] = null;
+			itemslot.StackAmount = 1;
+		}
+		
 
 		onChangedSlot?.Invoke();
 	}
