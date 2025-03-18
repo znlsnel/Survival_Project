@@ -106,10 +106,7 @@ public class InventoryHandler : MonoBehaviour
 		onChangedSlot?.Invoke();
 		messageUI.AddItem(item); 
 		QuestManager.ProgressQuest(EQuestCategory.Pickup, item.ItemName); 
-		if (item.ItemName == "¿£Áø")
-		{
-			GameManager.Instance.GameEnd();
-		}
+
 		
 		return true;
 	}

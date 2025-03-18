@@ -100,7 +100,6 @@ GameObject:
   - component: {fileID: 6542680498435014735}
   - component: {fileID: -1100394501680681042}
   - component: {fileID: 6044538309558082069}
-  - component: {fileID: 2201662193148428889}
   m_Layer: 0
   m_Name: Dropship
   m_TagString: Untagged
@@ -209,41 +208,6 @@ MonoBehaviour:
   objName: DropShip
   description: "\uC774 \uD589\uC131\uC5D0\uC11C \uD0C8\uCD9C\uD558\uAE30 \uC704\uD574
     \uAF2D \uD544\uC694\uD55C \uBE44\uD589\uC120\uC774\uB2E4"
---- !u!114 &2201662193148428889
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3089259401453716166}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff15ee82003679545a70f9ce139ca593, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  popupPrefab: {fileID: 6125694446655685766, guid: 5ee4cd6c99de9bc4291d29caa616afc1,
-    type: 3}
-  title: "\uBE44\uD589\uAE30 \uC218\uB9AC"
-  subTitle: "\uC5D4\uB529"
-  description: "\uBE44\uD589\uAE30\uB97C \uC218\uB9AC\uD558\uACE0 \uB5A0\uB098\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?"
-  image: {fileID: 0}
-  tintColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  Caption: 
-  buttons:
-  - Label: NO!
-    ClosePopupWhenClicked: 1
-    IgnoreButtonClickedEvent: 0
-    OnClickedEvent:
-      m_PersistentCalls:
-        m_Calls: []
-  - Label: YES!
-    ClosePopupWhenClicked: 1
-    IgnoreButtonClickedEvent: 0
-    OnClickedEvent:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!1 &3349164957223548138
 GameObject:
   m_ObjectHideFlags: 0
