@@ -2,14 +2,13 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class JHN_PlayerManager : MonoBehaviour
+public class PlayerModeHandler : MonoBehaviour
 {
     [SerializeField] private PlayerInput playerInput;
 
     private JHN_PlayerState currentState;
     private JHN_PlayerState normalState;
     private JHN_PlayerState buildState;
-
 
     private void OnValidate()
     {
@@ -29,8 +28,6 @@ public class JHN_PlayerManager : MonoBehaviour
     {
         EventManager.Instance.OnToggleBuildModeRequested += ToggleBuildingMode;
     }
-
-
 
     public void ToggleBuildingMode()
     {

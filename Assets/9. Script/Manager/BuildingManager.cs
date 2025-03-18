@@ -11,6 +11,7 @@ public class BuildingManager : Singleton<BuildingManager>
     [SerializeField] private BuildingUI buildingUI;
 	[SerializeField] private InventoryHandler InventoryHandler;
 
+    bool isBuildMode = false; 
     private void Start()
     {
         if (InputManager.Instance != null)
@@ -86,6 +87,9 @@ public class BuildingManager : Singleton<BuildingManager>
 
     private void OnCancelBuilding(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
+        if (EventManager.Instance.IsBuildMode == false)
+            return;
+
         CancelPlacement();
         buildingUI.buildingMenuUIOBJ.SetActive(true);
         buildingUI.buildingDesUIOBJ.SetActive(false);
