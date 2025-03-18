@@ -13,6 +13,7 @@ public class StorageUI : MonoBehaviour
     [SerializeField] private GameObject togglePrefab; // EItemType별 토글 버튼 프리팹
 
     [SerializeField] private Button closeBtn; // 닫기 버튼
+    [SerializeField] private GameObject UI;
 
 
     [SerializeField] private BoxInventory boxInventory;
@@ -22,22 +23,56 @@ public class StorageUI : MonoBehaviour
     private Dictionary<EItemType, Toggle> categoryToggles = new Dictionary<EItemType, Toggle>();
 
 
-    private void Start()
+
+    private void Awake()
     {
         if (boxInventory != null)
         {
             InitializeUI(boxInventory.GetStoredItem()); // 박스 아이템을 가져와 UI 초기화
             InitializeItemTypeToggles();
-
+            Debug.Log("이벤트 등록");
             boxInventory.OnInventoryChanged += InitializeUI;
             boxInventory.OnInventoryUIOpen += OnUI;
 
             closeBtn.onClick.AddListener(CloseUI);
         }
     }
+    private void Start()
+    {
+        if (boxInventory == null)
+        {
+            boxInventory = FindObjectOfType<BoxInventory>();
+        }
+
+        if (boxInventory != null)
+        {
+            InitializeUI(boxInventory.GetStoredItem());
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (boxInventory == null)
+        {
+            boxInventory = FindObjectOfType<BoxInventory>();
+        }
+
+        if (boxInventory != null)
+        {
+            InitializeUI(boxInventory.GetStoredItem()); // 박스 아이템을 가져와 UI 초기화
+            InitializeItemTypeToggles();
+            boxInventory.OnInventoryChanged -= InitializeUI; // 중복 방지
+            boxInventory.OnInventoryChanged += InitializeUI;
+            boxInventory.OnInventoryUIOpen -= OnUI; // 중복 방지
+            boxInventory.OnInventoryUIOpen += OnUI;
+        }
+
+        closeBtn.onClick.AddListener(CloseUI);
+    }
 
     public void InitializeUI(List<ItemDataSO> items)
     {
+
         allItems = items;
         UpdateItemList();
     }
@@ -176,12 +211,16 @@ public class StorageUI : MonoBehaviour
 
     public void CloseUI()
     {
-        this.gameObject.SetActive(false);
+        UI.SetActive(false);
     }
 
     public void OnUI()
     {
-        this.gameObject.SetActive(true);
+        UI.SetActive(true);
+        if (boxInventory != null)
+        {
+            InitializeUI(boxInventory.GetStoredItem()); // UI가 켜질 때만 업데이트
+        }
     }
 
 }

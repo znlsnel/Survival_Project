@@ -22,15 +22,26 @@ public class DroneAI : MonoBehaviour
     [SerializeField] private int maxInventorySize = 10;  // 드론 인벤 최대 크기
 
     private Transform boxPos;   // 거점 위치 / 인벤 꽉 차면 돌아올 곳
-    private BoxInventory boxInventory;   // 박스 인벤토리 (저장소)
+    public BoxInventory boxInventory;   // 박스 인벤토리 (저장소)
     [SerializeField] private LayerMask boxLayer;
 
 
     private bool isFull = false;
     private bool isNowHome = false;
 
+    private void Start()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        StartCoroutine(EnsureNavMeshPlacement());
+        currentScanRange = scanRange;
+        StartCoroutine(ScanForResources());
 
-    private IEnumerator EnsureNavMeshPlacement()
+        agent.baseOffset += 5;
+
+
+    }
+    
+        private IEnumerator EnsureNavMeshPlacement()
     {
         yield return new WaitForSeconds(0.1f);
 
@@ -46,17 +57,6 @@ public class DroneAI : MonoBehaviour
                 yield break;
             }
         }
-    }
-    private void Start()
-    {
-        agent = GetComponent<NavMeshAgent>();
-        StartCoroutine(EnsureNavMeshPlacement());
-        currentScanRange = scanRange;
-        StartCoroutine(ScanForResources());
-
-        agent.baseOffset += 5;
-
-
     }
 
     private IEnumerator ScanForResources()
@@ -104,6 +104,7 @@ public class DroneAI : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
     }
+
 
     private Transform FindNearestStorage()
     {
@@ -283,22 +284,19 @@ public class DroneAI : MonoBehaviour
             isNowHome = true;
         }
     }
-    
+
 
     private void StoredItemsToBox()
     {
         if (boxInventory != null)
         {
-            boxInventory.StoreItem(droneInventory);
-            droneInventory.Clear();
+            boxInventory.StoreItemDirectly(droneInventory);
         }
-        Debug.Log("저장끝~");
-        Debug.Log($"{droneInventory.Count}") ;
+
+        Debug.Log("드론이 아이템을 박스에 저장 완료!");
         isFull = false;
         isNowHome = false;
-
     }
-
 
 
     public List<ItemDataSO> GetInventory()

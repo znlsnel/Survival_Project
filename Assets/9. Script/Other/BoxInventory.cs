@@ -10,7 +10,6 @@ public class BoxInventory : MonoBehaviour, IInteractableObject
 
     public event Action OnInventoryUIOpen;
 
-
     public void StoreItem(List<ItemDataSO> items)
     {
         if (items == null || items.Count <= 0) return;
@@ -29,9 +28,18 @@ public class BoxInventory : MonoBehaviour, IInteractableObject
         return storedItem;
     }
 
+    public void StoreItemDirectly(List<ItemDataSO> items)
+    {
+        if (items == null || items.Count == 0) return;
+
+        storedItem.AddRange(items);
+        items.Clear();
+    }
+
 
     public void Interaction()
     {
+        Debug.Log("aa");
         // 여기 박스 ui 열기
         OnInventoryUIOpen?.Invoke();
     }
