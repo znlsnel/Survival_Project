@@ -10,8 +10,6 @@ public class QuickSlotUI : BaseUI
 		slotParent
 	}
 
-	[SerializeField] private GameObject slotPrefab;
-
 	// === List ===
 	private List<ItemSlot> quickSlot = new List<ItemSlot>();
 	private List<ItemSlot> itemSlots;
@@ -44,14 +42,8 @@ public class QuickSlotUI : BaseUI
 	{
 		Transform slotParent = Get<GameObject>((int)GameObjects.slotParent).transform;
 
-		for (int i = 0; i < itemSlots.Count; i++)
-		{
-			var slot = Instantiate(slotPrefab);
-			slot.transform.SetParent(slotParent, false);
-		}
-
 		foreach (Transform child in slotParent)
-			quickSlot.Add(child.GetComponent<ItemSlot>());
+			quickSlot.Add(child.GetComponent<ItemSlot>()); 
 
 	}
 	private void UpdateItemInfo()

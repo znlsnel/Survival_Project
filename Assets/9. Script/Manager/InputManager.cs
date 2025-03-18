@@ -81,21 +81,9 @@ public class InputManager : Singleton<InputManager>
 	private void Update()
 	{
 		CheckInputNumber();
-	
-
 	}
 
-
-	private void Start()
-    {
-		if (ToggleBuilding != null)
-		{
-			ToggleBuilding.started += ToggleBuildMode;
-			ToggleBuilding.Enable();
-		}
-	}
-
-
+	 
 	private void BindAction()
 	{
 		string mapName = typeof(EPlayerInput).Name;
@@ -131,14 +119,6 @@ public class InputManager : Singleton<InputManager>
 			Instance.inputSystem.Disable(); 
 		}
 	}
-
-    public void ToggleBuildMode(InputAction.CallbackContext context)
-    {
-        if (context.phase == InputActionPhase.Started) 
-        {
-            EventManager.Instance.RequestToggleBuildMode();
-        }
-    }
 
 	public static void ModeChange(bool playMode)
 	{
