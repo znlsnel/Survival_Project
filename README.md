@@ -76,7 +76,7 @@ AAssets/
 
 ---
 
-<img src="https://github.com/user-attachments/assets/a8c1503d-a9e4-4337-adae-ac3c82234ed5" width="400" height="300">
+<img src="https://github.com/user-attachments/assets/504e9da7-d243-408b-af3c-a25efbf96ea8" width="400" height="300">
 
 ### 4. 퀘스트 시스템
 
@@ -110,11 +110,10 @@ AAssets/
 
 <img src="https://github.com/user-attachments/assets/351311c9-6ad8-4cdb-90f3-95a890ca1df7" width="400" height="300">
 
-### 7. 액터 클래스
+### 7. 전투 시스템
 
 - 휴머노이드 기반 공통 애니메이터
 - 확장 가능한 애니메이션 시스템
-
 - 다양한 몬스터 타입:
   - 일반병: 기본 전투 AI
   - 마법사: 범위 마법 공격
