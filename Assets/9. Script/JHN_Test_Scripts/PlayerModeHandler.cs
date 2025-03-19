@@ -6,9 +6,9 @@ public class PlayerModeHandler : MonoBehaviour
 {
     [SerializeField] private PlayerInput playerInput;
 
-    private JHN_PlayerState currentState;
-    private JHN_PlayerState normalState;
-    private JHN_PlayerState buildState;
+    private PlayerState currentState;
+    private PlayerState normalState;
+    private PlayerState buildState;
 
     private void OnValidate()
     {
@@ -45,7 +45,7 @@ public class PlayerModeHandler : MonoBehaviour
         EventManager.Instance.BuildingModeChanged(isBuildingMode);
     }
 
-    private void SetState(JHN_PlayerState newState)
+    private void SetState(PlayerState newState)
     {
         currentState = newState;
         currentState.EnterState();

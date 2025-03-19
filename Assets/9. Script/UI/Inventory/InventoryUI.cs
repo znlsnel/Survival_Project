@@ -111,8 +111,6 @@ public class InventoryUI : BaseUI
 			itemSlots[ESlotType.QuickSlot].Add(slot);
 			myItems[ESlotType.QuickSlot].Add(null);
 		}
-
-		
 	}
 
 	private void SetCategoryButton()

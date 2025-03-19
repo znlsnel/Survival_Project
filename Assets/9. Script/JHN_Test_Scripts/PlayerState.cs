@@ -2,18 +2,18 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Playables;
 
-public abstract class JHN_PlayerState
+public abstract class PlayerState
 {
     protected PlayerInput playerInput;
 
-    public JHN_PlayerState(PlayerInput input)
+    public PlayerState(PlayerInput input)
     {
         playerInput = input;
     }
     public abstract void EnterState();
 }
 
-public class NormalState : JHN_PlayerState
+public class NormalState : PlayerState
 {
     private PlayerModeHandler playerManager;
 
@@ -29,7 +29,7 @@ public class NormalState : JHN_PlayerState
     }
 }
 
-public class BuildState : JHN_PlayerState
+public class BuildState : PlayerState
 {
     private PlayerModeHandler playerManager;
 
