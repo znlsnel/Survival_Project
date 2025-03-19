@@ -5,10 +5,6 @@ using UnityEngine;
 
 public class QuickSlotUI : BaseUI
 {
-	enum GameObjects
-	{
-		slotParent
-	}
 
 	// === List ===
 	private List<ItemSlot> quickSlot = new List<ItemSlot>();
@@ -23,7 +19,6 @@ public class QuickSlotUI : BaseUI
 
 	private void Awake()
 	{
-		Bind<GameObject>(typeof(GameObjects));
 
 		inventory = FindFirstObjectByType<InventoryHandler>();
 		itemSlots = inventory.QuickSlots;
@@ -40,9 +35,8 @@ public class QuickSlotUI : BaseUI
 	}
 	private void InitItemList()
 	{
-		Transform slotParent = Get<GameObject>((int)GameObjects.slotParent).transform;
 
-		foreach (Transform child in slotParent)
+		foreach (Transform child in transform)
 			quickSlot.Add(child.GetComponent<ItemSlot>()); 
 
 	}

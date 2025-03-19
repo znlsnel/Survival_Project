@@ -15,6 +15,7 @@ public class ExchangeUI : MonoBehaviour
     [SerializeField] private GameObject topContentPrefab;
     [SerializeField] private Button buttonMake;  // 교환 버튼
     [SerializeField] private Button buttonCancel; // 취소 버튼
+    [SerializeField] private ItemDataSO engineItemData;
 
     private ExchangeDataSO currentExchangeData; // 현재 선택된 교환 데이터
     private List<ItemDataSO> playerItemList;
@@ -22,7 +23,7 @@ public class ExchangeUI : MonoBehaviour
     private void OnValidate()
     {
         if (resourceListBG == null) resourceListBG = transform.Find("ScrollRect/Viewport/Content");
-        if (topContentPrefab == null) topContentPrefab = transform.Find("Top-Content")?.gameObject; 
+        if (topContentPrefab == null) topContentPrefab = transform.Find("Top-Content")?.gameObject;
         if (buttonMake == null) buttonMake = transform.Find("Button-make")?.GetComponent<Button>();
         if (buttonCancel == null) buttonCancel = transform.Find("Button-cancel")?.GetComponent<Button>();
         if (buttonMake != null && buttonMake.onClick.GetPersistentEventCount() == 0)
@@ -33,15 +34,20 @@ public class ExchangeUI : MonoBehaviour
         {
             buttonCancel.onClick.AddListener(CloseUI);
         }
-        if(inventoryHandler == null) inventoryHandler = FindObjectOfType<InventoryHandler>();
+        if (inventoryHandler == null) inventoryHandler = FindObjectOfType<InventoryHandler>();
 
+    }
+
+    private void OnEnable()
+    {
+        UpdateTop(currentExchangeData);
+        ScrollRectUpdate(currentExchangeData);
     }
 
     private void Awake()
     {
         if (inventoryHandler == null)
         {
-            Debug.LogError("InventoryHandler가 할당되지 않았습니다! Inspector에서 설정하세요.");
             return;
         }
 
@@ -49,6 +55,7 @@ public class ExchangeUI : MonoBehaviour
 
         buttonMake.onClick.AddListener(ProcessExchange);
         buttonCancel.onClick.AddListener(CloseUI);
+        CloseUI();
     }
 
 
@@ -58,7 +65,6 @@ public class ExchangeUI : MonoBehaviour
 
         if (exchangeData == null)
         {
-            Debug.LogError("선택된 교환 데이터가 없습니다.");
             return;
         }
 
@@ -134,7 +140,6 @@ public class ExchangeUI : MonoBehaviour
     {
         if (playerItemList == null)
         {
-            Debug.LogError("playerItemList 가 null이다?");
             return 0;
         }
 
@@ -152,7 +157,6 @@ public class ExchangeUI : MonoBehaviour
     {
         if (currentExchangeData == null)
         {
-            Debug.LogError("교환할 아이템이 선택되지 않았습니다.");
             return;
         }
 
@@ -170,9 +174,16 @@ public class ExchangeUI : MonoBehaviour
             RemoveItemFromInventory(requiredItem.item, requiredItem.amount);
         }
 
+        Debug.Log($"교환할 얘 {currentExchangeData.ExchangeRewards.ItemName}");
+
         // 교환 아이템 추가
-        playerItemList.Add(currentExchangeData.ExchangeRewards);
+        inventoryHandler.AddItem(currentExchangeData.ExchangeRewards);
         Debug.Log($"교환 완료! {currentExchangeData.ExchangeRewards.ItemName}을 획득했습니다.");
+
+        gameObject.SetActive(false);
+
+        var go = Instantiate(currentExchangeData.ExchangeRewards.DropItemPrefab);
+        go.transform.position = GameManager.Instance.transform.position;
 
         // UI 업데이트
         UpdateExchangeUI(currentExchangeData);
@@ -180,19 +191,12 @@ public class ExchangeUI : MonoBehaviour
 
     private void RemoveItemFromInventory(ItemDataSO item, int amount)
     {
-        int removeCount = amount;
-
-        for (int i = playerItemList.Count - 1; i >= 0; i--)
+        for(int i=0; i<amount; i++)
         {
-            if (playerItemList[i] == item)
-            {
-                playerItemList.RemoveAt(i);
-                removeCount--;
-
-                if (removeCount <= 0) break; // 필요한 만큼 삭제 완료하면 종료
-            }
+            inventoryHandler.RemoveItem(item);
         }
     }
+
     public int GetMaxExchangeCount(ExchangeDataSO exchangeData)
     {
         int maxExchangeCount = int.MaxValue;

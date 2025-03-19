@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7188743620014239477}
   - component: {fileID: 62715019588019133}
   - component: {fileID: 2269218248643092133}
+  - component: {fileID: 7351758710415888958}
   m_Layer: 5
   m_Name: StorageCanvas
   m_TagString: Untagged
@@ -102,6 +103,27 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &7351758710415888958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 10123805800853294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c89a5dafbbd44124182ddb78ad2533b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listBG: {fileID: 8720449113499303903}
+  toggleParent: {fileID: 8191715324133362040}
+  buttonPrefab: {fileID: 372025624139192352, guid: 129d9036bc393e945a58eaaac409c970,
+    type: 3}
+  togglePrefab: {fileID: 3796843838641590817, guid: e69e3924644878045ba0117fa9d85865,
+    type: 3}
+  closeBtn: {fileID: 539005187559036}
+  UI: {fileID: 1903655708834349564}
+  boxInventory: {fileID: 8886008849229843770}
 --- !u!1 &201431789306404772
 GameObject:
   m_ObjectHideFlags: 0
@@ -994,7 +1016,6 @@ GameObject:
   - component: {fileID: 50166949984543704}
   - component: {fileID: 7131416469508870916}
   - component: {fileID: 6018374236765696816}
-  - component: {fileID: 1615058500786015388}
   m_Layer: 5
   m_Name: StorageUI
   m_TagString: Untagged
@@ -1071,26 +1092,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &1615058500786015388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1903655708834349564}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c89a5dafbbd44124182ddb78ad2533b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  listBG: {fileID: 8720449113499303903}
-  toggleParent: {fileID: 8191715324133362040}
-  buttonPrefab: {fileID: 372025624139192352, guid: 129d9036bc393e945a58eaaac409c970,
-    type: 3}
-  togglePrefab: {fileID: 3796843838641590817, guid: e69e3924644878045ba0117fa9d85865,
-    type: 3}
-  closeBtn: {fileID: 539005187559036}
-  boxInventory: {fileID: 8886008849229843770}
 --- !u!1 &1997013895183249169
 GameObject:
   m_ObjectHideFlags: 0

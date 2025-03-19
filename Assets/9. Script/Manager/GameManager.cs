@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-	private Player.Controller playerController;
+	[SerializeField] private GameObject endingCutScene;
+	[SerializeField] private GameObject uiParent;
 
+	public GameObject UIParent => uiParent;
+
+
+	private Player.Controller playerController;
 	public Player.Controller PlayerController => playerController;
 	protected override void Awake()
 	{
@@ -13,5 +18,19 @@ public class GameManager : Singleton<GameManager>
 		playerController = FindFirstObjectByType<Player.Controller>();	
 	}
 
+	public void StartGame()
+	{
+		playerController.AnimationHandler.animator.speed = 1.0f; 
 
+		
+	}
+	public void GameEnd()
+	{
+		endingCutScene.gameObject.SetActive(true);
+	}
+
+	public void ActiveUI(bool active)
+	{
+		uiParent.SetActive(active); 
+	}
 }

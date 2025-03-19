@@ -42,8 +42,9 @@ namespace Player
             AnimationHandler = GetComponent<AnimationHandler>();
             AudioHandler = GetComponent<AudioHandler>();
 
-        
-        }
+            // AnimationHandler.animator.speed = 0.0f;
+
+		}
         
 
         void Start()
@@ -117,7 +118,7 @@ namespace Player
             
             AnimationHandler.animator.SetTrigger(AnimationHandler.HashHurtTrigger);
             AudioHandler.PlayRandomSound(PlayerSoundType.Damaged);
-            ResourceHandler.Modify(-30);
+            //ResourceHandler.Modify(-30);
             
             Vector3 knockBackDirection = (transform.position - hitPoint.controller.transform.position).normalized;
             knockBackDirection.y = 0;

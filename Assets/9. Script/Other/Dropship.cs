@@ -16,6 +16,7 @@ public class Dropship : MonoBehaviour, IInteractableObject
     }
     public void Interaction()
     {
+        Debug.Log("dd");
         if (exchangeUI != null)
         {
             exchangeUI.SetActive(true);

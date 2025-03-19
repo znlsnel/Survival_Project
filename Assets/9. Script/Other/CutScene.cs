@@ -21,6 +21,7 @@ public class CutScene : MonoBehaviour
     [SerializeField] private CanvasGroup fadeCanvas;   // ÆäÀÌµå ÀÎ/¾Æ¿ô¿ë Äµ¹ö½º
     [SerializeField] private float dropDuration = 5f;  // µå·Ó½Ê ¶³¾îÁö´Â ½Ã°£
     [SerializeField] private CinemachineVirtualCamera vCam;
+    [SerializeField] private GameObject dummyPrefab;
 
     private float defaultFOV;
     private Vector3 defaultOffset;
@@ -45,12 +46,16 @@ public class CutScene : MonoBehaviour
 
     private IEnumerator PlayCutScene()
     {
-        Vector3 startPos = startPosition.position;
+        yield return new WaitForSeconds(0.1f);
+        GameManager.Instance.ActiveUI(false);
+		Vector3 startPos = startPosition.position;
         Vector3 endPos = dropTarget.position;
 
         float startFOV = defaultFOV;
         float targetFOV = 30f;
 
+
+        SoundManager.Play("Sounds/UI/PlaneCrash", ESound.Effect, null, 0.55f);
 
         CinemachineTransposer transposer = vCam.GetCinemachineComponent<CinemachineTransposer>();
         if (transposer == null)
@@ -84,16 +89,25 @@ public class CutScene : MonoBehaviour
         transposer.m_FollowOffset = targetOffset;
         StartCoroutine(ShakeCamera(1.0f, 10f));
 
-        Instantiate(explosionPrefab, endPos, Quaternion.identity);
-        Time.timeScale = 1.0f;
+        var ptc = Instantiate(explosionPrefab, endPos, Quaternion.identity);
+        Time.timeScale = 1.0f; 
         vCam.m_Lens.FieldOfView = defaultFOV;
         yield return new WaitForSeconds(1.0f);
 
         yield return StartCoroutine(BlinkScreen());
 
         Debug.Log("ÄÆ¾À Á¾·á!");
+        var go =Instantiate(dummyPrefab);
+        go.transform.position = transform.position;
+        go.transform.rotation = transform.rotation;
 
-        vCam.enabled = false;
+		vCam.enabled = false;
+        gameObject.SetActive(false);
+        ptc.SetActive(false);
+
+		GameManager.Instance.ActiveUI(true); 
+		GameManager.Instance.StartGame();
+		StopAllCoroutines();
     }
 
     private IEnumerator BlinkScreen()

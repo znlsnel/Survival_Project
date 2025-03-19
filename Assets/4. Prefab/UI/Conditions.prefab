@@ -1494,6 +1494,7 @@ MonoBehaviour:
   stamina: {fileID: 1911493050381325587}
   temperature: {fileID: 1835990298685981272}
   temperatureBar: {fileID: 6348675880324687747}
+  temperatureFillImage: {fileID: 0}
 --- !u!1 &7021778246371182343
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ public class Weather : MonoBehaviour
     public enum WeatherType { Sunny, Rainy, Hot, Snow } // 날씨 유형 정의
     public WeatherType currentWeather; // 현재 날씨 상태
 
+
     void Start()
     {
         SetRandomWeather(); // 시작 시 랜덤한 날씨 설정

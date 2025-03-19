@@ -20,7 +20,10 @@ public class BuildingUI : MonoBehaviour
         {
             EventManager.Instance.OnCanBuildingRequested += OnlyDecOnUI;  //OnStartBuildingRequested가 오면 dec만 켜짐
         }
-    }
+        ToggleUI(false);
+
+	} 
+
 
     public void InitializeUI(List<BuildingData> allBuildings)
     {
@@ -31,6 +34,7 @@ public class BuildingUI : MonoBehaviour
         buildingMenuUIOBJ.SetActive(false);
         buildingDesUIOBJ.SetActive(false);
     }
+
 
     public void ToggleUI(bool isBuildingMode)
     {

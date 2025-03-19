@@ -367,6 +367,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbc6d5db3955c4c45b70e2b218902dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemToGive: {fileID: 11400000, guid: 7561059690f84ef49a31c818584c3406, type: 2}
+  itemToGive: {fileID: 11400000, guid: 83f9efc6179380146a2ff2a47c80e6b2, type: 2}
   quantityPerHit: 1
   capacity: 3

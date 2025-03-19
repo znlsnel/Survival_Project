@@ -26,7 +26,6 @@ public class BuildingResourceUI : MonoBehaviour
 
         if (InventoryHandler == null)
         {
-            Debug.LogError("InventoryHandler가 할당되지 않았습니다! Inspector에서 설정하세요.");
             return;
         }
 
@@ -119,7 +118,6 @@ public class BuildingResourceUI : MonoBehaviour
     {
         if (playerItemList == null)
         {
-            Debug.LogError("playerItemList 가 null이다?");
             return 0;
         }
 

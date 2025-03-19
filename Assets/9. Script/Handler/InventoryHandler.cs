@@ -39,7 +39,7 @@ public class InventoryHandler : MonoBehaviour
 
 	// === Component ===
 	private MessageUI messageUI;
-
+	 
 	private void OnValidate()
 	{
 		foreach (ESlotType type in Enum.GetValues(typeof(ESlotType)))
@@ -48,11 +48,11 @@ public class InventoryHandler : MonoBehaviour
 			itemSlots.Add(type, new List<ItemSlot>()); 
 		}
 	}
-	private void Awake()
+	private void Start()
 	{
 		messageUI = GetComponent<PlayerUIHandler>().MessageUI;
-
 	}
+
 	private (ESlotType, int) GetEmptySlotIdx()
     {
 		for (int i = 0; i < QuickSlotItems.Count; i++)
@@ -84,7 +84,7 @@ public class InventoryHandler : MonoBehaviour
 			
 
         return (ESlotType.None, -1);
-	}
+	} 
 
     public bool AddItem(ItemDataSO item)
     {
@@ -103,8 +103,10 @@ public class InventoryHandler : MonoBehaviour
 		}
 
 		onChangedSlot?.Invoke();
-		messageUI.AddItem(item);
+		messageUI.AddItem(item); 
 		QuestManager.ProgressQuest(EQuestCategory.Pickup, item.ItemName); 
+
+		
 		return true;
 	}
 
@@ -143,5 +145,18 @@ public class InventoryHandler : MonoBehaviour
 		onChangedSlot?.Invoke();
 	}
 
+	public bool HasItem(ItemDataSO data)
+	{
+		foreach ( var item in MyItems)
+			if (item == data)
+				return true;
+		
+		foreach ( var item in QuickSlotItems)
+			if (item == data)
+				return true;
+
+
+		return false;
+	}
 
 }
