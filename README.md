@@ -99,10 +99,11 @@ AAssets/
 ### 3. 인벤토리 시스템
   - 인벤토리 : 플레이어 인벤토리 구현 및 UI 연결 (아이템 퀵슬롯 관련 ) - 드래그앤 드랍
   - 퀵슬롯 : 사용할 아이템을 키 입력을 통해 선택하는 기능
-        - 퀵슬롯 구현 → 각 슬롯에 Item Data를 넣어놓는 방식
-        - 1 ~ 9번 키를 입력 → 해당 index에 있는 item Data 찾아서 플레이어에 적용
-        - 손에 쥘 수 있는 Prefab이 있다면 생성하여 사용
-
+```
+    - 퀵슬롯 구현 → 각 슬롯에 Item Data를 넣어놓는 방식
+    - 1 ~ 9번 키를 입력 → 해당 index에 있는 item Data 찾아서 플레이어에 적용
+    - 손에 쥘 수 있는 Prefab이 있다면 생성하여 사용
+```
 ---
 
 <img src="https://github.com/user-attachments/assets/504e9da7-d243-408b-af3c-a25efbf96ea8" width="400" height="300">
@@ -111,11 +112,13 @@ AAssets/
 
 - Quest Data를 통해 퀘스트를 받고 수행하는 기능 구현
 - 퀘스트 완료시 아이템 습득 및 다음 퀘스트 진행 되는 방식
-    - 퀘스트 시스템 구현 → QuestData에 퀘스트의 Type과 Target을 넣었습니다.
-    - ex) 나무 10개 습득 → Type : Pickup, Target : 나무, targetCnt : 10
-    - 아이템 습득이 일어나는 곳에서 해당 Type과 Target을 QuestManager에 보고
-    - QuestManger에서 퀘스트 진행도 체크
-    - 완료 되었다면 보상 지급 및 다음 퀘스트 진행
+```
+  - 퀘스트 시스템 구현 → QuestData에 퀘스트의 Type과 Target을 넣었습니다.
+  - ex) 나무 10개 습득 → Type : Pickup, Target : 나무, targetCnt : 10
+  - 아이템 습득이 일어나는 곳에서 해당 Type과 Target을 QuestManager에 보고
+  - QuestManger에서 퀘스트 진행도 체크
+  - 완료 되었다면 보상 지급 및 다음 퀘스트 진행
+```
 
 ---
 
@@ -123,7 +126,6 @@ AAssets/
 
 ### 5. 플레이어 컨디션
 
-PlayerCondition
 - **상태 관리:**
     - `UICondition`에서 `health`, `hunger`, `thirsty`, `stamina`, `temperature` 값을 가져와 플레이어 상태를 관리
 - Update
@@ -140,7 +142,7 @@ PlayerCondition
   - `Die()` 메서드를 통해 플레이어가 죽었을 때 로그를 출력
   - `GetPercentage()`: 현재 값을 0~1 사이 비율로 반환하여 UI 반영.
 
-Condition
+컨디션
 - 체력, 허기, 목마름, 체력 회복 등의 상태를 관리하는 클래스.
 - `curValue`: 현재 값, `maxValue`: 최대 값, `startValue`: 초기 값.
 - `passiveValue`: 시간이 지남에 따라 변화하는 기본 값.
