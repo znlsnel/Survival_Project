@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1078858187385997491}
   - component: {fileID: 5034164686934727208}
   - component: {fileID: 1820010022106568051}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Ripple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4899,7 +4899,7 @@ GameObject:
   - component: {fileID: 2935251426634638066}
   - component: {fileID: 2550767921789876150}
   - component: {fileID: 4798512373760922758}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Splash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9788,7 +9788,7 @@ GameObject:
   - component: {fileID: 3403989911800402195}
   - component: {fileID: 8852091618788698891}
   - component: {fileID: 996386047034027956}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Rain
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -41,6 +41,7 @@ public class BuildingMenuUI : MonoBehaviour
         decoToggle.isOn = false;
         UpdateBuildingList();
     }
+
     private void UpdateBuildingList()
     {
         int index = 0;

@@ -22,32 +22,29 @@ public class PlayerCondition : MonoBehaviour
     public float healthDecay; // 체력 감소율
     public float temperatureDecayRate; // 체온 감소율
 
-    private void Start()
+    private void Awake()
     {
         if (uiCondition == null)
         {
-            uiCondition = FindObjectOfType<UICondition>(); 
+            uiCondition = FindFirstObjectByType<UICondition>(); 
             if (uiCondition == null)
             {
-                Debug.LogError(" UICondition이 할당되지 않았습니다! 인스펙터에서 확인하세요.");
             }
         }
-
+         
         if (weather == null)
         {
-            weather = FindObjectOfType<Weather>();
+            weather = FindFirstObjectByType<Weather>();
             if (weather == null)
             {
-                Debug.LogError("Weather 스크립트가 할당되지 않았습니다! 인스펙터에서 확인하세요.");
             }
-        }
+        } 
 
         if (dayNightCycle == null)
         {
-            dayNightCycle = FindObjectOfType<DayNightCycle>();
+            dayNightCycle = FindFirstObjectByType<DayNightCycle>();
             if (dayNightCycle == null)
             {
-                Debug.LogError(" DayNightCycle 스크립트가 할당되지 않았습니다! 인스펙터에서 확인하세요.");
             }
         }
     }

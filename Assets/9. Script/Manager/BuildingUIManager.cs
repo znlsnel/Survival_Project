@@ -12,6 +12,7 @@ public class BuildingUIManager : MonoBehaviour
     {
         buildingUI = FindObjectOfType<BuildingUI>();
         LoadAllBuildings();
+        buildingUI.InitializeUI(allBuildings);
     }
 
 

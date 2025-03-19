@@ -21,6 +21,7 @@ public class BoxInventory : MonoBehaviour, IInteractableObject
         }
 
         OnInventoryChanged?.Invoke(storedItem);
+
     }
 
     public List<ItemDataSO> GetStoredItem()
@@ -34,6 +35,24 @@ public class BoxInventory : MonoBehaviour, IInteractableObject
 
         storedItem.AddRange(items);
         items.Clear();
+    }
+
+
+    public void RemoveItem(ItemDataSO item, int amount) //아이템이랑 수량
+    {
+        int removeCnt = amount;
+
+        for (int i = storedItem.Count - 1; i >= 0; i--)
+        {
+            if (storedItem[i] == item)
+            {
+                storedItem.RemoveAt(i);
+                removeCnt--;
+            }
+
+            if(removeCnt<=0) break;
+        }
+
     }
 
 

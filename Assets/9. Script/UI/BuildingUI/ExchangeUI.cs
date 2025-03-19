@@ -48,7 +48,6 @@ public class ExchangeUI : MonoBehaviour
     {
         if (inventoryHandler == null)
         {
-            Debug.LogError("InventoryHandler가 할당되지 않았습니다! Inspector에서 설정하세요.");
             return;
         }
 
@@ -66,7 +65,6 @@ public class ExchangeUI : MonoBehaviour
 
         if (exchangeData == null)
         {
-            Debug.LogError("선택된 교환 데이터가 없습니다.");
             return;
         }
 
@@ -142,7 +140,6 @@ public class ExchangeUI : MonoBehaviour
     {
         if (playerItemList == null)
         {
-            Debug.LogError("playerItemList 가 null이다?");
             return 0;
         }
 
@@ -160,7 +157,6 @@ public class ExchangeUI : MonoBehaviour
     {
         if (currentExchangeData == null)
         {
-            Debug.LogError("교환할 아이템이 선택되지 않았습니다.");
             return;
         }
 
@@ -183,6 +179,8 @@ public class ExchangeUI : MonoBehaviour
         // 교환 아이템 추가
         inventoryHandler.AddItem(currentExchangeData.ExchangeRewards);
         Debug.Log($"교환 완료! {currentExchangeData.ExchangeRewards.ItemName}을 획득했습니다.");
+
+        gameObject.SetActive(false);
 
         var go = Instantiate(currentExchangeData.ExchangeRewards.DropItemPrefab);
         go.transform.position = GameManager.Instance.transform.position;

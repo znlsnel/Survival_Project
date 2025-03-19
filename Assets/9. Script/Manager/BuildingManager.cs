@@ -11,6 +11,7 @@ public class BuildingManager : Singleton<BuildingManager>
     [SerializeField] private BuildingUI buildingUI;
 	[SerializeField] private InventoryHandler InventoryHandler;
 
+    bool isBuildMode = false; 
     private void Start()
     {
         if (InputManager.Instance != null)
@@ -34,13 +35,11 @@ public class BuildingManager : Singleton<BuildingManager>
         if(!HasRequiredResource()) return;
         if (selectedData == null)
         {
-            Debug.LogError("StartPlacement: 전달된 BuildingData가 없음");
             return;
         }
 
         if (selectedData.prefab == null)
         {
-            Debug.LogError($"StartPlacement: {selectedData.buildingName}의 프리팹이 설정되지 않음");
             return;
         }
 
@@ -86,6 +85,9 @@ public class BuildingManager : Singleton<BuildingManager>
 
     private void OnCancelBuilding(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
+        if (EventManager.Instance.IsBuildMode == false)
+            return;
+
         CancelPlacement();
         buildingUI.buildingMenuUIOBJ.SetActive(true);
         buildingUI.buildingDesUIOBJ.SetActive(false);

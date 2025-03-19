@@ -54,11 +54,16 @@ public class EndingCutScene : MonoBehaviour
 
     private IEnumerator PlayEndingCutScene()
     {
-        Vector3 startPos = airplane.transform.position;
+		GameManager.Instance.ActiveUI(false);
+
+		Vector3 startPos = airplane.transform.position;
         Vector3 endPos = skyTarget.position;
 
         float startFOV = defaultFOV;
         float targetFOV = 30f; // 점점 멀어지는 효과
+
+        SoundManager.Play("Sounds/UI/Flying");
+
 
         CinemachineTransposer transposer = vCam.GetCinemachineComponent<CinemachineTransposer>();
         if (transposer == null)
@@ -103,7 +108,9 @@ public class EndingCutScene : MonoBehaviour
         yield return new WaitForSeconds(3.0f);
         yield return StartCoroutine(Fade(0, 1, fadeDuration));
 
-        Debug.Log("게임 엔딩 컷씬 종료!");
+		GameManager.Instance.ActiveUI(true);
+
+		Debug.Log("게임 엔딩 컷씬 종료!");
     }
 
     private IEnumerator ContinuousTakeoff()
