@@ -53,43 +53,65 @@ AAssets/
 - ScriptableObject를 활용한 건축물 데이터 관리
 
 ### 2. 교환 시스템 (Storage & Trading System)
+
+<img src="https://github.com/user-attachments/assets/884d293e-eaab-4657-aa64-f067b0f1cf66" width="400" height="300">
+
 - Dictionary 기반 아이템 관리 시스템
 - AI 네비게이션을 활용한 자원 채취 드론
 - BoxInventory를 통한 드론 자원 저장 시스템
 - 레이캐스트 기반 건축물 스냅 시스템
 
 ### 3. 인벤토리 시스템
+
+<img src="https://github.com/user-attachments/assets/51326850-9efd-45f8-a580-ce3391be34ac" width="400" height="300">
+
 - 드래그 앤 드롭 지원 플레이어 인벤토리
 - 퀵슬롯 시스템 (1~9번 키 입력)
 - 아이템 데이터 기반 퀵슬롯 관리
 - 아이템 프리팹 생성 및 관리
 
 ### 4. 퀘스트 시스템
+
+<img src="https://github.com/user-attachments/assets/a8c1503d-a9e4-4337-adae-ac3c82234ed5" width="400" height="300">
+
 - QuestData 기반 퀘스트 관리
 - 퀘스트 타입 및 타겟 시스템
 - 자동 퀘스트 진행도 체크
 - 보상 지급 및 다음 퀘스트 연계
 
-### 5. 플레이어 컨디션 시스템
+### 5. 플레이어 컨디션
+
+<img src="https://github.com/user-attachments/assets/bba0b64c-63ad-4952-a681-35e538a4462b" width="400" height="300">
+
 - 스탯 관리 (배고픔, 갈증, 스테미나)
 - 날씨/시간 기반 체온 시스템
 - 캠프파이어 상호작용
 - 아이템 기반 회복 시스템
 
 ### 6. 날씨 시스템
+
+<img src="https://github.com/user-attachments/assets/5f50d5a8-541a-44dc-be41-e69dd640cb63" width="400" height="300">
+
 - 다양한 날씨 상태 (Sunny, Rainy, Hot, Snow)
 - 파티클 시스템 기반 날씨 효과
 - 카메라 기반 파티클 최적화
 
-### 7. 액터 시스템
+### 7. 액터 클래스
+
+<img src="https://github.com/user-attachments/assets/351311c9-6ad8-4cdb-90f3-95a890ca1df7" width="400" height="300">
+
 - 휴머노이드 기반 공통 애니메이터
 - 확장 가능한 애니메이션 시스템
+
 - 다양한 몬스터 타입:
   - 일반병: 기본 전투 AI
   - 마법사: 범위 마법 공격
   - 투척병: 투사체 공격
 
 ### 8. 레벨 디자인
+
+<img src="https://github.com/user-attachments/assets/cca60faa-551d-4049-977d-573daef59472" width="400" height="300">
+
 - 에셋 기반 맵 디자인
 - 나침반 시스템
 - Cinemachine 기반 컷씬 시스템
