@@ -125,17 +125,12 @@ AAssets/
 <img src="https://github.com/user-attachments/assets/bba0b64c-63ad-4952-a681-35e538a4462b" width="400" height="300">
 
 ### 5. 플레이어 컨디션
-
-- **상태 관리:**
-    - `UICondition`에서 `health`, `hunger`, `thirsty`, `stamina`, `temperature` 값을 가져와 플레이어 상태를 관리
-- Update
-  - 배고픔, 갈증, 스태미나를 일정 속도로 감소/증가
-  - 특정 조건(배고픔, 갈증, 온도)에 따라 체력이 감소
-  - 체력이 0 이하가 되면 `Die()` 메서드를 호출
-- **체온 시스템:**
-  - 날씨와 낮/밤의 영향을 받아 체온이 변함
-    
-- **기능 메서드:**
+- `UICondition`에서 `health`, `hunger`, `thirsty`, `stamina`, `temperature` 값을 가져와 플레이어 상태를 관리
+- 배고픔, 갈증, 스태미나를 일정 속도로 감소/증가
+- 특정 조건(배고픔, 갈증, 온도)에 따라 체력이 감소
+- 체력이 0 이하가 되면 `Die()` 메서드를 호출
+- **체온 시스템:날씨와 낮/밤의 영향을 받아 체온이 변함
+- **기능 메서드:
   - `Heal()`, `Eat()`, `Drink()` 체력, 배고픔 등을 회복할 수 있는 메서드
   - `UseStamina()`는 스태미나를 소모, `Rest()`는 체온을 회복
 - **사망 처리:**
@@ -150,23 +145,20 @@ AAssets/
 - `Add(amount)`: 상태 증가 (최대 값 초과 방지).
 - `Subtract(amount)`: 상태 감소 (0 이하 방지).
 
+컨디션 UI
+- 플레이어 상태 관리 : `health`, `hunger`, `thirsty`, `stamina`, `temperature`
+- UI 초기 설정 (`Start`)
+    - `GameManager.Instance.PlayerController`에서 `PlayerCondition`을 가져와 `UICondition`을 연결
+    - `temperatureBar`의 `fillRect`에서 `Image` 컴포넌트를 가져옴
+- 체온 UI 업데이트 (`Update`)
+    - `temperature.curValue` 값을 0~100 범위로 정규화하여 체온 바(`Slider`)에 적용
+    - 체온 값에 따라 색상을 **파랑 → 초록 → 빨강**으로 변화시켜 시각적으로 온도 변화를 표현
+
 ---
 
 <img src="https://github.com/user-attachments/assets/5f50d5a8-541a-44dc-be41-e69dd640cb63" width="400" height="300">
 
 ### 6. 날씨 시스템
-
-
-UICondition
-- 플레이어 상태 관리**
-    - `health`, `hunger`, `thirsty`, `stamina`, `temperature`
-- UI 초기 설정 (`Start`)
-    - `GameManager.Instance.PlayerController`에서 `PlayerCondition`을 가져와 `UICondition`을 연결
-    - `temperatureBar`의 `fillRect`에서 `Image` 컴포넌트를 가져옴
-    
-- 체온 UI 업데이트 (`Update`)
-    - `temperature.curValue` 값을 0~100 범위로 정규화하여 체온 바(`Slider`)에 적용
-    - 체온 값에 따라 색상을 **파랑 → 초록 → 빨강**으로 변화시켜 시각적으로 온도 변화를 표현
 
 Weather
 - 날씨 상태를 `Sunny`, `Rainy`, `Hot`, `Snow` 네 가지로 설정
