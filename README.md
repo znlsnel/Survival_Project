@@ -20,7 +20,7 @@
 <br><br>
 
 
-
+---
 # 🤝 팀원(역할 분담)
 
 | 진희원 | 정하나 | 김영송 | 이준범 | 천지훈 |
@@ -31,7 +31,7 @@
 <br><br>
 <br><br>
 
-
+---
 # 📁 프로젝트 구조
 
 ```
@@ -64,6 +64,7 @@ Assets/
 <br><br>
 <br><br>
 
+---
 # 🎮 시연 영상
 <a href="https://www.youtube.com/watch?v=fUpcPFJYs_8">
   <img src="https://github.com/user-attachments/assets/e7cee5b4-9187-4081-8e93-84f7c69f8dff" alt="시연 영상" width="1000">
