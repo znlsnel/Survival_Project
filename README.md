@@ -1,53 +1,84 @@
+
+<img src="https://readme-decorate.vercel.app/api/get?type=star&text=Space+Survival&width=1200&height=200&fontSize=80&fontWeight=800&useGradient=true&fontColor=%23ffffff&backgroundColor=%23c9c9c9&gradientColor1=%23ffffff&gradientColor2=%23fd86cc">
+
 # [Unity 7,8기] 게임개발 숙련 프로젝트(팀 - 조장님 군대갔조)
 
-## 스토리
+# 🛠️ Description
+- **프로젝트 소개** <br>
+  우주선을 타고 항해하던 당신은 갑작스러운 사고로 낯선 행성에 불시착합니다. 거친 환경과 기괴한 몬스터들이 가득한 이곳에서 <br>
+  살아남으려면 자원을 수집하고 장비를 제작해야 합니다. <br>
+  또한 우주선을 수리할 부품과 연료를 찾아야만 탈출할 수 있습니다.
+<br>
 
-```
-우주선을 타고 항해하던 당신은 갑작스러운 사고로 낯선 행성에 불시착합니다.거친 환경과 기괴한 몬스터들이 가득한 이곳에서 
-살아남으려면 자원을 수집하고 장비를 제작해야 합니다.
-또한 우주선을 수리할 부품과 연료를 찾아야만 탈출할 수 있습니다.
-```
+- **개발 기간** : 2025.03.12 - 2025.03.19
+- **개발 인원** : 4인 개발
+- **사용 기술** <br>
+-언어 : C#<br>
+-엔진 : Unity Engine <br>
 
-## 팀원(역할 분담)
+<br><br>
+<br><br>
+
+
+
+# 🤝 팀원(역할 분담)
 
 | 진희원 | 정하나 | 김영송 | 이준범 | 천지훈 |
 |----|----|----|----|----|
-| 생존 관리 | 건축 시스템 | 인벤토리 시스템 | 플레이어 | 레벨 디자인 |
-| 날씨 변화 | 자원 트레이딩 | 퀘스트 시스템 | 몬스터 및 전투 | 플랫폼 구현 |
+| 생존 관리 | 건축 시스템 | 각종 매니지먼트 시스템 | 플레이어 | 레벨 디자인 |
+| 날씨 변화 | 자원 트레이딩 | 인벤토리, 퀘스트 시스템 | 몬스터 및 전투 | 플랫폼 구현 |
 
-## 프로젝트 구조
+<br><br>
+<br><br>
+
+
+# 📁 프로젝트 구조
 
 ```
-AAssets/
-├── 0. External
-├── 1. Scene
-├── 2. InputSystem
-├── 3. Animation
-├── 4. Prefab
-├── 5. Data
-├── 6. Material
-├── 7. Font
-├── 8. UI
+Assets/
+├── 0. External              - 외부 에셋 및 라이브러리
+├── 1. Scene                 - 게임 씬 파일
+├── 2. InputSystem           - 입력 시스템 설정
+├── 3. Animation             - 애니메이션 및 컨트롤러
+├── 4. Prefab                - 프리팹 객체 
+├── 5. Data                  - SO 에셋 인스턴스 및 각종 데이터
+├── 6. Material              - 머티리얼 및 그래픽 리소스
+├── 7. Font                  - 게임 폰트
+├── 8. UI                    - UI 요소
 ├── 9. Script
-│   ├── Entity # 프로젝트 내 구현하고자 하는 기능 또는 대상 관련
+│   ├── Entity               - 프로젝트 내 구현하고자 하는 기능 또는 대상 관련
 │   │   ├── Player
 │   │   ├── Monster
 │   │   ├── Drone
 │   │   └── ...
-│   ├── Handler # 구현 대상의 핸들링을 위한 클래스들 또는 추가적 기능 관련
+│   ├── Handler              - 구현 대상의 핸들링을 위한 클래스들 또는 추가적 기능 관련
 │   │   ├── BuildingHandler
 │   │   └── InventoryHandler
-│   └── Manager # 매니저 클래스들 주로 싱글톤 기반 전반 구조 관련
+│   └── Manager              - 매니저 클래스들 주로 싱글톤 기반 전반 구조 관련
 │       ├── GameManager
 │       ├── QuestManager
 │       └── WeatherManager
 └── 10. Source
 ```
 
-## 주요 기능
+<br><br>
+<br><br>
 
-### 1. 건축 시스템 (Building System)
+# 🎮 시연 영상
+<a href="https://www.youtube.com/watch?v=fUpcPFJYs_8">
+  <img src="https://github.com/user-attachments/assets/e7cee5b4-9187-4081-8e93-84f7c69f8dff" alt="시연 영상" width="1000">
+</a>
 
+
+
+<br><br>
+<br><br>
+
+---
+# 🎲 주요 기능
+<details><summary> 건축 시스템 </summary>
+  
+### 건축 시스템 (Building System)
 건축 모드 전환 시스템
 - `PlayerManager`의 State Pattern을 활용하여 `NormalState`와 `BuildState`를 구현
 - `InputManager`에서 `PlayerBuilding` 액션 맵을 사용하여 건축 모드 입력 처리
@@ -70,10 +101,13 @@ AAssets/
 - 건축물이 바닥과 스냅되도록 Raycast 기반 배치 시스템 구현
 
 ---
+<br><br>
 
+</details>
+<details><summary>교환 시스템</summary>
+
+### 교환 시스템 (Storage & Trading System)
 <img src="https://github.com/user-attachments/assets/884d293e-eaab-4657-aa64-f067b0f1cf66" width="400" height="300">
-
-### 2. 교환 시스템 (Storage & Trading System)
 
 박스 인벤토리 시스템 (`BoxInventory`)
 - 드론이 채집한 자원을 박스에 저장할 수 있도록 구현
@@ -93,10 +127,14 @@ AAssets/
 - `DroneAI`가 `BoxInventory`에 아이템을 저장
 
 ---
-
+<br><br>
+  
+</details>
+<details><summary>인벤토리 시스템</summary>
+  
 <img src="https://github.com/user-attachments/assets/51326850-9efd-45f8-a580-ce3391be34ac" width="400" height="300">
 
-### 3. 인벤토리 시스템
+### 인벤토리 시스템
   - 인벤토리 : 플레이어 인벤토리 구현 및 UI 연결 (아이템 퀵슬롯 관련 ) - 드래그앤 드랍
   - 퀵슬롯 : 사용할 아이템을 키 입력을 통해 선택하는 기능
 ```
@@ -104,11 +142,15 @@ AAssets/
     - 1 ~ 9번 키를 입력 → 해당 index에 있는 item Data 찾아서 플레이어에 적용
     - 손에 쥘 수 있는 Prefab이 있다면 생성하여 사용
 ```
+
 ---
-
+<br><br>
+  
+</details>
+<details><summary>퀘스트 시스템</summary>
+  
+### 퀘스트 시스템
 <img src="https://github.com/user-attachments/assets/504e9da7-d243-408b-af3c-a25efbf96ea8" width="400" height="300">
-
-### 4. 퀘스트 시스템
 
 - Quest Data를 통해 퀘스트를 받고 수행하는 기능 구현
 - 퀘스트 완료시 아이템 습득 및 다음 퀘스트 진행 되는 방식
@@ -120,11 +162,17 @@ AAssets/
   - 완료 되었다면 보상 지급 및 다음 퀘스트 진행
 ```
 
+
 ---
+<br><br>
+
+</details>
+<details><summary>플레이어 컨디션</summary>
+
+### 플레이어 컨디션
 
 <img src="https://github.com/user-attachments/assets/bba0b64c-63ad-4952-a681-35e538a4462b" width="400" height="300">
 
-### 5. 플레이어 컨디션
 - `UICondition`에서 `health`, `hunger`, `thirsty`, `stamina`, `temperature` 값을 가져와 플레이어 상태를 관리
 - 배고픔, 갈증, 스태미나를 일정 속도로 감소/증가
 - 특정 조건(배고픔, 갈증, 온도)에 따라 체력이 감소
@@ -156,9 +204,14 @@ AAssets/
 
 ---
 
-<img src="https://github.com/user-attachments/assets/5f50d5a8-541a-44dc-be41-e69dd640cb63" width="400" height="300">
+<br><br>
 
-### 6. 날씨 시스템
+
+</details>
+<details><summary>날씨 시스템</summary>
+
+### 날씨 시스템
+<img src="https://github.com/user-attachments/assets/5f50d5a8-541a-44dc-be41-e69dd640cb63" width="400" height="300">
 
 Weather
 - 날씨 상태를 `Sunny`, `Rainy`, `Hot`, `Snow` 네 가지로 설정
@@ -175,12 +228,16 @@ UIWeather
 - 파티클 위치 조정 (`LateUpdate`)
     - 카메라의 위치를 기준으로 `rainParticle`과 `snowParticle`의 위치를 조정하여 플레이어 이동 시에도 파티클이 따라오도록 설정
 
+
 ---
+<br><br>
 
-<img src="https://github.com/user-attachments/assets/351311c9-6ad8-4cdb-90f3-95a890ca1df7" width="400" height="300">
+</details>
+<details><summary>전투 시스템</summary>
 
-### 7. 전투 시스템
+### 전투 시스템
 
+<img src="https://github.com/user-attachments/assets/351311c9-6ad8-4cdb-90f3-95a890ca1df7" width="400" height="300"> <br>
 액터(플레이어, 몬스터) 관련 클래스 구현
 - 구조(컨트롤러 → 각 핸들러)
 - 플레이어와 같은 구조(컨트롤러 → 각 핸들러)
@@ -200,11 +257,15 @@ UIWeather
 - 마법사 : 범위 내 플레이어 존재 여부를 판정으로 마법 공격
 - 투척병 : 타격 판정 클래스를 컴포넌트로 가진 투사체를 발사하여 공격
 
+
 ---
+<br><br>
 
+</details>
+<details><summary>레벨 디자인</summary>
+
+### 레벨 디자인
 <img src="https://github.com/user-attachments/assets/cca60faa-551d-4049-977d-573daef59472" width="400" height="300">
-
-### 8. 레벨 디자인
 
 나침반 기능: 맵내에서 방향을 알려주는 나침반
 - 현재 플레이어의 y축 회전 값 가져오기
@@ -223,3 +284,7 @@ UIWeather
 엔딩 컷씬 (비행기 이륙 연출)
 - `Cinemachine` 카메라가 목표 지점까지 따라간 후 멈추도록 설정
 
+---
+<br><br>
+
+</details>
